@@ -1,4 +1,4 @@
-import { TextProps } from '@/type/type';
+import { TextProps } from '@/components/text/textType';
 
 const Text: React.FC<TextProps> = ({
   fontSize = 18,
