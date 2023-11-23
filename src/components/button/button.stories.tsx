@@ -17,7 +17,7 @@ const meta = {
       description: {
         component: `
 - variant값으로 "default" | "secondary" |  "text" 중 하나를 선택할 수 있습니다.\n
-- size값으로 "xl" | "lg" |  "md"  중 하나를 선택할 수 있습니다.\n
+- size값으로 "xl" | "lg" |  "md" | "sm"  중 하나를 선택할 수 있습니다.\n
 - disabled값으로 true | false 중 하나를 선택할 수 있습니다.\n
 `,
       },
@@ -41,7 +41,7 @@ const meta = {
         type: { summary: 'ButtonSize' },
         defaultValue: { summary: 'lg' },
       },
-      options: ['xl', 'lg', 'md'],
+      options: ['xl', 'lg', 'md', 'sm'],
       control: {
         type: 'radio',
       },
