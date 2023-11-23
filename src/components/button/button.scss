@@ -1,0 +1,35 @@
+@import '@/styles/_variables.scss';
+.button {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &.default {
+    background-color: $primary;
+  }
+  &.xl {
+    width: 770px;
+    height: 50px;
+  }
+  &.lg {
+    width: 402px;
+    height: 52px;
+  }
+  &.md {
+    width: 184px;
+    height: 48px;
+  }
+  &.secondary {
+    width: 62px;
+    height: 48px;
+    border: 1px solid #b0b0b0;
+  }
+  &.text {
+    text-decoration: underline;
+  }
+  &.disabled {
+    background-color: #cccccc;
+    cursor: auto;
+  }
+}
