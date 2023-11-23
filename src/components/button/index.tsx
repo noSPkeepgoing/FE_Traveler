@@ -11,7 +11,7 @@ function Button({
 }: TButton) {
   const className = classNames('button', size, variant, { disabled });
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );
