@@ -1,7 +1,7 @@
 import Header from '@/components/header/header';
 
-const Room = () => {
+const SignIn = () => {
   return <Header />;
 };
 
-export default Room;
+export default SignIn;
