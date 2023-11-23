@@ -1,12 +1,6 @@
 import classNames from 'classnames';
 import './button.scss';
-type TButton = {
-  size?: string;
-  variant?: 'default' | 'text' | 'secondary';
-  children?: React.ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
-};
+import { TButton } from './buttonType';
 
 function Button({
   size = 'lg',
