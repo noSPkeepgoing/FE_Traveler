@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import TextInputComponent from '@/components/input/input';
+import TextInputComponent from './index';
 
 export default {
   title: 'Input',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '@/components/input/input.module.scss';
 
-const Input = () => {
+function Input() {
   const [inputValue, setInputValue] = useState('로그인');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +25,6 @@ const Input = () => {
       />
     </div>
   );
-};
+}
 
 export default Input;
