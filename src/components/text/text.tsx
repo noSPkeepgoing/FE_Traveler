@@ -1,12 +1,12 @@
-import { TextProps } from '@/components/text/textType';
+import { TextProps } from './textType';
 
-const Text: React.FC<TextProps> = ({
+function Text({
   fontSize = 18,
   lineHeight = 24,
   fontWeight = 400,
   color = '#222222',
   text,
-}: TextProps) => {
+}: TextProps) {
   return (
     <p
       style={{
@@ -18,6 +18,6 @@ const Text: React.FC<TextProps> = ({
       {text}
     </p>
   );
-};
+}
 
 export default Text;
