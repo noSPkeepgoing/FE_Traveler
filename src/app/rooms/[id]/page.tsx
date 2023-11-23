@@ -1,7 +1,8 @@
-import Text from '@/components/text/text'
+import Text from '@/components/text'
+
 
 const Room = ()=> {
-    return <Text text='hi' fontSize={30} color='#E5E5E5'/>
+    return <Text fontWeight='bold' color='blackAlpha100' fontSize='2xs'>hi</Text>
 }
 
 export default Room;
