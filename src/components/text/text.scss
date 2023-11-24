@@ -1,38 +1,39 @@
 @import '@/styles/_variables.scss';
+
 @font-face {
-    font-family: 'Pretendard';
-    src: url('../../public/fonts/Pretendard-Medium.ttf');
-  }
+  font-family: 'Pretendard';
+  src: url('../../public/fonts/Pretendard-Medium.ttf');
+}
 
 .Text {
   font-family: 'Pretendard', sans-serif;
   margin: 0;
   &.xs-5 {
-    font-size: 10px;
+    font-size: 0.625rem;
   }
   &.xs-4 {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
   &.xs-3 {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
   &.xs-2 {
-    font-size: 16px;
+    font-size: 1rem;
   }
   &.xs {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
   &.sm {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
   &.md {
-    font-size: 24px;
+    font-size: 1.5rem;
   }
   &.xl {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
   &.xl-2 {
-    font-size: 64px;
+    font-size: 4rem;
   }
   &.thin {
     font-weight: 200;
@@ -56,45 +57,45 @@
     font-weight: 800;
   }
   &.primary {
-    color: #222222;
+    color: $primary;
   }
   &.gray400 {
-    color: #cccccc;
+    color: $gray400;
     opacity: 80%;
   }
   &.blackAlpha100 {
-    color: #000000;
+    color: $blackAlpha100;
     opacity: 48%;
   }
   &.sub {
-    color: #4e4e4e;
+    color: $sub;
   }
   &.red200 {
-    color: #e53e3e;
+    color: $red200;
   }
   &.gray200 {
-    color: #e5e5e5;
+    color: $gray200;
   }
   &.gray300 {
-    color: #e5e5e5;
+    color: $gray300;
   }
   &.red100 {
-    color: #ff6565;
+    color: $red100;
   }
   &.green {
-    color: #38a169;
+    color: $green;
   }
   &.highlight {
-    color: #726bd7;
+    color: $highlight;
   }
   &.black {
-    color: #222222;
+    color: $black;
   }
   &.gray100 {
-    color: #f5f5f5;
+    color: $gray100;
   }
   &.blackAlpha200 {
-    color: #000000;
+    color: blackAlpha100;
     opacity: 64%;
   }
 }
