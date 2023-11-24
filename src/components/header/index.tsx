@@ -34,19 +34,29 @@ function header() {
             </>
           ) : (
             <>
-              <a className={`${styles.buttons} ${styles.child}`} href="/main">
-                로그아웃
-              </a>
-              <a
-                className={`${styles.buttons} ${styles.child}`}
-                href="/reservation-list">
-                장바구니
-              </a>
-              <a
-                className={`${styles.buttons} ${styles.child}`}
-                href="/reservation-check">
-                주문내역
-              </a>
+              <div className={`${styles.buttons} ${styles.child}`}>
+                <Button variant="text" onClick={() => router.push('/sign-in')}>
+                  <Text fontSize="xs" fontWeight="normal">
+                    로그아웃
+                  </Text>
+                </Button>
+              </div>
+              <div className={`${styles.buttons} ${styles.child}`}>
+                <Button variant="text" onClick={() => router.push('/cart')}>
+                  <Text fontSize="xs" fontWeight="normal">
+                    장바구니
+                  </Text>
+                </Button>
+              </div>
+              <div className={`${styles.buttons} ${styles.child}`}>
+                <Button
+                  variant="text"
+                  onClick={() => router.push('/reservation-list')}>
+                  <Text fontSize="xs" fontWeight="normal">
+                    주문내역
+                  </Text>
+                </Button>
+              </div>
             </>
           )}
         </div>
