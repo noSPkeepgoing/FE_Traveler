@@ -1,5 +1,5 @@
 export type TButton = {
-  size?: string;
+  size?: 'lg' | 'xl' | 'md' | 'sm' | '';
   variant?: 'default' | 'text' | 'secondary';
   children?: React.ReactNode;
   onClick?: () => void;
