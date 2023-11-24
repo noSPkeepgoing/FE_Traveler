@@ -1,0 +1,18 @@
+.frame {
+  max-width: 48.125rem;
+  margin: 1.25rem auto 0 auto;
+  border: 1px solid red;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+.selectContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
