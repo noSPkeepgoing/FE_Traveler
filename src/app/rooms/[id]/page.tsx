@@ -1,8 +1,8 @@
-import Text from '@/components/text'
+import Text from '@/components/text';
+import DetailPage from './(component)/detailPage';
 
-
-const Room = ()=> {
-    return <Text fontWeight='bold' color='blackAlpha100' fontSize='2xs'>hi</Text>
-}
+const Room = () => {
+  return <DetailPage />;
+};
 
 export default Room;

@@ -2,7 +2,7 @@ import { TextProps } from './textType';
 import './text.scss';
 
 function Text({
-  fontSize = '2xl',
+  fontSize = 'xl',
   fontWeight = 'bold',
   color = 'black',
   children,

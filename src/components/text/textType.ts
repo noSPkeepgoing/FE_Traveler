@@ -9,6 +9,7 @@ export interface TextProps {
     | 'bold'
     | 'extrabold';
   color?:
+    | 'white'
     | 'primary'
     | 'gray400'
     | 'blackAlpha100'
@@ -22,5 +23,6 @@ export interface TextProps {
     | 'black'
     | 'gray100'
     | 'blackAlpha200';
-  children: ReactNode;
+  children: string;
+  className?: string;
 }

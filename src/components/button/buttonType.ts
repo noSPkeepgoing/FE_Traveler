@@ -5,3 +5,4 @@ export type TButton = {
   onClick?: () => void;
   disabled?: boolean;
 };
+

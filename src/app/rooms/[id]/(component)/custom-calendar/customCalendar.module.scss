@@ -1,0 +1,41 @@
+.CalendarContainer {
+  position: relative;
+}
+
+.DropdownButton {
+  box-sizing: border-box;
+  width: 8rem;
+  height: 3rem;
+  border: 1px solid #b0b0b0;
+  border-top-left-radius: 0.5rem;
+
+  color: #222222;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 100%;
+  text-align: center;
+  padding-top: 1rem;
+  appearance: none;
+  background-color: white;
+  //   background-image: url(${selectArrow});
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.75rem;
+}
+
+.DropdownButton.checkout {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0.5rem;
+  border-left: none;
+}
+
+.CalendarWrapper {
+  z-index: 11;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  &.hide {
+    display: none;
+  }
+}
