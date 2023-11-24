@@ -3,7 +3,7 @@ import './button.scss';
 import { TButton } from './buttonType';
 
 function Button({
-  size = 'lg',
+  size = '',
   variant = 'default',
   children,
   onClick,
