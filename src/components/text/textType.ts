@@ -22,5 +22,5 @@ export interface TextProps {
     | 'black'
     | 'gray100'
     | 'blackAlpha200';
-  children: ReactNode;
+  children: string;
 }
