@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './cart.module.scss';
 import Button from '@/components/button';
+import Text from '@/components/text';
 
 function Cart() {
   return (
@@ -21,7 +22,9 @@ function Cart() {
         </div>
 
         <Button variant="text">
-          <div>선택 삭제</div>
+          <Text fontSize="xs-2" fontWeight="normal" color="highlight">
+            선택 삭제
+          </Text>
         </Button>
       </div>
     </>
