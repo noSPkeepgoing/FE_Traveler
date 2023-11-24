@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './cart.module.scss';
+import './cart.scss';
 
-function layout({ children }: { children: React.ReactNode }) {
-  return <main className={styles.frame}>{children}</main>;
+function CartLayout({ children }: { children: React.ReactNode }) {
+  return <main className="frame">{children}</main>;
 }
 
-export default layout;
+export default CartLayout;

@@ -1,12 +1,14 @@
 import React from 'react';
-import styles from './cart.module.scss';
+import './cart.scss';
 import Button from '@/components/button';
 import Text from '@/components/text';
+import Checkbox from '@/components/checkbox';
+import CartItem from './_components/cartItem';
 
-function Cart() {
+function CartPage() {
   return (
     <>
-      <section className={styles.title}>
+      <section className="title">
         <p
           style={{
             fontSize: '32px',
@@ -16,9 +18,10 @@ function Cart() {
           장바구니
         </p>
       </section>
-      <div className={styles.selectContainer}>
+      <div className="selectContainer">
         <div style={{ display: 'flex' }}>
-          <input type="checkbox" /> <div>전체선택</div>
+          <Checkbox variant="default" />
+          <div>전체선택</div>
         </div>
 
         <Button variant="text">
@@ -27,8 +30,9 @@ function Cart() {
           </Text>
         </Button>
       </div>
+      <CartItem />
     </>
   );
 }
 
-export default Cart;
+export default CartPage;
