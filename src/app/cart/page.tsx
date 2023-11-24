@@ -1,5 +1,5 @@
 import React from 'react';
-import './cart.scss';
+import styles from './cart.module.scss';
 import Button from '@/components/button';
 import Text from '@/components/text';
 import Checkbox from '@/components/checkbox';
@@ -8,7 +8,7 @@ import CartItem from './_components/cartItem';
 function CartPage() {
   return (
     <>
-      <section className="title">
+      <section className={styles.title}>
         <p
           style={{
             fontSize: '32px',
@@ -18,7 +18,7 @@ function CartPage() {
           장바구니
         </p>
       </section>
-      <div className="selectContainer">
+      <div className={styles.selectContainer}>
         <div style={{ display: 'flex' }}>
           <Checkbox variant="default" />
           <div>전체선택</div>
