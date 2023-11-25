@@ -42,14 +42,12 @@
 }
 
 .inputContainer input {
-  flex: 1; /* input 요소가 남은 공간을 모두 차지하도록 설정 */
-  margin-bottom: 0.5rem; /* input 아래 여백 조정 */
-  /* 추가적인 스타일링을 원하시면 여기에 작성하세요 */
+  flex: 1;
+  margin-bottom: 0.5rem;
 }
 
 .inputContainer button {
-  margin-left: 0.5rem; /* 버튼과 input 사이 여백 조정 */
-  /* 추가적인 스타일링을 원하시면 여기에 작성하세요 */
+  margin-left: 0.5rem;
 }
 
 .footer {
