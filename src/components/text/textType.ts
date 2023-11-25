@@ -1,4 +1,4 @@
-export interface TTextProps {
+export type TTextProps = {
   fontSize?: 'xs-5' | 'xs-4' | 'xs-3' | 'xs-2' | 'xs' | 'md' | 'xl' | 'xl-2';
   fontWeight?:
     | 'thin'
