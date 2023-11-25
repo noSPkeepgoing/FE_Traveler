@@ -1,8 +1,11 @@
 import Text from '@/components/text'
+import React from 'react'
 
-
-const Room = ()=> {
-    return <Text fontWeight='bold' color='blackAlpha100' fontSize='2xs'>hi</Text>
+function Page() {
+  return (
+    <Text>hi</Text>
+  )
 }
 
-export default Room;
+export default Page
+
