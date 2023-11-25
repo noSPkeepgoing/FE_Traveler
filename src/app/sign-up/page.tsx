@@ -13,7 +13,7 @@ type signUpType = {
   name: string;
 };
 
-function SignUp() {
+function SignUpPage() {
   const router = useRouter();
 
   // api 전달 함수
@@ -124,4 +124,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUpPage;
