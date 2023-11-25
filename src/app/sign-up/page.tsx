@@ -42,9 +42,11 @@ function SignUpPage() {
           </Text>
         </div>
         <div className={styles.form}>
-          <Text color="primary" fontSize="xl" fontWeight="medium">
-            회원가입
-          </Text>
+          <div className={styles.info}>
+            <Text color="primary" fontSize="xl" fontWeight="medium">
+              회원가입
+            </Text>
+          </div>
           <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
               <input type="email" placeholder="이메일" name="email" />
