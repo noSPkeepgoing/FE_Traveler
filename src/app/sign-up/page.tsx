@@ -58,22 +58,27 @@ function SignUpPage() {
               이메일 상태 모시깽이
             </label>
           </div>
-          <div className={styles.inputContainer}></div>
-          <div className={styles.inputBox}>
-            <input type="password" placeholder="비밀번호" name="password" />
-            <label htmlFor="">비밀번호 상태 모시깽이</label>
+          <div className={styles.inputContainer}>
+            <div className={styles.inputBox}>
+              <input type="password" placeholder="비밀번호" name="password" />
+              <label htmlFor="">비밀번호 상태 모시깽이</label>
+            </div>
           </div>
-          <div className={styles.inputBox}>
-            <input
-              type="password"
-              placeholder="비밀번호 확인"
-              name="passwordCheck"
-            />
-            <label htmlFor="">비밀번호 확인 상태 모시깽이</label>
+          <div className={styles.inputContainer}>
+            <div className={styles.inputBox}>
+              <input
+                type="password"
+                placeholder="비밀번호 확인"
+                name="passwordCheck"
+              />
+              <label htmlFor="">비밀번호 확인 상태 모시깽이</label>
+            </div>
           </div>
-          <div className={styles.inputBox}>
-            <input type="text" placeholder="이름" name="name" />
-            <label htmlFor="">이메일 상태 모시깽이</label>
+          <div className={styles.inputContainer}>
+            <div className={styles.inputBox}>
+              <input type="text" placeholder="이름" name="name" />
+              <label htmlFor="">이름 상태 모시깽이</label>
+            </div>
           </div>
           <div className={styles.confirm}>
             <Button size="lg">
@@ -82,9 +87,9 @@ function SignUpPage() {
               </Text>
             </Button>
           </div>
-          <div>
+          <div className={styles.signInBtn}>
             <Button variant="text" onClick={() => router.push('/sign-in')}>
-              <Text fontSize="xs" fontWeight="normal">
+              <Text fontSize="xs-3" fontWeight="bold">
                 이미 회원이신가요??
               </Text>
             </Button>

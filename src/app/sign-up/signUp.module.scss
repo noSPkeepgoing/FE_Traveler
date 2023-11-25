@@ -30,20 +30,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+
+  margin-bottom: 0.5rem;
 }
 
 .inputContainer {
   display: flex;
   align-items: center;
+
+  input {
+    flex: 1;
+    margin-bottom: 0.5rem;
+  }
+  button {
+    margin-left: 0.5rem;
+  }
 }
 
-.inputContainer input {
-  flex: 1;
-  margin-bottom: 0.5rem;
-}
-
-.inputContainer button {
-  margin-left: 0.5rem;
+.signInBtn {
+  margin-top: 0.5rem;
 }
