@@ -6,12 +6,12 @@ import Button from '@/components/button';
 import Text from '@/components/text';
 import { useRouter } from 'next/navigation';
 
-interface signUpType {
+type signUpType = {
   email: string;
   password: string;
   passwordConfirm?: string;
   name: string;
-}
+};
 
 function SignUp() {
   const router = useRouter();
