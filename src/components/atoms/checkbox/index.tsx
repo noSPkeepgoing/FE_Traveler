@@ -1,13 +1,8 @@
 import React from 'react';
 import './checkbox.scss';
+import { Tcheckbox } from './checkboxType';
 
-function Checkbox({
-  onChange,
-  isChecked,
-}: {
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  isChecked?: boolean;
-}) {
+function Checkbox({ onChange, isChecked }: Tcheckbox) {
   return (
     <input
       type="checkbox"
