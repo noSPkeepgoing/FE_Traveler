@@ -1,3 +1,3 @@
 export type THeader = {
-  border?: boolean;
+  border: boolean;
 };
