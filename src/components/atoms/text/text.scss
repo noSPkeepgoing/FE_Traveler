@@ -1,8 +1,6 @@
 @import '@/styles/_variables.scss';
 
 .Text {
-  font-family: 'Pretendard', sans-serif;
-  margin: 0;
   &.xs-5 {
     font-size: 0.625rem;
   }
@@ -92,5 +90,8 @@
   &.blackAlpha200 {
     color: blackAlpha100;
     opacity: 64%;
+  }
+  &.white {
+    color: white;
   }
 }

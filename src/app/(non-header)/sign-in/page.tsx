@@ -2,9 +2,9 @@
 
 import React from 'react';
 import styles from './signIn.module.scss';
-import Button from '@/components/button';
-import Text from '@/components/text';
-import Footer from '@/components/footer';
+import Button from '@/components/atoms/button';
+import Text from '@/components/atoms/text';
+import Footer from '@/components/layouts/footer';
 import { useRouter } from 'next/navigation';
 import { TSignInType } from './signInType';
 

@@ -1,4 +1,4 @@
-import { TextProps } from './textType';
+import { TText } from './textType';
 import './text.scss';
 
 function Text({
@@ -6,7 +6,7 @@ function Text({
   fontWeight = 'normal',
   color = 'primary',
   children,
-}: TextProps) {
+}: TText) {
   const className = `Text ${fontSize} ${fontWeight} ${color}`;
   return <p className={className}>{children}</p>;
 }

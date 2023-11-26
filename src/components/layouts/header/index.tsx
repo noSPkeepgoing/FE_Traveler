@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import styles from './header.module.scss';
 import React from 'react';
-import Button from '../button';
-import Text from '../text';
+import Button from '../../atoms/button';
+import Text from '../../atoms/text';
 
 function header() {
   const isOnline = false;

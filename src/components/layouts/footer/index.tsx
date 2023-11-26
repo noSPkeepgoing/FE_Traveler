@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './footer.module.scss';
-import Text from '@/components/text';
+import Text from '@/components/atoms/text';
 
 function Footer() {
   return (
