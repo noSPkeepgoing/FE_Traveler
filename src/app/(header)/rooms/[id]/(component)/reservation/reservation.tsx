@@ -11,7 +11,7 @@ function Reservation({ price }: { price: number }) {
   const [value, onChange] = useState(new Date());
   const [valueSecond, onChangeSecond] = useState(new Date());
   const [selectedOption, setSelectedOption] = useState('');
-  const day:number = (Number(valueSecond) - Number(value)) / DAY_SECOND;
+  const day: number = (Number(valueSecond) - Number(value)) / DAY_SECOND;
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -67,10 +67,9 @@ function Reservation({ price }: { price: number }) {
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text
-              fontSize="xs"
-              fontWeight="semibold"
-              color="highlight">{`₩${price * day}`}</Text>
+            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
+              price * day
+            }`}</Text>
           </div>
           <div className={styles.day}>
             <Text
