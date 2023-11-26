@@ -1,0 +1,97 @@
+@import '@/styles/_variables.scss';
+
+.Text {
+  &.xs-5 {
+    font-size: 0.625rem;
+  }
+  &.xs-4 {
+    font-size: 0.75rem;
+  }
+  &.xs-3 {
+    font-size: 0.875rem;
+  }
+  &.xs-2 {
+    font-size: 1rem;
+  }
+  &.xs {
+    font-size: 1.125rem;
+  }
+  &.sm {
+    font-size: 1.25rem;
+  }
+  &.md {
+    font-size: 1.5rem;
+  }
+  &.xl {
+    font-size: 2.25rem;
+  }
+  &.xl-2 {
+    font-size: 4rem;
+  }
+  &.thin {
+    font-weight: 200;
+  }
+  &.light {
+    font-weight: 300;
+  }
+  &.normal {
+    font-weight: 400;
+  }
+  &.medium {
+    font-weight: 500;
+  }
+  &.semibold {
+    font-weight: 600;
+  }
+  &.bold {
+    font-weight: 700;
+  }
+  &.extrabold {
+    font-weight: 800;
+  }
+  &.primary {
+    color: $primary;
+  }
+  &.gray400 {
+    color: $gray400;
+    opacity: 80%;
+  }
+  &.blackAlpha100 {
+    color: $blackAlpha100;
+    opacity: 48%;
+  }
+  &.sub {
+    color: $sub;
+  }
+  &.red200 {
+    color: $red200;
+  }
+  &.gray200 {
+    color: $gray200;
+  }
+  &.gray300 {
+    color: $gray300;
+  }
+  &.red100 {
+    color: $red100;
+  }
+  &.green {
+    color: $green;
+  }
+  &.highlight {
+    color: $highlight;
+  }
+  &.black {
+    color: $black;
+  }
+  &.gray100 {
+    color: $gray100;
+  }
+  &.blackAlpha200 {
+    color: blackAlpha100;
+    opacity: 64%;
+  }
+  &.white {
+    color: white;
+  }
+}
