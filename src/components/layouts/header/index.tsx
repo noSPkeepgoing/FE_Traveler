@@ -8,12 +8,12 @@ import Button from '../../atoms/button';
 import Text from '../../atoms/text';
 import { THeader } from './headerType';
 
-function Header({ border = true }: THeader) {
+function Header({ border }: THeader) {
   const containerClassName = classNames(styles.container, {
     [styles.border]: border,
   });
 
-  const isOnline = true;
+  const isOnline = false;
   const router = useRouter();
 
   return (
