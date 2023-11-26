@@ -47,5 +47,5 @@ export const header: StoryObj<typeof Header> = {
       },
     },
   },
-  render: (args) => <Header border={true} {...args} />,
+  render: (args) => <Header {...args} />,
 };
