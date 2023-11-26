@@ -2,9 +2,9 @@ import { TextProps } from './textType';
 import './text.scss';
 
 function Text({
-  fontSize = '2xl',
-  fontWeight = 'bold',
-  color = 'black',
+  fontSize = 'xs',
+  fontWeight = 'normal',
+  color = 'primary',
   children,
 }: TextProps) {
   const className = `Text ${fontSize} ${fontWeight} ${color}`;
