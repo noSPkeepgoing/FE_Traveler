@@ -6,7 +6,7 @@ import Button from '@/components/atoms/button';
 import Text from '@/components/atoms/text';
 import Footer from '@/components/layouts/footer';
 import { useRouter } from 'next/navigation';
-import { TSignInType } from './signInType';
+import { TSignIn } from './signInType';
 
 function SignInPage() {
   const router = useRouter();
@@ -14,7 +14,7 @@ function SignInPage() {
   // api 전달 함수
   const signInSubmit = (
     event: React.FormEvent<HTMLFormElement>,
-    formData: TSignInType,
+    formData: TSignIn,
   ) => {
     event.preventDefault();
     // 폼 제출(submit) 이벤트 발생 시 실행할 api가 들어갈 자리
@@ -24,7 +24,7 @@ function SignInPage() {
   // const MyFormComponent: React.FC = () => {
   //   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   //     // 이벤트 핸들러에서 폼 데이터를 수집하거나 사용할 수 있도록 로직 추가
-  //     const formData: TSignUpType = {
+  //     const formData: TSignIn = {
   //       email: 'user@example.com',
   //       password: '1q2w3e4r!',
   //     };
