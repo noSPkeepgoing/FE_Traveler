@@ -8,7 +8,7 @@ import Button from '../../atoms/button';
 import Text from '../../atoms/text';
 import { THeader } from './headerType';
 
-function Header({ border }: THeader) {
+function Header({ border = true }: THeader) {
   const containerClassName = classNames(styles.container, {
     [styles.border]: border,
   });
