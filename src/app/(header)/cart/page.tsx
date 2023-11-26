@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './cart.module.scss';
-import Button from '@/components/button';
-import Text from '@/components/text';
+import Button from '@/components/atoms/button';
+import Text from '@/components/atoms/text';
 
 function Cart() {
   return (

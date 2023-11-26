@@ -1,4 +1,4 @@
-export type TTextProps = {
+export type TText = {
   fontSize?: 'xs-5' | 'xs-4' | 'xs-3' | 'xs-2' | 'xs' | 'md' | 'xl' | 'xl-2';
   fontWeight?:
     | 'thin'
@@ -21,6 +21,7 @@ export type TTextProps = {
     | 'highlight'
     | 'black'
     | 'gray100'
-    | 'blackAlpha200';
-  children: string;
-}
+    | 'blackAlpha200'
+    | 'white';
+  children: string | number;
+};
