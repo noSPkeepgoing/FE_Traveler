@@ -7,6 +7,7 @@ import Text from '@/components/atoms/text';
 import Footer from '@/components/layouts/footer';
 import { useRouter } from 'next/navigation';
 import { TSignUpType } from './signUpType';
+import Input from '@/components/atoms/input';
 
 function SignUpPage() {
   const router = useRouter();
@@ -49,7 +50,7 @@ function SignUpPage() {
           </div>
           <div className={styles.inputBox}>
             <div className={styles.inputContainer}>
-              <input type="email" placeholder="이메일" name="email" />
+              <Input variant="reservation" placeholder="이메일" />
               <Button size="sm">
                 <Text color="gray100" fontSize="xs-5" fontWeight="medium">
                   중복 확인
