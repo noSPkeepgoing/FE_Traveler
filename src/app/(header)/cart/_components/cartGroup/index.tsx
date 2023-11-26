@@ -9,7 +9,7 @@ function CartGroup({ children, selectAll, isAllSelected }: TcartGroup) {
     <>
       <div className={styles.selectContainer}>
         <div className={styles.allSelection}>
-          <Checkbox onChange={selectAll} checkedValue={isAllSelected()} />
+          <Checkbox onChange={selectAll} isChecked={isAllSelected()} />
           <Text fontSize="xs" fontWeight="normal">
             전체선택
           </Text>

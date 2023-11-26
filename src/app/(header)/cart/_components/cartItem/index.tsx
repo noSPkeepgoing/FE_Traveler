@@ -8,11 +8,10 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
   return (
     <div className={styles.cartItem}>
       <Checkbox
-        value={data.cart_price}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           handleSelectItem({ event, selectedItem: data });
         }}
-        checkedValue={isSelected(data.cart_id)}
+        isChecked={isSelected(data.cart_id)}
       />
       <div className={styles.cartInfo}>
         <Text fontSize="xs" fontWeight="bold">

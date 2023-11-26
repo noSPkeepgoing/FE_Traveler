@@ -2,21 +2,17 @@ import React from 'react';
 import './checkbox.scss';
 
 function Checkbox({
-  value,
   onChange,
-  checkedValue,
+  isChecked,
 }: {
-  value?: number;
-  id?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  checkedValue?: boolean;
+  isChecked?: boolean;
 }) {
   return (
     <input
       type="checkbox"
       className="checkbox"
-      checked={checkedValue}
-      value={value}
+      checked={isChecked}
       onChange={onChange}
     />
   );
