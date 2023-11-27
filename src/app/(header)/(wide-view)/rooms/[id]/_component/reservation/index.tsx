@@ -17,12 +17,12 @@ function Reservation({ price }: { price: number }) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
-  function handleCartClick (){
-    if (!modalOpen){
-      setModalOpen(prev=>!prev)
-      setTimeout(()=>{
+  function handleCartClick() {
+    if (!modalOpen) {
+      setModalOpen((prev) => !prev);
+      setTimeout(() => {
         setModalOpen(false);
-      },2500)
+      }, 2500);
     }
   }
   return (
