@@ -5,7 +5,7 @@ import { TCategory } from '../../mainType';
 
 function Category({ item }: { item: TCategory }) {
   return (
-    <div className={styles.category__item}>
+    <div className={styles.categoryItem}>
       <Text fontSize="xs-2">{`#${item.name}`}</Text>
     </div>
   );

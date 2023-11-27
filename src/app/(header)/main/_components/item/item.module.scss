@@ -2,7 +2,8 @@
 
 .item {
   margin: 1rem;
-  &__image {
+
+  &Image {
     margin: 0.2rem 0;
 
     $size: 15rem;
@@ -19,16 +20,16 @@
     }
   }
 
-  &__info {
+  &Info {
     margin: 0.4rem 0;
     display: flex;
     flex-direction: column;
 
-    .info__address {
+    .infoAddress {
       margin: 0.4rem 0;
     }
 
-    .info__price {
+    .infoPrice {
       margin: 0.4rem 0;
       p {
         display: inline-block;
