@@ -1,8 +1,8 @@
-import Text from '@/components/atoms/text';
+import DetailPage from './_component/detail-page/detailPage';
 import React from 'react';
 
-function Page() {
-  return <Text>hi</Text>;
+function page() {
+  return <DetailPage />;
 }
 
-export default Page;
+export default page;
