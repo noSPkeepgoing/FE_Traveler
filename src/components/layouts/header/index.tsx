@@ -18,17 +18,11 @@ function Header({ border = true }: THeader) {
 
   return (
     <div className={containerClassName}>
-      <div className={styles.container}>
-        <div className={styles.logo}>
-          <Button
-            variant="text"
-            size="sm"
-            onClick={() => router.push('/main')}
-            href="/main">
-            <Text fontSize="xl" fontWeight="thin">
-              LOGO
-            </Text>
-          </Button>
+      <div className={styles.inner}>
+        <div className={styles.logo} onClick={() => router.push('/main')}>
+          <Text fontSize="xl" fontWeight="thin">
+            Traveler
+          </Text>
         </div>
         <div className={styles.buttons}>
           {!isOnline ? (
