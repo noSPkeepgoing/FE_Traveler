@@ -23,7 +23,7 @@
   flex-direction: column;
   align-items: flex-end;
 }
-.cartInfo {
+.itemInfo {
   width: 35.625rem;
   height: 100%;
 
@@ -32,17 +32,16 @@
   justify-content: space-between;
 }
 
-.cartImageInfo {
+.imageInfo {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.cartDetailInfo {
+.detailInfo {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-
 .accommodationImage {
   border-radius: 0.5rem;
 }
