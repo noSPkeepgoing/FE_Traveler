@@ -1,11 +1,12 @@
 import React from 'react';
 import CategoryList from './_components/category-list';
+import ItemList from './_components/item-list';
 
 function MainPage() {
   return (
     <>
       <CategoryList />
-      여기 밑에 아이템
+      <ItemList />
     </>
   );
 }
