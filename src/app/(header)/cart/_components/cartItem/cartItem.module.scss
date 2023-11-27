@@ -1,0 +1,48 @@
+@import '@/styles/_variables.scss';
+
+.cartItem {
+  width: 100%;
+  height: 8.125rem;
+
+  border: 1px solid $gray;
+  padding: 0.5rem 0.2rem 0.5rem 0.25rem;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-around;
+}
+.subCartInfo {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.cartInfo {
+  width: 35.625rem;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartImageInfo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cartDetailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.accommodationImage {
+  border-radius: 0.5rem;
+}
