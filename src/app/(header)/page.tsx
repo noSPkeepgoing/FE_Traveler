@@ -1,7 +1,7 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
-function page() {
-  return <div>page</div>;
+function Page() {
+  return redirect('/main');
 }
 
-export default page;
+export default Page;

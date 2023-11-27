@@ -4,7 +4,7 @@ import styles from '../cartGroup/cartGroup.module.scss';
 import CartItem from '.';
 import { TcartInfo } from './cartItemType';
 import { ThandleSelectItem } from '../../cartType';
-import CartLayout from '../../layout';
+import Layout from '../../../layout';
 
 const meta = {
   title: 'cart/CartItem',
@@ -44,11 +44,11 @@ export default meta;
 export const ExampleCartItem: StoryObj<typeof CartItem> = {
   decorators: [
     (Story) => (
-      <CartLayout>
+      <Layout>
         <div className={styles.cartContainer}>
           <Story />
         </div>
-      </CartLayout>
+      </Layout>
     ),
   ],
   parameters: {
