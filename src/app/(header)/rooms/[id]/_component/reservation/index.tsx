@@ -7,15 +7,24 @@ import CustomCalendar from '../custom-calendar';
 import Button from '@/components/atoms/button';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { DAY_SECOND } from '@/constants/rooms';
+import CartModal from '../cart-modal/cartModal';
 function Reservation({ price }: { price: number }) {
   const [value, onChange] = useState(new Date());
   const [valueSecond, onChangeSecond] = useState(new Date());
   const [selectedOption, setSelectedOption] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
   const day: number = (Number(valueSecond) - Number(value)) / DAY_SECOND;
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
-
+  function handleCartClick (){
+    if (!modalOpen){
+      setModalOpen(prev=>!prev)
+      setTimeout(()=>{
+        setModalOpen(false);
+      },2500)
+    }
+  }
   return (
     <div className={styles.Reservation}>
       <div className={styles.dailyPriceBox}>
@@ -51,7 +60,7 @@ function Reservation({ price }: { price: number }) {
       </div>
       <div className={styles.reservationButtonBox}>
         <Button variant="secondary">
-          <div className={styles.shoppingCart}>
+          <div className={styles.shoppingCart} onClick={handleCartClick}>
             <MdOutlineShoppingCart />
           </div>
         </Button>
@@ -61,6 +70,7 @@ function Reservation({ price }: { price: number }) {
           </Text>
         </Button>
       </div>
+      <div>{modalOpen && <CartModal />}</div>
       <div>
         <div className={styles.amountBox}>
           <Text fontSize="xs-3" fontWeight="normal" color="primary">
