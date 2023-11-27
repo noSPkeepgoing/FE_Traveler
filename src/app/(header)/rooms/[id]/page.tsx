@@ -1,7 +1,8 @@
-import DetailPage from './(component)/detail-page/detailPage';
+import DetailPage from './_component/detail-page/detailPage';
+import React from 'react';
 
-const Room = () => {
+function page() {
   return <DetailPage />;
-};
+}
 
-export default Room;
+export default page;

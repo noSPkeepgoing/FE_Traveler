@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from './reservation.module.scss';
 import Text from '@/components/atoms/text';
 import 'react-calendar/dist/Calendar.css';
-import CustomCalendar from '../custom-calendar/customCalendar';
+import CustomCalendar from '../custom-calendar';
 import Button from '@/components/atoms/button';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import { DAY_SECOND } from '@/constants/rooms';

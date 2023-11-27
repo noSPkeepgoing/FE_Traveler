@@ -1,13 +1,14 @@
 import Text from '@/components/atoms/text';
 import React from 'react';
 import styles from './detailDescription.module.scss';
+import { TDetailDescription } from './detailDescriptionType';
 
-function DetailDescription({ adress, desc }: { adress: string; desc: string }) {
+function DetailDescription({ address, desc }: TDetailDescription) {
   return (
-    <div className={styles.DetailDescription}>
-      <div className={styles.adress}>
+    <div className={styles.detailDescription}>
+      <div className={styles.address}>
         <Text fontSize="md" fontWeight="semibold">
-          {adress}
+          {address}
         </Text>
       </div>
       <div className={styles.descTitle}>

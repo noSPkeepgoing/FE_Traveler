@@ -3,18 +3,13 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styles from './customCalendar.module.scss';
 import moment, { Moment } from 'moment';
-
-interface CustomCalendarProps {
-  onChange: (selectedDate: Date | Date[] | null) => void;
-  value: Date;
-  type: string;
-}
+import { TCustomCalendar } from './customCalendarType';
 
 function CustomCalendar({
   onChange,
   value,
   type,
-}: CustomCalendarProps): ReactElement {
+}: TCustomCalendar): ReactElement {
   const [nowDate, setNowDate] = useState<string | null>(type);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const handleToggleCalendar = () => {

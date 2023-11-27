@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React from 'react';
-import Carousel from '../carousel/carousel';
+import Carousel from '../carousel';
 import DetailTitle from '../detail-title/detailTitle';
 import styles from './detailPage.module.scss';
 import DetailDescription from '../detail-description/detailDescription';
-import Reservation from '../reservation/reservation';
+import Reservation from '../reservation';
 
 async function getProduct() {
   const res = await axios.get('https://api.gamsung.xyz/v1/accomodations', {
@@ -29,7 +29,7 @@ async function DetailPage() {
       </div>
       <div className={styles.content}>
         <DetailDescription
-          adress={data.data.address}
+          address={data.data.address}
           desc={data.data.description}
         />
         <Reservation price={data.data.accomodation_price} />
