@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import './button.scss';
-import { TButton } from './buttonType';
+import { Tbutton } from './buttonType';
 
 function Button({
   size = '',
@@ -8,7 +8,7 @@ function Button({
   children,
   onClick,
   disabled = false,
-}: TButton) {
+}: Tbutton) {
   const className = classNames('button', size, variant, { disabled });
   return (
     <button className={className} onClick={onClick} disabled={disabled}>
