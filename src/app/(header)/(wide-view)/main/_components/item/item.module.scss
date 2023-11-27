@@ -3,6 +3,8 @@
 .item {
   margin: 1rem 0.5rem;
 
+  transition: all 0.2s;
+
   &Image {
     margin: 0.2rem 0;
 
@@ -36,6 +38,14 @@
       p {
         display: inline-block;
       }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    img {
+      opacity: 0.8;
     }
   }
 }
