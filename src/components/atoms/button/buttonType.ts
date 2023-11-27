@@ -4,4 +4,6 @@ export type Tbutton = {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  type?: 'Link';
+  href?: string;
 };
