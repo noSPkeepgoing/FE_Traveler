@@ -1,8 +1,8 @@
 import React from 'react';
 import Category from '../category';
 import { LOCATION } from '@/constants/main';
-import { TCategory } from '../category/categoryType';
 import styles from './categoryList.module.scss';
+import { TCategory } from '../../mainType';
 
 function CategoryList() {
   return (

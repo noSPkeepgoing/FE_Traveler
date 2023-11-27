@@ -1,7 +1,7 @@
 import React from 'react';
-import { TCategory } from './categoryType';
 import styles from './category.module.scss';
 import Text from '@/components/atoms/text';
+import { TCategory } from '../../mainType';
 
 function Category({ item }: { item: TCategory }) {
   return (
