@@ -6,7 +6,6 @@
   flex-shrink: 0;
   justify-content: center;
   outline: none;
-  color: red;
 
   &.login {
     width: 42rem;
@@ -21,7 +20,15 @@
   }
 
   &.signUpShort {
-    width: 42.5rem;
+    width: 32rem;
+    padding: 0.5rem 0.75rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: black;
+
+    &:focus {
+      border-color: black;
+    }
   }
 
   &.reservation {
@@ -29,7 +36,7 @@
     padding: 0.75rem 2.875rem 0.75rem 1.125rem; //1.125rem은 좌측 아이콘 자리를 위해 짧게 측정한 것
     margin-bottom: 0.625rem;
     width: 25rem;
-    color: aqua;
+    color: black;
 
     &:focus {
       border-color: black;
