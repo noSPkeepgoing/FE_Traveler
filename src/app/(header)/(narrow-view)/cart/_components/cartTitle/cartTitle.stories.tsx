@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CartLayout from '../../layout';
 import CartTitle from '.';
+import Layout from '../../../layout';
 
 const meta = {
   title: 'cart/CartTitle',
@@ -20,9 +20,9 @@ export default meta;
 export const ExampleCartTitle: StoryObj<typeof CartTitle> = {
   decorators: [
     (Story) => (
-      <CartLayout>
+      <Layout>
         <Story />
-      </CartLayout>
+      </Layout>
     ),
   ],
   parameters: {
