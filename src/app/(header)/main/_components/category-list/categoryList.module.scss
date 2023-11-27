@@ -1,0 +1,17 @@
+@use '@/styles/_variables.scss' as *;
+
+.frame {
+  width: 100%;
+  border-bottom: solid 2px $gray;
+
+  .category {
+    margin: auto;
+    padding: 2rem;
+    max-width: 55rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
