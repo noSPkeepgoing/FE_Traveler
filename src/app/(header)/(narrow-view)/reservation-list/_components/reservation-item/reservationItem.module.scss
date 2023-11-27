@@ -7,6 +7,9 @@
   border: 1px solid $gray;
   padding: 0.5rem 0.2rem 0.5rem 0.7rem;
   box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-around;
 }
 .itemInfo {
   width: 35.625rem;
@@ -29,4 +32,9 @@
 }
 .accommodationImage {
   border-radius: 0.5rem;
+}
+
+.priceInfo {
+  display: flex;
+  align-items: end;
 }

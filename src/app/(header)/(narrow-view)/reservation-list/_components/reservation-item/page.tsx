@@ -22,10 +22,18 @@ function ReservationItem() {
               2023.12.04(화) ~ 2023.12.05(수) / 성인 2명
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              이용자 이름
+              이용자: 박가현
+            </Text>
+            <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
+              결제일: 2023.11.27(월)
             </Text>
           </div>
         </div>
+      </div>
+      <div className={styles.priceInfo}>
+        <Text fontSize="md" fontWeight="bold">
+          139000원
+        </Text>
       </div>
     </div>
   );
