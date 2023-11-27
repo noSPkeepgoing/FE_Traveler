@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
-import { TcartInfo } from '../cartItem/cartItemType';
+import { TcartInfo } from '../cart-item/cartItemType';
 import Layout from '../../../layout';
 
 const meta = {

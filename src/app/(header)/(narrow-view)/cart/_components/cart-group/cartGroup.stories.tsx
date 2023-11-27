@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartGroup from '.';
 import { ThandleSelectItem } from '../../cartType';
-import { TcartInfo } from '../cartItem/cartItemType';
-import CartItem from '../cartItem';
+import { TcartInfo } from '../cart-item/cartItemType';
+import CartItem from '../cart-item';
 import Layout from '../../../layout';
 
 const meta = {
