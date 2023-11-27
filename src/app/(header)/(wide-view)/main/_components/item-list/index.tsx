@@ -40,4 +40,20 @@ const dummy: TAccommodation[] = [
     accommodation_img:
       'https://i.pinimg.com/736x/4e/9d/86/4e9d8645e1ad5146f7d1c441114cddce.jpg',
   },
+  {
+    accommodation_id: 8,
+    accommodation_name: '리거 로얄 라구니 괌 리조트',
+    short_address: '경기도 수원시',
+    accommodation_price: 40000,
+    accommodation_img:
+      'https://i.pinimg.com/736x/4e/9d/86/4e9d8645e1ad5146f7d1c441114cddce.jpg',
+  },
+  {
+    accommodation_id: 0,
+    accommodation_name: '리거 로얄 라구니 괌 리조트',
+    short_address: '경기도 수원시',
+    accommodation_price: 40000,
+    accommodation_img:
+      'https://i.pinimg.com/736x/4e/9d/86/4e9d8645e1ad5146f7d1c441114cddce.jpg',
+  },
 ];
