@@ -40,7 +40,7 @@ function SignUpForm() {
           <div className={styles.inputContainer}>
             <input type="email" placeholder="이메일" name="email" />
             <Button size="sm">
-              <Text color="gray100" fontSize="xs-5" fontWeight="medium">
+              <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
               </Text>
             </Button>
