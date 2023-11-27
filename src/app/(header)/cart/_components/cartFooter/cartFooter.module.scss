@@ -1,0 +1,40 @@
+@import '@/styles/_variables.scss';
+
+.cartFooter {
+  height: 7rem;
+  width: 100%;
+  padding: 1rem 0.5rem;
+  border-top: 2px solid $gray;
+
+  display: flex;
+  justify-content: center;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  background-color: white;
+}
+
+.cartFooterContent {
+  width: 48.125rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.cartTotalPriceInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
