@@ -17,24 +17,24 @@
   &.border {
     border-bottom: 0.1rem solid $gray400;
   }
-}
 
-.logo {
-  display: flex;
-  align-items: center;
-  height: 100%;
+  .logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
 
-  margin-left: 11.25rem;
-}
+    margin-left: 11.25rem;
+  }
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-  margin-right: 11.25rem;
+    margin-right: 11.25rem;
 
-  &.child {
-    margin-right: 4rem;
+    &.child {
+      margin-right: 4rem;
+    }
   }
 }
