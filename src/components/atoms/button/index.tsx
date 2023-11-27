@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import './button.scss';
-import { TButton } from './buttonType';
+import { Tbutton } from './buttonType';
 import Link from 'next/link';
 
 function Button({
@@ -11,7 +11,7 @@ function Button({
   disabled = false,
   type,
   href,
-}: TButton) {
+}: Tbutton) {
   const className = classNames('button', size, variant, { disabled });
   if (type === 'Link' && href)
     return (

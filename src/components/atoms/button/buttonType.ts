@@ -1,4 +1,4 @@
-export type TButton = {
+export type Tbutton = {
   size?: 'lg' | 'xl' | 'md' | 'sm' | '';
   variant?: 'default' | 'text' | 'secondary';
   children?: React.ReactNode;
