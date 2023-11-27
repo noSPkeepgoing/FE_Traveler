@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
-import CartLayout from '../../layout';
 import { TcartInfo } from '../cartItem/cartItemType';
+import Layout from '../../../layout';
 
 const meta = {
   title: 'cart/CartFooter',
@@ -39,9 +39,9 @@ export default meta;
 export const ExampleCartFooter: StoryObj<typeof CartFooter> = {
   decorators: [
     (Story) => (
-      <CartLayout>
+      <Layout>
         <Story />
-      </CartLayout>
+      </Layout>
     ),
   ],
   parameters: {
