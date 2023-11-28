@@ -1,9 +1,9 @@
 import Text from '@/components/atoms/text';
 import styles from './cartItem.module.scss';
 import Image from 'next/image';
-import { TcartInfo } from './cartItemType';
+import { TCartItem } from '@/api/cart/cartApiType';
 
-function SoldOutCartItem({ data }: { data: TcartInfo }) {
+function SoldOutCartItem({ data }: { data: TCartItem }) {
   return (
     <div className={styles.cartItem}>
       <div className={styles.itemInfo}>
@@ -20,7 +20,7 @@ function SoldOutCartItem({ data }: { data: TcartInfo }) {
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
-              {`${data.date} / ${data.people_number}명`}
+              {` / ${data.people_number}명`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {data.address}
