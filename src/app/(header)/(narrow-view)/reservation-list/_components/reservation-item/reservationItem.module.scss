@@ -1,29 +1,17 @@
 @import '@/styles/_variables.scss';
 
-.cartItem {
+.reservationItem {
   width: 100%;
   height: 8.125rem;
 
   border: 1px solid $gray;
-  padding: 0.5rem 0.2rem 0.5rem 0.25rem;
+  padding: 0.5rem 0.2rem 0.5rem 0.7rem;
   box-sizing: border-box;
 
   display: flex;
   justify-content: space-around;
 }
-.subCartInfo {
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.priceInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.cartInfo {
+.itemInfo {
   width: 35.625rem;
   height: 100%;
 
@@ -32,17 +20,21 @@
   justify-content: space-between;
 }
 
-.cartImageInfo {
+.imageInfo {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-.cartDetailInfo {
+.detailInfo {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-
 .accommodationImage {
   border-radius: 0.5rem;
+}
+
+.priceInfo {
+  display: flex;
+  align-items: end;
 }

@@ -1,9 +1,9 @@
-export type Tbutton = {
+export type TButton = {
   size?: 'lg' | 'xl' | 'md' | 'sm' | '';
   variant?: 'default' | 'text' | 'secondary';
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
-  type?: 'Link';
+  type?: 'button' | 'submit' | 'reset';
   href?: string;
 };

@@ -1,26 +1,30 @@
 import classNames from 'classnames';
 import './button.scss';
-import { Tbutton } from './buttonType';
+import { TButton } from './buttonType';
 import Link from 'next/link';
 
 function Button({
-  size = 'lg',
+  size = '',
   variant = 'default',
   children,
   onClick,
   disabled = false,
-  type,
+  type = 'button',
   href,
-}: Tbutton) {
+}: TButton) {
   const className = classNames('button', size, variant, { disabled });
-  if (type === 'Link' && href)
+  if (href)
     return (
       <Link href={href} className={className}>
         {children}
       </Link>
     );
   return (
-    <button className={className} onClick={onClick} disabled={disabled}>
+    <button
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+      type={type}>
       {children}
     </button>
   );

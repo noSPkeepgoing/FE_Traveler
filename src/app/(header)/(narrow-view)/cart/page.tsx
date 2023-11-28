@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import CartGroup from './_components/cartGroup';
-import CartTitle from './_components/cartTitle';
-import { ThandleSelectItem } from './cartType';
-import CartItem from './_components/cartItem';
-import CartFooter from './_components/cartFooter';
-import { TcartInfo } from './_components/cartItem/cartItemType';
+import CartGroup from './_components/cart-group';
+import CartTitle from './_components/cart-title';
+import { THandleSelectItem } from './cartType';
+import CartItem from './_components/cart-item';
+import CartFooter from './_components/cart-footer';
+import { TCartInfo } from './_components/cart-item/cartItemType';
 
 const data = [
   {
@@ -33,7 +33,7 @@ const data = [
 ];
 
 function CartPage() {
-  const [selectedItems, setSelectedItems] = useState<TcartInfo[]>([]);
+  const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
 
   const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.checked) {
@@ -47,7 +47,7 @@ function CartPage() {
     return selectedItems.length === data.length;
   };
 
-  const handleSelectItem = ({ event, selectedItem }: ThandleSelectItem) => {
+  const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
     if (event.target.checked) {
       setSelectedItems((prev) => [...prev, selectedItem]);
     } else {
