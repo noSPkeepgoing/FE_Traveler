@@ -15,6 +15,7 @@ function Cart() {
     isSelected,
     calculateTotalPrice,
     selectedItems,
+    handleDeleteCartItems,
   } = useCart();
 
   if (isLoading) return <div>로딩중</div>;
@@ -23,7 +24,11 @@ function Cart() {
 
   return (
     <>
-      <CartGroup selectAll={selectAll} isAllSelected={isAllSelected}>
+      <CartGroup
+        selectAll={selectAll}
+        isAllSelected={isAllSelected}
+        handleDeleteCartItems={handleDeleteCartItems}
+        selectedItems={selectedItems}>
         {cartData?.map((item) => (
           <CartItem
             key={item.cart_id}
