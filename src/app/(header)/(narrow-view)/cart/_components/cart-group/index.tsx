@@ -20,7 +20,7 @@ function CartGroup({ children, selectAll, isAllSelected }: TcartGroup) {
           </Text>
         </Button>
       </div>
-      <div className={styles.cartContainer}>{children}</div>
+      <section className={styles.cartContainer}>{children}</section>
     </>
   );
 }

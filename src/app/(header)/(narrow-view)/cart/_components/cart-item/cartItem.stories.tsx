@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import styles from '../cartGroup/cartGroup.module.scss';
+import styles from '../cart-group/cartGroup.module.scss';
 import CartItem from '.';
 import { TcartInfo } from './cartItemType';
 import { ThandleSelectItem } from '../../cartType';
