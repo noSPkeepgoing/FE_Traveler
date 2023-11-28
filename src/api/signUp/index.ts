@@ -5,9 +5,16 @@ import { isAxiosError } from 'axios';
 export const SIGN_API = {
   // 회원가입 API
   userSignUp: async (userData: TSignUpData) => {
-    const response = await instance.post('/v1/member/register', userData);
-    const { code, data } = response.data;
-    return { code, data };
+    try {
+      const response = await instance.post('/v1/member/register', userData);
+      const code = response.data.code;
+      return code;
+    } catch (error: unknown) {
+      if (isAxiosError<TResponse>(error)) {
+        const code: number = error.response!.data.code;
+        return code;
+      }
+    }
   },
 
   // 이메일 중복체크 API
@@ -16,13 +23,12 @@ export const SIGN_API = {
       const response = await instance.get(
         `v1/member/register/check?email=${email}`,
       );
-      console.log('respose: ', response);
-      const { code, data } = response.data;
-      return { code, data };
+      const code = response.data.code;
+      return code;
     } catch (error: unknown) {
       if (isAxiosError<TResponse>(error)) {
-        const { code, data } = error.response!.data;
-        return { code, data };
+        const code: number = error.response!.data.code;
+        return code;
       }
     }
   },

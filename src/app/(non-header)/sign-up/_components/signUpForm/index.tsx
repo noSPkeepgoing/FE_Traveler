@@ -11,7 +11,8 @@ import { RESPONSE_CODE } from '@constants/api';
 function SignUpForm() {
   // const [message, setMessage] = useState('');
 
-  // 회원가입 submit 핸들러 함수
+  /* -------------------- 회원가입 submit 핸들러 함수 --------------------*/
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -22,21 +23,22 @@ function SignUpForm() {
       name: formData.get('name') as string,
     };
 
-    console.log(userData); // 유저데이터 잘 받아와지는지?
-    const { code, data } = await SIGN_API.userSignUp(userData);
-    console.log({ code, data }); // response 코드 및 데이터 잘 받아와지는지?
+    const code = await SIGN_API.userSignUp(userData); // 회원가입 API 호출
 
     // 응답 코드에 따른 처리
     switch (code) {
       case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
-        alert(data.message);
+        alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
         window.location.href = '/sign-in';
         break;
       case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
-        alert(data.message);
+        alert('올바르지 않은 이메일 형식입니다.');
         break;
       case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
-        alert(data.message);
+        alert('비밀번호는 영문자와 숫자로 조합해야 합니다.');
+        break;
+      case RESPONSE_CODE.DUPLICATE_EMAIL:
+        alert('이미 사용중인 이메일입니다.');
         break;
       default:
         alert('회원 가입에 실패했습니다.');
@@ -44,53 +46,36 @@ function SignUpForm() {
     }
   };
 
-  // 현재 작업하던 도중이라 에러가 발생해서 아래 함수는 주석처리하고 pr 올리겠습니다~~
+  /* -------------------- 이메일 중복확인 핸들러 함수 -------------------- */
 
-  // 이메일 중복확인 핸들러 함수
-  // const checkEmailValid = async (
-  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  // ) => {
-  //   event.preventDefault();
+  const checkEmailValid = async () => {
+    const formElement = document.querySelector('form');
+    const formData = new FormData(formElement as HTMLFormElement);
+    const email = formData.get('email') as string;
 
-  //   const formElement = document.querySelector('form'); // 현재 폼 요소를 찾습니다.
-  //   if (!formElement) {
-  //     console.error('폼 요소를 찾을 수 없습니다.');
-  //     return;
-  //   }
+    // 이메일 형식 유효성 검사
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('유효하지 않은 이메일 형식입니다.');
+      return;
+    }
 
-  //   const formData = new FormData(formElement as HTMLFormElement);
-  //   const email = formData.get('email') as string;
+    // 이메일 중복체크 API 호출
+    const code = await SIGN_API.emailCheck(email);
 
-  //   // 이메일 형식 유효성 검사
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(email)) {
-  //     alert('유효하지 않은 이메일 형식입니다.');
-  //     return;
-  //   }
-
-  //   try {
-  //     console.log(email);
-  //     // 이메일 중복체크 API 호출
-  //     const response = await SIGN_API.emailCheck(email);
-  //     const { code, data } = response;
-  //     console.log(response);
-
-  //     // 응답에 따른 처리
-  //     switch (code) {
-  //       case 1006: // 이메일 사용 가능
-  //         console.log('사용 가능한 이메일입니다.', data);
-  //         break;
-  //       case 1007: // 이메일 중복
-  //         console.log('중복된 이메일입니다.', data);
-  //         break;
-  //       default:
-  //         console.log('일시적인 서버 오류가 발생했습니다.', data);
-  //         break;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+    // 응답에 따른 처리
+    switch (code) {
+      case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
+        alert('사용 가능한 이메일입니다.');
+        break;
+      case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
+        alert('이미 사용중인 이메일입니다.');
+        break;
+      case 5003:
+        alert('올바르지 않은 이메일 형식입니다.');
+        break;
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -103,8 +88,7 @@ function SignUpForm() {
         <div className={styles.inputBox}>
           <div className={styles.inputContainer}>
             <input type="email" placeholder="이메일" name="email" />
-            <Button size="sm" type="button">
-              {/* onClick={checkEmailValid} */}
+            <Button size="sm" type="button" onClick={checkEmailValid}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
               </Text>
