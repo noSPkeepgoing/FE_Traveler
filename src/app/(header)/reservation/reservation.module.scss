@@ -5,17 +5,27 @@
   padding: 0;
   box-sizing: border-box;
 }*/
+.frame {
+  max-width: 770px;
+  margin: 0 auto;
+}
 
-.content {
+.right {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
+  align-items: end;
+}
+
+.content {
+  width: 100%;
+  max-width: 48.125rem;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
+  width: 100%;
 
   .item {
     margin-bottom: 1rem;
@@ -24,9 +34,11 @@
 
 .reservationCard {
   border: 1px solid #b1b1b1;
+  width: 100%;
+  max-width: 770px;
   border-radius: 0.25rem;
   padding: 1rem;
-  margin-bottom: 0.625rem;
+  margin-top: 1rem;
 
   &.reservationItem {
     display: flex;
@@ -44,17 +56,25 @@
   }
 }
 
-.labels {
+.parts {
+  margin-bottom: 2rem;
+}
+
+.booker {
   margin-bottom: 1rem;
 }
 
-.options {
-  margin: 1rem 0;
-
-  .checkbox-option {
-    margin: 0.5rem 0;
-  }
-
-  .checkboxLabel {
-  }
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.grayLine {
+  height: 1px;
+  background-color: #e5e5e5;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

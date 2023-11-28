@@ -1,3 +1,5 @@
+@import '@/styles/_variables.scss';
+
 .input {
   display: inline-flex;
   height: 1rem;
@@ -6,13 +8,19 @@
   flex-shrink: 0;
   justify-content: center;
   outline: none;
+  border-radius: 0.5rem;
+  height: 3.125rem;
 
   &.login {
-    width: 42rem;
-    padding: 0.5rem 0.75rem;
+    width: 23.5rem;
+    padding: 0 0.75rem;
     background-color: white;
     border: 1px solid #ccc;
     color: black;
+
+    &:invalid {
+      border-color: $red200;
+    }
 
     &:focus {
       border-color: black;
@@ -20,11 +28,12 @@
   }
 
   &.signUpShort {
-    width: 32rem;
-    padding: 0.5rem 0.75rem;
+    width: 22rem;
+    padding: 0 0.75rem;
     background-color: white;
     border: 1px solid #ccc;
     color: black;
+    margin: 0;
 
     &:focus {
       border-color: black;

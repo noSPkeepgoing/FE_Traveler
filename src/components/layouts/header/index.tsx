@@ -20,7 +20,11 @@ function Header({ border = true }: THeader) {
     <div className={containerClassName}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Button variant="text" onClick={() => router.push('/main')}>
+          <Button
+            variant="text"
+            size="sm"
+            onClick={() => router.push('/main')}
+            href="/main">
             <Text fontSize="xl" fontWeight="thin">
               LOGO
             </Text>
@@ -30,14 +34,14 @@ function Header({ border = true }: THeader) {
           {!isOnline ? (
             <>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button variant="text" onClick={() => router.push('/sign-in')}>
+                <Button variant="text" size="sm" href="/sign-in">
                   <Text fontSize="xs-2" fontWeight="semibold">
                     로그인
                   </Text>
                 </Button>
               </div>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button variant="text" onClick={() => router.push('/sign-up')}>
+                <Button variant="text" size="sm" href="/sign-up">
                   <Text fontSize="xs-2" fontWeight="semibold">
                     회원가입
                   </Text>
@@ -47,23 +51,21 @@ function Header({ border = true }: THeader) {
           ) : (
             <>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button variant="text" onClick={() => router.push('/sign-in')}>
+                <Button variant="text" size="sm" href="/main">
                   <Text fontSize="xs-2" fontWeight="semibold">
                     로그아웃
                   </Text>
                 </Button>
               </div>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button variant="text" onClick={() => router.push('/cart')}>
+                <Button variant="text" size="sm" href="/cart">
                   <Text fontSize="xs-2" fontWeight="semibold">
                     장바구니
                   </Text>
                 </Button>
               </div>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button
-                  variant="text"
-                  onClick={() => router.push('/reservation-list')}>
+                <Button variant="text" size="sm" href="/reservation-list">
                   <Text fontSize="xs-2" fontWeight="semibold">
                     주문내역
                   </Text>
