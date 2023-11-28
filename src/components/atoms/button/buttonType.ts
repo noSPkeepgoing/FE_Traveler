@@ -2,7 +2,7 @@ export type TButton = {
   size?: 'lg' | 'xl' | 'md' | 'sm' | '';
   variant?: 'default' | 'text' | 'secondary';
   children?: React.ReactNode;
-  onClick?: (v: unknown) => unknown;
+  onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   href?: string;
