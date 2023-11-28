@@ -2,9 +2,9 @@ import Checkbox from '@/components/atoms/checkbox';
 import styles from './cartItem.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
-import { TcartItem } from './cartItemType';
+import { TCartItem } from './cartItemType';
 
-function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
+function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
   return (
     <div className={styles.cartItem}>
       <Checkbox
@@ -13,11 +13,11 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
         }}
         isChecked={isSelected(data.cart_id)}
       />
-      <div className={styles.cartInfo}>
+      <div className={styles.itemInfo}>
         <Text fontSize="xs" fontWeight="bold">
           {data.accommodation_name}
         </Text>
-        <div className={styles.cartImageInfo}>
+        <div className={styles.imageInfo}>
           <Image
             src="https://avatars.githubusercontent.com/u/81469686?v=4"
             width={80}
@@ -25,7 +25,7 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
             alt="숙소 이미지"
             className={styles.accommodationImage}
           />
-          <div className={styles.cartDetailInfo}>
+          <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
               {`${data.date} / ${data.people_number}명`}
             </Text>
@@ -37,7 +37,7 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
       </div>
       <div className={styles.subCartInfo}>
         <div>아이콘</div>
-        <div className={styles.cart_priceInfo}>
+        <div>
           <Text fontSize="md" fontWeight="bold">
             {`${data.cart_price}원`}
           </Text>

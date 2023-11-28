@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartGroup from '.';
-import { ThandleSelectItem } from '../../cartType';
-import { TcartInfo } from '../cartItem/cartItemType';
-import CartItem from '../cartItem';
+import { THandleSelectItem } from '../../cartType';
+import { TCartInfo } from '../cart-item/cartItemType';
+import CartItem from '../cart-item';
 import Layout from '../../../layout';
 
 const meta = {
@@ -84,7 +84,7 @@ export const ExampleCartGroup: StoryObj<typeof CartGroup> = {
           'https://avatars.githubusercontent.com/u/81469686?v=4',
       },
     ];
-    const [selectedItems, setSelectedItems] = useState<TcartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
 
     const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.currentTarget.checked) {
@@ -98,7 +98,7 @@ export const ExampleCartGroup: StoryObj<typeof CartGroup> = {
       return selectedItems.length === data.length;
     };
 
-    const handleSelectItem = ({ event, selectedItem }: ThandleSelectItem) => {
+    const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
       if (event.target.checked) {
         setSelectedItems((prev) => [...prev, selectedItem]);
       } else {

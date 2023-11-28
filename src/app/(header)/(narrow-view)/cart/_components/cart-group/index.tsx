@@ -2,9 +2,9 @@ import Checkbox from '@/components/atoms/checkbox';
 import styles from './cartGroup.module.scss';
 import Button from '@/components/atoms/button';
 import Text from '@/components/atoms/text';
-import { TcartGroup } from './cartGroupType';
+import { TCartGroup } from './cartGroupType';
 
-function CartGroup({ children, selectAll, isAllSelected }: TcartGroup) {
+function CartGroup({ children, selectAll, isAllSelected }: TCartGroup) {
   return (
     <>
       <div className={styles.selectContainer}>
@@ -20,7 +20,7 @@ function CartGroup({ children, selectAll, isAllSelected }: TcartGroup) {
           </Text>
         </Button>
       </div>
-      <div className={styles.cartContainer}>{children}</div>
+      <section className={styles.cartContainer}>{children}</section>
     </>
   );
 }
