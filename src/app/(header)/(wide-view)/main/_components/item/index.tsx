@@ -3,16 +3,24 @@ import { TAccommodation } from '../../mainType';
 import styles from './item.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 function Item({ data }: { data: TAccommodation }) {
+  const router = useRouter();
   const {
+    accommodation_id,
     short_address,
     accommodation_name,
     accommodation_price,
     accommodation_img,
   } = data;
+
+  const handleClick = () => {
+    router.push(`/rooms/${accommodation_id}`);
+  };
+
   return (
-    <div className={styles.item}>
+    <div className={styles.item} onClick={handleClick}>
       <div className={styles.itemImage}>
         <Image
           src="https://avatars.githubusercontent.com/u/81469686?v=4"
