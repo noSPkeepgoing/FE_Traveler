@@ -6,10 +6,12 @@ import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignUp } from './signUpType';
 import { SIGN_API } from '@api/signUp';
+import { RESPONSE_CODE } from '@constants/api';
 
 function SignUpForm() {
   // const [message, setMessage] = useState('');
 
+  // 회원가입 submit 핸들러 함수
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -21,33 +23,79 @@ function SignUpForm() {
     };
 
     try {
-      console.log(userData);
+      console.log(userData); // 유저데이터 잘 받아와지는지?
       const { code, data } = await SIGN_API.userSignUp(userData);
-      console.log({ code, data });
+      console.log({ code, data }); // response 코드 및 데이터 잘 받아와지는지?
+
       // 응답 코드에 따른 처리
       switch (code) {
-        case 1003: // 회원가입 성공
-          console.log(code, data.message);
+        case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
+          alert(data.message);
+          window.location.href = '/sign-in';
           break;
-        case 1004: // 이메일 형식 오류
-          console.log(code, data.message);
+        case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
+          alert(data.message);
           break;
-        case 1005: // 비밀번호 형식 오류
-          console.log(code, data.message);
+        case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
+          alert(data.message);
           break;
         default:
-          console.log('알 수 없는 오류가 발생했습니다.');
+          alert('회원 가입에 실패했습니다.');
           break;
       }
     } catch (error) {
-      console.log('회원가입에 실패했습니다..!');
+      alert('서버와의 통신 중 오류가 발생했습니다.');
       console.error(error);
     }
   };
 
-  const sayHello = () => {
-    return console.log('hello');
-  };
+  // 현재 작업하던 도중이라 에러가 발생해서 아래 함수는 주석처리하고 pr 올리겠습니다~~
+
+  // 이메일 중복확인 핸들러 함수
+  // const checkEmailValid = async (
+  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  // ) => {
+  //   event.preventDefault();
+
+  //   const formElement = document.querySelector('form'); // 현재 폼 요소를 찾습니다.
+  //   if (!formElement) {
+  //     console.error('폼 요소를 찾을 수 없습니다.');
+  //     return;
+  //   }
+
+  //   const formData = new FormData(formElement as HTMLFormElement);
+  //   const email = formData.get('email') as string;
+
+  //   // 이메일 형식 유효성 검사
+  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //   if (!emailRegex.test(email)) {
+  //     alert('유효하지 않은 이메일 형식입니다.');
+  //     return;
+  //   }
+
+  //   try {
+  //     console.log(email);
+  //     // 이메일 중복체크 API 호출
+  //     const response = await SIGN_API.emailCheck(email);
+  //     const { code, data } = response;
+  //     console.log(response);
+
+  //     // 응답에 따른 처리
+  //     switch (code) {
+  //       case 1006: // 이메일 사용 가능
+  //         console.log('사용 가능한 이메일입니다.', data);
+  //         break;
+  //       case 1007: // 이메일 중복
+  //         console.log('중복된 이메일입니다.', data);
+  //         break;
+  //       default:
+  //         console.log('일시적인 서버 오류가 발생했습니다.', data);
+  //         break;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -60,7 +108,8 @@ function SignUpForm() {
         <div className={styles.inputBox}>
           <div className={styles.inputContainer}>
             <input type="email" placeholder="이메일" name="email" />
-            <Button size="sm" type="Link" onClick={sayHello}>
+            <Button size="sm" type="button">
+              {/* onClick={checkEmailValid} */}
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
               </Text>
@@ -93,14 +142,14 @@ function SignUpForm() {
           </div>
         </div>
         <div className={styles.confirm}>
-          <Button size="lg">
+          <Button size="lg" type="submit">
             <Text color="gray100" fontSize="xs-2" fontWeight="medium">
               가입하기
             </Text>
           </Button>
         </div>
         <div className={styles.signInBtn}>
-          <Button type="Link" variant="text" href="/sign-in">
+          <Button type="button" variant="text" href="/sign-in">
             <Text fontSize="xs-3" fontWeight="bold">
               이미 회원이신가요??
             </Text>

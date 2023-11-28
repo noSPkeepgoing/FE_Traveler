@@ -9,7 +9,7 @@ export const SIGN_API = {
       const { code, data } = response.data;
       return { code, data };
     } catch (error) {
-      throw new Error('서버와 통신중 에러가 발생했습니다.');
+      throw new Error('서버와 통신중 에러가 발생');
     }
   },
 
@@ -22,7 +22,7 @@ export const SIGN_API = {
       const { code, data } = response.data;
       return { code, data };
     } catch (error) {
-      throw new Error('서버와 통신중 에러가 발생했습니다.');
+      throw new Error('서버와 통신중 에러가 발생');
     }
   },
 };
