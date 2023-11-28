@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import styles from '../cart-group/cartGroup.module.scss';
 import CartItem from '.';
-import { TCartInfo } from './cartItemType';
 import { THandleSelectItem } from '../../cartType';
 import Layout from '../../../layout';
 import SoldOutCartItem from './soldOutCartItem';
+import { TCartItem } from '@/api/cart/cartApiType';
 
 const meta = {
   title: 'cart/CartItem',
@@ -60,18 +60,20 @@ export const ExampleCartItem: StoryObj<typeof CartItem> = {
     },
   },
   render: (args) => {
-    const item = {
-      cart_id: 1,
-      accommodation_id: 1,
+    const item: TCartItem = {
+      cart_id: 2,
+      accommodation_id: 2,
       accommodation_name:
         'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
-      date: '2023.12.04(화) ~ 2023.12.05(수)',
-      people_number: 2,
       address: '서울특별시 강남구 강남대로 364',
+      start_date: new Date(),
+      end_date: new Date(),
+      people_number: 2,
       cart_price: 129000,
       accommodation_img: 'https://avatars.githubusercontent.com/u/81469686?v=4',
+      accommodation_sold_out: true,
     };
-    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
 
     const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
       if (event.target.checked) {
@@ -116,16 +118,18 @@ export const ExampleSoldOutCartItem: StoryObj<typeof SoldOutCartItem> = {
     },
   },
   render: (args) => {
-    const item = {
-      cart_id: 1,
-      accommodation_id: 1,
+    const item: TCartItem = {
+      cart_id: 2,
+      accommodation_id: 2,
       accommodation_name:
         'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
-      date: '2023.12.04(화) ~ 2023.12.05(수)',
-      people_number: 2,
       address: '서울특별시 강남구 강남대로 364',
+      start_date: new Date(),
+      end_date: new Date(),
+      people_number: 2,
       cart_price: 129000,
       accommodation_img: 'https://avatars.githubusercontent.com/u/81469686?v=4',
+      accommodation_sold_out: true,
     };
     return <SoldOutCartItem {...args} data={item} />;
   },

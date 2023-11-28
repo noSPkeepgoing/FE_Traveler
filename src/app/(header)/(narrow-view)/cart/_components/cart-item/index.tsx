@@ -2,9 +2,11 @@ import Checkbox from '@/components/atoms/checkbox';
 import styles from './cartItem.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
-import { TCartItem } from './cartItemType';
+import { VscChromeClose } from 'react-icons/vsc';
+import Button from '@/components/atoms/button';
+import { TCartItemProps } from './cartItemType';
 
-function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
+function CartItem({ handleSelectItem, isSelected, data }: TCartItemProps) {
   return (
     <div className={styles.cartItem}>
       <Checkbox
@@ -27,7 +29,7 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              {`${data.date} / ${data.people_number}명`}
+              {` / ${data.people_number}명`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
               {data.address}
@@ -36,7 +38,9 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
         </div>
       </div>
       <div className={styles.subCartInfo}>
-        <div>아이콘</div>
+        <Button variant="text">
+          <VscChromeClose size="16" />
+        </Button>
         <div>
           <Text fontSize="md" fontWeight="bold">
             {`${data.cart_price}원`}
