@@ -4,6 +4,12 @@
   width: 100%;
   border-bottom: solid 2px $gray;
 
+  position: sticky;
+  top: 4.95rem;
+  z-index: 1;
+
+  background-color: white;
+
   .category {
     margin: auto;
     padding: 2rem;
