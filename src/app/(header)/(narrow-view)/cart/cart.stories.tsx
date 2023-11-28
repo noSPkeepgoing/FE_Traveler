@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import type { StoryObj } from '@storybook/react';
-import { TcartInfo } from './_components/cartItem/cartItemType';
-import { ThandleSelectItem } from './cartType';
-import CartTitle from './_components/cartTitle';
-import CartGroup from './_components/cartGroup';
-import CartItem from './_components/cartItem';
-import CartFooter from './_components/cartFooter';
+import { TCartInfo } from './_components/cart-item/cartItemType';
+import { THandleSelectItem } from './cartType';
+import CartTitle from './_components/cart-title';
+import CartGroup from './_components/cart-group';
+import CartItem from './_components/cart-item';
+import CartFooter from './_components/cart-footer';
 import Layout from '../layout';
 
 const meta = {
@@ -65,7 +65,7 @@ export const ExampleCart: StoryObj = {
           'https://avatars.githubusercontent.com/u/81469686?v=4',
       },
     ];
-    const [selectedItems, setSelectedItems] = useState<TcartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
 
     const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.currentTarget.checked) {
@@ -79,7 +79,7 @@ export const ExampleCart: StoryObj = {
       return selectedItems.length === data.length;
     };
 
-    const handleSelectItem = ({ event, selectedItem }: ThandleSelectItem) => {
+    const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
       if (event.target.checked) {
         setSelectedItems((prev) => [...prev, selectedItem]);
       } else {

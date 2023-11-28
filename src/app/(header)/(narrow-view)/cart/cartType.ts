@@ -1,6 +1,6 @@
-import { TcartInfo } from './_components/cartItem/cartItemType';
+import { TCartInfo } from './_components/cart-item/cartItemType';
 
-export type ThandleSelectItem = {
+export type THandleSelectItem = {
   event: React.ChangeEvent<HTMLInputElement>;
-  selectedItem: TcartInfo;
+  selectedItem: TCartInfo;
 };
