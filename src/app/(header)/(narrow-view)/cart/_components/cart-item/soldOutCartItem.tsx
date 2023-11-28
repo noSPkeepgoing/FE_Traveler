@@ -6,11 +6,11 @@ import { TcartInfo } from './cartItemType';
 function SoldOutCartItem({ data }: { data: TcartInfo }) {
   return (
     <div className={styles.cartItem}>
-      <div className={styles.cartInfo}>
+      <div className={styles.itemInfo}>
         <Text fontSize="xs" fontWeight="bold" color="gray400">
           {data.accommodation_name}
         </Text>
-        <div className={styles.cartImageInfo}>
+        <div className={styles.imageInfo}>
           <Image
             src="https://avatars.githubusercontent.com/u/81469686?v=4"
             width={80}
@@ -18,7 +18,7 @@ function SoldOutCartItem({ data }: { data: TcartInfo }) {
             alt="숙소 이미지"
             className={styles.accommodationImage}
           />
-          <div className={styles.cartDetailInfo}>
+          <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {`${data.date} / ${data.people_number}명`}
             </Text>
@@ -31,7 +31,11 @@ function SoldOutCartItem({ data }: { data: TcartInfo }) {
       <div className={styles.subCartInfo}>
         <div>아이콘</div>
         <div className={styles.priceInfo}>
-          <Text fontSize="md" fontWeight="bold" color="blackAlpha100">
+          <Text
+            fontSize="md"
+            fontWeight="bold"
+            color="blackAlpha100"
+            textDecoration="line-through">
             {`${data.cart_price}원`}
           </Text>
           <Text fontSize="xs-4" fontWeight="medium" color="blackAlpha200">
