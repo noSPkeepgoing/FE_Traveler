@@ -1,28 +1,37 @@
 import { instance } from '../';
-import { TSignUpData, TResponse } from './types';
+import { TSignUpData, TResponse } from './signUpType';
+import { isAxiosError } from 'axios';
 
 export const SIGN_API = {
   // 회원가입 API
-  userSignUp: async (userData: TSignUpData): Promise<TResponse> => {
+  userSignUp: async (userData: TSignUpData) => {
     try {
       const response = await instance.post('/v1/member/register', userData);
-      const { code, data } = response.data;
-      return { code, data };
-    } catch (error) {
-      throw new Error('서버와 통신중 에러가 발생');
+      const code = response.data.code;
+      return code;
+    } catch (error: unknown) {
+      if (isAxiosError<TResponse>(error)) {
+        const code: number = error.response!.data.code;
+        return code;
+      }
     }
   },
 
   // 이메일 중복체크 API
-  emailCheck: async (email: string): Promise<TResponse> => {
+  emailCheck: async (email: string) => {
     try {
       const response = await instance.get(
         `v1/member/register/check?email=${email}`,
       );
-      const { code, data } = response.data;
-      return { code, data };
-    } catch (error) {
-      throw new Error('서버와 통신중 에러가 발생');
+      const code = response.data.code;
+      return code;
+    } catch (error: unknown) {
+      if (isAxiosError<TResponse>(error)) {
+        if (error.response) {
+          const code: number = error.response.data.code;
+          return code;
+        }
+      }
     }
   },
 };
