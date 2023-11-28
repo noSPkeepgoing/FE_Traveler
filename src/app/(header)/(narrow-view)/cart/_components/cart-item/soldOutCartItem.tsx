@@ -1,20 +1,13 @@
-import Checkbox from '@/components/atoms/checkbox';
-import styles from './cartItem.module.scss';
 import Text from '@/components/atoms/text';
+import styles from './cartItem.module.scss';
 import Image from 'next/image';
-import { TCartItem } from './cartItemType';
+import { TcartInfo } from './cartItemType';
 
-function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
+function SoldOutCartItem({ data }: { data: TcartInfo }) {
   return (
     <div className={styles.cartItem}>
-      <Checkbox
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          handleSelectItem({ event, selectedItem: data });
-        }}
-        isChecked={isSelected(data.cart_id)}
-      />
       <div className={styles.itemInfo}>
-        <Text fontSize="xs" fontWeight="bold">
+        <Text fontSize="xs" fontWeight="bold" color="gray400">
           {data.accommodation_name}
         </Text>
         <div className={styles.imageInfo}>
@@ -26,10 +19,10 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
             className={styles.accommodationImage}
           />
           <div className={styles.detailInfo}>
-            <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
+            <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {`${data.date} / ${data.people_number}명`}
             </Text>
-            <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
+            <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {data.address}
             </Text>
           </div>
@@ -37,12 +30,16 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
       </div>
       <div className={styles.subCartInfo}>
         <div>아이콘</div>
-        <div>
-          <Text fontSize="md" fontWeight="bold">
+        <div className={styles.priceInfo}>
+          <Text
+            fontSize="md"
+            fontWeight="bold"
+            color="blackAlpha100"
+            textDecoration="line-through">
             {`${data.cart_price}원`}
           </Text>
-          <Text fontSize="xs-3" fontWeight="light" color="red200">
-            결제 시 환불 불가
+          <Text fontSize="xs-4" fontWeight="medium" color="blackAlpha200">
+            예약마감
           </Text>
         </div>
       </div>
@@ -50,4 +47,4 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
   );
 }
 
-export default CartItem;
+export default SoldOutCartItem;
