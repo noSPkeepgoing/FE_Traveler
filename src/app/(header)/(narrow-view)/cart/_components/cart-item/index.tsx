@@ -13,11 +13,11 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
         }}
         isChecked={isSelected(data.cart_id)}
       />
-      <div className={styles.cartInfo}>
+      <div className={styles.itemInfo}>
         <Text fontSize="xs" fontWeight="bold">
           {data.accommodation_name}
         </Text>
-        <div className={styles.cartImageInfo}>
+        <div className={styles.imageInfo}>
           <Image
             src="https://avatars.githubusercontent.com/u/81469686?v=4"
             width={80}
@@ -25,7 +25,7 @@ function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
             alt="숙소 이미지"
             className={styles.accommodationImage}
           />
-          <div className={styles.cartDetailInfo}>
+          <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
               {`${data.date} / ${data.people_number}명`}
             </Text>

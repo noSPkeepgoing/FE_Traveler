@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import CartGroup from './_components/cartGroup';
-import CartTitle from './_components/cartTitle';
+import CartGroup from './_components/cart-group';
+import CartTitle from './_components/cart-title';
 import { ThandleSelectItem } from './cartType';
-import CartItem from './_components/cartItem';
-import CartFooter from './_components/cartFooter';
-import { TcartInfo } from './_components/cartItem/cartItemType';
+import CartItem from './_components/cart-item';
+import CartFooter from './_components/cart-footer';
+import { TcartInfo } from './_components/cart-item/cartItemType';
 
 const data = [
   {

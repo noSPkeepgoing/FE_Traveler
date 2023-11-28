@@ -1,5 +1,14 @@
 export type TText = {
-  fontSize?: 'xs-5' | 'xs-4' | 'xs-3' | 'xs-2' | 'xs' | 'md' | 'xl' | 'xl-2';
+  fontSize?:
+    | 'xs-5'
+    | 'xs-4'
+    | 'xs-3'
+    | 'xs-2'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'xl'
+    | 'xl-2';
   fontWeight?:
     | 'thin'
     | 'light'
@@ -23,5 +32,6 @@ export type TText = {
     | 'gray100'
     | 'blackAlpha200'
     | 'white';
+  textDecoration?: 'line-through' | 'none';
   children: string | number;
 };

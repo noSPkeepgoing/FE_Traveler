@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import type { StoryObj } from '@storybook/react';
-import { TcartInfo } from './_components/cartItem/cartItemType';
+import { TcartInfo } from './_components/cart-item/cartItemType';
 import { ThandleSelectItem } from './cartType';
-import CartTitle from './_components/cartTitle';
-import CartGroup from './_components/cartGroup';
-import CartItem from './_components/cartItem';
-import CartFooter from './_components/cartFooter';
+import CartTitle from './_components/cart-title';
+import CartGroup from './_components/cart-group';
+import CartItem from './_components/cart-item';
+import CartFooter from './_components/cart-footer';
 import Layout from '../layout';
 
 const meta = {
