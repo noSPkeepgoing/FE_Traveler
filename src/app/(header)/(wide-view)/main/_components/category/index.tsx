@@ -1,17 +1,9 @@
 import React from 'react';
 import styles from './category.module.scss';
 import Text from '@/components/atoms/text';
-import { TCategory } from '../../mainType';
+import { TCategoryProps } from './categoryType';
 
-function Category({
-  item,
-  isSelected,
-  handleSelect,
-}: {
-  item: TCategory;
-  isSelected: number;
-  handleSelect: (num: number) => void;
-}) {
+function Category({ item, isSelected, handleSelect }: TCategoryProps) {
   const handleClick = () => {
     handleSelect(item.num);
   };

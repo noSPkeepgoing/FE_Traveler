@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from '../item';
-import { TAccommodation } from '../../mainType';
 import styles from './itemList.module.scss';
+import { TAccommodation } from '../item/itemType';
 
 const ItemList = () => {
   return (
