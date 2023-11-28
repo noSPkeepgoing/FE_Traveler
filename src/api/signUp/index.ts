@@ -1,5 +1,6 @@
 import { instance } from '../';
-import { TSignUpData, TResponse } from './signUpType';
+import { Response, ErrorData } from '../type';
+import { TSignUpData } from './signUpType';
 import { isAxiosError } from 'axios';
 
 export const SIGN_API = {
@@ -10,7 +11,7 @@ export const SIGN_API = {
       const code = response.data.code;
       return code;
     } catch (error: unknown) {
-      if (isAxiosError<TResponse>(error)) {
+      if (isAxiosError<Response<ErrorData>>(error)) {
         if (error.response) {
           const code: number = error.response.data.code;
           return code;
@@ -28,7 +29,7 @@ export const SIGN_API = {
       const code = response.data.code;
       return code;
     } catch (error: unknown) {
-      if (isAxiosError<TResponse>(error)) {
+      if (isAxiosError<Response<ErrorData>>(error)) {
         if (error.response) {
           const code: number = error.response.data.code;
           return code;
