@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
 import Layout from '../../../layout';
-import { TCartItem } from '@/api/cart/type';
+import { TCartItem } from '@/api/cart/cartApiType';
 
 const meta = {
   title: 'cart/CartFooter',

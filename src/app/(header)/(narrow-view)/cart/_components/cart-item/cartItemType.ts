@@ -1,4 +1,4 @@
-import { TCartItem } from '@/api/cart/type';
+import { TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '../../cartType';
 
 export type TCartItemProps = {

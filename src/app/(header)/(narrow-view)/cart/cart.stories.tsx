@@ -6,7 +6,7 @@ import CartGroup from './_components/cart-group';
 import CartItem from './_components/cart-item';
 import CartFooter from './_components/cart-footer';
 import Layout from '../layout';
-import { TCartItem } from '@/api/cart/type';
+import { TCartItem } from '@/api/cart/cartApiType';
 
 const meta = {
   title: 'cart/Cart',
@@ -39,30 +39,34 @@ export const ExampleCart: StoryObj = {
     },
   },
   render: () => {
-    const data = [
-      {
-        cart_id: 1,
-        accommodation_id: 1,
-        accommodation_name:
-          'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
-        date: '2023.12.04(화) ~ 2023.12.05(수)',
-        people_number: 2,
-        address: '서울특별시 강남구 강남대로 364',
-        cart_price: 129000,
-        accommodation_img:
-          'https://avatars.githubusercontent.com/u/81469686?v=4',
-      },
+    const data: TCartItem[] = [
       {
         cart_id: 2,
         accommodation_id: 2,
         accommodation_name:
           'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
-        date: '2023.12.04(화) ~ 2023.12.05(수)',
-        people_number: 2,
         address: '서울특별시 강남구 강남대로 364',
+        start_date: new Date(),
+        end_date: new Date(),
+        people_number: 2,
         cart_price: 129000,
         accommodation_img:
           'https://avatars.githubusercontent.com/u/81469686?v=4',
+        accommodation_sold_out: true,
+      },
+      {
+        cart_id: 1,
+        accommodation_id: 1,
+        accommodation_name:
+          'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
+        address: '서울특별시 강남구 강남대로 364',
+        start_date: new Date(),
+        end_date: new Date(),
+        people_number: 2,
+        cart_price: 129000,
+        accommodation_img:
+          'https://avatars.githubusercontent.com/u/81469686?v=4',
+        accommodation_sold_out: true,
       },
     ];
     const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
