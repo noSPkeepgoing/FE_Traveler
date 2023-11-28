@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import styles from '../cart-group/cartGroup.module.scss';
 import CartItem from '.';
-import { TcartInfo } from './cartItemType';
-import { ThandleSelectItem } from '../../cartType';
+import { TCartInfo } from './cartItemType';
+import { THandleSelectItem } from '../../cartType';
 import Layout from '../../../layout';
 
 const meta = {
@@ -70,9 +70,9 @@ export const ExampleCartItem: StoryObj<typeof CartItem> = {
       cart_price: 129000,
       accommodation_img: 'https://avatars.githubusercontent.com/u/81469686?v=4',
     };
-    const [selectedItems, setSelectedItems] = useState<TcartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
 
-    const handleSelectItem = ({ event, selectedItem }: ThandleSelectItem) => {
+    const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
       if (event.target.checked) {
         setSelectedItems((prev) => [...prev, selectedItem]);
       } else {

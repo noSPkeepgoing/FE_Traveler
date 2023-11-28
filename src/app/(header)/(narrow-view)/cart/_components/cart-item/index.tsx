@@ -2,9 +2,9 @@ import Checkbox from '@/components/atoms/checkbox';
 import styles from './cartItem.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
-import { TcartItem } from './cartItemType';
+import { TCartItem } from './cartItemType';
 
-function CartItem({ handleSelectItem, isSelected, data }: TcartItem) {
+function CartItem({ handleSelectItem, isSelected, data }: TCartItem) {
   return (
     <div className={styles.cartItem}>
       <Checkbox
