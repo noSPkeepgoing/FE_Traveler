@@ -51,29 +51,31 @@ function SignUpForm() {
   const checkEmailValid = async () => {
     const formElement = document.querySelector('form');
     const formData = new FormData(formElement as HTMLFormElement);
-    const email = formData.get('email') as string;
+    const email = formData.get('email');
 
-    // 이메일 형식 유효성 검사
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert('유효하지 않은 이메일 형식입니다.');
-      return;
-    }
+    if (typeof email === 'string') {
+      // 이메일 형식 유효성 검사
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('유효하지 않은 이메일 형식입니다.');
+        return;
+      }
 
-    // 이메일 중복체크 API 호출
-    const code = await SIGN_API.emailCheck(email);
+      // 이메일 중복체크 API 호출
+      const code = await SIGN_API.emailCheck(email);
 
-    // 응답에 따른 처리
-    switch (code) {
-      case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
-        alert('사용 가능한 이메일입니다.');
-        break;
-      case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
-        alert('이미 사용중인 이메일입니다.');
-        break;
-      case RESPONSE_CODE.INVALID_FORMAT:
-        alert('올바르지 않은 이메일 형식입니다.');
-        break;
+      // 응답에 따른 처리
+      switch (code) {
+        case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
+          alert('사용 가능한 이메일입니다.');
+          break;
+        case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
+          alert('이미 사용중인 이메일입니다.');
+          break;
+        case RESPONSE_CODE.INVALID_FORMAT:
+          alert('올바르지 않은 이메일 형식입니다.');
+          break;
+      }
     }
   };
 

@@ -27,8 +27,10 @@ export const SIGN_API = {
       return code;
     } catch (error: unknown) {
       if (isAxiosError<TResponse>(error)) {
-        const code: number = error.response!.data.code;
-        return code;
+        if (error.response) {
+          const code: number = error.response.data.code;
+          return code;
+        }
       }
     }
   },
