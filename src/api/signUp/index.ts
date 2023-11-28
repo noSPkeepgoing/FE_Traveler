@@ -1,5 +1,5 @@
 import { instance } from '../';
-import { TSignUpData, TResponse } from './types';
+import { TSignUpData, TResponse } from './signUpType';
 
 export const SIGN_API = {
   // 회원가입 API
