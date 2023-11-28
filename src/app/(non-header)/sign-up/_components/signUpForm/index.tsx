@@ -22,30 +22,25 @@ function SignUpForm() {
       name: formData.get('name') as string,
     };
 
-    try {
-      console.log(userData); // 유저데이터 잘 받아와지는지?
-      const { code, data } = await SIGN_API.userSignUp(userData);
-      console.log({ code, data }); // response 코드 및 데이터 잘 받아와지는지?
+    console.log(userData); // 유저데이터 잘 받아와지는지?
+    const { code, data } = await SIGN_API.userSignUp(userData);
+    console.log({ code, data }); // response 코드 및 데이터 잘 받아와지는지?
 
-      // 응답 코드에 따른 처리
-      switch (code) {
-        case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
-          alert(data.message);
-          window.location.href = '/sign-in';
-          break;
-        case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
-          alert(data.message);
-          break;
-        case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
-          alert(data.message);
-          break;
-        default:
-          alert('회원 가입에 실패했습니다.');
-          break;
-      }
-    } catch (error) {
-      alert('서버와의 통신 중 오류가 발생했습니다.');
-      console.error(error);
+    // 응답 코드에 따른 처리
+    switch (code) {
+      case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
+        alert(data.message);
+        window.location.href = '/sign-in';
+        break;
+      case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
+        alert(data.message);
+        break;
+      case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
+        alert(data.message);
+        break;
+      default:
+        alert('회원 가입에 실패했습니다.');
+        break;
     }
   };
 
