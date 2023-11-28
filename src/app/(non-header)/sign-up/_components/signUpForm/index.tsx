@@ -5,6 +5,7 @@ import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignUp } from './signUpType';
+import Input from '@/components/atoms/input';
 import { SIGN_API } from '@api/signUp';
 import { RESPONSE_CODE } from '@constants/api';
 
@@ -89,6 +90,8 @@ function SignUpForm() {
         </div>
         <div className={styles.inputBox}>
           <div className={styles.inputContainer}>
+            <Input variant="signUpShort" placeholder="이메일" />
+            <Button size="sm" />
             <input type="email" placeholder="이메일" name="email" />
             <Button size="sm" type="button" onClick={checkEmailValid}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
@@ -102,7 +105,8 @@ function SignUpForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
-            <input type="password" placeholder="비밀번호" name="password" />
+            <Input variant="login" placeholder="비밀번호" />
+            {/* <input type="password" placeholder="비밀번호" name="password" /> */}
             <label htmlFor="">비밀번호 상태 모시깽이</label>
           </div>
         </div>

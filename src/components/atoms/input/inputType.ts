@@ -1,3 +1,5 @@
 export type TInput = {
-  variant?: 'login' | 'reservation';
+  variant?: 'signUpShort' | 'login' | 'reservation' | 'invalid';
+  type?: 'text' | 'email' | 'password';
+  placeholder?: string;
 };

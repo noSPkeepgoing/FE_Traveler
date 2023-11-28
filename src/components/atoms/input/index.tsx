@@ -3,11 +3,14 @@ import classNames from 'classnames';
 import { TInput } from './inputType';
 import './input.scss';
 
-function Input({ variant = 'login' }: TInput) {
-  const className = classNames('input', variant);
-  let placeholder = variant === 'login' ? '이메일' : '홍길동';
+function Input({ variant, type, placeholder }: TInput) {
+  const inputPlaceholder = placeholder ?? '';
 
-  return <input className={className} placeholder={placeholder} />;
+  const className = classNames('input', variant);
+
+  return (
+    <input className={className} type={type} placeholder={inputPlaceholder} />
+  );
 }
 
 export default Input;
