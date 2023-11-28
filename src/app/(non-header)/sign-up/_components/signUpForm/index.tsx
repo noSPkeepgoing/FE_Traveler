@@ -71,7 +71,7 @@ function SignUpForm() {
       case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
         alert('이미 사용중인 이메일입니다.');
         break;
-      case 5003:
+      case RESPONSE_CODE.INVALID_FORMAT:
         alert('올바르지 않은 이메일 형식입니다.');
         break;
     }
