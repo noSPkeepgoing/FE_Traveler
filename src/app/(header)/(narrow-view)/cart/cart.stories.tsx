@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import type { StoryObj } from '@storybook/react';
-import { TCartInfo } from './_components/cart-item/cartItemType';
 import { THandleSelectItem } from './cartType';
 import CartTitle from './_components/cart-title';
 import CartGroup from './_components/cart-group';
 import CartItem from './_components/cart-item';
 import CartFooter from './_components/cart-footer';
 import Layout from '../layout';
+import { TCartItem } from '@/api/cart/type';
 
 const meta = {
   title: 'cart/Cart',
@@ -65,7 +65,7 @@ export const ExampleCart: StoryObj = {
           'https://avatars.githubusercontent.com/u/81469686?v=4',
       },
     ];
-    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
 
     const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.currentTarget.checked) {

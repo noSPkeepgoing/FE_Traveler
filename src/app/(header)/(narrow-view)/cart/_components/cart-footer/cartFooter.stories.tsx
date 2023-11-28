@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
-import { TCartInfo } from '../cart-item/cartItemType';
 import Layout from '../../../layout';
+import { TCartItem } from '@/api/cart/type';
 
 const meta = {
   title: 'cart/CartFooter',
@@ -52,7 +52,7 @@ export const ExampleCartFooter: StoryObj<typeof CartFooter> = {
     },
   },
   render: () => {
-    const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
+    const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
     const calculateTotalPrice = () => {
       return selectedItems.reduce(
         (totalPrice, items) => totalPrice + items.cart_price,

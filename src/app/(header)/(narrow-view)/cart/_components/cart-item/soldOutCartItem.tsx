@@ -1,9 +1,9 @@
 import Text from '@/components/atoms/text';
 import styles from './cartItem.module.scss';
 import Image from 'next/image';
-import { TcartInfo } from './cartItemType';
+import { TCartItem } from '@/api/cart/type';
 
-function SoldOutCartItem({ data }: { data: TcartInfo }) {
+function SoldOutCartItem({ data }: { data: TCartItem }) {
   return (
     <div className={styles.cartItem}>
       <div className={styles.itemInfo}>
