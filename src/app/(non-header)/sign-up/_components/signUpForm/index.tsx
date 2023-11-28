@@ -1,35 +1,56 @@
-import React from 'react';
+'use client';
+
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignUp } from './signUpType';
+import { SIGN_API } from '@api/signUp';
 
 function SignUpForm() {
-  // api 전달 함수
-  const signUpSubmit = (
-    event: React.FormEvent<HTMLFormElement>,
-    formData: TSignUp,
-  ) => {
+  // const [message, setMessage] = useState('');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // 폼 제출(submit) 이벤트 발생 시 실행할 api가 들어갈 자리
+
+    const formData = new FormData(event.currentTarget);
+    const userData: TSignUp = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      name: formData.get('name') as string,
+    };
+
+    try {
+      console.log(userData);
+      const { code, data } = await SIGN_API.userSignUp(userData);
+      console.log({ code, data });
+      // 응답 코드에 따른 처리
+      switch (code) {
+        case 1003: // 회원가입 성공
+          console.log(code, data.message);
+          break;
+        case 1004: // 이메일 형식 오류
+          console.log(code, data.message);
+          break;
+        case 1005: // 비밀번호 형식 오류
+          console.log(code, data.message);
+          break;
+        default:
+          console.log('알 수 없는 오류가 발생했습니다.');
+          break;
+      }
+    } catch (error) {
+      console.log('회원가입에 실패했습니다..!');
+      console.error(error);
+    }
   };
 
-  // form 제출 시 유효성 검사용 함수
-  // const MyFormComponent: React.FC = () => {
-  //   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  //     // 이벤트 핸들러에서 폼 데이터를 수집하거나 사용할 수 있도록 로직 추가
-  //     const formData: TSignUp = {
-  //       email: 'user@example.com',
-  //       password: '1q2w3e4r!',
-  //       name: '박준규',
-  //     };
-
-  //     signUpSubmit(event, formData);
-  //   };
-  // };
+  const sayHello = () => {
+    return console.log('hello');
+  };
 
   return (
-    <form action="/v1/member/register" method="post">
+    <form onSubmit={handleSubmit}>
       <div className={styles.form}>
         <div className={styles.info}>
           <Text color="primary" fontSize="xl" fontWeight="medium">
@@ -39,7 +60,7 @@ function SignUpForm() {
         <div className={styles.inputBox}>
           <div className={styles.inputContainer}>
             <input type="email" placeholder="이메일" name="email" />
-            <Button size="sm">
+            <Button size="sm" type="Link" onClick={sayHello}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
               </Text>
