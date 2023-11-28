@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './cartFooter.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { TcartFooter } from './cartFooterType';
+import { TCartFooter } from './cartFooterType';
 
-function CartFooter({ totalPrice, selectedItemsLength }: TcartFooter) {
+function CartFooter({ totalPrice, selectedItemsLength }: TCartFooter) {
   return (
     <footer className={styles.cartFooter}>
       <div className={styles.cartFooterContent}>

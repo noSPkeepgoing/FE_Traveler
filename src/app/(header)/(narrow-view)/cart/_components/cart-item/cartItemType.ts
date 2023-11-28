@@ -1,6 +1,6 @@
-import { ThandleSelectItem } from '../../cartType';
+import { THandleSelectItem } from '../../cartType';
 
-export type TcartInfo = {
+export type TCartInfo = {
   cart_id: number;
   accommodation_id: number;
   accommodation_name: string;
@@ -11,8 +11,8 @@ export type TcartInfo = {
   accommodation_img: string;
 };
 
-export type TcartItem = {
-  handleSelectItem: (value: ThandleSelectItem) => void;
-  data: TcartInfo;
+export type TCartItem = {
+  handleSelectItem: (value: THandleSelectItem) => void;
+  data: TCartInfo;
   isSelected: (id: number) => boolean;
 };

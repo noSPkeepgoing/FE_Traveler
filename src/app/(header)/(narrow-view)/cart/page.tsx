@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import CartGroup from './_components/cart-group';
 import CartTitle from './_components/cart-title';
-import { ThandleSelectItem } from './cartType';
+import { THandleSelectItem } from './cartType';
 import CartItem from './_components/cart-item';
 import CartFooter from './_components/cart-footer';
-import { TcartInfo } from './_components/cart-item/cartItemType';
+import { TCartInfo } from './_components/cart-item/cartItemType';
 
 const data = [
   {
@@ -33,7 +33,7 @@ const data = [
 ];
 
 function CartPage() {
-  const [selectedItems, setSelectedItems] = useState<TcartInfo[]>([]);
+  const [selectedItems, setSelectedItems] = useState<TCartInfo[]>([]);
 
   const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.checked) {
@@ -47,7 +47,7 @@ function CartPage() {
     return selectedItems.length === data.length;
   };
 
-  const handleSelectItem = ({ event, selectedItem }: ThandleSelectItem) => {
+  const handleSelectItem = ({ event, selectedItem }: THandleSelectItem) => {
     if (event.target.checked) {
       setSelectedItems((prev) => [...prev, selectedItem]);
     } else {
