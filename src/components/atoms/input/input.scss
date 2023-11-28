@@ -16,15 +16,14 @@
     padding: 0 0.75rem;
     background-color: white;
     border: 1px solid #ccc;
-    color: black;
-
-    &:invalid {
-      border-color: $red200;
-    }
 
     &:focus {
       border-color: black;
     }
+  }
+
+  &.invalid {
+    border-color: $red200 !important;
   }
 
   &.signUpShort {

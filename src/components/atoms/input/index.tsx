@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { TInput } from './inputType';
-import styles from './input.module.scss';
+import './input.scss';
 
-function Input({ variant, type, placeholder, invalid }: TInput) {
+function Input({ variant, type, placeholder }: TInput) {
   const inputPlaceholder = placeholder ?? '';
 
-  const inputClasses = classNames('input', {
-    [styles.invalid]: invalid,
-    [styles.login]: variant === 'login',
-    [styles.signUpShort]: variant === 'signUpShort',
-    [styles.reservation]: variant === 'reservation',
-  });
+  const className = classNames('input', variant);
 
   return (
-    <input
-      className={inputClasses}
-      type={type}
-      placeholder={inputPlaceholder}
-    />
+    <input className={className} type={type} placeholder={inputPlaceholder} />
   );
 }
 
