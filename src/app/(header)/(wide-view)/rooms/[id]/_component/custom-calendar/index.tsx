@@ -8,6 +8,7 @@ import { TCustomCalendar } from './customCalendarType';
 function CustomCalendar({
   onChange,
   value,
+  valueSecond,
   type,
 }: TCustomCalendar): ReactElement {
   const [nowDate, setNowDate] = useState<string | null>(type);
@@ -24,9 +25,13 @@ function CustomCalendar({
       );
     }
   };
+  
   const tileDisabled = ({ date }: { date: Date }) => {
-    if (date.toDateString() === new Date().toDateString()) {
-      return false;
+    if (date.toDateString() === value.toDateString()) {
+      return true;
+    }
+    if (valueSecond) {
+      return date < value;
     }
     return date < new Date();
   };
@@ -45,7 +50,7 @@ function CustomCalendar({
         <Calendar
           locale="en"
           onChange={handleDateChange}
-          value={value}
+          value={valueSecond ? valueSecond : value}
           tileDisabled={tileDisabled}
           formatDay={(locale, date) => moment(date).format('DD')}></Calendar>
       </div>

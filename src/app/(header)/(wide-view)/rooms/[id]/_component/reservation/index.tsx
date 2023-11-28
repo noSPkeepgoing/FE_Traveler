@@ -6,25 +6,41 @@ import 'react-calendar/dist/Calendar.css';
 import CustomCalendar from '../custom-calendar';
 import Button from '@/components/atoms/button';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { DAY_SECOND } from '@/constants/rooms';
 import CartModal from '../cart-modal/cartModal';
+import { ROOMS_API } from '@/api/rooms';
+import moment, { Moment } from 'moment';
 function Reservation({ price }: { price: number }) {
   const [value, onChange] = useState(new Date());
   const [valueSecond, onChangeSecond] = useState(new Date());
   const [selectedOption, setSelectedOption] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const day: number = (Number(valueSecond) - Number(value)) / DAY_SECOND;
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const [isValuesChange, setIsValuesChange] = useState({
+    isvalue: false,
+    isvalueSecond: false,
+  });
+  const [amount, setAmount] = useState(0);
+  const [day, setDay] = useState(0);
+  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
-  function handleCartClick (){
-    if (!modalOpen){
-      setModalOpen(prev=>!prev)
-      setTimeout(()=>{
+  function handleCartClick() {
+    if (!modalOpen) {
+      setModalOpen((prev) => !prev);
+      setTimeout(() => {
         setModalOpen(false);
-      },2500)
+      }, 2500);
     }
   }
+  async function handleClickReservation(value: Date, valueSecond: Date) {
+    const startDate = moment(value).format('YYYY-MM-DD');
+    const endDate = moment(valueSecond).format('YYYY-MM-DD');
+    // 예약가능 여부 확인로직
+    const res = await ROOMS_API.checkReservation(startDate, endDate);
+    if (res.code === )
+    console.log(res)
+    // 리코일에 상품정보 담고 예약하기페이지로 이동
+  }
+
   return (
     <div className={styles.Reservation}>
       <div className={styles.dailyPriceBox}>
@@ -42,7 +58,8 @@ function Reservation({ price }: { price: number }) {
           <CustomCalendar onChange={onChange} value={value} type="체크인" />
           <CustomCalendar
             onChange={onChangeSecond}
-            value={valueSecond}
+            value={value}
+            valueSecond={valueSecond}
             type="체크아웃"
           />
         </div>
@@ -50,7 +67,7 @@ function Reservation({ price }: { price: number }) {
           <select
             className={styles.select}
             value={selectedOption}
-            onChange={handleChange}>
+            onChange={handleChangeSelect}>
             <option value="1">1명</option>
             <option value="2">2명</option>
             <option value="3">3명</option>
@@ -64,7 +81,12 @@ function Reservation({ price }: { price: number }) {
             <MdOutlineShoppingCart />
           </div>
         </Button>
-        <Button variant="default" size="md">
+        <Button
+          variant="default"
+          size="md"
+          onClick={() => {
+            handleClickReservation(value, valueSecond);
+          }}>
           <Text color="white" fontSize="xs" fontWeight="semibold">
             예약하기
           </Text>
@@ -77,9 +99,10 @@ function Reservation({ price }: { price: number }) {
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
-              price * day
-            }`}</Text>
+            <Text
+              fontSize="xs"
+              fontWeight="semibold"
+              color="highlight">{`₩${amount}`}</Text>
           </div>
           <div className={styles.day}>
             <Text
