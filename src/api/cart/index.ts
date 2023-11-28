@@ -1,8 +1,7 @@
 import { instance } from '..';
-import { Response, TCartItem } from './type';
+import { Response } from '../type';
+import { TCartItem } from './cartApiType';
 
-// cart 관련 api 코드
 export const CART_API = {
-  getCart: async () =>
-    await instance.get<Response<TCartItem[]>, Response<TCartItem[]>>('v1/cart'),
+  getCart: () => instance.get<Response<TCartItem[]>>('v1/cart'),
 };
