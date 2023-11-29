@@ -3,13 +3,19 @@ import classNames from 'classnames';
 import { TInput } from './inputType';
 import './input.scss';
 
-function Input({ variant, type, placeholder }: TInput) {
+function Input({ variant, type, placeholder, state, name, onChange }: TInput) {
   const inputPlaceholder = placeholder ?? '';
 
-  const className = classNames('input', variant);
+  const className = classNames('input', variant, state);
 
   return (
-    <input className={className} type={type} placeholder={inputPlaceholder} />
+    <input
+      className={className}
+      type={type}
+      placeholder={inputPlaceholder}
+      name={name}
+      onChange={onChange}
+    />
   );
 }
 

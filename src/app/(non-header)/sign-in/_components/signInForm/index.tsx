@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import styles from './signInForm.module.scss';
 import Text from '@/components/atoms/text';

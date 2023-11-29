@@ -6,16 +6,29 @@ import 'react-calendar/dist/Calendar.css';
 import CustomCalendar from '../custom-calendar';
 import Button from '@/components/atoms/button';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { DAY_SECOND } from '@/constants/rooms';
 import CartModal from '../cart-modal/cartModal';
-function Reservation({ price }: { price: number }) {
-  const [value, onChange] = useState(new Date());
-  const [valueSecond, onChangeSecond] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-  const day: number = (Number(valueSecond) - Number(value)) / DAY_SECOND;
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
+import { ROOMS_API } from '@/api/rooms';
+import moment from 'moment';
+import { productState } from '@/recoil/order';
+import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/navigation';
+import {
+  TReservation,
+  TReservationForm,
+  TReservationEvent,
+} from './reservationType';
+import { Value } from '../custom-calendar/customCalendarType';
+function Reservation({ price, params, data }: TReservation) {
+  const [value, onChange] = useState<Value>(new Date());
+  const [valueSecond, onChangeSecond] = useState<Value>(new Date());
+  const [selectedOption, setSelectedOption] = useState<number>(1);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [amount, setAmount] = useState<number>(0);
+  const [day, setDay] = useState(0);
+  const [product, setProduct] = useRecoilState(productState);
+  const router = useRouter();
+  const handleChangeSelect = (event: TReservationEvent) => {
+    setSelectedOption(Number(event.target.value));
   };
   function handleCartClick() {
     if (!modalOpen) {
@@ -23,6 +36,33 @@ function Reservation({ price }: { price: number }) {
       setTimeout(() => {
         setModalOpen(false);
       }, 2500);
+    }
+  }
+  async function handleClickReservation({
+    value,
+    valueSecond,
+    id,
+    data,
+    selectedOption,
+  }: TReservationForm) {
+    const startDate = moment(value).format('YYYY-MM-DD');
+    const endDate = moment(valueSecond).format('YYYY-MM-DD');
+    const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
+    if (res.data.code === 2001 && data) {
+      const productData = {
+        accommodation_name: data.accommodation_name,
+        adress: data.address,
+        accommodation_price: data.accommodation_price,
+        accommodation_img: data.accommodation_img,
+        start_date: startDate,
+        end_date: endDate,
+        accommodation_id: id,
+        people: selectedOption,
+      };
+      setProduct(productData);
+      router.push('/reservation');
+    } else {
+      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
     }
   }
   return (
@@ -42,7 +82,8 @@ function Reservation({ price }: { price: number }) {
           <CustomCalendar onChange={onChange} value={value} type="체크인" />
           <CustomCalendar
             onChange={onChangeSecond}
-            value={valueSecond}
+            value={value}
+            valueSecond={valueSecond}
             type="체크아웃"
           />
         </div>
@@ -50,7 +91,7 @@ function Reservation({ price }: { price: number }) {
           <select
             className={styles.select}
             value={selectedOption}
-            onChange={handleChange}>
+            onChange={handleChangeSelect}>
             <option value="1">1명</option>
             <option value="2">2명</option>
             <option value="3">3명</option>
@@ -64,7 +105,18 @@ function Reservation({ price }: { price: number }) {
             <MdOutlineShoppingCart />
           </div>
         </Button>
-        <Button variant="default" size="md">
+        <Button
+          variant="default"
+          size="md"
+          onClick={() => {
+            handleClickReservation({
+              value,
+              valueSecond,
+              id: params,
+              data,
+              selectedOption,
+            });
+          }}>
           <Text color="white" fontSize="xs" fontWeight="semibold">
             예약하기
           </Text>
@@ -77,9 +129,10 @@ function Reservation({ price }: { price: number }) {
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
-              price * day
-            }`}</Text>
+            <Text
+              fontSize="xs"
+              fontWeight="semibold"
+              color="highlight">{`₩${amount}`}</Text>
           </div>
           <div className={styles.day}>
             <Text
