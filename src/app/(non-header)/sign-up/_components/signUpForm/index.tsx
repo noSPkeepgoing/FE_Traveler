@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
@@ -8,6 +8,8 @@ import { TSignUp } from './signUpType';
 import Input from '@/components/atoms/input';
 import { SIGN_API } from '@api/signUp';
 import { RESPONSE_CODE } from '@constants/api';
+import { isAxiosError } from 'axios';
+import { Response } from '@/api/type';
 
 function SignUpForm() {
   // 이메일 중복확인 버튼 활성화용 state
@@ -102,27 +104,54 @@ function SignUpForm() {
     }
 
     // 회원가입 API 호출
-    const code = await SIGN_API.userSignUp(apiData);
-    console.log(code);
-
-    // 서버응답 코드에 따른 별도처리
-    switch (code) {
-      case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
-        alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
-        window.location.href = '/sign-in';
-        break;
-      case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
-        alert('올바르지 않은 이메일 형식입니다.');
-        break;
-      case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
-        alert('비밀번호는 영문자와 숫자로 조합해야 합니다.');
-        break;
-      case RESPONSE_CODE.DUPLICATE_EMAIL:
-        alert('이미 사용중인 이메일입니다.');
-        break;
-      default:
-        alert('회원 가입에 실패했습니다. 서버와의 연결을 확인해주세요.');
-        break;
+    try {
+      const response = await SIGN_API.userSignUp(apiData);
+      const responseCode = response.data.code;
+      switch (responseCode) {
+        case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
+          alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
+          window.location.href = '/sign-in';
+          break;
+        case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
+          setMessageAndHideAfterDelay(
+            setEmailMessage,
+            '올바르지 않은 이메일 형식입니다.',
+            true,
+          );
+          break;
+      }
+    } catch (error: unknown) {
+      if (isAxiosError<Response>(error)) {
+        if (error.response) {
+          const responseCode = error.response.data.code;
+          switch (responseCode) {
+            case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
+              setMessageAndHideAfterDelay(
+                setEmailMessage,
+                '올바르지 않은 이메일 형식입니다.',
+                true,
+              );
+              break;
+            case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
+              setMessageAndHideAfterDelay(
+                setPasswordMessage,
+                '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
+                true,
+              );
+              break;
+            case RESPONSE_CODE.DUPLICATE_EMAIL:
+              setMessageAndHideAfterDelay(
+                setEmailMessage,
+                '이미 사용중인 이메일입니다.',
+                true,
+              );
+              break;
+            default:
+              alert('회원 가입에 실패했습니다. 서버와의 연결을 확인해주세요.');
+              break;
+          }
+        }
+      }
     }
   };
 
@@ -139,42 +168,53 @@ function SignUpForm() {
       if (!emailRegex.test(email)) {
         setMessageAndHideAfterDelay(
           setEmailMessage,
-          '유효하지 않은 이메일 형식입니다.',
+          '올바르지 않은 이메일 형식입니다.',
           true,
         );
         return;
       }
 
       // 이메일 중복체크 API 호출
-      const code = await SIGN_API.emailCheck(email);
-      console.log(code);
-      // 응답에 따른 처리
-      switch (code) {
-        case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
-          setMessageAndHideAfterDelay(
-            setEmailMessage,
-            '사용 가능한 이메일입니다.',
-            false,
-          );
-          break;
-        case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
-          setMessageAndHideAfterDelay(
-            setEmailMessage,
-            '이미 사용중인 이메일입니다.',
-            true,
-          );
-          break;
-        case RESPONSE_CODE.INVALID_FORMAT:
-          setMessageAndHideAfterDelay(
-            setEmailMessage,
-            '유효하지 않은 이메일 형식입니다. 다시 입력해주세요.',
-            true,
-          );
-          break;
+
+      try {
+        const response = await SIGN_API.emailCheck(email);
+        const responseCode = response.data.code;
+
+        switch (responseCode) {
+          case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
+            setMessageAndHideAfterDelay(
+              setEmailMessage,
+              '사용 가능한 이메일입니다.',
+              false,
+            );
+            break;
+        }
+      } catch (error: unknown) {
+        if (isAxiosError<Response>(error)) {
+          if (error.response) {
+            const responseCode = error.response.data.code;
+
+            switch (responseCode) {
+              case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
+                setMessageAndHideAfterDelay(
+                  setEmailMessage,
+                  '이미 사용중인 이메일입니다.',
+                  true,
+                );
+                break;
+              case RESPONSE_CODE.INVALID_FORMAT:
+                setMessageAndHideAfterDelay(
+                  setEmailMessage,
+                  '유효하지 않은 이메일 형식입니다. 다시 입력해주세요.',
+                  true,
+                );
+                break;
+            }
+          }
+        }
       }
     }
   };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form}>
