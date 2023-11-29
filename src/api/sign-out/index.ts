@@ -1,4 +1,4 @@
-import { instance } from '../';
+import { instance } from '..';
 import { Response } from '../type';
 
 export const SIGN_API = {

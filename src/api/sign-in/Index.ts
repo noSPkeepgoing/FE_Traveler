@@ -1,4 +1,4 @@
-import { instance } from '../';
+import { instance } from '..';
 import { Response } from '../type';
 import { TSignInData, TSignInResponseData } from './signInType';
 
