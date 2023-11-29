@@ -121,5 +121,5 @@ export const LinkButton: StoryObj<typeof Button> = {
       },
     },
   },
-  render: (args) => <Button type="Link" href="" {...args}></Button>,
+  render: (args) => <Button href="" {...args}></Button>,
 };

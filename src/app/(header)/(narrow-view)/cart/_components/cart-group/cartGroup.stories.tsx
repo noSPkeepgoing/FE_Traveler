@@ -116,8 +116,14 @@ export const ExampleCartGroup: StoryObj<typeof CartGroup> = {
       return selectedItems.filter((item) => item.cart_id === id).length !== 0;
     };
 
+    const handleDeleteCartItems = () => {};
+
     return (
-      <CartGroup selectAll={selectAll} isAllSelected={isAllSelected}>
+      <CartGroup
+        selectAll={selectAll}
+        isAllSelected={isAllSelected}
+        handleDeleteCartItems={handleDeleteCartItems}
+        selectedItems={selectedItems}>
         <CartItem
           data={data[0]}
           handleSelectItem={handleSelectItem}
