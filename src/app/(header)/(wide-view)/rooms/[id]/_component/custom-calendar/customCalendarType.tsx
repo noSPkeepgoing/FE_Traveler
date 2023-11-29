@@ -5,6 +5,4 @@ export type TCustomCalendar = {
   type: string;
 };
 
-type ValuePiece = Date | undefined;
-
-export type Value = ValuePiece;
+export type Value = Date | undefined;
