@@ -6,7 +6,7 @@ import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignUp } from './signUpType';
 import Input from '@/components/atoms/input';
-import { SIGN_API } from '@api/signUp';
+import { SIGN_API } from '@/api/sign-up';
 import { RESPONSE_CODE } from '@constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
