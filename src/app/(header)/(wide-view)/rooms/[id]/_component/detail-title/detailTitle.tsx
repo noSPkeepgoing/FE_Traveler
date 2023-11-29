@@ -1,7 +1,8 @@
 import Text from '@/components/atoms/text';
 import React from 'react';
+import { TTitle } from './detailTitleType';
 
-function DetailTitle({ title }: { title: string }) {
+function DetailTitle({ title }: TTitle) {
   return (
     <Text fontSize="md" fontWeight="semibold">
       {title}
