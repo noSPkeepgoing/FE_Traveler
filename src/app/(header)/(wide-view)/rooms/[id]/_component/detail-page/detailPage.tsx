@@ -5,24 +5,15 @@ import DetailTitle from '../detail-title/detailTitle';
 import styles from './detailPage.module.scss';
 import DetailDescription from '../detail-description/detailDescription';
 import Reservation from '../reservation';
+import { TParams,TProductId } from './paramsType';
+import { ROOMS_API } from '@/api/rooms';
 
-async function getProduct() {
-  const res = await axios.get('https://api.gamsung.xyz/v1/accomodations', {
-    headers: {
-      'Content-Type': 'application/json',
-      cache: 'no-store',
-    },
-  });
-  return res.data;
-}
-
-async function DetailPage() {
-  const data = await getProduct();
-
+async function DetailPage({ params }: TParams ) {
+  const data = await ROOMS_API.getProduct(params);
   return (
     <>
       <div className={styles.title}>
-        <DetailTitle title={data.data.accomodation_name} />
+        <DetailTitle title={data.data.accommodation_name} />
       </div>
       <div className={styles.carousel}>
         <Carousel imgs={data.data.room_img} />
@@ -32,7 +23,7 @@ async function DetailPage() {
           address={data.data.address}
           desc={data.data.description}
         />
-        <Reservation price={data.data.accomodation_price} />
+        <Reservation data={data.data} params={params} price={data.data.accommodation_price} />
       </div>
     </>
   );
