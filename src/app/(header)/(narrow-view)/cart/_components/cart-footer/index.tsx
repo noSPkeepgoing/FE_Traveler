@@ -4,7 +4,11 @@ import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TCartFooter } from './cartFooterType';
 
-function CartFooter({ totalPrice, selectedItemsLength }: TCartFooter) {
+function CartFooter({
+  totalPrice,
+  selectedItemsLength,
+  handleReservation,
+}: TCartFooter) {
   return (
     <footer className={styles.cartFooter}>
       <div className={styles.cartFooterContent}>
@@ -21,7 +25,7 @@ function CartFooter({ totalPrice, selectedItemsLength }: TCartFooter) {
             </Text>
           </div>
         </div>
-        <Button size="lg">
+        <Button size="lg" onClick={handleReservation}>
           <Text color="white" fontSize="xs" fontWeight="semibold">
             예약하기
           </Text>

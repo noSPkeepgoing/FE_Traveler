@@ -60,10 +60,13 @@ export const ExampleCartFooter: StoryObj<typeof CartFooter> = {
       );
     };
 
+    const handleReservation = () => {};
+
     return (
       <CartFooter
         totalPrice={calculateTotalPrice()}
         selectedItemsLength={selectedItems.length}
+        handleReservation={handleReservation}
       />
     );
   },

@@ -1,10 +1,17 @@
 import { TCartDeleteParams, TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
+import { productState } from '@/recoil/order';
+import { TProduct } from '@/recoil/productType';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import Swal from 'sweetalert2';
 
 function useCart() {
   const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
+  const setProductState = useSetRecoilState(productState);
+  const router = useRouter();
 
   const {
     data: cartData,
@@ -19,11 +26,11 @@ function useCart() {
 
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
-      alert('상품이 삭제되었습니다.');
+      Swal.fire('상품이 삭제되었습니다');
       refetchCartData();
     },
-    onError(error) {
-      alert(error.message);
+    onError() {
+      Swal.fire('상품 삭제에 실패했습니다');
     },
   });
 
@@ -62,11 +69,39 @@ function useCart() {
   };
 
   const handleDeleteCartItems = (params: TCartDeleteParams) => {
-    if (params.cart_id.length === 0) {
-      alert('삭제할 상품을 선택해주세요');
+    if (params.delete_id.length === 0) {
+      Swal.fire('삭제할 상품을 선택해주세요');
       return;
     }
-    deleteCartItems(params);
+    Swal.fire({
+      title: '상품을 삭제하시겠습니까?',
+      showCancelButton: true,
+      confirmButtonText: '삭제',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCartItems(params);
+        setSelectedItems([]);
+      }
+    });
+  };
+
+  const handleReservation = () => {
+    const products: TProduct[] = selectedItems.map((item) => {
+      const product = {
+        accommodation_name: item.accommodation_name,
+        accommodation_id: item.accommodation_id,
+        accommodation_img: item.accommodation_img,
+        accommodation_price: item.cart_price,
+        start_date: item.start_date,
+        end_date: item.end_date,
+        people_number: item.people_number,
+        address: item.address,
+        cart_id: item.cart_id,
+      };
+      return product;
+    });
+    setProductState(products);
+    router.push('/reservation');
   };
 
   return {
@@ -80,6 +115,7 @@ function useCart() {
     calculateTotalPrice,
     selectedItems,
     handleDeleteCartItems,
+    handleReservation,
   };
 }
 
