@@ -1,3 +1,4 @@
+'use client';
 import { TCartDeleteParams, TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
@@ -23,7 +24,6 @@ function useCart() {
       return data.data.data;
     },
   });
-
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
       Swal.fire('상품이 삭제되었습니다');

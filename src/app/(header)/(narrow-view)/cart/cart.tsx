@@ -3,6 +3,8 @@ import CartGroup from './_components/cart-group';
 import CartItem from './_components/cart-item';
 import CartFooter from './_components/cart-footer';
 import useCart from '@/hooks/cart/useCart';
+import Text from '@/components/atoms/text';
+import styles from './cart.module.scss';
 
 function Cart() {
   const {
@@ -22,6 +24,16 @@ function Cart() {
   if (isLoading) return <div>로딩중</div>;
 
   if (isError) return <div>에러</div>;
+
+  if (cartData?.length === 0) {
+    return (
+      <section className={styles.container}>
+        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+          장바구니에 담긴 상품이 없습니다
+        </Text>
+      </section>
+    );
+  }
 
   return (
     <>
