@@ -1,21 +1,23 @@
 'use client';
-import React, { useMemo } from 'react';
+import React from 'react';
 import ReservationItem from './_components/reservation-item/page';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './reservationList.module.scss';
-import { useGetInfiniteReservationList } from '@/queries/reservation-list';
+import useReservationList from '@/hooks/reservation-list';
+import Text from '@/components/atoms/text';
 
 function ReservationList() {
-  const { data, fetchNextPage, hasNextPage } = useGetInfiniteReservationList({
-    select: (data) => ({
-      pages: data.pages.flatMap((page) => page.data),
-      pageParams: data.pageParams,
-    }),
-  });
+  const { reservationItems, fetchNextPage, hasNextPage } = useReservationList();
 
-  const reservationItems = useMemo(() => {
-    return data?.pages.flatMap((page) => page.data.order_list);
-  }, [data]);
+  if (reservationItems?.length === 0) {
+    return (
+      <section className={styles.reservationItemContainer}>
+        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+          고객님의 예약내역이 존재하지 않습니다
+        </Text>
+      </section>
+    );
+  }
 
   return (
     <InfiniteScroll
