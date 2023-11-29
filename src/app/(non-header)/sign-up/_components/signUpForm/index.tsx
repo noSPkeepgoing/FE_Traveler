@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
@@ -10,21 +10,101 @@ import { SIGN_API } from '@api/signUp';
 import { RESPONSE_CODE } from '@constants/api';
 
 function SignUpForm() {
-  // const [message, setMessage] = useState('');
+  // 이메일 중복확인 버튼 활성화용 state
+  const [email, setEmail] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  // 각 Input 라벨 메세지용 state
+  const [emailMessage, setEmailMessage] = useState({
+    message: '',
+    error: false,
+  });
+  const [passwordMessage, setPasswordMessage] = useState({
+    message: '',
+    error: false,
+  });
+  const [passwordCheckMessage, setPasswordCheckMessage] = useState({
+    message: '',
+    error: false,
+  });
+  const [nameMessage, setNameMessage] = useState({ message: '', error: false });
+
+  // 각 상태관리 함수 메세지값 전달용 함수
+  const setMessageAndHideAfterDelay = (
+    setMessage: Function,
+    message: string,
+    error: boolean,
+  ) => {
+    setMessage({ message, error });
+    setTimeout(() => setMessage({ message: '', color: 'black' }), 3000); // 3초 후 메시지를 숨기는 용도.
+  };
+
+  useEffect(() => {
+    // 이메일 input 빈칸시
+    setIsEmailValid(!email);
+  }, [email]);
 
   /* -------------------- 회원가입 submit 핸들러 함수 --------------------*/
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // form 데이터 Target함수
     const formData = new FormData(event.currentTarget);
     const userData: TSignUp = {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
+      passwordCheck: formData.get('passwordCheck') as string,
       name: formData.get('name') as string,
     };
+    console.log(userData);
+    // 객체 분해 할당으로 비밀번호 확인만 제외하고 apiData라는 객체에 할당! (api 전달용)
+    const { passwordCheck, ...apiData } = userData;
+    console.log(apiData);
+    // 각 form 데이터 유효성 검사 실시
+    if (!userData.email) {
+      setMessageAndHideAfterDelay(
+        setEmailMessage,
+        '이메일을 입력해주세요.',
+        true,
+      );
+      return;
+    } else if (!userData.password) {
+      setMessageAndHideAfterDelay(
+        setPasswordMessage,
+        '비밀번호를 입력해주세요.',
+        true,
+      );
+      return;
+    } else if (!/(?=.*[a-zA-Z])(?=.*[0-9]).{5,}/.test(userData.password)) {
+      setMessageAndHideAfterDelay(
+        setPasswordMessage,
+        '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
+        true,
+      );
+      return;
+    } else if (!userData.passwordCheck) {
+      setMessageAndHideAfterDelay(
+        setPasswordCheckMessage,
+        '비밀번호 확인을 입력해주세요.',
+        true,
+      );
+      return;
+    } else if (userData.password !== userData.passwordCheck) {
+      setMessageAndHideAfterDelay(
+        setPasswordCheckMessage,
+        '입력된 비밀번호가 서로 다릅니다. 다시 확인해주세요.',
+        true,
+      );
+      return;
+    } else if (!userData.name) {
+      setMessageAndHideAfterDelay(setNameMessage, '이름을 입력해주세요.', true);
+      return;
+    }
 
-    const code = await SIGN_API.userSignUp(userData); // 회원가입 API 호출
+    // 회원가입 API 호출
+    const code = await SIGN_API.userSignUp(apiData);
+    console.log(code);
 
     // 응답 코드에 따른 처리
     switch (code) {
@@ -58,7 +138,11 @@ function SignUpForm() {
       // 이메일 형식 유효성 검사
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert('유효하지 않은 이메일 형식입니다.');
+        setMessageAndHideAfterDelay(
+          setEmailMessage,
+          '유효하지 않은 이메일 형식입니다.',
+          true,
+        );
         return;
       }
 
@@ -68,13 +152,25 @@ function SignUpForm() {
       // 응답에 따른 처리
       switch (code) {
         case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
-          alert('사용 가능한 이메일입니다.');
+          setMessageAndHideAfterDelay(
+            setEmailMessage,
+            '사용 가능한 이메일입니다.',
+            false,
+          );
           break;
         case RESPONSE_CODE.DUPLICATE_EMAIL: // 이메일 중복
-          alert('이미 사용중인 이메일입니다.');
+          setMessageAndHideAfterDelay(
+            setEmailMessage,
+            '이미 사용중인 이메일입니다.',
+            true,
+          );
           break;
         case RESPONSE_CODE.INVALID_FORMAT:
-          alert('올바르지 않은 이메일 형식입니다.');
+          setMessageAndHideAfterDelay(
+            setEmailMessage,
+            '유효하지 않은 이메일 형식입니다. 다시 입력해주세요.',
+            true,
+          );
           break;
       }
     }
@@ -95,16 +191,28 @@ function SignUpForm() {
               type="email"
               placeholder="이메일"
               name="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Button size="sm" type="button" onClick={checkEmailValid}>
+            <Button
+              size="sm"
+              type="button"
+              onClick={checkEmailValid}
+              disabled={isEmailValid}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
               </Text>
             </Button>
           </div>
-          <label className={styles.label} htmlFor="">
-            이메일 상태 모시깽이
-          </label>
+          <div className={styles.labelArea}>
+            <label className={styles.label} htmlFor="email">
+              <Text
+                fontSize="xs-3"
+                fontWeight="normal"
+                color={emailMessage.error ? 'red100' : 'green'}>
+                {emailMessage.message || ''}
+              </Text>
+            </label>
+          </div>
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
@@ -114,7 +222,16 @@ function SignUpForm() {
               placeholder="비밀번호"
               name="password"
             />
-            <label htmlFor="password">비밀번호 상태 모시깽이</label>
+            <div className={styles.labelArea}>
+              <label htmlFor="password">
+                <Text
+                  fontSize="xs-3"
+                  fontWeight="normal"
+                  color={passwordMessage.error ? 'red100' : 'green'}>
+                  {passwordMessage.message || ''}
+                </Text>
+              </label>
+            </div>
           </div>
         </div>
         <div className={styles.inputContainer}>
@@ -125,7 +242,16 @@ function SignUpForm() {
               placeholder="비밀번호 확인"
               name="passwordCheck"
             />
-            <label htmlFor="">비밀번호 확인 상태 모시깽이</label>
+            <div className={styles.labelArea}>
+              <label htmlFor="passwordCheck">
+                <Text
+                  fontSize="xs-3"
+                  fontWeight="normal"
+                  color={passwordCheckMessage.error ? 'red100' : 'green'}>
+                  {passwordCheckMessage.message || ''}
+                </Text>
+              </label>
+            </div>
           </div>
         </div>
         <div className={styles.inputContainer}>
@@ -136,7 +262,16 @@ function SignUpForm() {
               placeholder="이름"
               name="name"
             />
-            <label htmlFor="">이름 상태 모시깽이</label>
+            <div className={styles.labelArea}>
+              <label htmlFor="name">
+                <Text
+                  fontSize="xs-3"
+                  fontWeight="normal"
+                  color={nameMessage.error ? 'red100' : 'green'}>
+                  {nameMessage.message || ''}
+                </Text>
+              </label>
+            </div>
           </div>
         </div>
         <div className={styles.confirm}>
