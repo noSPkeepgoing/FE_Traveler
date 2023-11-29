@@ -6,7 +6,12 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Button from '@/components/atoms/button';
 import { TCartItemProps } from './cartItemType';
 
-function CartItem({ handleSelectItem, isSelected, data }: TCartItemProps) {
+function CartItem({
+  handleSelectItem,
+  isSelected,
+  data,
+  handleDeleteCartItems,
+}: TCartItemProps) {
   return (
     <div className={styles.cartItem}>
       <Checkbox
@@ -38,7 +43,11 @@ function CartItem({ handleSelectItem, isSelected, data }: TCartItemProps) {
         </div>
       </div>
       <div className={styles.subCartInfo}>
-        <Button variant="text">
+        <Button
+          variant="text"
+          onClick={() => {
+            handleDeleteCartItems({ cart_id: [data.cart_id] });
+          }}>
           <VscChromeClose size="16" />
         </Button>
         <div>

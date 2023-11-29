@@ -1,4 +1,4 @@
-import Cart from './_components/cart';
+import Cart from './cart';
 import CartTitle from './_components/cart-title';
 
 function CartPage() {

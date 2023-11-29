@@ -1,6 +1,6 @@
-import { TCartItem } from '@/api/cart/cartApiType';
+import { TCartDeleteParams, TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
-import { useGetCartItems } from '@/queries/cart';
+import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
 import React, { useState } from 'react';
 
 function useCart() {
@@ -8,11 +8,22 @@ function useCart() {
 
   const {
     data: cartData,
+    refetch: refetchCartData,
     isLoading,
     isError,
   } = useGetCartItems({
     select(data) {
       return data.data.data;
+    },
+  });
+
+  const { mutate: deleteCartItems } = useDeleteCartItems({
+    onSuccess() {
+      alert('상품이 삭제되었습니다.');
+      refetchCartData();
+    },
+    onError(error) {
+      alert(error.message);
     },
   });
 
@@ -50,6 +61,14 @@ function useCart() {
     );
   };
 
+  const handleDeleteCartItems = (params: TCartDeleteParams) => {
+    if (params.cart_id.length === 0) {
+      alert('삭제할 상품을 선택해주세요');
+      return;
+    }
+    deleteCartItems(params);
+  };
+
   return {
     cartData,
     isLoading,
@@ -60,6 +79,7 @@ function useCart() {
     isSelected,
     calculateTotalPrice,
     selectedItems,
+    handleDeleteCartItems,
   };
 }
 

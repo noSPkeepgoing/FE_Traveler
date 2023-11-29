@@ -1,9 +1,14 @@
 import Text from '@/components/atoms/text';
 import styles from './cartItem.module.scss';
 import Image from 'next/image';
-import { TCartItem } from '@/api/cart/cartApiType';
+import { TCartItemProps } from './cartItemType';
+import Button from '@/components/atoms/button';
+import { VscChromeClose } from 'react-icons/vsc';
 
-function SoldOutCartItem({ data }: { data: TCartItem }) {
+function SoldOutCartItem({
+  data,
+  handleDeleteCartItems,
+}: Pick<TCartItemProps, 'data' | 'handleDeleteCartItems'>) {
   return (
     <div className={styles.cartItem}>
       <div className={styles.itemInfo}>
@@ -29,7 +34,13 @@ function SoldOutCartItem({ data }: { data: TCartItem }) {
         </div>
       </div>
       <div className={styles.subCartInfo}>
-        <div>아이콘</div>
+        <Button
+          variant="text"
+          onClick={() => {
+            handleDeleteCartItems({ cart_id: [data.cart_id] });
+          }}>
+          <VscChromeClose size="16" />
+        </Button>
         <div className={styles.priceInfo}>
           <Text
             fontSize="md"

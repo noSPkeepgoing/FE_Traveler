@@ -1,7 +1,7 @@
 'use client';
-import CartGroup from './cart-group';
-import CartItem from './cart-item';
-import CartFooter from './cart-footer';
+import CartGroup from './_components/cart-group';
+import CartItem from './_components/cart-item';
+import CartFooter from './_components/cart-footer';
 import useCart from '@/hooks/cart/useCart';
 
 function Cart() {
@@ -15,6 +15,7 @@ function Cart() {
     isSelected,
     calculateTotalPrice,
     selectedItems,
+    handleDeleteCartItems,
   } = useCart();
 
   if (isLoading) return <div>로딩중</div>;
@@ -23,11 +24,16 @@ function Cart() {
 
   return (
     <>
-      <CartGroup selectAll={selectAll} isAllSelected={isAllSelected}>
+      <CartGroup
+        selectAll={selectAll}
+        isAllSelected={isAllSelected}
+        handleDeleteCartItems={handleDeleteCartItems}
+        selectedItems={selectedItems}>
         {cartData?.map((item) => (
           <CartItem
             key={item.cart_id}
             data={item}
+            handleDeleteCartItems={handleDeleteCartItems}
             handleSelectItem={handleSelectItem}
             isSelected={isSelected}
           />

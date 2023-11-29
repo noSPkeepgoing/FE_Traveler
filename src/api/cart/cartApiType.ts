@@ -10,3 +10,7 @@ export type TCartItem = {
   accommodation_img: string;
   accommodation_sold_out: boolean;
 };
+
+export type TCartDeleteParams = {
+  cart_id: number[];
+};
