@@ -2,13 +2,14 @@
 
 .item {
   margin: 1rem 0.5rem;
-
   transition: all 0.2s;
+
+  $size: 15.5rem;
+  max-width: $size;
 
   &Image {
     margin: 0.2rem 0;
 
-    $size: 14rem;
     width: $size;
     height: $size;
 
@@ -27,6 +28,10 @@
 
     .infoName {
       margin: 0.2rem;
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
 
     .infoAddress {

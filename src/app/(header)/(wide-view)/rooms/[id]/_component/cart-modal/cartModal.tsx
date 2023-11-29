@@ -21,7 +21,7 @@ function CartModal() {
       </div>
     );
   }
-  if (false) {
+  if (true) {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">
@@ -37,7 +37,7 @@ function CartModal() {
       </div>
     );
   }
-  if (true) {
+  if (false) {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">

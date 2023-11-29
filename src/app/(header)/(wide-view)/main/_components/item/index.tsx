@@ -1,9 +1,11 @@
+'use client';
+
 import React from 'react';
-import { TAccommodation } from '../../mainType';
 import styles from './item.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { TAccommodation } from './itemType';
 
 function Item({ data }: { data: TAccommodation }) {
   const router = useRouter();
@@ -23,7 +25,7 @@ function Item({ data }: { data: TAccommodation }) {
     <div className={styles.item} onClick={handleClick}>
       <div className={styles.itemImage}>
         <Image
-          src="https://avatars.githubusercontent.com/u/81469686?v=4"
+          src={accommodation_img}
           alt={`${accommodation_name} 이미지`}
           width={80}
           height={80}
