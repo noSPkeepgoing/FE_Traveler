@@ -64,7 +64,7 @@ function SignUpForm() {
 
       // 이메일 중복체크 API 호출
       const code = await SIGN_API.emailCheck(email);
-
+      console.log(code);
       // 응답에 따른 처리
       switch (code) {
         case RESPONSE_CODE.VALID_EMAIL: // 이메일 사용 가능
@@ -90,9 +90,12 @@ function SignUpForm() {
         </div>
         <div className={styles.inputBox}>
           <div className={styles.inputContainer}>
-            <Input variant="signUpShort" placeholder="이메일" />
-            <Button size="sm" />
-            <input type="email" placeholder="이메일" name="email" />
+            <Input
+              variant="signShort"
+              type="email"
+              placeholder="이메일"
+              name="email"
+            />
             <Button size="sm" type="button" onClick={checkEmailValid}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
                 중복 확인
@@ -105,14 +108,19 @@ function SignUpForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
-            <Input variant="login" placeholder="비밀번호" />
-            {/* <input type="password" placeholder="비밀번호" name="password" /> */}
-            <label htmlFor="">비밀번호 상태 모시깽이</label>
+            <Input
+              variant="signRegular"
+              type="password"
+              placeholder="비밀번호"
+              name="password"
+            />
+            <label htmlFor="password">비밀번호 상태 모시깽이</label>
           </div>
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
-            <input
+            <Input
+              variant="signRegular"
               type="password"
               placeholder="비밀번호 확인"
               name="passwordCheck"
@@ -122,7 +130,12 @@ function SignUpForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
-            <input type="text" placeholder="이름" name="name" />
+            <Input
+              variant="signRegular"
+              type="text"
+              placeholder="이름"
+              name="name"
+            />
             <label htmlFor="">이름 상태 모시깽이</label>
           </div>
         </div>
