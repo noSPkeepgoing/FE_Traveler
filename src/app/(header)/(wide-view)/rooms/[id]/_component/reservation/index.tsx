@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './reservation.module.scss';
 import Text from '@/components/atoms/text';
 import 'react-calendar/dist/Calendar.css';
@@ -16,15 +16,18 @@ import {
   TReservation,
   TReservationForm,
   TReservationEvent,
+  TCheckValue,
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
+import { DAY_SECOND } from '@/constants/rooms';
 function Reservation({ price, params, data }: TReservation) {
   const [value, onChange] = useState<Value>(new Date());
   const [valueSecond, onChangeSecond] = useState<Value>(new Date());
   const [selectedOption, setSelectedOption] = useState<number>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [amount, setAmount] = useState<number>(0);
-  const [day, setDay] = useState(0);
+  // const [amount, setAmount] = useState<number>(0);
+  const [day, setDay] = useState(1);
+  const amount = price;
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
   const handleChangeSelect = (event: TReservationEvent) => {
@@ -52,7 +55,7 @@ function Reservation({ price, params, data }: TReservation) {
       const productData = {
         accommodation_name: data.accommodation_name,
         adress: data.address,
-        accommodation_price: data.accommodation_price,
+        accommodation_price: amount * day,
         accommodation_img: data.accommodation_img,
         start_date: startDate,
         end_date: endDate,
@@ -65,6 +68,19 @@ function Reservation({ price, params, data }: TReservation) {
       alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
     }
   }
+  function isNaturalNumber(value: TCheckValue) {
+    return Number.isInteger(value) && value >= 0;
+  }
+
+  const calculatedDay = Math.floor(
+    (Number(valueSecond) - Number(value)) / DAY_SECOND,
+  );
+  useEffect(() => {
+    if (isNaturalNumber(calculatedDay)) {
+      setDay(calculatedDay);
+    }
+  }, [calculatedDay]);
+
   return (
     <div className={styles.Reservation}>
       <div className={styles.dailyPriceBox}>
@@ -129,10 +145,9 @@ function Reservation({ price, params, data }: TReservation) {
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text
-              fontSize="xs"
-              fontWeight="semibold"
-              color="highlight">{`₩${amount}`}</Text>
+            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
+              amount * day
+            }`}</Text>
           </div>
           <div className={styles.day}>
             <Text

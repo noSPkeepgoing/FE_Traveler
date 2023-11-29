@@ -24,3 +24,5 @@ export type TReservation = {
 }
 
 export type TReservationEvent = React.ChangeEvent<HTMLSelectElement>
+
+export type TCheckValue = number;

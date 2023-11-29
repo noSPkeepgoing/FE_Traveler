@@ -16,6 +16,7 @@ function Cart() {
     calculateTotalPrice,
     selectedItems,
     handleDeleteCartItems,
+    handleReservation,
   } = useCart();
 
   if (isLoading) return <div>로딩중</div>;
@@ -42,6 +43,7 @@ function Cart() {
       <CartFooter
         totalPrice={calculateTotalPrice()}
         selectedItemsLength={selectedItems.length}
+        handleReservation={handleReservation}
       />
     </>
   );
