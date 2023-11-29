@@ -1,3 +1,14 @@
+export type TReservationItemParams = {
+  size?: number;
+  page?: number;
+};
+
+export type TReservationItemResponse = {
+  order_list: TReservationItem[];
+  total_page: number;
+  page_number: number;
+};
+
 export type TReservationItem = {
   order_date: string;
   accommodation_id: number;

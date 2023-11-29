@@ -1,28 +1,32 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import ReservationItem from './_components/reservation-item/page';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './reservationList.module.scss';
-import { useGetReservationList } from '@/queries/reservation-list';
+import { useGetInfiniteReservationList } from '@/queries/reservation-list';
 
 function ReservationList() {
-  const { data, fetchNextPage, hasNextPage } = useGetReservationList();
-  const [items, setItems] = useState([1, 2, 3, 4]);
-  const fetchMoreData = () => {
-    // 새로운 데이터를 가져와서 state 업데이트
-    console.log('first');
-  };
+  const { data, fetchNextPage, hasNextPage } = useGetInfiniteReservationList({
+    select: (data) => ({
+      pages: data.pages.flatMap((page) => page.data),
+      pageParams: data.pageParams,
+    }),
+  });
+
+  const reservationItems = useMemo(() => {
+    return data?.pages.flatMap((page) => page.data.order_list);
+  }, [data]);
 
   return (
     <InfiniteScroll
-      dataLength={items.length}
+      dataLength={reservationItems?.length ?? 0}
       scrollThreshold={0.95}
-      next={fetchMoreData}
-      hasMore={true}
+      next={fetchNextPage}
+      hasMore={hasNextPage ?? false}
       loader={<h4>Loading...</h4>}>
       <section className={styles.reservationItemContainer}>
-        {items.map((item, index) => (
-          <ReservationItem key={index} />
+        {reservationItems?.map((item, index) => (
+          <ReservationItem key={index} item={item} />
         ))}
       </section>
     </InfiniteScroll>

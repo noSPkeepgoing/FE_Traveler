@@ -1,10 +1,13 @@
 import { instance } from '..';
 import { Response } from '../type';
-import { TReservationItem } from './reservationListApiType';
+import {
+  TReservationItemParams,
+  TReservationItemResponse,
+} from './reservationListApiType';
 
 export const RESERVATION_LIST_API = {
-  getReservationList: (page: number) =>
-    instance.get<Response<TReservationItem[]>>(
-      `/v1/accommodations?location=31&size=12&page=${page}`,
-    ),
+  getReservationList: (params?: TReservationItemParams) =>
+    instance.get<Response<TReservationItemResponse>>('/v1/order/me', {
+      params,
+    }),
 };

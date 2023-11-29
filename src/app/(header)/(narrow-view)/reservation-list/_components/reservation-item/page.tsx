@@ -1,17 +1,18 @@
 import Image from 'next/image';
 import styles from './reservationItem.module.scss';
 import Text from '@/components/atoms/text';
+import { TReservationItem } from '@/api/reservation-list/reservationListApiType';
 
-function ReservationItem() {
+function ReservationItem({ item }: { item: TReservationItem }) {
   return (
     <div className={styles.reservationItem}>
       <div className={styles.itemInfo}>
         <Text fontSize="xs" fontWeight="bold">
-          RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)
+          {item.accommodation_name}
         </Text>
         <div className={styles.imageInfo}>
           <Image
-            src="https://avatars.githubusercontent.com/u/81469686?v=4"
+            src={item.accommodation_img}
             width={80}
             height={80}
             alt="숙소 이미지"
@@ -19,20 +20,20 @@ function ReservationItem() {
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              2023.12.04(화) ~ 2023.12.05(수) / 2명
+              {`${item.start_date} ~ ${item.end_date} / ${item.people_number}명`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              이용자: 박가현
+              {`이용자: ${item.representative_name}`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              결제일: 2023.11.27(월)
+              {`결제일: ${item.order_date}`}
             </Text>
           </div>
         </div>
       </div>
       <div className={styles.priceInfo}>
         <Text fontSize="md" fontWeight="bold">
-          139000원
+          {`${item.order_price}원`}
         </Text>
       </div>
     </div>
