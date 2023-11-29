@@ -104,10 +104,16 @@ export const ExampleCart: StoryObj = {
       );
     };
 
+    const handleDeleteCartItems = () => {};
+
     return (
       <>
         <CartTitle />
-        <CartGroup selectAll={selectAll} isAllSelected={isAllSelected}>
+        <CartGroup
+          selectAll={selectAll}
+          isAllSelected={isAllSelected}
+          handleDeleteCartItems={handleDeleteCartItems}
+          selectedItems={selectedItems}>
           {data.map((item) => (
             <CartItem
               data={item}
