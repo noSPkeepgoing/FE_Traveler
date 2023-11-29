@@ -26,7 +26,7 @@ function CartItem({
         </Text>
         <div className={styles.imageInfo}>
           <Image
-            src="https://avatars.githubusercontent.com/u/81469686?v=4"
+            src={data.accommodation_img}
             width={80}
             height={80}
             alt="숙소 이미지"
@@ -34,7 +34,7 @@ function CartItem({
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              {` / ${data.people_number}명`}
+              {`${data.start_date}~${data.end_date} / ${data.people_number}명`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
               {data.address}
@@ -46,7 +46,7 @@ function CartItem({
         <Button
           variant="text"
           onClick={() => {
-            handleDeleteCartItems({ cart_id: [data.cart_id] });
+            handleDeleteCartItems({ delete_id: [data.cart_id] });
           }}>
           <VscChromeClose size="16" />
         </Button>
