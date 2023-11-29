@@ -1,5 +1,5 @@
 'use client';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './reservation.module.scss';
 import Text from '@/components/atoms/text';
 import 'react-calendar/dist/Calendar.css';
@@ -16,7 +16,7 @@ import {
   TReservation,
   TReservationForm,
   TReservationEvent,
-  TCheckValue
+  TCheckValue,
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
 import { DAY_SECOND } from '@/constants/rooms';
@@ -55,7 +55,7 @@ function Reservation({ price, params, data }: TReservation) {
       const productData = {
         accommodation_name: data.accommodation_name,
         adress: data.address,
-        accommodation_price: data.accommodation_price,
+        accommodation_price: amount * day,
         accommodation_img: data.accommodation_img,
         start_date: startDate,
         end_date: endDate,
@@ -68,16 +68,18 @@ function Reservation({ price, params, data }: TReservation) {
       alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
     }
   }
-  function isNaturalNumber(value : TCheckValue) {
+  function isNaturalNumber(value: TCheckValue) {
     return Number.isInteger(value) && value >= 0;
-}
-
-const calculatedDay = Math.floor((Number(valueSecond) - Number(value)) / DAY_SECOND);
-useEffect(() => {
-  if (isNaturalNumber(calculatedDay)) {
-    setDay(calculatedDay);
   }
-}, [calculatedDay]);
+
+  const calculatedDay = Math.floor(
+    (Number(valueSecond) - Number(value)) / DAY_SECOND,
+  );
+  useEffect(() => {
+    if (isNaturalNumber(calculatedDay)) {
+      setDay(calculatedDay);
+    }
+  }, [calculatedDay]);
 
   return (
     <div className={styles.Reservation}>
@@ -143,10 +145,9 @@ useEffect(() => {
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text
-              fontSize="xs"
-              fontWeight="semibold"
-              color="highlight">{`₩${amount * day}`}</Text>
+            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
+              amount * day
+            }`}</Text>
           </div>
           <div className={styles.day}>
             <Text
