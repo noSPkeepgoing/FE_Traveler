@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import '@styles/_reset.scss';
 import { AppProvider } from '@/AppProvider';
 
-
 export const metadata: Metadata = {
   title: 'Traveler',
   description: '당신의 여행을 함께합니다.',
