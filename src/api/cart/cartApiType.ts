@@ -3,8 +3,8 @@ export type TCartItem = {
   accommodation_id: number;
   accommodation_name: string;
   address: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
   people_number: number;
   cart_price: number;
   accommodation_img: string;
