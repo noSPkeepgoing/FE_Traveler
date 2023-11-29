@@ -21,50 +21,70 @@ import {
 import { Value } from '../custom-calendar/customCalendarType';
 import { DAY_SECOND } from '@/constants/rooms';
 function Reservation({ price, params, data }: TReservation) {
-  const [value, onChange] = useState<Value>(new Date());
-  const [valueSecond, onChangeSecond] = useState<Value>(new Date());
-  const [selectedOption, setSelectedOption] = useState<number>(0);
+  const currentDate = new Date();
+  const nextDate = new Date(currentDate);
+  nextDate.setDate(currentDate.getDate() + 1);
+  const [value, onChange] = useState<Value>(currentDate);
+  const [valueSecond, onChangeSecond] = useState<Value>(nextDate);
+  const [selectedOption, setSelectedOption] = useState<number>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [day, setDay] = useState(1);
   const amount = price;
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
-  const [modalType,setModalType] = useState(0)
+  const [modalType, setModalType] = useState(0);
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
   async function handleCartClick() {
     const token = sessionStorage.getItem('accessToken');
-    if (token === null){
-      // alert('로그인 후 진행하실 수 있습니다.');
-      // router.push('/sign-in');
-      // return;
+    if (token === null) {
+      alert('로그인 후 진행하실 수 있습니다.');
+      router.push('/sign-in');
+      return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
-    const productData = {
-        accommodation_id : Number(params),
-        name : data.accommodation_name,
-        address:data.address,
-        start_date : startDate,
-        end_date : endDate,
-        people : selectedOption,
-        cart_price : price * day,
-        accommodation_img : data.accommodation_img,
+    try {
+      const res = await ROOMS_API.checkReservation({
+        startDate,
+        endDate,
+        id: params,
+      });
+      console.log(res);
+    } catch (error: any) {
+      console.log(error);
+      return;
     }
+    const productData = {
+      accommodation_id: Number(params),
+      name: data.accommodation_name,
+      address: data.address,
+      start_date: startDate,
+      end_date: endDate,
+      people: selectedOption,
+      cart_price: price * day,
+      accommodation_img: data.accommodation_img,
+    };
+    console.log(productData);
     try {
       const res = await ROOMS_API.addCart(productData);
-      console.log(res)
       setModalType(4001);
-    if (!modalOpen) {
-      setModalOpen((prev) => !prev);
-      setTimeout(() => {
-        setModalOpen(false);
-      }, 2500);
-    }
-    }
-    catch (error : any){
-      console.log(error.response.data.code)
+      if (!modalOpen) {
+        setModalOpen((prev) => !prev);
+        setTimeout(() => {
+          setModalOpen(false);
+        }, 2500);
+      }
+    } catch (error: any) {
+      if (error.response.status === 403) {
+        setModalType(403);
+        setModalOpen((prev) => !prev);
+        setTimeout(() => {
+          setModalOpen(false);
+        }, 2500);
+        return;
+      }
       setModalType(error.response.data.code);
       setModalOpen((prev) => !prev);
       setTimeout(() => {
@@ -80,7 +100,7 @@ function Reservation({ price, params, data }: TReservation) {
     selectedOption,
   }: TReservationForm) {
     const token = sessionStorage.getItem('accessToken');
-    if (token === null){
+    if (token === null) {
       // alert('로그인 후 진행하실 수 있습니다.');
       // router.push('/sign-in');
       // return;
@@ -89,17 +109,19 @@ function Reservation({ price, params, data }: TReservation) {
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
     const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
     if (res.data.code === 2001) {
-      const productData = [{
-        accommodation_name: data.accommodation_name,
-        address: data.address,
-        accommodation_price: amount * day,
-        accommodation_img: data.accommodation_img,
-        start_date: startDate,
-        end_date: endDate,
-        accommodation_id: id,
-        people_number: selectedOption,
-        cart_id: 0,
-      }];
+      const productData = [
+        {
+          accommodation_name: data.accommodation_name,
+          address: data.address,
+          accommodation_price: amount * day,
+          accommodation_img: data.accommodation_img,
+          start_date: startDate,
+          end_date: endDate,
+          accommodation_id: id,
+          people_number: selectedOption,
+          cart_id: 0,
+        },
+      ];
       setProduct(productData);
       router.push('/reservation');
     } else {
@@ -119,11 +141,23 @@ function Reservation({ price, params, data }: TReservation) {
     }
   }, [calculatedDay]);
 
+  useEffect(() => {
+    if (value > valueSecond){
+      const nextDate = new Date(value);
+      nextDate.setDate(nextDate.getDate()+1);
+      onChangeSecond(nextDate);
+      console.log(nextDate);
+      
+    }
+    },[value,valueSecond]);
+
   return (
     <div className={styles.Reservation}>
       <div className={styles.dailyPriceBox}>
         <div className={styles.dailyPrice}>
-          <Text fontSize="md" fontWeight="semibold">{`₩${price.toLocaleString()}`}</Text>
+          <Text
+            fontSize="md"
+            fontWeight="semibold">{`₩${price.toLocaleString()}`}</Text>
         </div>
         <div className={styles.daily}>
           <Text fontSize="xs-2" fontWeight="normal">
@@ -176,16 +210,16 @@ function Reservation({ price, params, data }: TReservation) {
           </Text>
         </Button>
       </div>
-      <div>{modalOpen && <CartModal type={modalType}/>}</div>
+      <div>{modalOpen && <CartModal type={modalType} />}</div>
       <div>
         <div className={styles.amountBox}>
           <Text fontSize="xs-3" fontWeight="normal" color="primary">
             결제 예상 금액:
           </Text>
           <div className={styles.amount}>
-            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${
-              (amount * day).toLocaleString()
-            }`}</Text>
+            <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${(
+              amount * day
+            ).toLocaleString()}`}</Text>
           </div>
           <div className={styles.day}>
             <Text

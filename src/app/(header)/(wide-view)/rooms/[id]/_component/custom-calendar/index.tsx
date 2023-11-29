@@ -1,9 +1,9 @@
-import React, { useState, ReactElement } from 'react';
+import React, { useState, ReactElement, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styles from './customCalendar.module.scss';
 import moment, { Moment } from 'moment';
-import { TCustomCalendar } from './customCalendarType';
+import { TCustomCalendar, TValue, Value } from './customCalendarType';
 
 function CustomCalendar({
   onChange,
@@ -16,16 +16,14 @@ function CustomCalendar({
   const handleToggleCalendar = () => {
     setIsOpen(!isOpen);
   };
-  const handleDateChange = (selectedDate: Date | Date[] | null) => {
-    onChange(selectedDate);
+  const handleDateChange = (value: Date, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    onChange(value);
     setIsOpen(false);
-    if (selectedDate) {
-      setNowDate(
-        moment(selectedDate as Date | Moment).format('YYYY년 MM월 DD일'),
-      );
+    if (value) {
+      setNowDate(moment(value as Date | Moment).format('YYYY년 MM월 DD일'));
     }
   };
-  
+
   const tileDisabled = ({ date }: { date: Date }) => {
     if (date.toDateString() === value.toDateString()) {
       return true;
@@ -35,6 +33,14 @@ function CustomCalendar({
     }
     return date < new Date();
   };
+
+  useEffect(() => {
+    if (valueSecond) {
+      setNowDate(
+        moment(valueSecond as Date | Moment).format('YYYY년 MM월 DD일'),
+      );
+    }
+  }, [value, valueSecond]);
 
   return (
     <div className={styles.CalendarContainer}>
@@ -49,7 +55,7 @@ function CustomCalendar({
       <div className={`${styles.CalendarWrapper} ${isOpen ? '' : styles.hide}`}>
         <Calendar
           locale="en"
-          onChange={handleDateChange}
+          onChange={(value,e)=>{handleDateChange(value as Date,e)}}
           value={valueSecond ? valueSecond : value}
           tileDisabled={tileDisabled}
           formatDay={(locale, date) => moment(date).format('DD')}></Calendar>

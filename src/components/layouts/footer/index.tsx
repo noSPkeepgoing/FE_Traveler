@@ -9,7 +9,7 @@ function Footer() {
         <div className={styles.footerContainer}>
           <div className={styles.footerChild}>
             <Text color="black" fontSize="xl" fontWeight="thin">
-              LOGO
+              Traveler
             </Text>
           </div>
           <div className={styles.footerChild}>
@@ -19,7 +19,7 @@ function Footer() {
           </div>
           <div className={styles.footerChild}>
             <Text color="black" fontSize="xs-4" fontWeight="bold">
-              © LOGO Corp.
+              © Traveler Corp.
             </Text>
           </div>
           <div className={styles.footerChild}>

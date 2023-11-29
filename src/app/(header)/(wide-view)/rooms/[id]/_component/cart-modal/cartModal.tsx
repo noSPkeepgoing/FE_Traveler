@@ -2,13 +2,14 @@ import styles from './cartModal.module.scss';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Text from '@/components/atoms/text';
+import { TCartModal } from './cartModalType';
 
-function CartModal({type}) {
+function CartModal({type} : TCartModal ) {
   const router = useRouter();
   function handlePath(type: string): void {
     router.push(`/${type}`);
   }
-  if (type === 5000 || type === 5001) {
+  if (type === 5000 || type === 5001 || type === 403) {
     return (
       <div className={styles.modal}>
         <p
