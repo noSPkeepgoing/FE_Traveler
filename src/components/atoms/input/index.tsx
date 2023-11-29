@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { TInput } from './inputType';
 import './input.scss';
 
-function Input({ variant, type, placeholder, state, name }: TInput) {
+function Input({ variant, type, placeholder, state, name, onChange }: TInput) {
   const inputPlaceholder = placeholder ?? '';
 
   const className = classNames('input', variant, state);
@@ -14,6 +14,7 @@ function Input({ variant, type, placeholder, state, name }: TInput) {
       type={type}
       placeholder={inputPlaceholder}
       name={name}
+      onChange={onChange}
     />
   );
 }
