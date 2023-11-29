@@ -1,5 +1,5 @@
 import { instance } from '..';
-import { TCheckReservation, TProductId } from './roomsApiType';
+import { TCheckReservation, TProductId, TProduct } from './roomsApiType';
 export const ROOMS_API = {
   checkReservation: async ({ startDate, endDate, id }: TCheckReservation) =>
     instance.get(
@@ -11,10 +11,8 @@ export const ROOMS_API = {
     });
     return res.data;
   },
-  addCart: async (product) => {
-    const res = await instance.post(`/v1/cart`,{...product});
+  addCart: async (product: TProduct) => {
+    const res = await instance.post(`/v1/cart`, { ...product });
     return res.data;
   },
 };
-
-// /v1/order/check?accommodation_id=${id}&start_date=${startDate}&end_date=${endDate}
