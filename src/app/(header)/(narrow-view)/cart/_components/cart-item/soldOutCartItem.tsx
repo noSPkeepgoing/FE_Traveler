@@ -1,9 +1,14 @@
 import Text from '@/components/atoms/text';
 import styles from './cartItem.module.scss';
 import Image from 'next/image';
-import { TcartInfo } from './cartItemType';
+import { TCartItemProps } from './cartItemType';
+import Button from '@/components/atoms/button';
+import { VscChromeClose } from 'react-icons/vsc';
 
-function SoldOutCartItem({ data }: { data: TcartInfo }) {
+function SoldOutCartItem({
+  data,
+  handleDeleteCartItems,
+}: Pick<TCartItemProps, 'data' | 'handleDeleteCartItems'>) {
   return (
     <div className={styles.cartItem}>
       <div className={styles.itemInfo}>
@@ -20,7 +25,7 @@ function SoldOutCartItem({ data }: { data: TcartInfo }) {
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
-              {`${data.date} / ${data.people_number}명`}
+              {` / ${data.people_number}명`}
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {data.address}
@@ -29,7 +34,13 @@ function SoldOutCartItem({ data }: { data: TcartInfo }) {
         </div>
       </div>
       <div className={styles.subCartInfo}>
-        <div>아이콘</div>
+        <Button
+          variant="text"
+          onClick={() => {
+            handleDeleteCartItems({ cart_id: [data.cart_id] });
+          }}>
+          <VscChromeClose size="16" />
+        </Button>
         <div className={styles.priceInfo}>
           <Text
             fontSize="md"
