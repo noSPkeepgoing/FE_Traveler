@@ -1,3 +1,4 @@
+'use client';
 import { TCartDeleteParams, TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
