@@ -23,16 +23,23 @@ import { DAY_SECOND } from '@/constants/rooms';
 function Reservation({ price, params, data }: TReservation) {
   const [value, onChange] = useState<Value>(new Date());
   const [valueSecond, onChangeSecond] = useState<Value>(new Date());
-  const [selectedOption, setSelectedOption] = useState<number>(1);
+  const [selectedOption, setSelectedOption] = useState<number>(0);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [day, setDay] = useState(1);
   const amount = price;
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
+  const [modalType,setModalType] = useState(0)
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
   async function handleCartClick() {
+    const token = sessionStorage.getItem('accessToken');
+    if (token === null){
+      // alert('로그인 후 진행하실 수 있습니다.');
+      // router.push('/sign-in');
+      // return;
+    }
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
     const productData = {
@@ -45,9 +52,20 @@ function Reservation({ price, params, data }: TReservation) {
         cart_price : price * day,
         accommodation_img : data.accommodation_img,
     }
-    const res = await ROOMS_API.addCart(productData)
-    console.log(res)
+    try {
+      const res = await ROOMS_API.addCart(productData);
+      console.log(res)
+      setModalType(4001);
     if (!modalOpen) {
+      setModalOpen((prev) => !prev);
+      setTimeout(() => {
+        setModalOpen(false);
+      }, 2500);
+    }
+    }
+    catch (error : any){
+      console.log(error.response.data.code)
+      setModalType(error.response.data.code);
       setModalOpen((prev) => !prev);
       setTimeout(() => {
         setModalOpen(false);
@@ -61,20 +79,27 @@ function Reservation({ price, params, data }: TReservation) {
     data,
     selectedOption,
   }: TReservationForm) {
+    const token = sessionStorage.getItem('accessToken');
+    if (token === null){
+      // alert('로그인 후 진행하실 수 있습니다.');
+      // router.push('/sign-in');
+      // return;
+    }
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
     const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
-    if (res.data.code === 2001 && data) {
-      const productData = {
+    if (res.data.code === 2001) {
+      const productData = [{
         accommodation_name: data.accommodation_name,
-        adress: data.address,
+        address: data.address,
         accommodation_price: amount * day,
         accommodation_img: data.accommodation_img,
         start_date: startDate,
         end_date: endDate,
         accommodation_id: id,
-        people: selectedOption,
-      };
+        people_number: selectedOption,
+        cart_id: 0,
+      }];
       setProduct(productData);
       router.push('/reservation');
     } else {
@@ -151,7 +176,7 @@ function Reservation({ price, params, data }: TReservation) {
           </Text>
         </Button>
       </div>
-      <div>{modalOpen && <CartModal />}</div>
+      <div>{modalOpen && <CartModal type={modalType}/>}</div>
       <div>
         <div className={styles.amountBox}>
           <Text fontSize="xs-3" fontWeight="normal" color="primary">

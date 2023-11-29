@@ -24,7 +24,7 @@ function CartGroup({
           variant="text"
           onClick={() => {
             const cart_ids = selectedItems.map((item) => item.cart_id);
-            handleDeleteCartItems({ cart_id: cart_ids });
+            handleDeleteCartItems({ delete_id: cart_ids });
           }}>
           <Text fontSize="xs" fontWeight="normal" color="highlight">
             선택 삭제
