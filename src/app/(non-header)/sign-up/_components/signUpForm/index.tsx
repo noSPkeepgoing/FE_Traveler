@@ -112,13 +112,6 @@ function SignUpForm() {
           alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
           window.location.href = '/sign-in';
           break;
-        case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
-          setMessageAndHideAfterDelay(
-            setEmailMessage,
-            '올바르지 않은 이메일 형식입니다.',
-            true,
-          );
-          break;
       }
     } catch (error: unknown) {
       if (isAxiosError<Response>(error)) {
