@@ -4,6 +4,6 @@ export type TButton = {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit' | 'reset' | 'Link';
   href?: string;
 };
