@@ -1,5 +1,3 @@
-export type TCategory = { name: string; num: number };
-
 export type TAccommodation = {
   accommodation_id: number;
   accommodation_name: string;
