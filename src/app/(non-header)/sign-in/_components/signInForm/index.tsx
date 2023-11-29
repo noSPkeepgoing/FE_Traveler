@@ -33,7 +33,6 @@ function SignInForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     // form 데이터 Target함수
     const formData = new FormData(event.currentTarget);
     const userData: TSignIn = {
@@ -42,8 +41,7 @@ function SignInForm() {
     };
 
     // 각 form 데이터 유효성 검사 실시
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 유효성 검사용 정규식
 
     if (!userData.email) {
       setMessageAndHideAfterDelay(
@@ -82,12 +80,11 @@ function SignInForm() {
       sessionStorage.setItem('userName', userName);
       sessionStorage.setItem('userEmail', userEmail);
 
+      // response코드 저장
       const responseCode = response.data.code;
-
       switch (responseCode) {
         case RESPONSE_CODE.SIGNIN_SUCCESS:
           window.location.href = '/main';
-
           break;
       }
     } catch (error: unknown) {
