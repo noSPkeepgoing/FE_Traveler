@@ -30,7 +30,21 @@ function Reservation({ price, params, data }: TReservation) {
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
-  function handleCartClick() {
+  async function handleCartClick() {
+    const startDate = moment(value).format('YYYY-MM-DD');
+    const endDate = moment(valueSecond).format('YYYY-MM-DD');
+    const productData = {
+        accommodation_id : Number(params),
+        name : data.accommodation_name,
+        address:data.address,
+        start_date : startDate,
+        end_date : endDate,
+        people : selectedOption,
+        cart_price : price * day,
+        accommodation_img : data.accommodation_img,
+    }
+    const res = await ROOMS_API.addCart(productData)
+    console.log(res)
     if (!modalOpen) {
       setModalOpen((prev) => !prev);
       setTimeout(() => {
