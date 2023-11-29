@@ -12,26 +12,23 @@ import moment from 'moment';
 import { productState } from '@/recoil/order';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
-import { TReservationData } from './reservationDataType'
-function Reservation({
-  price,
-  params,
-  data,
-}: {
-  price: number;
-  params: number;
-  data: object;
-}) {
-  const [value, onChange] = useState(new Date());
-  const [valueSecond, onChangeSecond] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState(1);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [amount, setAmount] = useState(0);
+import {
+  TReservation,
+  TReservationForm,
+  TReservationEvent,
+} from './reservationType';
+import { Value } from '../custom-calendar/customCalendarType';
+function Reservation({ price, params, data }: TReservation) {
+  const [value, onChange] = useState<Value>(new Date());
+  const [valueSecond, onChangeSecond] = useState<Value>(new Date());
+  const [selectedOption, setSelectedOption] = useState<number>(1);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [amount, setAmount] = useState<number>(0);
   const [day, setDay] = useState(0);
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
-  const handleChangeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
+  const handleChangeSelect = (event: TReservationEvent) => {
+    setSelectedOption(Number(event.target.value));
   };
   function handleCartClick() {
     if (!modalOpen) {
@@ -41,33 +38,32 @@ function Reservation({
       }, 2500);
     }
   }
-  async function handleClickReservation(
-    value: Date,
-    valueSecond: Date,
-    id: number,
-    data: TReservationData,
-    selectedOption:number,
-  ) {
+  async function handleClickReservation({
+    value,
+    valueSecond,
+    id,
+    data,
+    selectedOption,
+  }: TReservationForm) {
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
-
-    const res = await ROOMS_API.checkReservation(startDate, endDate,id);
-    if (res.code === 2001){
+    console.log(id);
+    const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
+    if (res.data.code === 2001) {
       const productData = {
-          accommodation_name: data.accommodation_name,
-          adress: data.address,
-          accommodation_price: data.accommodation_price,
-          accommodation_img: data.accommodation_img,
-          start_date: startDate,
-          end_date: endDate,
-          accommodation_id: id,
-          people:selectedOption,
-        };
+        accommodation_name: data.accommodation_name,
+        adress: data.address,
+        accommodation_price: data.accommodation_price,
+        accommodation_img: data.accommodation_img,
+        start_date: startDate,
+        end_date: endDate,
+        accommodation_id: id,
+        people: selectedOption,
+      };
       setProduct(productData);
       router.push('/reservation');
-    }
-    else{
-      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.')
+    } else {
+      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
     }
   }
   return (
@@ -114,7 +110,14 @@ function Reservation({
           variant="default"
           size="md"
           onClick={() => {
-            handleClickReservation(value, valueSecond, params, data, selectedOption);
+            console.log(data);
+            handleClickReservation({
+              value,
+              valueSecond,
+              id: params,
+              data,
+              selectedOption,
+            });
           }}>
           <Text color="white" fontSize="xs" fontWeight="semibold">
             예약하기

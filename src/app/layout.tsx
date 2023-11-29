@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@styles/_reset.scss';
-import { AppProvider } from '@/appProvider';
+import { AppProvider } from '@/AppProvider';
+
 
 export const metadata: Metadata = {
   title: 'Traveler',

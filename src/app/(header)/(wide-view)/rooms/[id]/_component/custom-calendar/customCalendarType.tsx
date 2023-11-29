@@ -1,6 +1,10 @@
 export type TCustomCalendar = {
-  onChange: (selectedDate: Date | Date[] | null) => void;
-  value: Date;
+  onChange: React.Dispatch<any>;
+  value: Value;
   valueSecond?: Date;
   type: string;
 };
+
+type ValuePiece = Date | undefined;
+
+export type Value = ValuePiece;

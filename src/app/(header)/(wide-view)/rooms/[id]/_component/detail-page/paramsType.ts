@@ -1,3 +1,5 @@
 export type TParams = {
-  id: number;
+  params: number;
 };
+
+export type TProductId = number;

@@ -16,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component: `
-- variant값으로 "login" | "reservation" 중 하나를 선택할 수 있습니다.\n
+- variant값으로 "login" | "reservation | signUpShort" 중 하나를 선택할 수 있습니다.\n
 `,
       },
     },
@@ -28,7 +28,7 @@ const meta = {
         type: { summary: 'InputVariant' },
         defaultValue: { summary: 'login' },
       },
-      options: ['login', 'reservation'],
+      options: ['login', 'reservation', 'signUpShort'],
       control: {
         type: 'radio',
       },
@@ -58,4 +58,15 @@ export const reservationInput: StoryObj<typeof Input> = {
     },
   },
   render: (args) => <Input variant="reservation" {...args}></Input>,
+};
+
+export const signUpShortInput: StoryObj<typeof Input> = {
+  parameters: {
+    docs: {
+      description: {
+        story: '예약에 사용되는 signUpShort input입니다.',
+      },
+    },
+  },
+  render: (args) => <Input variant="signUpShort" {...args}></Input>,
 };
