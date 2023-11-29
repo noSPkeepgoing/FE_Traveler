@@ -72,7 +72,7 @@ function Reservation() {
               대표자 정보
             </Text>
             <div className={styles.container}>
-              대표자 <Input variant="login" placeholder="홍길동" />
+              대표자 <Input variant="signRegular" placeholder="홍길동" />
               이메일 <Input variant="reservation" placeholder="abc@naver.com" />
             </div>
           </div>
