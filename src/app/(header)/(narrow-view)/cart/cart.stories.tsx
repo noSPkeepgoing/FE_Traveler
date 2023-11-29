@@ -119,6 +119,7 @@ export const ExampleCart: StoryObj = {
               data={item}
               handleSelectItem={handleSelectItem}
               isSelected={isSelected}
+              handleDeleteCartItems={handleDeleteCartItems}
             />
           ))}
         </CartGroup>
