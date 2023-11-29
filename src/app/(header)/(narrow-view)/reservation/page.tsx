@@ -72,7 +72,7 @@ function Reservation() {
               대표자 정보
             </Text>
             <div className={styles.container}>
-              대표자 <Input variant="reservation" placeholder="홍길동" />
+              대표자 <Input variant="login" placeholder="홍길동" />
               이메일 <Input variant="reservation" placeholder="abc@naver.com" />
             </div>
           </div>
@@ -100,7 +100,7 @@ function Reservation() {
           <Button
             variant="default"
             size="xl"
-            onClick={() => router.push('/reservation-check')}>
+            onClick={() => router.push('/main')}>
             <Text fontSize="xs" fontWeight="normal" color="white">
               결제하기
             </Text>
