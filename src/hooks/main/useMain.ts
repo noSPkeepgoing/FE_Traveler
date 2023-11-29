@@ -9,7 +9,6 @@ function useMain() {
     data: accommodationData,
     refetch,
     isLoading,
-    isError,
   } = useGetAccommodations(isSelected);
 
   const handleSelect = (category: number) => {
@@ -23,6 +22,7 @@ function useMain() {
     accommodationData,
     isSelected,
     handleSelect,
+    isLoading,
   };
 }
 
