@@ -62,7 +62,7 @@ function useCart() {
   };
 
   const handleDeleteCartItems = (params: TCartDeleteParams) => {
-    if (params.cart_id.length === 0) {
+    if (params.delete_id.length === 0) {
       alert('삭제할 상품을 선택해주세요');
       return;
     }

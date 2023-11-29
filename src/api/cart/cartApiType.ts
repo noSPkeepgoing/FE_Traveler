@@ -12,5 +12,5 @@ export type TCartItem = {
 };
 
 export type TCartDeleteParams = {
-  cart_id: number[];
+  delete_id: number[];
 };
