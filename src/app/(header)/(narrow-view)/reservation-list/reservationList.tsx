@@ -7,7 +7,16 @@ import useReservationList from '@/hooks/reservation-list';
 import Text from '@/components/atoms/text';
 
 function ReservationList() {
-  const { reservationItems, fetchNextPage, hasNextPage } = useReservationList();
+  const { reservationItems, fetchNextPage, hasNextPage, isError, isLoading } =
+    useReservationList();
+
+  if (isLoading) {
+    return <div>로딩 중</div>;
+  }
+
+  if (isError) {
+    return <div>에러</div>;
+  }
 
   if (reservationItems?.length === 0) {
     return (
