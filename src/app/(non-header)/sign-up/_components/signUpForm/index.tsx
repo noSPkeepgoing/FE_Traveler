@@ -167,9 +167,8 @@ function SignUpForm() {
         return;
       }
 
-      // 이메일 중복체크 API 호출
-
       try {
+        // 이메일 중복체크 API 호출
         const response = await SIGN_API.emailCheck(email);
         const responseCode = response.data.code;
 
