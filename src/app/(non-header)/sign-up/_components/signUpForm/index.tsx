@@ -57,10 +57,9 @@ function SignUpForm() {
       passwordCheck: formData.get('passwordCheck') as string,
       name: formData.get('name') as string,
     };
-    console.log(userData);
     // 객체 분해 할당으로 비밀번호 확인만 제외하고 apiData라는 객체에 할당! (api 전달용)
     const { passwordCheck, ...apiData } = userData;
-    console.log(apiData);
+
     // 각 form 데이터 유효성 검사 실시
     if (!userData.email) {
       setMessageAndHideAfterDelay(
@@ -106,7 +105,7 @@ function SignUpForm() {
     const code = await SIGN_API.userSignUp(apiData);
     console.log(code);
 
-    // 응답 코드에 따른 처리
+    // 서버응답 코드에 따른 별도처리
     switch (code) {
       case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
         alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
@@ -122,7 +121,7 @@ function SignUpForm() {
         alert('이미 사용중인 이메일입니다.');
         break;
       default:
-        alert('회원 가입에 실패했습니다.');
+        alert('회원 가입에 실패했습니다. 서버와의 연결을 확인해주세요.');
         break;
     }
   };
@@ -192,6 +191,7 @@ function SignUpForm() {
               placeholder="이메일"
               name="email"
               onChange={(e) => setEmail(e.target.value)}
+              state={emailMessage.error ? 'invalid' : ''}
             />
             <Button
               size="sm"
@@ -221,6 +221,7 @@ function SignUpForm() {
               type="password"
               placeholder="비밀번호"
               name="password"
+              state={passwordMessage.error ? 'invalid' : ''}
             />
             <div className={styles.labelArea}>
               <label htmlFor="password">
@@ -241,6 +242,7 @@ function SignUpForm() {
               type="password"
               placeholder="비밀번호 확인"
               name="passwordCheck"
+              state={passwordCheckMessage.error ? 'invalid' : ''}
             />
             <div className={styles.labelArea}>
               <label htmlFor="passwordCheck">
@@ -261,6 +263,7 @@ function SignUpForm() {
               type="text"
               placeholder="이름"
               name="name"
+              state={nameMessage.error ? 'invalid' : ''}
             />
             <div className={styles.labelArea}>
               <label htmlFor="name">
