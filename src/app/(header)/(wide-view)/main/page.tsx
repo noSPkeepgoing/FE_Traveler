@@ -1,20 +1,17 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import CategoryList from './_components/category-list';
 import ItemList from './_components/item-list';
+import useMain from '@/hooks/main/useMain';
 
 function MainPage() {
-  const [isSelected, setIsSelected] = useState<number>(1);
-
-  const handleSelect = (category: number) => {
-    setIsSelected(category);
-  };
+  const { isSelected, handleSelect, accommodationData } = useMain();
 
   return (
     <>
       <CategoryList isSelected={isSelected} handleSelect={handleSelect} />
-      <ItemList />
+      <ItemList data={accommodationData?.data} />
     </>
   );
 }

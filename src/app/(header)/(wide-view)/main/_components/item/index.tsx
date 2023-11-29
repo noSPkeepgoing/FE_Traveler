@@ -25,7 +25,7 @@ function Item({ data }: { data: TAccommodation }) {
     <div className={styles.item} onClick={handleClick}>
       <div className={styles.itemImage}>
         <Image
-          src="https://avatars.githubusercontent.com/u/81469686?v=4"
+          src={accommodation_img}
           alt={`${accommodation_name} 이미지`}
           width={80}
           height={80}
