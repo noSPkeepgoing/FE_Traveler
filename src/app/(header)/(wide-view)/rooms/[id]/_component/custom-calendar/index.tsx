@@ -3,7 +3,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styles from './customCalendar.module.scss';
 import moment, { Moment } from 'moment';
-import { TCustomCalendar, TValue, Value } from './customCalendarType';
+import { TCustomCalendar } from './customCalendarType';
+
 
 function CustomCalendar({
   onChange,
@@ -13,6 +14,7 @@ function CustomCalendar({
 }: TCustomCalendar): ReactElement {
   const [nowDate, setNowDate] = useState<string | null>(type);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isFirst,setIsFirst] = useState(false);
   const handleToggleCalendar = () => {
     setIsOpen(!isOpen);
   };
@@ -33,13 +35,15 @@ function CustomCalendar({
     }
     return date < new Date();
   };
-
   useEffect(() => {
-    if (valueSecond) {
+    console.log(isFirst)
+    if (valueSecond  && isFirst) {
+      console.log('test')
       setNowDate(
         moment(valueSecond as Date | Moment).format('YYYY년 MM월 DD일'),
       );
     }
+    setIsFirst(true);
   }, [value, valueSecond]);
 
   return (
