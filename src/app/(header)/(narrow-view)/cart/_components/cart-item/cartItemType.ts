@@ -1,8 +1,9 @@
-import { TCartItem } from '@/api/cart/cartApiType';
+import { TCartDeleteParams, TCartItem } from '@/api/cart/cartApiType';
 import { THandleSelectItem } from '../../cartType';
 
 export type TCartItemProps = {
   handleSelectItem: (value: THandleSelectItem) => void;
   data: TCartItem;
   isSelected: (id: number) => boolean;
+  handleDeleteCartItems: (params: TCartDeleteParams) => void;
 };

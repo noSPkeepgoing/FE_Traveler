@@ -36,6 +36,7 @@
   &.text {
     &:hover {
       text-decoration: underline;
+      text-decoration-color: black;
     }
   }
   &.disabled {
