@@ -19,7 +19,7 @@ function ReservationItem() {
           />
           <div className={styles.detailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
-              2023.12.04(화) ~ 2023.12.05(수) / 성인 2명
+              2023.12.04(화) ~ 2023.12.05(수) / 2명
             </Text>
             <Text fontSize="xs-3" fontWeight="medium" color="blackAlpha100">
               이용자: 박가현

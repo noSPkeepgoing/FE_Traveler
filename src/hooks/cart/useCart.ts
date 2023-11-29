@@ -16,7 +16,6 @@ function useCart() {
       return data.data.data;
     },
   });
-
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
       alert('상품이 삭제되었습니다.');

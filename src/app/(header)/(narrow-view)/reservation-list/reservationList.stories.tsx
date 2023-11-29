@@ -3,6 +3,8 @@ import Layout from '../layout';
 import ReservationListTitle from './_components/reservation-list-title/page';
 import ReservationItem from './_components/reservation-item/page';
 import styles from './reservationList.module.scss';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { useState } from 'react';
 
 const meta = {
   title: 'reservation-list/ReservationList',
@@ -35,12 +37,27 @@ export const ExampleReservationList: StoryObj = {
     },
   },
   render: () => {
+    const [items, setItems] = useState([0, 1, 2, 3, 4, 5, 6]);
+    const fetchMoreData = () => {
+      // 새로운 데이터를 가져와서 state 업데이트
+      setItems((prev) => [...prev, 0, 1, 2, 3, 4, 5, 6]);
+    };
+
     return (
       <>
         <ReservationListTitle />
-        <section className={styles.reservationItemContainer}>
-          <ReservationItem />
-        </section>
+        <InfiniteScroll
+          dataLength={items.length}
+          scrollThreshold={0.95}
+          next={fetchMoreData}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}>
+          <section className={styles.reservationItemContainer}>
+            {items.map((_, index) => (
+              <ReservationItem key={index} />
+            ))}
+          </section>
+        </InfiniteScroll>
       </>
     );
   },
