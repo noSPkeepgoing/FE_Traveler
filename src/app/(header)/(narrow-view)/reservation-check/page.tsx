@@ -7,6 +7,10 @@ import Input from '@/components/atoms/input/index';
 import Checkbox from '@/components/atoms/checkbox';
 import Text from '@/components/atoms/text';
 import { useRouter } from 'next/navigation';
+import Subtitles from './_components/subtitles';
+import SubtitlesContent from './_components/subtitles-content';
+import checkmark from './checkmark.svg';
+import Image from 'next/image';
 
 const data = [
   {
@@ -21,18 +25,32 @@ function ReservationCheck() {
 
   return (
     <>
-      <main className="main-content">
-        <div className="confirmation-icon">✔</div>
-        <h1 className="confirmation-title">감사합니다</h1>
-        <p className="confirmation-message">주문이 성공적으로 완료되었습니다</p>
+      <main className={styles.mainContent}>
+        <Image src={checkmark} alt="Checkmark" width={100} height={100} />
+        <Text fontSize="xl" fontWeight="semibold" color="primary">
+          감사합니다
+        </Text>
+        <Text fontSize="md" fontWeight="normal" color="primary">
+          주문이 성공적으로 완료되었습니다
+        </Text>
 
-        <div className="order-details">
-          <div className="order-item">상품명 외 1건</div>
-          <div className="order-price">결제 금액 278000원</div>
-          <div className="order-date">결제 날짜 2023.11.21</div>
+        <div className={styles.leftContent}>
+          <Subtitles text="상품명" />
+          <SubtitlesContent text="상품명 외 1건" />
+          <Subtitles text="결제 금액" />
+          <SubtitlesContent text="결제 금액 278000원" />
+          <Subtitles text="결제 날짜" />
+          <SubtitlesContent text="결제 금액 278000원" />
         </div>
 
-        <Button>확인</Button>
+        <Button
+          variant="default"
+          size="xl"
+          onClick={() => router.push('/reservation-check')}>
+          <Text fontSize="xs" fontWeight="normal" color="white">
+            확인
+          </Text>
+        </Button>
       </main>
     </>
   );

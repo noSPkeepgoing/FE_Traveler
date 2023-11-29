@@ -26,6 +26,8 @@
   flex-direction: column;
   margin-top: 1rem;
   width: 100%;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 
   .item {
     margin-bottom: 1rem;
