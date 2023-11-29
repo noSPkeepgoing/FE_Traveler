@@ -3,7 +3,7 @@ import React from 'react';
 import ReservationItem from './_components/reservation-item/page';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './reservationList.module.scss';
-import useReservationList from '@/hooks/reservation-list';
+import useReservationList from '@/hooks/reservation-list/useReservationList';
 import Text from '@/components/atoms/text';
 
 function ReservationList() {
