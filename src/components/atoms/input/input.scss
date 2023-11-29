@@ -1,58 +1,52 @@
 @import '@/styles/_variables.scss';
 
 .input {
-  display: inline-flex;
-  height: 1rem;
-  align-items: flex-start;
-  gap: 0.5rem;
-  flex-shrink: 0;
-  justify-content: center;
-  outline: none;
-  border-radius: 0.5rem;
   height: 3.125rem;
 
-  &.login {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  outline: none;
+
+  &.signRegular {
     width: 23.5rem;
+
     padding: 0 0.75rem;
+
     background-color: white;
     border: 1px solid #ccc;
-
-    &:focus {
-      border-color: black;
-    }
   }
 
-  &.invalid {
-    border-color: $red200 !important;
-  }
+  &.signShort {
+    width: 18.4rem;
 
-  &.signUpShort {
-    width: 22rem;
     padding: 0 0.75rem;
-    background-color: white;
-    border: 1px solid #ccc;
-    color: black;
     margin: 0;
 
-    &:focus {
-      border-color: black;
-    }
+    background-color: white;
+    border: 1px solid #ccc;
+    color: $black;
   }
 
   &.reservation {
-    border: 0.0625rem solid #b1b1b1;
+    width: 25rem;
+
     padding: 0.75rem 2.875rem 0.75rem 1.125rem; //1.125rem은 좌측 아이콘 자리를 위해 짧게 측정한 것
     margin-bottom: 0.625rem;
-    width: 25rem;
-    color: black;
 
-    &:focus {
-      border-color: black;
-      outline: none;
-    }
+    border: 0.0625rem solid #b1b1b1;
+    color: $black;
   }
 
-  .inputStyle {
-    color: gray;
+  &.invalid {
+    border: 1.5px solid $red200;
+  }
+
+  &:focus {
+    border-color: $black;
   }
 }
