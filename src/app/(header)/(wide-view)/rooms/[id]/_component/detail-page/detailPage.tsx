@@ -6,25 +6,10 @@ import styles from './detailPage.module.scss';
 import DetailDescription from '../detail-description/detailDescription';
 import Reservation from '../reservation';
 import { TParams,TProductId } from './paramsType';
-
-async function getProduct(params : TProductId) {
-  const res = await axios.get(
-    `https://api.gamsung.xyz/v1/accommodations/${params}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        cache: 'no-store',
-      },
-    },
-  );
-  return res.data;
-}
+import { ROOMS_API } from '@/api/rooms';
 
 async function DetailPage({ params }: TParams ) {
-  const data = await getProduct(params);
-  console.log(params);
-  // console.log(data);
-
+  const data = await ROOMS_API.getProduct(params);
   return (
     <>
       <div className={styles.title}>

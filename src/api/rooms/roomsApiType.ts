@@ -3,3 +3,5 @@ export type TCheckReservation = {
   endDate: string;
   id: number;
 };
+
+export type TProductId = number;

@@ -47,7 +47,6 @@ function Reservation({ price, params, data }: TReservation) {
   }: TReservationForm) {
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
-    console.log(id);
     const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
     if (res.data.code === 2001) {
       const productData = {
@@ -110,7 +109,6 @@ function Reservation({ price, params, data }: TReservation) {
           variant="default"
           size="md"
           onClick={() => {
-            console.log(data);
             handleClickReservation({
               value,
               valueSecond,
