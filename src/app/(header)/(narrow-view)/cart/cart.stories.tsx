@@ -46,8 +46,8 @@ export const ExampleCart: StoryObj = {
         accommodation_name:
           'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
         address: '서울특별시 강남구 강남대로 364',
-        start_date: new Date(),
-        end_date: new Date(),
+        start_date: '2023-10-12',
+        end_date: '2023-10-12',
         people_number: 2,
         cart_price: 129000,
         accommodation_img:
@@ -60,8 +60,8 @@ export const ExampleCart: StoryObj = {
         accommodation_name:
           'RIHGA Royal Laguna Guam Resort(리가 로얄 라구나 괌 리조트)',
         address: '서울특별시 강남구 강남대로 364',
-        start_date: new Date(),
-        end_date: new Date(),
+        start_date: '2023-10-12',
+        end_date: '2023-10-12',
         people_number: 2,
         cart_price: 129000,
         accommodation_img:
@@ -106,6 +106,8 @@ export const ExampleCart: StoryObj = {
 
     const handleDeleteCartItems = () => {};
 
+    const handleReservation = () => {};
+
     return (
       <>
         <CartTitle />
@@ -126,6 +128,7 @@ export const ExampleCart: StoryObj = {
         <CartFooter
           totalPrice={calculateTotalPrice()}
           selectedItemsLength={selectedItems.length}
+          handleReservation={handleReservation}
         />
       </>
     );
