@@ -1,5 +1,8 @@
 export type TInput = {
-  variant?: 'signUpShort' | 'login' | 'reservation' | 'invalid';
+  variant?: 'signShort' | 'signRegular' | 'reservation';
+  state?: 'invalid' | '';
   type?: 'text' | 'email' | 'password';
+  onChange?: (e: any) => any;
   placeholder?: string;
+  name?: string;
 };
