@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '@styles/_reset.scss';
+import { AppProvider } from '@/appProvider';
 
 export const metadata: Metadata = {
   title: 'Traveler',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }

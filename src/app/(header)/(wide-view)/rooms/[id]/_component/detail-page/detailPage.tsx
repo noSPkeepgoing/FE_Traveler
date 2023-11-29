@@ -5,36 +5,25 @@ import DetailTitle from '../detail-title/detailTitle';
 import styles from './detailPage.module.scss';
 import DetailDescription from '../detail-description/detailDescription';
 import Reservation from '../reservation';
+import { TParams } from './paramsType';
 
-async function getProduct() {
-  // const res = await axios.get('https://api.gamsung.xyz/v1/accomodations/1', {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     cache: 'no-store',
-  //   },
-  // });
-  return ({
-    "code" : 3001,
-    "data" : {
-        "accommodation_name" : "신라 호텔",
-        "description" : "신라 호텔 입니다.",
-        "address" : "상세주소",
-        "limit_people" : 4,
-        "accommodation_price" : 100000,
-      "accommodation_img" : "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&",
-        "room_img" : [
-                "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&",
-                "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&",
-                "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&",
-                "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&",
-                "https://cdn.discordapp.com/attachments/1174993798766546984/1176059765785370624/image.png?ex=656d7e02&is=655b0902&hm=9653d7a75fae6974278eff3ae6ac4e2379b9c62794934460b311af64138048e2&" 
-        ]
-    }
-})
+async function getProduct(params: number) {
+  const res = await axios.get(
+    `https://api.gamsung.xyz/v1/accommodations/${params}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        cache: 'no-store',
+      },
+    },
+  );
+  return res.data;
 }
 
-async function DetailPage() {
-  const data = await getProduct();
+async function DetailPage({ params }: { params: number }) {
+  const data = await getProduct(params);
+  console.log(data);
+  // console.log(data);
 
   return (
     <>
@@ -49,7 +38,7 @@ async function DetailPage() {
           address={data.data.address}
           desc={data.data.description}
         />
-        <Reservation price={data.data.accommodation_price} />
+        <Reservation data={data.data} params={params} price={data.data.accommodation_price} />
       </div>
     </>
   );
