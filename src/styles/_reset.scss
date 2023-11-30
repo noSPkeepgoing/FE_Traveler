@@ -93,6 +93,7 @@ a:-webkit-any-link {
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css');
 
-* {
+*,
+a {
   font-family: 'Pretendard';
 }
