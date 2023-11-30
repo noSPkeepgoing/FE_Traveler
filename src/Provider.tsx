@@ -22,7 +22,9 @@ export const Provider = ({ children }: { children: ReactNode }) => {
 
   if (!refreshToken && pathArray.includes(pathName)) {
     // 리프레시 토큰 X (로그인 안했을때)
-    return router.push('/sign-in');
+
+    router.push('/sign-in');
+    return <></>;
   }
 
   const [queryClient] = useState(
@@ -61,7 +63,7 @@ export const Provider = ({ children }: { children: ReactNode }) => {
               <Text fontSize="xs-2" fontWeight="semibold">
                 모바일 서비스 준비중입니다.
               </Text>
-              <Text fontSize="xs-2">웹페이지로 다시 접속해주세요!</Text>
+              <Text fontSize="xs-2">PC환경으로 다시 접속해주세요!</Text>
             </div>
           </div>
         ) : (
