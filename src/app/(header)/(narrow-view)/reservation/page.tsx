@@ -44,8 +44,9 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
-    console.log(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) return false;
+    if (!emailRegex.test(email)) return;
     return true;
   };
 
@@ -100,7 +101,6 @@ function Reservation() {
   const reservation = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
     const name = data.get('name') as string;
     const email = data.get('email') as string;
     if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
@@ -108,7 +108,6 @@ function Reservation() {
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
-    console.log(getParams(name, email));
     postReservation(getParams(name, email));
   };
 
@@ -152,7 +151,7 @@ function Reservation() {
                   </div>
                   <div className={styles.priceInfo}>
                     <Text fontSize="md" fontWeight="medium">
-                      {`${item.accommodation_price}원`}
+                      {`${item.accommodation_price.toLocaleString()}원`}
                     </Text>
                     <Text fontSize="xs-3" fontWeight="normal" color="red200">
                       취소 및 환불 불가
@@ -215,8 +214,8 @@ function Reservation() {
                   <Input
                     variant="reservation"
                     placeholder="abc@naver.com"
-                    id="name"
-                    name="name"
+                    id="email"
+                    name="email"
                   />
                 </div>
               </div>
@@ -233,7 +232,7 @@ function Reservation() {
                 총 결제 금액
               </Text>
               <Text fontSize="sm" fontWeight="medium" color="highlight">
-                {`${calculateTotalPrice()}원`}
+                {`${calculateTotalPrice().toLocaleString()}원`}
               </Text>
             </div>
           </div>
