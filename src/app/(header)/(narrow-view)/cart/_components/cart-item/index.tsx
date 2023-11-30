@@ -52,7 +52,7 @@ function CartItem({
         </Button>
         <div>
           <Text fontSize="md" fontWeight="bold">
-            {`${data.cart_price}원`}
+            {`${data.cart_price.toLocaleString()}원`}
           </Text>
           <Text fontSize="xs-3" fontWeight="light" color="red200">
             결제 시 환불 불가
