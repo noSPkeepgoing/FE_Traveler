@@ -1,5 +1,4 @@
 'use client';
-
 import Button from '@/components/atoms/button/index';
 import styles from './reservation.module.scss';
 import Input from '@/components/atoms/input/index';
@@ -15,12 +14,12 @@ import { successProductsState } from '@/recoil/successProducts';
 
 function Reservation() {
   const products = useRecoilValue(productState);
-  const userEmail = sessionStorage && sessionStorage.getItem('userEmail');
-  const userName = sessionStorage && sessionStorage.getItem('userName');
+  const userEmail = typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : '';
+  const userName = typeof window !== 'undefined' ? sessionStorage.getItem('userName') : '';
   const setSuccessProducts = useSetRecoilState(successProductsState);
-  const router = useRouter();
-  if (products.length === 0) {
+  if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
+    const router = useRouter();
     router.push('/main');
   }
 
@@ -67,7 +66,11 @@ function Reservation() {
       total_price: calculateTotalPrice(),
     };
     setSuccessProducts(successProducts);
-    router.push('/reservation-check');
+    if (typeof window !== 'undefined'){
+      const router = useRouter();
+      router.push('/reservation-check');
+    }
+    
   };
 
   const getParams = (name: string, email: string) => {

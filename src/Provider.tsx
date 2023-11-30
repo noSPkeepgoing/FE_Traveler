@@ -9,9 +9,9 @@ import Text from './components/atoms/text';
 import { usePathname, useRouter } from 'next/navigation';
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  const pathName = usePathname();
+  if (typeof window !== 'undefined'){
+    const pathName = usePathname();
   const router = useRouter();
-
   const refreshToken = sessionStorage.getItem('refreshToken');
   const pathArray = [
     '/cart',
@@ -26,6 +26,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     router.push('/sign-in');
     return <></>;
   }
+  }
+  
 
   const [queryClient] = useState(
     () =>

@@ -87,7 +87,7 @@ function SignInForm() {
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNIN_SUCCESS:
-          window.location.href = '/main';
+          // window.location.href = '/main';
           router.push('/main');
           break;
       }

@@ -16,10 +16,10 @@ import { useRouter } from 'next/navigation';
 function ReservationCheck() {
   const successProduct = useRecoilValue(successProductsState);
   const isReserved = !(successProduct.total_accommodation_num === 0);
-  const router = useRouter();
 
-  if (!isReserved) {
+  if (!isReserved && typeof window !== 'undefined') {
     Swal.fire('상품이 존재하지 않습니다');
+    const router = useRouter();
     router.push('/main');
   }
   const accommodation_name =
