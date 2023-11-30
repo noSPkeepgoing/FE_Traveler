@@ -5,13 +5,14 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './reservationList.module.scss';
 import useReservationList from '@/hooks/reservation-list/useReservationList';
 import Text from '@/components/atoms/text';
+import Loader from '@/components/layouts/loader';
 
 function ReservationList() {
   const { reservationItems, fetchNextPage, hasNextPage, isError, isLoading } =
     useReservationList();
 
   if (isLoading) {
-    return <div>로딩 중</div>;
+    return <Loader />;
   }
 
   if (isError) {

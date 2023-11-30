@@ -12,15 +12,23 @@ import { usePostReservation } from '@/queries/reservation/useReservation';
 import { TReservationItems } from '@/api/reservation/reservationApiType';
 import { successProductsState } from '@/recoil/successProducts';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 function Reservation() {
   const router = useRouter();
 
   const products = useRecoilValue(productState);
-  const userEmail =
-    typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : '';
-  const userName =
-    typeof window !== 'undefined' ? sessionStorage.getItem('userName') : '';
+  const [userEmail,setUserEmail] = useState('');
+  const [userName,setUserName] = useState('');
+
+  useEffect(()=>{
+    const userEmail = sessionStorage.getItem('userEmail');
+    const userName = sessionStorage.getItem('userName');
+    if (userEmail !== null && userName !== null) {
+      setUserEmail(userEmail);
+      setUserName(userName);
+    }
+  },[])
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');

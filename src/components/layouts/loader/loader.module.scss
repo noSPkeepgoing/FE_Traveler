@@ -1,0 +1,27 @@
+@import '@styles/_variables.scss';
+
+.loader {
+  display: flex;
+  justify-content: center;
+
+  padding: 3rem;
+  height: 100%;
+  .spinner {
+    $size: 4rem;
+    border: 1rem solid $gray;
+    border-top: 16px solid $highlight;
+    border-radius: 50%;
+    width: $size;
+    height: $size;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
