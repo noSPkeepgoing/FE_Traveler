@@ -1,6 +1,7 @@
 import { HTTP_BASE_URL } from '@/constants/api';
 import axios from 'axios';
 import { TOKEN_API } from './refresh-token';
+import { useRouter } from 'next/navigation';
 
 const isServer = typeof window === 'undefined';
 let headers;
@@ -40,11 +41,15 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    console.log('응답인터셉터 에러');
-    console.log(error.response.status);
+
     // 여기서는 토큰 만료 상태를 확인하여 재발급 로직을 처리.
     if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
+
+      if (!sessionStorage.getItem('refreshToken')) {
+        alert('로그인이 필요한 서비스입니다!');
+        window.location.href = '/sign-in';
+      }
 
       try {
         console.log('123123');
@@ -74,6 +79,7 @@ instance.interceptors.response.use(
         return Promise.reject(refreshError);
       }
     }
+
     return Promise.reject(error);
   },
 );
