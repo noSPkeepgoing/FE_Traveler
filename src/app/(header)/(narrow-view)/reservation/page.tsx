@@ -191,9 +191,9 @@ function Reservation() {
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     예약자
                   </Text>
-                  {/* <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     {userName}
-                  </Text> */}
+                  </Text>
                 </div>
                 <div className={styles.booker}>이메일</div>
                 <div>{userEmail}</div>
