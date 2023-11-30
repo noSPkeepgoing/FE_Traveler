@@ -1,12 +1,23 @@
 import { MAIN_API } from '@/api/main';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const useGetAccommodations = (category: number) => {
-  return useQuery(
+  return useInfiniteQuery(
     ['getAccommodations'],
-    () => MAIN_API.getAccommodations(category),
+    ({ pageParam = 1 }) => MAIN_API.getAccommodations(category, pageParam),
     {
-      select: (data) => data.data,
+      getNextPageParam: ({
+        data: {
+          data: { page_number, total_page },
+        },
+      }) => {
+        const nextPage = page_number + 1;
+        return total_page > page_number ? nextPage : undefined;
+      },
+      select: (data) => ({
+        pages: data.pages.flatMap((page) => page.data),
+        pageParams: data.pageParams,
+      }),
     },
   );
 };

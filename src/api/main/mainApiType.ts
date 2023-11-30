@@ -9,5 +9,5 @@ export type TAccommodation = {
 export type TMainListData = {
   accommodations: TAccommodation[];
   page_number: number;
-  total_number: number;
+  total_page: number;
 };
