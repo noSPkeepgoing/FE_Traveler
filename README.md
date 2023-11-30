@@ -1,4 +1,4 @@
-# Traveler 트래블러
+# 여행자의 동반자, Traveler
 
 ### <p align="center">여행을 떠나신다고요? `Traveler`를 통해서 숙소를 예약해보세요!</p>
 
