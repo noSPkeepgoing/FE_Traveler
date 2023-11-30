@@ -41,16 +41,18 @@ function ReservationCheck() {
         <Text fontSize="md" fontWeight="normal" color="primary">
           주문이 성공적으로 완료되었습니다
         </Text>
+      </main>
 
-        <div className={styles.leftContent}>
-          <Subtitles text="상품명" />
-          <SubtitlesContent text={accommodation_name} />
-          <Subtitles text="결제 금액" />
-          <SubtitlesContent text={`${successProduct.total_price}원`} />
-          <Subtitles text="결제 날짜" />
-          <SubtitlesContent text={order_date} />
-        </div>
+      <div className={styles.leftContent}>
+        <Subtitles text="상품명" />
+        <SubtitlesContent text={accommodation_name} />
+        <Subtitles text="결제 금액" />
+        <SubtitlesContent text={`${successProduct.total_price}원`} />
+        <Subtitles text="결제 날짜" />
+        <SubtitlesContent text={order_date} />
+      </div>
 
+      <main className={styles.mainContent}>
         <Button variant="default" size="xl" href="/">
           <Text fontSize="xs" fontWeight="normal" color="white">
             확인
