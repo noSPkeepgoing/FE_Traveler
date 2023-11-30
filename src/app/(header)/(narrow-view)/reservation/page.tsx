@@ -44,7 +44,6 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
-    console.log(email);
     if (!email) return false;
     return true;
   };
@@ -107,7 +106,6 @@ function Reservation() {
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
-    console.log(getParams(name, email));
     postReservation(getParams(name, email));
   };
 
