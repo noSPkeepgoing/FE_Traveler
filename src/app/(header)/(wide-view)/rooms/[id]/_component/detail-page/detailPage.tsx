@@ -10,13 +10,15 @@ import { ROOMS_API } from '@/api/rooms';
 
 async function DetailPage({ params }: TParams ) {
   const data = await ROOMS_API.getProduct(params);
+  const productImg = data.data.room_img;
+  productImg.push(data.data.accommodation_img);
   return (
     <>
       <div className={styles.title}>
         <DetailTitle title={data.data.accommodation_name} />
       </div>
       <div className={styles.carousel}>
-        <Carousel imgs={data.data.room_img} />
+        <Carousel imgs={productImg} />
       </div>
       <div className={styles.content}>
         <DetailDescription
