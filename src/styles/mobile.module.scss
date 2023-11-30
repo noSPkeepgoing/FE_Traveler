@@ -1,12 +1,12 @@
 @use '@/styles/_variables.scss' as *;
 
-.moblie {
+.mobile {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &__text {
+  &text {
     padding: 2rem 1rem;
     background-color: $gray;
     border-radius: 1rem;
