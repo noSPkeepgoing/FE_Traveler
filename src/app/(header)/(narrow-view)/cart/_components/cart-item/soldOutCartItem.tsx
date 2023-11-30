@@ -37,7 +37,7 @@ function SoldOutCartItem({
         <Button
           variant="text"
           onClick={() => {
-            handleDeleteCartItems({ cart_id: [data.cart_id] });
+            handleDeleteCartItems({ delete_id: [data.cart_id] });
           }}>
           <VscChromeClose size="16" />
         </Button>
