@@ -15,6 +15,7 @@ import Image from 'next/image';
 
 function Reservation() {
   const products = useRecoilValue(productState);
+
   const userEmail =
     typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : '';
   const userName =
@@ -59,12 +60,11 @@ function Reservation() {
     },
     onError(error) {
       let message = '상품 결제에 실패했습니다';
-      // Assuming error object contains a 'code' property
-      // if (error.code === 1) {
+      if (error.response?.data?[code] === 2004) {
       //   message = 'Error message for code 1';
       // } else if (error.code === 2) {
       //   message = 'Error message for code 2';
-      // }
+      }
       // Swal.fire(message);
       console.log(error);
       Swal.fire('상품 결제에 실패했습니다');
@@ -163,13 +163,8 @@ function Reservation() {
                     </Text>
                   </div>
                 </div>
-                // <ReservationItem key={index} item={item} />
               ))}
             </section>
-
-            {/* {products.map((product, index) => {
-              return <div key={index}>{product.accommodation_name}</div>;
-            })} */}
           </div>
 
           <div className={styles.parts}>
@@ -183,12 +178,18 @@ function Reservation() {
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     예약자
                   </Text>
-                  {/* <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                  <Text fontSize="sm" fontWeight="normal" color="primary">
                     {userName}
-                  </Text> */}
+                  </Text>
                 </div>
-                <div className={styles.booker}>이메일</div>
-                <div>{userEmail}</div>
+                <div className={styles.sameLine}>
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    이메일
+                  </Text>
+                  <Text fontSize="sm" fontWeight="normal" color="primary">
+                    {userEmail}
+                  </Text>
+                </div>
               </div>
             </div>
           </div>
@@ -211,7 +212,6 @@ function Reservation() {
                     name="name"
                   />
                 </div>
-
                 <div className={styles.sameLine}>
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     이메일
@@ -219,8 +219,8 @@ function Reservation() {
                   <Input
                     variant="reservation"
                     placeholder="abc@naver.com"
-                    id="email"
-                    name="email"
+                    id="name"
+                    name="name"
                   />
                 </div>
               </div>

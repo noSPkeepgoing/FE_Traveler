@@ -33,5 +33,5 @@ export type TText = {
     | 'blackAlpha200'
     | 'white';
   textDecoration?: 'line-through' | 'none';
-  children: string | number;
+  children: string | number | null;
 };
