@@ -9,3 +9,9 @@ export type TProduct = {
   people_number: number;
   cart_id: number;
 };
+
+export type TSuccessProduct = {
+  representative_accommodation_name: string;
+  total_price: number;
+  total_accommodation_num: number;
+};
