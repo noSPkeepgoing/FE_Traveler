@@ -47,9 +47,7 @@ function Reservation() {
   ) => {
     event.preventDefault();
   };
-  console.log(cartData);
 
-  console.log('Asdfs');
   const first_item_name = () => {
     return 0;
   };

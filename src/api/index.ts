@@ -46,23 +46,18 @@ instance.interceptors.response.use(
     if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      if (!sessionStorage.getItem('refreshToken')) {
-        // alert('로그인이 필요한 서비스입니다!');
-        // window.location.href = '/sign-in';
-      }
+      // if (!sessionStorage.getItem('refreshToken')) {
+      //   alert('로그인이 필요한 서비스입니다!');
+      //   return;
+      // }
 
       try {
         // 토큰 재발급 함수 호출
         const newToken = await TOKEN_API.tokenRefresh();
-        console.log('newToken');
         // 토큰 재발급 성공 시 세션 스토리지에 새로운 토큰 저장
-        // sessionStorage.setItem('accessToken', newToken.data.data.accessToken);
+        sessionStorage.setItem('accessToken', newToken.data.data.accessToken);
 
         // 기존 refreshToken값
-        console.log(
-          '기존 refreshToken: ',
-          sessionStorage.getItem('refreshToken'),
-        );
 
         // 이전 요청에 새로운 토큰을 적용하여 재시도
         // originalRequest.headers.Authorization = `Bearer ${newToken.data.data.accessToken}`;

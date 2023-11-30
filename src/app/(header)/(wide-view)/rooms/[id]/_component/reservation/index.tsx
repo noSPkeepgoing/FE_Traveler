@@ -66,7 +66,6 @@ function Reservation({ price, params, data }: TReservation) {
     };
     try {
       const res = await ROOMS_API.addCart(productData);
-      console.log(res)
       setModalType(4001);
       if (!modalOpen) {
         setModalOpen((prev) => !prev);
@@ -140,13 +139,12 @@ function Reservation({ price, params, data }: TReservation) {
   }, [calculatedDay]);
 
   useEffect(() => {
-    if (value > valueSecond){
+    if (value > valueSecond) {
       const nextDate = new Date(value);
-      nextDate.setDate(nextDate.getDate()+1);
+      nextDate.setDate(nextDate.getDate() + 1);
       onChangeSecond(nextDate);
-      
     }
-    },[value,valueSecond]);
+  }, [value, valueSecond]);
 
   return (
     <div className={styles.Reservation}>
