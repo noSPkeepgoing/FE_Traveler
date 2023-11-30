@@ -5,6 +5,7 @@ import CartFooter from './_components/cart-footer';
 import useCart from '@/hooks/cart/useCart';
 import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
+import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
 
 function Cart() {
   const {
@@ -42,15 +43,22 @@ function Cart() {
         isAllSelected={isAllSelected}
         handleDeleteCartItems={handleDeleteCartItems}
         selectedItems={selectedItems}>
-        {cartData?.map((item) => (
-          <CartItem
-            key={item.cart_id}
-            data={item}
-            handleDeleteCartItems={handleDeleteCartItems}
-            handleSelectItem={handleSelectItem}
-            isSelected={isSelected}
-          />
-        ))}
+        {cartData?.map((item) =>
+          item.accommodation_sold_out ? (
+            <SoldOutCartItem
+              data={item}
+              handleDeleteCartItems={handleDeleteCartItems}
+            />
+          ) : (
+            <CartItem
+              key={item.cart_id}
+              data={item}
+              handleDeleteCartItems={handleDeleteCartItems}
+              handleSelectItem={handleSelectItem}
+              isSelected={isSelected}
+            />
+          ),
+        )}
       </CartGroup>
       <CartFooter
         totalPrice={calculateTotalPrice()}
