@@ -1,3 +1,7 @@
-export default function Home() {
-  return <div></div>;
+import { redirect } from 'next/navigation';
+
+function Page() {
+  return redirect('/main');
 }
+
+export default Page;

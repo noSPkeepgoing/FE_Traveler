@@ -1,0 +1,48 @@
+.form {
+  width: 25rem;
+  height: 30rem;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .info {
+    margin-bottom: 1rem;
+  }
+
+  .inputBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: start;
+
+    margin-bottom: 0.35rem;
+
+    .labelArea {
+      display: inline-block;
+      margin-left: 10px;
+      min-height: 1rem;
+    }
+    .inputContainer {
+      display: flex;
+      align-items: center;
+
+      button {
+        margin-left: 0.5rem;
+      }
+      .labelArea {
+        display: inline-block;
+        margin-left: 10px;
+        min-height: 1rem;
+      }
+    }
+  }
+  .confirm {
+    margin-bottom: 1.5rem;
+  }
+  .signInBtn {
+    margin-top: 0.5rem;
+  }
+}
