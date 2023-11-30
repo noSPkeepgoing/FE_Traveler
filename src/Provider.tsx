@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import { useMediaQuery } from 'react-responsive';
+import styles from '@/styles/mobile.module.scss';
+import Text from './components/atoms/text';
 
 export const Provider = ({ children }: { children: ReactNode }) => {
   const [queryClient] = useState(
@@ -36,7 +38,18 @@ export const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        {mobile ? <div>모바일 반응형은 아직 지원하지 않습니다</div> : children}
+        {mobile ? (
+          <div className={styles.moblie}>
+            <div className={styles.moblie__text}>
+              <Text fontSize="xs-2" fontWeight="semibold">
+                모바일 서비스 준비중입니다.
+              </Text>
+              <Text fontSize="xs-2">웹페이지로 다시 접속해주세요!</Text>
+            </div>
+          </div>
+        ) : (
+          children
+        )}
       </RecoilRoot>
       <ReactQueryDevtools />
     </QueryClientProvider>
