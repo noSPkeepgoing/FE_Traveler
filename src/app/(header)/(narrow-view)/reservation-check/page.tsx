@@ -20,7 +20,7 @@ function ReservationCheck() {
   if (!isReserved && typeof window !== 'undefined') {
     Swal.fire('상품이 존재하지 않습니다');
     const router = useRouter();
-    //router.push('/main');
+    router.push('/main');
   }
   const accommodation_name =
     successProduct.total_accommodation_num > 1
