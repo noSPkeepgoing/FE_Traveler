@@ -5,3 +5,9 @@ export type TAccommodation = {
   accommodation_price: number;
   accommodation_img: string;
 };
+
+export type TMainListData = {
+  accommodations: TAccommodation[];
+  page_number: number;
+  total_page: number;
+};

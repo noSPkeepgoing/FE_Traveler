@@ -2,13 +2,14 @@ import styles from './cartModal.module.scss';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Text from '@/components/atoms/text';
+import { TCartModal } from './cartModalType';
 
-function CartModal() {
+function CartModal({type} : TCartModal ) {
   const router = useRouter();
   function handlePath(type: string): void {
     router.push(`/${type}`);
   }
-  if (false) {
+  if (type === 5000 || type === 5001 || type === 403) {
     return (
       <div className={styles.modal}>
         <p
@@ -21,7 +22,7 @@ function CartModal() {
       </div>
     );
   }
-  if (true) {
+  else if  (type === 4002) {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">
@@ -37,7 +38,7 @@ function CartModal() {
       </div>
     );
   }
-  if (false) {
+  else if (type === 4001) {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">
@@ -53,21 +54,22 @@ function CartModal() {
       </div>
     );
   }
-
-  return (
-    <div className={styles.modal}>
-      <Text color="white" fontSize="xs-3">
-        장바구니 에러
-      </Text>
-      <p
-        className={styles.modalDesc}
-        onClick={() => {
-          handlePath('cart');
-        }}>
-        장바구니로 가기
-      </p>
-    </div>
-  );
+  else {
+    return (
+      <div className={styles.modal}>
+        <Text color="white" fontSize="xs-3">
+          장바구니 에러
+        </Text>
+        <p
+          className={styles.modalDesc}
+          onClick={() => {
+            handlePath('cart');
+          }}>
+          장바구니로 가기
+        </p>
+      </div>
+    );
+  }
 }
 
 export default CartModal;
