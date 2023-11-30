@@ -1,8 +1,8 @@
 import { instance } from '..';
 import { Response } from '../type';
-import { TReservation } from './reservationApiType';
+import { TReservationItems } from './reservationApiType';
 
 export const RESERVATION_API = {
-  postReservation: (userData: TReservation) =>
-    instance.post<Response<TReservation[]>>('v1/order', userData),
+  postReservation: (params: TReservationItems) =>
+    instance.post<Response>('v1/order', params),
 };

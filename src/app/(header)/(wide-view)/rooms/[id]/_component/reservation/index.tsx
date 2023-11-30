@@ -98,9 +98,9 @@ function Reservation({ price, params, data }: TReservation) {
   }: TReservationForm) {
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
-      // alert('로그인 후 진행하실 수 있습니다.');
-      // router.push('/sign-in');
-      // return;
+      alert('로그인 후 진행하실 수 있습니다.');
+      router.push('/sign-in');
+      return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
     const endDate = moment(valueSecond).format('YYYY-MM-DD');
@@ -139,7 +139,7 @@ function Reservation({ price, params, data }: TReservation) {
   }, [calculatedDay]);
 
   useEffect(() => {
-    if (value > valueSecond) {
+    if (value >= valueSecond) {
       const nextDate = new Date(value);
       nextDate.setDate(nextDate.getDate() + 1);
       onChangeSecond(nextDate);

@@ -5,4 +5,5 @@ export type TInput = {
   onChange?: (e: any) => any;
   placeholder?: string;
   name?: string;
+  id?: string;
 };
