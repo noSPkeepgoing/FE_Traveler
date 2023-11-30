@@ -15,22 +15,23 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 function Reservation() {
-  const products = useRecoilValue(productState);
-  const [userEmail,setUserEmail] = useState('');
-  const [userName,setUserName] = useState('');
+  const router = useRouter();
 
-  useEffect(()=>{
+  const products = useRecoilValue(productState);
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
     const userEmail = sessionStorage.getItem('userEmail');
     const userName = sessionStorage.getItem('userName');
     if (userEmail !== null && userName !== null) {
       setUserEmail(userEmail);
       setUserName(userName);
     }
-  },[])
+  }, []);
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
-    const router = useRouter();
     router.push('/main');
   }
 
@@ -43,10 +44,8 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
+    console.log(email);
     if (!email) return false;
-    const regex =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-    if (regex.test(email)) return false;
     return true;
   };
 
@@ -66,15 +65,6 @@ function Reservation() {
       setOrderedItems();
     },
     onError(error) {
-      let message = '상품 결제에 실패했습니다';
-      // Assuming error object contains a 'code' property
-      // if (error.code === 1) {
-      //   message = 'Error message for code 1';
-      // } else if (error.code === 2) {
-      //   message = 'Error message for code 2';
-      // }
-      // Swal.fire(message);
-      console.log(error);
       Swal.fire('상품 결제에 실패했습니다');
     },
   });
@@ -87,7 +77,6 @@ function Reservation() {
     };
     setSuccessProducts(successProducts);
     if (typeof window !== 'undefined') {
-      const router = useRouter();
       router.push('/reservation-check');
     }
   };
@@ -114,13 +103,12 @@ function Reservation() {
 
     const name = data.get('name') as string;
     const email = data.get('email') as string;
-
     if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
-    if (checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
+    if (!checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
-
+    console.log(getParams(name, email));
     postReservation(getParams(name, email));
   };
 
@@ -171,13 +159,8 @@ function Reservation() {
                     </Text>
                   </div>
                 </div>
-                // <ReservationItem key={index} item={item} />
               ))}
             </section>
-
-            {/* {products.map((product, index) => {
-              return <div key={index}>{product.accommodation_name}</div>;
-            })} */}
           </div>
 
           <div className={styles.parts}>
@@ -191,12 +174,24 @@ function Reservation() {
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     예약자
                   </Text>
+<<<<<<< HEAD
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     {userName}
                   </Text>
+=======
+                  <Text fontSize="sm" fontWeight="normal" color="primary">
+                    {userName}
+                  </Text>
                 </div>
-                <div className={styles.booker}>이메일</div>
-                <div>{userEmail}</div>
+                <div className={styles.sameLine}>
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    이메일
+                  </Text>
+                  <Text fontSize="sm" fontWeight="normal" color="primary">
+                    {userEmail}
+                  </Text>
+>>>>>>> ad24e935213cf79be6ae2ad70c2dd1245dbc6a29
+                </div>
               </div>
             </div>
           </div>
@@ -219,7 +214,6 @@ function Reservation() {
                     name="name"
                   />
                 </div>
-
                 <div className={styles.sameLine}>
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     이메일
@@ -227,8 +221,8 @@ function Reservation() {
                   <Input
                     variant="reservation"
                     placeholder="abc@naver.com"
-                    id="email"
-                    name="email"
+                    id="name"
+                    name="name"
                   />
                 </div>
               </div>

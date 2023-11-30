@@ -59,8 +59,8 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         {mobile ? (
-          <div className={styles.moblie}>
-            <div className={styles.moblie__text}>
+          <div className={styles.mobile}>
+            <div className={styles.mobileText}>
               <Text fontSize="xs-2" fontWeight="semibold">
                 모바일 서비스 준비중입니다.
               </Text>
