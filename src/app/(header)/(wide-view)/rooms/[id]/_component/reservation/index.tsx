@@ -154,12 +154,10 @@ function Reservation({ price, params, data }: TReservation) {
     }
   }, [value, valueSecond]);
   useEffect(() => {
-    console.log('22');
     window.addEventListener('click', () => {
       setModalOpen(false);
     });
     return ()=>{
-      console.log(window)
       window.removeEventListener('click', () => {
         setModalOpen(false);
       });
