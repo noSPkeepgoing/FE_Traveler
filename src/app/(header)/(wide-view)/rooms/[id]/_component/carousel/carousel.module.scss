@@ -1,0 +1,29 @@
+.carousel {
+  position: relative;
+  width: 67.5rem;
+  height: 29rem;
+  
+}
+.prevButton,
+.nextButton {
+  font-size: 3rem;
+}
+.prevButton {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+}
+.nextButton {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}
+
+.carouselImage {
+    width : 100%;
+    max-height: 460px;
+    border-radius: 0.75rem;
+    object-fit: contain;
+}

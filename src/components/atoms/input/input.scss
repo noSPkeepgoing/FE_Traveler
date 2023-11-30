@@ -1,0 +1,54 @@
+@import '@/styles/_variables.scss';
+
+.input {
+  height: 3.125rem;
+
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
+
+  border-radius: 0.5rem;
+  outline: none;
+
+  &.signRegular {
+    width: 23.5rem;
+
+    padding: 0 0.75rem;
+
+    background-color: white;
+    border: 1px solid $gray400;
+  }
+
+  &.signShort {
+    width: 18.4rem;
+
+    padding: 0 0.75rem;
+    margin: 0;
+
+    background-color: white;
+    border: 1px solid $gray400;
+    color: $black;
+  }
+
+  &.reservation {
+    padding: 0.75rem 2.875rem 0.75rem 1.125rem; //1.125rem은 좌측 아이콘 자리를 위해 짧게 측정한 것
+    width: 32rem;
+    height: 0.7rem;
+    border-radius: 0.2rem;
+    color: black;
+    gap: 0;
+
+    border: 0.0625rem solid $gray400;
+    color: $black;
+  }
+
+  &.invalid {
+    border: 1.5px solid $red200;
+  }
+
+  &:focus {
+    border-color: $black;
+  }
+}
