@@ -11,9 +11,7 @@ if (!isServer) {
 
 export const instance = axios.create({
   baseURL: HTTP_BASE_URL,
-
-  /* 현재 header 부분  401 이슈때문에 주석처리한 상태입니다! */
-  // headers: headers,
+  headers: headers,
 });
 
 // 요청 인터셉터 설정
@@ -42,25 +40,33 @@ instance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-
+    console.log('응답인터셉터 에러');
+    console.log(error.response.status);
     // 여기서는 토큰 만료 상태를 확인하여 재발급 로직을 처리.
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
+        console.log('123123');
         // 토큰 재발급 함수 호출
         const newToken = await TOKEN_API.tokenRefresh();
-
         // 토큰 재발급 성공 시 세션 스토리지에 새로운 토큰 저장
         sessionStorage.setItem('accessToken', newToken.data.data.accessToken);
 
+        // 기존 refreshToken값
+        console.log(
+          '기존 refreshToken: ',
+          sessionStorage.getItem('refreshToken'),
+        );
+
         /* 리프레시 토큰이 같이 딸려 오는 상황인데.. 이게 과연 필요할까요..??? */
-        // sessionStorage.setItem('accessToken', newToken.data.data.refreshToken);
+        sessionStorage.setItem('refreshToken', newToken.data.data.refreshToken);
+
+        // 새로 받은 refreshToken값
+        console.log('새로운 refreshToken: ', newToken.data.data.refreshToken);
 
         // 이전 요청에 새로운 토큰을 적용하여 재시도
-        originalRequest.headers.Authorization = `
-        Bearer ${newToken.data.data.accessToken}
-        `;
+        originalRequest.headers.Authorization = `Bearer ${newToken.data.data.accessToken}`;
 
         return axios(originalRequest);
       } catch (refreshError) {
