@@ -47,7 +47,7 @@ function ReservationCheck() {
         <Subtitles text="상품명" />
         <SubtitlesContent text={accommodation_name} />
         <Subtitles text="결제 금액" />
-        <SubtitlesContent text={`${successProduct.total_price}원`} />
+        <SubtitlesContent text={`${successProduct.total_price.toLocaleString()}원`} />
         <Subtitles text="결제 날짜" />
         <SubtitlesContent text={order_date} />
       </div>
