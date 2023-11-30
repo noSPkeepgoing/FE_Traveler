@@ -44,8 +44,9 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
-    console.log(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 유효성 검사용 정규식
     if (!email) return false;
+    if (!emailRegex.test(email)) return;
     return true;
   };
 
