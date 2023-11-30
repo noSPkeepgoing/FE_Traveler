@@ -5,7 +5,7 @@ import styles from './item.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { TAccommodation } from './itemType';
+import { TAccommodation } from '@/api/main/mainApiType';
 
 function Item({ data }: { data: TAccommodation }) {
   const router = useRouter();

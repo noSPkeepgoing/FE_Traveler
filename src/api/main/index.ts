@@ -1,12 +1,14 @@
-import { TAccommodation } from '@/app/(header)/(wide-view)/main/_components/item/itemType';
 import { instance } from '..';
 import { Response } from '../type';
+import { TMainListData } from './mainApiType';
 
 export const MAIN_API = {
-  getAccommodations: (category: number) =>
-    instance.get<Response<TAccommodation[]>>('/v1/accommodations', {
+  getAccommodations: (category: number, page?: number) =>
+    instance.get<Response<TMainListData>>('/v1/accommodations', {
       params: {
         location: category,
+        size: 12,
+        page: page,
       },
     }),
 };
