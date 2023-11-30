@@ -13,7 +13,7 @@ export const useGetCartItems = (
   options?: UseQueryOptions<
     AxiosResponse<Response<TCartItem[]>>,
     AxiosError,
-    TCartItem[] // select를 사용해서 return된 데이터 ( 사용될 데이터) 타입을 의미
+    TCartItem[]
   >,
 ) => {
   return useQuery<
@@ -27,7 +27,7 @@ export const useDeleteCartItems = (
   options?: UseMutationOptions<
     AxiosResponse<Response>,
     AxiosError,
-    TCartDeleteParams // 우리는 TCartDeleteParams 데이터 타입을 전달할 거라는 의미
+    TCartDeleteParams
   >,
 ) => {
   return useMutation<AxiosResponse<Response>, AxiosError, TCartDeleteParams>(
