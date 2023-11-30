@@ -158,16 +158,6 @@ function Reservation({ price, params, data }: TReservation) {
       onChangeSecond(nextDate);
     }
   }, [value, valueSecond]);
-  useEffect(() => {
-    window.addEventListener('click', () => {
-      setModalOpen(false);
-    });
-    return ()=>{
-      window.removeEventListener('click', () => {
-        setModalOpen(false);
-      });
-    }
-  }, []);
 
   return (
     <div className={styles.Reservation}>
