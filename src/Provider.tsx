@@ -9,25 +9,24 @@ import Text from './components/atoms/text';
 import { usePathname, useRouter } from 'next/navigation';
 
 export const Provider = ({ children }: { children: ReactNode }) => {
-  if (typeof window !== 'undefined'){
+  if (typeof window !== 'undefined') {
     const pathName = usePathname();
-  const router = useRouter();
-  const refreshToken = sessionStorage.getItem('refreshToken');
-  const pathArray = [
-    '/cart',
-    '/reservation',
-    '/reservation-check',
-    '/reservation-list',
-  ];
+    const router = useRouter();
+    const refreshToken = sessionStorage.getItem('refreshToken');
+    const pathArray = [
+      '/cart',
+      '/reservation',
+      '/reservation-check',
+      '/reservation-list',
+    ];
 
-  if (!refreshToken && pathArray.includes(pathName)) {
-    // 리프레시 토큰 X (로그인 안했을때)
+    if (!refreshToken && pathArray.includes(pathName)) {
+      // 리프레시 토큰 X (로그인 안했을때)
 
-    router.push('/sign-in');
-    return <></>;
+      router.push('/sign-in');
+      return <></>;
+    }
   }
-  }
-  
 
   const [queryClient] = useState(
     () =>

@@ -11,11 +11,14 @@ import Swal from 'sweetalert2';
 import { usePostReservation } from '@/queries/reservation/useReservation';
 import { TReservationItems } from '@/api/reservation/reservationApiType';
 import { successProductsState } from '@/recoil/successProducts';
+import Image from 'next/image';
 
 function Reservation() {
   const products = useRecoilValue(productState);
-  const userEmail = typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : '';
-  const userName = typeof window !== 'undefined' ? sessionStorage.getItem('userName') : '';
+  const userEmail =
+    typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : '';
+  const userName =
+    typeof window !== 'undefined' ? sessionStorage.getItem('userName') : '';
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
@@ -54,7 +57,16 @@ function Reservation() {
       Swal.fire('상품이 결제되었습니다');
       setOrderedItems();
     },
-    onError() {
+    onError(error) {
+      let message = '상품 결제에 실패했습니다';
+      // Assuming error object contains a 'code' property
+      // if (error.code === 1) {
+      //   message = 'Error message for code 1';
+      // } else if (error.code === 2) {
+      //   message = 'Error message for code 2';
+      // }
+      // Swal.fire(message);
+      console.log(error);
       Swal.fire('상품 결제에 실패했습니다');
     },
   });
@@ -66,11 +78,10 @@ function Reservation() {
       total_price: calculateTotalPrice(),
     };
     setSuccessProducts(successProducts);
-    if (typeof window !== 'undefined'){
+    if (typeof window !== 'undefined') {
       const router = useRouter();
       router.push('/reservation-check');
     }
-    
   };
 
   const getParams = (name: string, email: string) => {
@@ -97,7 +108,7 @@ function Reservation() {
     const email = data.get('email') as string;
 
     if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
-    if (!checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
+    if (checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
@@ -110,7 +121,7 @@ function Reservation() {
       <form onSubmit={reservation}>
         <div className={styles.content}>
           <div className={styles.parts}>
-            <Text fontSize="md" fontWeight="normal">
+            <Text fontSize="md" fontWeight="bold">
               상품 정보
             </Text>
             <div className={styles.grayLine}></div>
@@ -118,20 +129,64 @@ function Reservation() {
               숙소
             </Text>
 
-            {products.map((product, index) => {
+            <section className={styles.reservationItemContainer}>
+              {products?.map((item) => (
+                <div className={styles.reservationItem}>
+                  <div className={styles.itemInfo}>
+                    <div className={styles.imageInfo}>
+                      <Image
+                        src={item.accommodation_img}
+                        width={80}
+                        height={80}
+                        alt="숙소 이미지"
+                        className={styles.accommodationImage}
+                      />
+                      <div className={styles.detailInfo}>
+                        <Text fontSize="xs" fontWeight="bold">
+                          {item.accommodation_name}
+                        </Text>
+                        <Text
+                          fontSize="xs-3"
+                          fontWeight="medium"
+                          color="blackAlpha100">
+                          {`${item.start_date} ~ ${item.end_date} / ${item.people_number}명`}
+                        </Text>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.priceInfo}>
+                    <Text fontSize="md" fontWeight="medium">
+                      {`${item.accommodation_price}원`}
+                    </Text>
+                    <Text fontSize="xs-3" fontWeight="normal" color="red200">
+                      취소 및 환불 불가
+                    </Text>
+                  </div>
+                </div>
+                // <ReservationItem key={index} item={item} />
+              ))}
+            </section>
+
+            {/* {products.map((product, index) => {
               return <div key={index}>{product.accommodation_name}</div>;
-            })}
+            })} */}
           </div>
 
           <div className={styles.parts}>
             <div className={styles.container}>
               {/* <Text fontSize='md' color='black' /> */}
-              <Text fontSize="md" fontWeight="normal">
+              <Text fontSize="md" fontWeight="bold">
                 예약자 정보
               </Text>
               <div className={styles.container}>
-                <div className={styles.booker}>예약자</div>
-                <div>{userName}</div>
+                <div className={styles.sameLine}>
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    예약자
+                  </Text>
+                  {/* <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    {userName}
+                  </Text> */}
+                </div>
                 <div className={styles.booker}>이메일</div>
                 <div>{userEmail}</div>
               </div>
@@ -141,47 +196,59 @@ function Reservation() {
           <div className={styles.parts}>
             <div className={styles.container}>
               {/* <Text fontSize='md' color='black' /> */}
-              <Text fontSize="md" fontWeight="normal">
+              <Text fontSize="md" fontWeight="bold">
                 대표자 정보
               </Text>
               <div className={styles.container}>
-                대표자
-                <Input
-                  variant="reservation"
-                  placeholder="홍길동"
-                  id="name"
-                  name="name"
-                />
-                이메일
-                <Input
-                  variant="reservation"
-                  placeholder="abc@naver.com"
-                  id="email"
-                  name="email"
-                />
+                <div className={styles.sameLine}>
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    대표자
+                  </Text>
+                  <Input
+                    variant="reservation"
+                    placeholder="홍길동"
+                    id="name"
+                    name="name"
+                  />
+                </div>
+
+                <div className={styles.sameLine}>
+                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
+                    이메일
+                  </Text>
+                  <Input
+                    variant="reservation"
+                    placeholder="abc@naver.com"
+                    id="email"
+                    name="email"
+                  />
+                </div>
               </div>
             </div>
           </div>
 
           <div className={styles.parts}>
-            <Text fontSize="md" fontWeight="normal">
+            <Text fontSize="md" fontWeight="bold">
               결제 정보
             </Text>
             <div className={styles.grayLine}></div>
             <div className={styles.totalPrice}>
-              <div>총 결제 금액</div>
-              <div>{`${calculateTotalPrice()}원`}</div>
+              <Text fontSize="sm" fontWeight="medium" color="primary">
+                총 결제 금액
+              </Text>
+              <Text fontSize="sm" fontWeight="medium" color="highlight">
+                {`${calculateTotalPrice()}원`}
+              </Text>
             </div>
           </div>
 
           <div className={styles.parts}>
             {/* <Checkbox onChange={} isChecked={}/> */}
-            <Text fontSize="md" fontWeight="normal">
+            <Text fontSize="md" fontWeight="bold">
               필수약관 동의
             </Text>
-            <div>
-              <Checkbox id="check" name="check" />
-              개인 정보 수집 동의
+            <div className={styles.terms}>
+              <Checkbox id="check" name="check" />만 14세 이용 동의
             </div>
           </div>
 
