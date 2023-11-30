@@ -1,4 +1,4 @@
-export type TReservationItem = {
+export type TReservation = {
   accommodation_id: number;
   people_number: number;
   start_date: Date;

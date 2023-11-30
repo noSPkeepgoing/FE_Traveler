@@ -1,8 +1,10 @@
 export type TCustomCalendar = {
   onChange: React.Dispatch<any>;
-  value: Value;
+  value: TValue;
   valueSecond?: Date;
   type: string;
 };
 
-export type Value = Date | undefined;
+export type TValue = Date;
+
+export type Value = Date;
