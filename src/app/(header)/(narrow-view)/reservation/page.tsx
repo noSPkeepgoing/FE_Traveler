@@ -15,8 +15,8 @@ import { successProductsState } from '@/recoil/successProducts';
 
 function Reservation() {
   const products = useRecoilValue(productState);
-  const userEmail = sessionStorage && sessionStorage.getItem('userEmail');
-  const userName = sessionStorage && sessionStorage.getItem('userName');
+  const userEmail = ''
+  const userName = ''
   const setSuccessProducts = useSetRecoilState(successProductsState);
   const router = useRouter();
   if (products.length === 0) {
