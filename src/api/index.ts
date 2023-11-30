@@ -2,10 +2,10 @@ import { HTTP_BASE_URL } from '@/constants/api';
 import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: HTTP_BASE_URL,
+  baseURL: 'https://api.gamsung.xyz',
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJjbGllbnRfaWQiOiIxIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlzcyI6ImZjX21pbmkiLCJpYXQiOjE3MDEyMzg2NTksImV4cCI6MTcwMTI3NDY1OX0.IlsJyT25cwb7n5aRatRSzzuYVGKZRkkiIOBs4iD7Fk-f2rDKP9PT2V1AbW_xo2ZEBRqldMX4e58RefTQLzeW1w',
+      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJjbGllbnRfaWQiOiIzIiwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSIsImlzcyI6ImZjX21pbmkiLCJpYXQiOjE3MDEyODkyNTEsImV4cCI6MTcwMTMyNTI1MX0.n5Q6ltSH08NFHkx8tRxjo9hnKcbJXWDp1tXIEzspw27IxqrC6zn6OVc8I5WmLB5VqJ9Zs44ciiCdfMAB08GDKg',
   },
 });
 
