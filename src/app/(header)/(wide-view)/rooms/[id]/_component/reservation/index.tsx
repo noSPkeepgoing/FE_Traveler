@@ -20,6 +20,7 @@ import {
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
 import { DAY_SECOND } from '@/constants/rooms';
+
 function Reservation({ price, params, data }: TReservation) {
   const currentDate = new Date();
   const nextDate = new Date(currentDate);
