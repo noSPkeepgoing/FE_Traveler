@@ -11,14 +11,16 @@ import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
 import { successProductsState } from '@/recoil/successProducts';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 function ReservationCheck() {
   const successProduct = useRecoilValue(successProductsState);
   const isReserved = !(successProduct.total_accommodation_num === 0);
+  const router = useRouter();
 
   if (!isReserved) {
     Swal.fire('상품이 존재하지 않습니다');
-    window.history.back();
+    router.push('/main');
   }
   const accommodation_name =
     successProduct.total_accommodation_num > 1
