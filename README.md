@@ -1,5 +1,9 @@
 # Traveler 트래블러
 
+### <p align="center">여행을 떠나신다고요? `Traveler`를 통해서 숙소를 예약해보세요!</p>
+
+<br/>
+
 <p align="center">
   <img width="124" alt="Screenshot 2023-12-01 at 2 42 28 AM" src="https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/57075876/e3704041-f75a-4f66-81be-780c14b94641"></br>
   <a href="[https:google.com](https://fe-traveler.vercel.app/main)">
@@ -14,37 +18,8 @@
 Test ID : sun@test.com
 Test PW : 123qwe
 ```
-
-## 🧑🏻‍💻 프로젝트 소개
-
-여행을 떠나신다고요? `Traveler`를 통해서 숙소를 예약해보세요!
-
-## 프로젝트 실행 결과 및 주요 페이지
-<table align="center">
-    <tr>        
-<img width="200" alt="Screenshot 2023-12-01 at 4 03 06 AM" src="https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/57075876/99ad3eba-0604-4c79-b230-0ec5a201ab6b">
-        <td align="center"><img alt="avatar" src="https://github.com/gahyuun.png" width="10"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/kyungkyuBae.png" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/MOVIEJOJO7/cat-talk/assets/57075876/b094f8b2-322f-47f5-989e-2f4bf6e76b15" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/noSPkeepgoing.png" width="100"></td>
-<td align="center"><img alt="avatar" src="https://ca.slack-edge.com/T064N4WMK28-U0657EMC2CW-g5edba45a3df-512" width="100"></td>
-    </tr>
-    <tr>
-        <td align="center"><a href="https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/57075876/f1aef40a-daec-4121-9847-28d463059c4b">메인 페이지</a><br/>
-        Frontend(조장)</td>
-        <td align="center"><a href="https://github.com/gahyuun">박가현</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/kyungkyuBae">배경규</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/syb0127">서예빈</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/noSPkeepgoing">최선파</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="">김민수 멘토님</a><br />
-        멘토님</td>
-    </tr>
- </table>
-
+<br/>
+<br/>
 
 ## :clap: 3조 Contributors
 
@@ -58,20 +33,68 @@ Test PW : 123qwe
 <td align="center"><img alt="avatar" src="https://ca.slack-edge.com/T064N4WMK28-U0657EMC2CW-g5edba45a3df-512" width="100"></td>
     </tr>
     <tr>
-        <td align="center"><a href="https://github.com/junkue20">박준규</a><br />
-        Frontend(조장)</td>
-        <td align="center"><a href="https://github.com/gahyuun">박가현</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/kyungkyuBae">배경규</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/syb0127">서예빈</a><br />
-        Frontend(조원)</td>
-        <td align="center"><a href="https://github.com/noSPkeepgoing">최선파</a><br />
-        Frontend(조원)</td>
+        <td align="center">조장[<a href="https://github.com/junkue20">박준규</a>]<br />
+        로그인,<br /> 회원가입</td>
+        <td align="center">팀원[<a href="https://github.com/gahyuun">박가현</a>]<br />
+        장바구니,<br /> 예약내역</td>
+        <td align="center">팀원[<a href="https://github.com/kyungkyuBae">배경규]</a><br />
+        상세페이지</td>
+        <td align="center">팀원[<a href="https://github.com/syb0127">서예빈]</a><br />
+        결제완료,<br /> 예약진행</td>
+        <td align="center">팀원[<a href="https://github.com/noSPkeepgoing">최선파]</a><br />
+        메인페이지 </td>
         <td align="center"><a href="">김민수 멘토님</a><br />
-        멘토님</td>
+        3조 멘토님</td>
     </tr>
  </table>
+
+<br/>
+<br/>
+
+## 🧑🏻‍💻 프로젝트 소개
+
+### 📜 프로젝트 기획안
+<a href="https://www.notion.so/3b4e035529684a3abe2672e3d62f817f?pvs=4">
+  <img src="https://img.shields.io/badge/Traveler GitHub-726BD7?style=for-the-badge&logo=notion&logoColor=white" alt="Traveler"/>
+</a>
+
+### 📜 API 위키 (Swagger)
+<a href="https://www.notion.so/3b4e035529684a3abe2672e3d62f817f?pvs=4">
+  <img src="https://img.shields.io/badge/swagger-82e72f?style=for-the-badge&logo=swagger&logoColor=white" alt="Traveler"/>
+</a>
+
+<br/>
+<br/>
+
+
+## 프로젝트 실행 결과 및 주요 페이지
+
+|                           로그인 페이지                            |                                              회원가입 페이지                                             |
+| :-------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
+|![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/eb98e4b6-1cef-4b89-9353-c6a122f18668)|![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/55902cff-f5db-4a33-b7d7-50618803a627)|
+|       로그인 페이지입니다. 각 Input 태그의 하단에 위치한 label로 유효성 검사 여부를 알 수 있습니다.       |                   이메일 중복 여부와 더불어 각 Input 태그의 하단에 위치한 label로 유효성 검사 여부를 알 수 있습니다.                     |
+
+|                          메인 페이지                           |                                   상세 상품 페이지                                          |
+| :------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
+| ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/c55e2292-d978-4e1d-89df-44fd1ed9e931) |         ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/74f1c873-f463-4ad1-b0bc-04efd62ffa23)|
+|   메인 페이지에서는 지역별로 숙박 상품을 무한 스크롤을 통해 조회가 가능합니다.          |                   개별 상품을 조회하며 숙박을 위한 날짜 및 인원수를 설정하여, 장바구니에 담거나 바로 결제를 할 수 있습니다.                    |
+
+
+
+|                           장바구니 페이지                             |                                             예약진행 페이지                                             |
+| :-------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
+| ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/3c245806-94b6-4b47-a894-678ba3ead1fa) |    ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/438eeeeb-e486-457b-b1b9-b68c71976dfe) |
+|       개별 상품 페이지에서 설정했던 날짜와 인원수대로, 최대 10개까지 저장이 가능합니다.       |                  한번에 여러 상품을 결제 할 수 있으며, 예약자 정보를 로그인한 유저의 정보에서 가져와 저장합니다.                  |
+
+|                           예약내역 페이지                             |
+| :-------------------------------------------------------------------------------------------------------: | 
+| ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/38dcc9de-bf52-426f-82e9-6ef66ccd8bf3)|
+|       결제를 진행했던 숙박 상품들을 모두 조회할 수 있습니다.     | 
+
+<br/>
+<br/>
+
+
  
 ## 🛢️ Stack
 
@@ -106,43 +129,62 @@ Test PW : 123qwe
   <img src="https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black&style=for-the-badge"/>
 </p>
 
+<br/>
+<br/>
+
 ## Git Branches
 
 - main: 배포용 브랜치
 - develop : 개발용 브랜치
 - feature/~~ : 개별 개발용 브랜치
 
-## 필수 구현 사항
+<br/>
+<br/>
+
+## ❗ 필수 구현 사항
 
 ✅ 회원 인증
 - 회원가입
-- 로그인 </br>
+- 로그인
+  
 ✅ 상품 조회
 - 전체 숙박 상품 목록 조회
 - (옵션) 카테고리를 임의 생성하여 분류하여 출력
-- 개별 숙박 상품 상세 소개</br>
+- 개별 숙박 상품 상세 소개
+
+  
 ✅ 상품 선택 및 장바구니 담기
 - 숙박 상품 옵션 선택
 - 장바구니 담기
-- (또는) 바로 결제하기</br>
+- (또는) 바로 결제하기
+
 ✅ 장바구니
-- 장바구니 보기
-- 장바구니에서 주문하기 버튼 클릭 시, 예약(주문) 페이지로 이동</br>
+- 장바구니 보기
+- 장바구니에서 주문하기 버튼 클릭 시, 예약(주문) 페이지로 이동
+
 ✅ 예약(주문) 하기
 - 만 14세 이상 이용 동의 (상세 설명서 X, 체크박스로만 간단히 처리)
 - 결제하기 버튼 클릭 시, 상품을 주문한 것으로 처리
 (별도 결제 로직 없음)
-- 결제 성공 시 주문 결과 출력</br>
-✅ (옵션) 주문 내역 조회
-- 별도 주문 내역 페이지를 통해 주문 내역 확인</br>
+- 결제 성공 시 주문 결과 출력
 
-## 프론트엔드 기능적 요구사항
-◼ 사용자 인터페이스 예시를 참고하여, 화면을 구성합니다.</br>
-◼ API 명세에 따라 백엔드에 전달된 JSON 데이터를 필요에 따라 정돈하여 화면에
-출력합니다.</br>
-◼ 프론트엔드단에서 유효성 검사를 수행해야하는 지점을 고려합니다.</br>
-◼ React.js 또는 Next.js를 기반으로 구현하며, 컴포넌트 단위로 구조를 설계합니다.</br>
-◼ (옵션) 페이징 처리 시, 무한 스크롤을 고려합니다.</br>
+✅ (옵션) 주문 내역 조회
+- 별도 주문 내역 페이지를 통해 주문 내역 확인
+
+## ❕ 프론트엔드 기능적 요구사항
+✅ 사용자 인터페이스 예시를 참고하여, 화면을 구성합니다.
+
+✅ API 명세에 따라 백엔드에 전달된 JSON 데이터를 필요에 따라 정돈하여 화면에
+출력합니다.
+
+✅ 프론트엔드단에서 유효성 검사를 수행해야하는 지점을 고려합니다.
+
+✅ React.js 또는 Next.js를 기반으로 구현하며, 컴포넌트 단위로 구조를 설계합니다.
+
+✅ (옵션) 페이징 처리 시, 무한 스크롤을 고려합니다.
+
+<br/>
+<br/>
 
 ## :computer: 커밋 컨벤션
 
@@ -159,8 +201,9 @@ Test PW : 123qwe
 
 
 <br/>
+<br/>
 
-## 🧑🏻‍💻 Script
+## 🚩 Script
 
 ### Development Mode
 
@@ -169,13 +212,14 @@ $ git clone https://github.com/FAST-gamsungcoding/FE_MiniProject.git
 $ npm i
 $ npm run dev
 ```
-</br>
-
+<br/>
+<br/>
 
 ## 🧑🏻‍💻 회고록
 <details>
 <summary>박준규</summary>
 지난번 토이2 프로젝트까지만 해도 사실 학습이 아닌 완성에만 급급하여 '쉬운 역할', '간단한 것', '내가 지금 할 수 있는 역할'만 고집하다보니, 항상 프로젝트가 끝나는 시점에서는 뿌듯함과 성취감보다는, 앞으로 다가오는 미니프로젝트와 파이널 프로젝트에 대해서 새로운 것에 대한 막연한 두려움만 앞섰습니다.
+<br/>
 
  하지만 이번 프로젝트를 통해서 기나긴 7개월 과정동안에서 제일 많은 성장을 이뤄내지 않았을까 싶습니다. 슬럼프에 빠져있던 저에게 따뜻한 조언을 아껴주지 않으신 매니저님, 자신감 결여에 빠져있던 저에게 팀장이라는 역할을 수행할 수 있게끔 진심을 다해 응원해주며 함께해준 팀원들 덕분에 7월부터 지금까지의 그 어느때보다도 열정적인 자세로 프로젝트에 임할 수 있었지 않았을까 하는 생각에 감사함을 전달하고 싶습니다.
 
@@ -204,3 +248,12 @@ $ npm run dev
 <summary>최선파</summary>
 리액트 쿼리, 리코일 등 처음 다뤄보는 기술스택으로 로직을 짜는 데에 미숙한 점이 있어 아쉬움이 남는 프로젝트였습니다. 하지만 동시에 컨벤션의 힘에 대해 다시금 깨닫게 되는 프로젝트였습니다. 팀원들과 함께 공들인 컨벤션은 협업에서 원활한 의사소통을 도와주었고, 팀원들간의 관계형성에도 큰 도움이 되었습니다. 2주라는 짧은 시간이었지만 새로운 기술스택을 배우고, 좋은 인연도 얻은 후회없는 시간이었습니다.
 </details>
+
+<br/>
+<br/>
+
+## 🧑🏻‍💻 개발 기간 
+
+### 15일 23.11.17 금 ~ 23.12.01 금
+
+
