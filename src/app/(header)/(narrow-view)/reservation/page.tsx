@@ -15,8 +15,8 @@ import { successProductsState } from '@/recoil/successProducts';
 
 function Reservation() {
   const products = useRecoilValue(productState);
-  const userEmail = ''
-  const userName = ''
+  const userEmail = '';
+  const userName = '';
   const setSuccessProducts = useSetRecoilState(successProductsState);
   const router = useRouter();
   if (products.length === 0) {
@@ -142,10 +142,12 @@ function Reservation() {
                 대표자 정보
               </Text>
               <div className={styles.container}>
-                대표자
+                <Text fontSize="sm" fontWeight="normal" color="gray200">
+                  대표자
+                </Text>
                 <Input
                   variant="reservation"
-                  placeholder="홍길동"
+                  placeholder="홍S길동"
                   id="name"
                   name="name"
                 />
@@ -161,24 +163,28 @@ function Reservation() {
           </div>
 
           <div className={styles.parts}>
-            <Text fontSize="md" fontWeight="normal">
+            <Text fontSize="md" fontWeight="bold">
               결제 정보
             </Text>
             <div className={styles.grayLine}></div>
             <div className={styles.totalPrice}>
-              <div>총 결제 금액</div>
-              <div>{`${calculateTotalPrice()}원`}</div>
+              <Text fontSize="sm" fontWeight="medium" color="primary">
+                총 결제 금액
+              </Text>
+              <Text fontSize="sm" fontWeight="medium" color="highlight">
+                {`${calculateTotalPrice()}원`}
+              </Text>
             </div>
           </div>
 
           <div className={styles.parts}>
             {/* <Checkbox onChange={} isChecked={}/> */}
-            <Text fontSize="md" fontWeight="normal">
+            <Text fontSize="md" fontWeight="bold">
               필수약관 동의
             </Text>
+
             <div>
-              <Checkbox id="check" name="check" />
-              개인 정보 수집 동의
+              <Checkbox id="check" name="check" />만 14세 이용 동의
             </div>
           </div>
 
