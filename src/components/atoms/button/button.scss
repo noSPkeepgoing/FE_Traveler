@@ -1,0 +1,46 @@
+@import '@/styles/_variables.scss';
+.button {
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: white;
+  padding: 0;
+  &.default {
+    background-color: $primary;
+  }
+  &.xl {
+    width: 48.125rem;
+    height: 3.125rem;
+  }
+  &.lg {
+    width: 25.125rem;
+    height: 3.25rem;
+  }
+  &.md {
+    width: 11.5rem;
+    height: 3rem;
+  }
+  &.sm {
+    width: 4.625rem;
+    height: 3.125rem;
+  }
+  &.secondary {
+    width: 3.875rem;
+    height: 3rem;
+    border: 1px solid #b0b0b0;
+  }
+  &.text {
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: black;
+    }
+  }
+  &.disabled {
+    background-color: #cccccc;
+    cursor: auto;
+  }
+}
