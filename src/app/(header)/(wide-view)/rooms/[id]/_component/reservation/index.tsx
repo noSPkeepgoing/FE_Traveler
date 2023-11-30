@@ -51,9 +51,7 @@ function Reservation({ price, params, data }: TReservation) {
         endDate,
         id: params,
       });
-      console.log(res);
-    } catch (error: any) {
-      console.log(error);
+    } catch (error: unknown) {
       return;
     }
     const productData = {
@@ -66,9 +64,9 @@ function Reservation({ price, params, data }: TReservation) {
       cart_price: price * day,
       accommodation_img: data.accommodation_img,
     };
-    console.log(productData);
     try {
       const res = await ROOMS_API.addCart(productData);
+      console.log(res)
       setModalType(4001);
       if (!modalOpen) {
         setModalOpen((prev) => !prev);
@@ -146,7 +144,6 @@ function Reservation({ price, params, data }: TReservation) {
       const nextDate = new Date(value);
       nextDate.setDate(nextDate.getDate()+1);
       onChangeSecond(nextDate);
-      console.log(nextDate);
       
     }
     },[value,valueSecond]);

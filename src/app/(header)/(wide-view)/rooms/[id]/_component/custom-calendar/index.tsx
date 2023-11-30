@@ -36,9 +36,7 @@ function CustomCalendar({
     return date < new Date();
   };
   useEffect(() => {
-    console.log(isFirst)
     if (valueSecond  && isFirst) {
-      console.log('test')
       setNowDate(
         moment(valueSecond as Date | Moment).format('YYYY년 MM월 DD일'),
       );
