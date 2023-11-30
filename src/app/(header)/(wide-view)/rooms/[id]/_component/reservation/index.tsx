@@ -206,8 +206,8 @@ function Reservation({ price, params, data }: TReservation) {
         </div>
       </div>
       <div className={styles.reservationButtonBox}>
-        <Button variant="secondary">
-          <div className={styles.shoppingCart} onClick={handleCartClick}>
+        <Button onClick={handleCartClick} variant="secondary">
+          <div className={styles.shoppingCart}>
             <MdOutlineShoppingCart />
           </div>
         </Button>
