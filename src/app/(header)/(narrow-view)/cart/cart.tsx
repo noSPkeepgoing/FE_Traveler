@@ -5,6 +5,7 @@ import CartFooter from './_components/cart-footer';
 import useCart from '@/hooks/cart/useCart';
 import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
+import Loader from '@/components/layouts/loader';
 
 function Cart() {
   const {
@@ -21,7 +22,7 @@ function Cart() {
     handleReservation,
   } = useCart();
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <Loader />;
 
   if (isError) return <div>에러</div>;
 
