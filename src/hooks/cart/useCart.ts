@@ -4,6 +4,7 @@ import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
 import { productState } from '@/recoil/order';
 import { TProduct } from '@/recoil/productType';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -29,8 +30,10 @@ function useCart() {
       Swal.fire('상품이 삭제되었습니다');
       refetchCartData();
     },
-    onError() {
-      Swal.fire('상품 삭제에 실패했습니다');
+    onError(error) {
+      if (error instanceof AxiosError) {
+        Swal.fire('상품 삭제에 실패했습니다');
+      }
     },
   });
 

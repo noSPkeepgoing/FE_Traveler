@@ -16,7 +16,13 @@ function ReservationList() {
   }
 
   if (isError) {
-    return <div>에러</div>;
+    return (
+      <section className={styles.reservationItemContainer}>
+        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+          알 수 없는 오류입니다
+        </Text>
+      </section>
+    );
   }
 
   if (reservationItems?.length === 0) {

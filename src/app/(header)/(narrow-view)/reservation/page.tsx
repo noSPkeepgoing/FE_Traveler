@@ -44,7 +44,9 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) return false;
+    if (!emailRegex.test(email)) return;
     return true;
   };
 
