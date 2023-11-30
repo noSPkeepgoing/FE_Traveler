@@ -11,7 +11,7 @@ if (!isServer) {
 }
 
 export const instance = axios.create({
-  baseURL: 'https://api.gamsung.xyz',
+  baseURL: HTTP_BASE_URL,
   headers: headers,
 });
 
