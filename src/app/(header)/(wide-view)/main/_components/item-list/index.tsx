@@ -6,6 +6,7 @@ import styles from './itemList.module.scss';
 import { TAccommodation } from '@/api/main/mainApiType';
 import { TItemListProps } from './itemListType';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Loader from '@/components/layouts/loader';
 
 const ItemList = ({
   data,
@@ -13,7 +14,7 @@ const ItemList = ({
   hasNextPage,
   fetchNextPage,
 }: TItemListProps) => {
-  if (isLoading) return <>loading...</>;
+  if (isLoading) return <Loader />;
   return (
     <InfiniteScroll
       loader={<>loading...</>}
