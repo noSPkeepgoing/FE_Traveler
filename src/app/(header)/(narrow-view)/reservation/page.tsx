@@ -174,11 +174,6 @@ function Reservation() {
                   <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
                     예약자
                   </Text>
-<<<<<<< HEAD
-                  <Text fontSize="sm" fontWeight="normal" color="blackAlpha200">
-                    {userName}
-                  </Text>
-=======
                   <Text fontSize="sm" fontWeight="normal" color="primary">
                     {userName}
                   </Text>
@@ -190,7 +185,6 @@ function Reservation() {
                   <Text fontSize="sm" fontWeight="normal" color="primary">
                     {userEmail}
                   </Text>
->>>>>>> ad24e935213cf79be6ae2ad70c2dd1245dbc6a29
                 </div>
               </div>
             </div>
