@@ -5,8 +5,9 @@ export const instance = axios.create({
   baseURL: HTTP_BASE_URL,
   headers: {
     Authorization:
-      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJjbGllbnRfaWQiOiIxIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlzcyI6ImZjX21pbmkiLCJpYXQiOjE3MDEyMzg2NTksImV4cCI6MTcwMTI3NDY1OX0.IlsJyT25cwb7n5aRatRSzzuYVGKZRkkiIOBs4iD7Fk-f2rDKP9PT2V1AbW_xo2ZEBRqldMX4e58RefTQLzeW1w',
+      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJjbGllbnRfaWQiOiIzIiwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSIsImlzcyI6ImZjX21pbmkiLCJpYXQiOjE3MDEzMjAwOTUsImV4cCI6MTcwMTM1NjA5NX0.Gtrp0rYzyhxmjKOb6IfcL1Y-YJxaxmBn1HDZ36TY3Pvki4DJfXe7HmvSu2q-Dz3zMlHxwzF4re8XHztHALAYGQ',
   },
 });
 
 // interceptor 코드
+
