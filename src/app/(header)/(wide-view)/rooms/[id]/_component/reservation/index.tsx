@@ -20,6 +20,7 @@ import {
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
 import { DAY_SECOND } from '@/constants/rooms';
+
 function Reservation({ price, params, data }: TReservation) {
   const currentDate = new Date();
   const nextDate = new Date(currentDate);
@@ -102,6 +103,10 @@ function Reservation({ price, params, data }: TReservation) {
     data,
     selectedOption,
   }: TReservationForm) {
+    if (day === 0) {
+      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
+      return;
+    }
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
       alert('로그인 후 진행하실 수 있습니다.');
