@@ -16,17 +16,17 @@ import { useEffect, useState } from 'react';
 
 function Reservation() {
   const products = useRecoilValue(productState);
-  const [userEmail,setUserEmail] = useState('');
-  const [userName,setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
 
-  useEffect(()=>{
+  useEffect(() => {
     const userEmail = sessionStorage.getItem('userEmail');
     const userName = sessionStorage.getItem('userName');
     if (userEmail !== null && userName !== null) {
       setUserEmail(userEmail);
       setUserName(userName);
     }
-  },[])
+  }, []);
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
@@ -67,11 +67,11 @@ function Reservation() {
     },
     onError(error) {
       let message = '상품 결제에 실패했습니다';
-      if (error.response?.data?[code] === 2004) {
-      //   message = 'Error message for code 1';
-      // } else if (error.code === 2) {
-      //   message = 'Error message for code 2';
-      }
+      // if (error.response?.data?[code] === 2004) {
+      // //   message = 'Error message for code 1';
+      // // } else if (error.code === 2) {
+      // //   message = 'Error message for code 2';
+      // }
       // Swal.fire(message);
       console.log(error);
       Swal.fire('상품 결제에 실패했습니다');
