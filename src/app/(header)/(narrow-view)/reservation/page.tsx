@@ -15,6 +15,8 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 function Reservation() {
+  const router = useRouter();
+
   const products = useRecoilValue(productState);
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
@@ -30,7 +32,6 @@ function Reservation() {
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
-    const router = useRouter();
     router.push('/main');
   }
 
@@ -43,10 +44,8 @@ function Reservation() {
   };
 
   const checkEmail = (email: string) => {
+    console.log(email);
     if (!email) return false;
-    const regex =
-      /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-    if (regex.test(email)) return false;
     return true;
   };
 
@@ -66,14 +65,6 @@ function Reservation() {
       setOrderedItems();
     },
     onError(error) {
-      let message = '상품 결제에 실패했습니다';
-      // if (error.response?.data?[code] === 2004) {
-      // //   message = 'Error message for code 1';
-      // // } else if (error.code === 2) {
-      // //   message = 'Error message for code 2';
-      // }
-      // Swal.fire(message);
-      console.log(error);
       Swal.fire('상품 결제에 실패했습니다');
     },
   });
@@ -86,7 +77,6 @@ function Reservation() {
     };
     setSuccessProducts(successProducts);
     if (typeof window !== 'undefined') {
-      const router = useRouter();
       router.push('/reservation-check');
     }
   };
@@ -113,13 +103,12 @@ function Reservation() {
 
     const name = data.get('name') as string;
     const email = data.get('email') as string;
-
     if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
-    if (checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
+    if (!checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
-
+    console.log(getParams(name, email));
     postReservation(getParams(name, email));
   };
 
