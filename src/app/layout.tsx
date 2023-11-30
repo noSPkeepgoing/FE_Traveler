@@ -14,6 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard.css"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         <Provider>{children}</Provider>
       </body>
