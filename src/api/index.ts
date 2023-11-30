@@ -47,16 +47,16 @@ instance.interceptors.response.use(
       originalRequest._retry = true;
 
       if (!sessionStorage.getItem('refreshToken')) {
-        alert('로그인이 필요한 서비스입니다!');
-        window.location.href = '/sign-in';
+        // alert('로그인이 필요한 서비스입니다!');
+        // window.location.href = '/sign-in';
       }
 
       try {
-        console.log('123123');
         // 토큰 재발급 함수 호출
         const newToken = await TOKEN_API.tokenRefresh();
+        console.log('newToken');
         // 토큰 재발급 성공 시 세션 스토리지에 새로운 토큰 저장
-        sessionStorage.setItem('accessToken', newToken.data.data.accessToken);
+        // sessionStorage.setItem('accessToken', newToken.data.data.accessToken);
 
         // 기존 refreshToken값
         console.log(
@@ -64,14 +64,8 @@ instance.interceptors.response.use(
           sessionStorage.getItem('refreshToken'),
         );
 
-        /* 리프레시 토큰이 같이 딸려 오는 상황인데.. 이게 과연 필요할까요..??? */
-        sessionStorage.setItem('refreshToken', newToken.data.data.refreshToken);
-
-        // 새로 받은 refreshToken값
-        console.log('새로운 refreshToken: ', newToken.data.data.refreshToken);
-
         // 이전 요청에 새로운 토큰을 적용하여 재시도
-        originalRequest.headers.Authorization = `Bearer ${newToken.data.data.accessToken}`;
+        // originalRequest.headers.Authorization = `Bearer ${newToken.data.data.accessToken}`;
 
         return axios(originalRequest);
       } catch (refreshError) {

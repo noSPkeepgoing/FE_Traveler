@@ -6,8 +6,30 @@ import { RecoilRoot } from 'recoil';
 import { useMediaQuery } from 'react-responsive';
 import styles from '@/styles/mobile.module.scss';
 import Text from './components/atoms/text';
+import { usePathname, useRouter } from 'next/navigation';
 
 export const Provider = ({ children }: { children: ReactNode }) => {
+  const pathName = usePathname();
+  const router = useRouter();
+
+  const refreshToken = sessionStorage.getItem('refreshToken');
+  const pathArray = [
+    '/cart',
+    '/reservation',
+    '/reservation-check',
+    '/reservation-list',
+  ];
+
+  useEffect(() => {
+    if (!refreshToken) {
+      // 리프레시 토큰 X (로그인 안했을때)
+      if (pathArray.includes(pathName)) {
+        console.log('나와라', pathName);
+        router.push('/sign-in');
+      }
+    }
+  }, []);
+
   const [queryClient] = useState(
     () =>
       new QueryClient({
