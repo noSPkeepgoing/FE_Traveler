@@ -20,15 +20,10 @@ export const Provider = ({ children }: { children: ReactNode }) => {
     '/reservation-list',
   ];
 
-  useEffect(() => {
-    if (!refreshToken) {
-      // 리프레시 토큰 X (로그인 안했을때)
-      if (pathArray.includes(pathName)) {
-        console.log('나와라', pathName);
-        router.push('/sign-in');
-      }
-    }
-  }, []);
+  if (!refreshToken && pathArray.includes(pathName)) {
+    // 리프레시 토큰 X (로그인 안했을때)
+    return router.push('/sign-in');
+  }
 
   const [queryClient] = useState(
     () =>
