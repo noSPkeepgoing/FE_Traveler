@@ -2,7 +2,7 @@ import { instance } from '..';
 import { Response } from '../type';
 import { TSignUpData } from './signUpType';
 
-export const SIGN_API = {
+export const SIGNUP_API = {
   // 회원가입 API 수정용
   userSignUp: (userData: TSignUpData) =>
     instance.post<Response>('v1/member/register', userData),

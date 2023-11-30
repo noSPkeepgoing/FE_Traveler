@@ -42,10 +42,8 @@ function Header({ border = true }: THeader) {
     const accessToken = sessionStorage.getItem('accessToken');
     if (accessToken) {
       setIsOnline(true);
-      console.log('로그인');
     } else {
       setIsOnline(false);
-      console.log('로그아웃');
     }
   }, []);
 
