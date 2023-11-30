@@ -3,18 +3,49 @@
 import { useRouter } from 'next/navigation';
 import styles from './header.module.scss';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../atoms/button';
 import Text from '../../atoms/text';
 import { THeader } from './headerType';
+import { instance } from '@/api';
 
 function Header({ border = true }: THeader) {
+  const router = useRouter();
+
+  const [isOnline, setIsOnline] = useState(false);
+
   const containerClassName = classNames(styles.container, {
     [styles.border]: border,
   });
 
-  const isOnline = false;
-  const router = useRouter();
+  const signOutHandler = async () => {
+    try {
+      const accessToken = sessionStorage.getItem('accessToken');
+      if (accessToken) {
+        const shouldLogout = window.confirm('로그아웃 하시겠습니까?');
+        if (shouldLogout) {
+          const headers = { Authorization: `Bearer ${accessToken}` };
+          await instance.post<Response>('v1/member/logout', {}, { headers });
+
+          sessionStorage.removeItem('accessToken');
+          sessionStorage.removeItem('refreshToken');
+          setIsOnline(false);
+          router.push('/main');
+        }
+      }
+    } catch (error) {
+      throw new Error('로그아웃 실패.');
+    }
+  };
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (accessToken) {
+      setIsOnline(true);
+    } else {
+      setIsOnline(false);
+    }
+  }, []);
 
   return (
     <div className={containerClassName}>
@@ -45,7 +76,7 @@ function Header({ border = true }: THeader) {
           ) : (
             <>
               <div className={`${styles.buttons} ${styles.child}`}>
-                <Button variant="text" size="sm" href="/main">
+                <Button variant="text" size="sm" onClick={signOutHandler}>
                   <Text fontSize="xs-2" fontWeight="semibold">
                     로그아웃
                   </Text>

@@ -5,12 +5,15 @@ import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignIn } from './signInType';
 import Input from '@/components/atoms/input';
-import { SIGNIN_API } from '@/api/signIn/Index';
+import { SIGNIN_API } from '@/api/sign-in/Index';
 import { RESPONSE_CODE } from '@/constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
+import { useRouter } from 'next/navigation';
 
 function SignInForm() {
+  const router = useRouter();
+
   // 각 Input 라벨 메세지용 state
   const [emailMessage, setEmailMessage] = useState({
     message: '',
@@ -85,6 +88,7 @@ function SignInForm() {
       switch (responseCode) {
         case RESPONSE_CODE.SIGNIN_SUCCESS:
           window.location.href = '/main';
+          router.push('/main');
           break;
       }
     } catch (error: unknown) {
@@ -99,10 +103,17 @@ function SignInForm() {
                 true,
               );
               break;
-            case RESPONSE_CODE.INCORRECT_ID:
+            case RESPONSE_CODE.INCORRECT_PASSWORD:
               setMessageAndHideAfterDelay(
                 setPasswordMessage,
                 '비밀번호가 올바르지 않습니다.',
+                true,
+              );
+              break;
+            case RESPONSE_CODE.INVALID_FORMAT:
+              setMessageAndHideAfterDelay(
+                setEmailMessage,
+                '잘못된 이메일 형식입니다. ',
                 true,
               );
               break;

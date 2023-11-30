@@ -6,12 +6,14 @@ import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import { TSignUp } from './signUpType';
 import Input from '@/components/atoms/input';
-import { SIGN_API } from '@api/signUp';
+import { SIGNUP_API } from '@/api/sign-up';
 import { RESPONSE_CODE } from '@constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
+import { useRouter } from 'next/navigation';
 
 function SignUpForm() {
+  const router = useRouter();
   // 이메일 중복확인 버튼 활성화용 state
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
@@ -105,12 +107,12 @@ function SignUpForm() {
 
     // 회원가입 API 호출
     try {
-      const response = await SIGN_API.userSignUp(apiData);
+      const response = await SIGNUP_API.userSignUp(apiData);
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
           alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
-          window.location.href = '/sign-in';
+          router.push('/sign-in');
           break;
       }
     } catch (error: unknown) {
@@ -169,7 +171,7 @@ function SignUpForm() {
 
       try {
         // 이메일 중복체크 API 호출
-        const response = await SIGN_API.emailCheck(email);
+        const response = await SIGNUP_API.emailCheck(email);
         const responseCode = response.data.code;
 
         switch (responseCode) {
