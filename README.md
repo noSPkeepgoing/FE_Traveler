@@ -1,4 +1,4 @@
-# Traveler 트래블러
+# 여행자의 동반자, Traveler
 
 ### <p align="center">여행을 떠나신다고요? `Traveler`를 통해서 숙소를 예약해보세요!</p>
 
@@ -6,10 +6,10 @@
 
 <p align="center">
   <img width="124" alt="Screenshot 2023-12-01 at 2 42 28 AM" src="https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/57075876/e3704041-f75a-4f66-81be-780c14b94641"></br>
-  <a href="[https:google.com](https://fe-traveler.vercel.app/main)">
+  <a href="https://github.com/FAST-gamsungcoding/FE_MiniProject">
     <img src="https://img.shields.io/badge/Traveler GitHub-726BD7?style=for-the-badge&logoColor=white" alt="Traveler"/>
   </a>
-  <a href="https://github.com/FAST-gamsungcoding">
+  <a href="https://fe-traveler.vercel.app/main">
     <img src="https://img.shields.io/badge/Deployed Link-5C5C5C?style=for-the-badge&logoColor=white" alt="배포 레포"/>
   </a>
 </p>
@@ -21,30 +21,56 @@ Test PW : 123qwe
 <br/>
 <br/>
 
-## :clap: 3조 Contributors
+## 🖌 3조 FE Contributors
 
  <table align="center">
     <tr>        
-        <td align="center"><img alt="avatar" src="https://github.com/junkue20.png" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/gahyuun.png" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/kyungkyuBae.png" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/MOVIEJOJO7/cat-talk/assets/57075876/b094f8b2-322f-47f5-989e-2f4bf6e76b15" width="100"></td>
-        <td align="center"><img alt="avatar" src="https://github.com/noSPkeepgoing.png" width="100"></td>
+        <td align="center"><a href="https://github.com/junkue20"><img alt="avatar" src="https://github.com/junkue20.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/gahyuun"><img alt="avatar" src="https://github.com/gahyuun.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/kyungkyuBae"><img alt="avatar" src="https://github.com/kyungkyuBae.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/syb0127"><img alt="avatar" src="https://github.com/MOVIEJOJO7/cat-talk/assets/57075876/b094f8b2-322f-47f5-989e-2f4bf6e76b15" width="100"></a></td>
+        <td align="center"><a href="https://github.com/noSPkeepgoing"><img alt="avatar" src="https://github.com/noSPkeepgoing.png" width="100"></a></td>
 <td align="center"><img alt="avatar" src="https://ca.slack-edge.com/T064N4WMK28-U0657EMC2CW-g5edba45a3df-512" width="100"></td>
     </tr>
     <tr>
-        <td align="center">조장[<a href="https://github.com/junkue20">박준규</a>]<br />
+        <td align="center">FE팀장[<a href="https://github.com/junkue20">박준규</a>]<br />
         로그인,<br /> 회원가입</td>
-        <td align="center">팀원[<a href="https://github.com/gahyuun">박가현</a>]<br />
+        <td align="center">FE팀원[<a href="https://github.com/gahyuun">박가현</a>]<br />
         장바구니,<br /> 예약내역</td>
-        <td align="center">팀원[<a href="https://github.com/kyungkyuBae">배경규]</a><br />
+        <td align="center">FE팀원[<a href="https://github.com/kyungkyuBae">배경규</a>]<br />
         상세페이지</td>
-        <td align="center">팀원[<a href="https://github.com/syb0127">서예빈]</a><br />
+        <td align="center">FE팀원[<a href="https://github.com/syb0127">서예빈</a>]<br />
         결제완료,<br /> 예약진행</td>
-        <td align="center">팀원[<a href="https://github.com/noSPkeepgoing">최선파]</a><br />
+        <td align="center">FE팀원[<a href="https://github.com/noSPkeepgoing">최선파</a>]<br />
         메인페이지 </td>
         <td align="center"><a href="">김민수 멘토님</a><br />
-        3조 멘토님</td>
+        3조 FE멘토님</td>
+    </tr>
+ </table>
+
+<br/>
+
+## ⚙ 3조 BE Contributors
+
+ <table align="center">
+    <tr>        
+        <td align="center"><a href="https://github.com/pabu-lim"><img alt="avatar" src="https://github.com/pabu-lim.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/Parkgeonmoo"><img alt="avatar" src="https://github.com/Parkgeonmoo.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/tkddn204"></a><img alt="avatar" src="https://github.com/tkddn204.png" width="100"></a></td>
+        <td align="center"><a href="https://github.com/windowM"></a><img alt="avatar" src="https://github.com/windowM.png" width="100"></a></td>
+<td align="center"><img alt="avatar" src="https://ca.slack-edge.com/T064N4WMK28-U0657ELHEBG-edd1e20389d6-512" width="100"></td>
+    </tr>
+    <tr>
+        <td align="center">BE팀장[<a href="https://github.com/pabu-lim">임경민</a>]
+        </td>
+        <td align="center">BE팀원[<a href="https://github.com/Parkgeonmoo">박건우</a>]
+        </td>
+        <td align="center">BE팀원[<a href="https://github.com/tkddn204">한상우</a>]
+        </td>
+        <td align="center">BE팀원[<a href="https://github.com/windowM">문창호</a>]
+        </td>
+        <td align="center"><a href="">박경태 멘토님</a><br />
+        3조 BE멘토님</td>
     </tr>
  </table>
 
@@ -86,10 +112,10 @@ Test PW : 123qwe
 | ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/3c245806-94b6-4b47-a894-678ba3ead1fa) |    ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/438eeeeb-e486-457b-b1b9-b68c71976dfe) |
 |       개별 상품 페이지에서 설정했던 날짜와 인원수대로, 최대 10개까지 저장이 가능합니다.       |                  한번에 여러 상품을 결제 할 수 있으며, 예약자 정보를 로그인한 유저의 정보에서 가져와 저장합니다.                  |
 
-|                           예약내역 페이지                             |
-| :-------------------------------------------------------------------------------------------------------: | 
-| ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/38dcc9de-bf52-426f-82e9-6ef66ccd8bf3)|
-|       결제를 진행했던 숙박 상품들을 모두 조회할 수 있습니다.     | 
+|                           예약내역 페이지                             |                         결제확인 페이지                                           |
+| :-------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
+| ![image](https://github.com/FAST-gamsungcoding/FE_MiniProject/assets/122848687/38dcc9de-bf52-426f-82e9-6ef66ccd8bf3)   |![image](https://github.com/KDT1-FE/Y_FE_Mini-Project/assets/122848687/82b84a55-258e-4d1a-8645-f591ae806820) |
+|       결제를 진행했던 숙박 상품들을 모두 조회할 수 있습니다.     |          결제를 성공적으로 진행한 상품의 목록을 확인할 수 있습니다.          |
 
 <br/>
 <br/>
@@ -174,8 +200,7 @@ Test PW : 123qwe
 ## ❕ 프론트엔드 기능적 요구사항
 ✅ 사용자 인터페이스 예시를 참고하여, 화면을 구성합니다.
 
-✅ API 명세에 따라 백엔드에 전달된 JSON 데이터를 필요에 따라 정돈하여 화면에
-출력합니다.
+✅ API 명세에 따라 백엔드에 전달된 JSON 데이터를 필요에 따라 정돈하여 화면에 출력합니다.
 
 ✅ 프론트엔드단에서 유효성 검사를 수행해야하는 지점을 고려합니다.
 
