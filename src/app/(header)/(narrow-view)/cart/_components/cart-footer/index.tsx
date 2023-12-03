@@ -21,7 +21,7 @@ function CartFooter({
               결제 예상 금액
             </Text>
             <Text fontSize="md" fontWeight="bold">
-              {`${totalPrice}원`}
+              {`${totalPrice.toLocaleString()}원`}
             </Text>
           </div>
         </div>
