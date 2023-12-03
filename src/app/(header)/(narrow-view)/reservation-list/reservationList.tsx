@@ -12,7 +12,7 @@ function ReservationList() {
     useReservationList();
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader size="sm" />;
   }
 
   if (isError) {
@@ -41,7 +41,7 @@ function ReservationList() {
       scrollThreshold={0.95}
       next={fetchNextPage}
       hasMore={hasNextPage ?? false}
-      loader={<h4>Loading...</h4>}>
+      loader={<Loader size="sm" />}>
       <section className={styles.reservationItemContainer}>
         {reservationItems?.map((item, index) => (
           <ReservationItem key={index} item={item} />
