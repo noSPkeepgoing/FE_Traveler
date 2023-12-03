@@ -24,7 +24,11 @@ function useCart() {
     select(data) {
       return data.data.data;
     },
+    onSuccess(cartData) {
+      setSelectedItems(cartData);
+    },
   });
+
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
       Swal.fire('상품이 삭제되었습니다');
