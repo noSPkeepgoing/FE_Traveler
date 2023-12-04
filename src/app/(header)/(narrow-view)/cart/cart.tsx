@@ -56,6 +56,7 @@ function Cart() {
             <SoldOutCartItem
               data={item}
               handleDeleteCartItems={handleDeleteCartItems}
+              key={item.cart_id}
             />
           ) : (
             <CartItem

@@ -1,3 +1,3 @@
 export type TLoader = {
-  size: 'lg' | 'sm';
+  size?: 'lg' | 'sm';
 };
