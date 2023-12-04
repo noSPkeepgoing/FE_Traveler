@@ -4,7 +4,7 @@ import { TButton } from './buttonType';
 import Link from 'next/link';
 
 function Button({
-  size = '',
+  size,
   variant = 'default',
   children,
   onClick,
