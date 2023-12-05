@@ -25,7 +25,14 @@ function Cart() {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <div>에러</div>;
+  if (isError)
+    return (
+      <section className={styles.container}>
+        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+          알 수 없는 에러가 발생했습니다
+        </Text>
+      </section>
+    );
 
   if (cartData?.length === 0) {
     return (
@@ -49,6 +56,7 @@ function Cart() {
             <SoldOutCartItem
               data={item}
               handleDeleteCartItems={handleDeleteCartItems}
+              key={item.cart_id}
             />
           ) : (
             <CartItem

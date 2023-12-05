@@ -25,7 +25,10 @@ function CartFooter({
             </Text>
           </div>
         </div>
-        <Button size="lg" onClick={handleReservation}>
+        <Button
+          size="lg"
+          onClick={handleReservation}
+          disabled={selectedItemsLength === 0}>
           <Text color="white" fontSize="xs" fontWeight="semibold">
             예약하기
           </Text>

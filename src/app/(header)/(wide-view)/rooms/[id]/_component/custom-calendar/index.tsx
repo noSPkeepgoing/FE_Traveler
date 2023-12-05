@@ -49,15 +49,17 @@ function CustomCalendar({
 
   useEffect(() => {
     window.addEventListener('click', (e) => {
-      if(modalRef.current !== e.target) {
-        setIsOpen(false)
-    }
+      // const targetClassName = e.target.className;
+      // if (targetClassName.includes('react-calendar') || targetClassName.includes('customCalendar_DropdownButton__b_Z_7')) {
+      //   // setIsOpen(true);
+      //   return;
+      // }
+      setIsOpen(false);
     });
   }, []);
   return (
     <div className={styles.CalendarContainer}>
       <div
-        ref={modalRef}
         className={`${styles.DropdownButton} ${
           type === '체크인' ? '' : styles.checkout
         }`}
@@ -65,7 +67,9 @@ function CustomCalendar({
         suppressHydrationWarning={true}>
         {nowDate}
       </div>
-      <div className={`${styles.CalendarWrapper} ${isOpen ? '' : styles.hide}`}>
+      <div
+        ref={modalRef}
+        className={`${styles.CalendarWrapper} ${isOpen ? '' : styles.hide}`}>
         <Calendar
           locale="en"
           onChange={(value, e) => {

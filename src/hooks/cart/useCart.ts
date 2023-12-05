@@ -4,8 +4,9 @@ import { THandleSelectItem } from '@/app/(header)/(narrow-view)/cart/cartType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
 import { productState } from '@/recoil/order';
 import { TProduct } from '@/recoil/productType';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
@@ -24,26 +25,47 @@ function useCart() {
       return data.data.data;
     },
   });
+
+  useEffect(() => {
+    if (cartData) {
+      const notSoldOutItems = cartData.filter(
+        (item) => !item.accommodation_sold_out,
+      );
+      setSelectedItems(notSoldOutItems);
+    }
+  }, []);
+
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
       Swal.fire('상품이 삭제되었습니다');
       refetchCartData();
     },
-    onError() {
-      Swal.fire('상품 삭제에 실패했습니다');
+    onError(error) {
+      if (error instanceof AxiosError) {
+        Swal.fire('상품 삭제에 실패했습니다');
+      }
     },
   });
 
   const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (cartData && event.currentTarget.checked) {
-      setSelectedItems(cartData);
+      /* 장바구니 최대 갯수가 10개로 제한되어 있어 filter 사용이 성능에 크게 미치지 않을거라고 판단됩니다 */
+      const notSoldOutItems = cartData.filter(
+        (item) => !item.accommodation_sold_out,
+      );
+      setSelectedItems(notSoldOutItems);
     } else {
       setSelectedItems([]);
     }
   };
 
   const isAllSelected = () => {
-    if (cartData) return selectedItems.length === cartData.length;
+    if (cartData) {
+      const notSoldOutItems = cartData.filter(
+        (item) => !item.accommodation_sold_out,
+      );
+      return selectedItems.length === notSoldOutItems.length;
+    }
     return false;
   };
 
