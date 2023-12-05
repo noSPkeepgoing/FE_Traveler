@@ -11,6 +11,7 @@ import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
 import { emailRegex } from '@/constants/emailRegex';
+import Swal from 'sweetalert2';
 
 function SignInForm() {
   const router = useRouter();
@@ -51,14 +52,16 @@ function SignInForm() {
         true,
       );
       return;
-    } else if (!emailRegex.test(userData.email)) {
+    }
+    if (!emailRegex.test(userData.email)) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
         '올바르지 않은 이메일 형식입니다.',
         true,
       );
       return;
-    } else if (!userData.password) {
+    }
+    if (!userData.password) {
       setMessageAndHideAfterDelay(
         setPasswordMessage,
         '비밀번호를 입력해주세요.',
@@ -113,7 +116,7 @@ function SignInForm() {
               );
               break;
             default:
-              alert('로그인에 실패했습니다. 관리자에게 문의하세요.');
+              Swal.fire('로그인에 실패했습니다. 관리자에게 문의하세요.');
               break;
           }
         }

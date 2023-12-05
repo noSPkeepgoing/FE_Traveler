@@ -12,6 +12,7 @@ import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
 import { emailRegex } from '@/constants/emailRegex';
+import Swal from 'sweetalert2';
 
 function SignUpForm() {
   const router = useRouter();
@@ -112,7 +113,9 @@ function SignUpForm() {
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
-          alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
+          Swal.fire(
+            '회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.',
+          );
           router.push('/sign-in');
           break;
       }
@@ -143,7 +146,7 @@ function SignUpForm() {
               );
               break;
             default:
-              alert('회원 가입에 실패했습니다. 서버와의 연결을 확인해주세요.');
+              Swal.fire('회원 가입에 실패했습니다. 관리자에게 문의하세요.');
               break;
           }
         }
