@@ -10,6 +10,7 @@ import { RESPONSE_CODE } from '@/constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
+import { emailRegex } from '@/constants/emailRegex';
 
 function SignInForm() {
   const router = useRouter();
@@ -43,9 +44,6 @@ function SignInForm() {
       password: formData.get('password') as string,
     };
 
-    // 각 form 데이터 유효성 검사 실시
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 유효성 검사용 정규식
-
     if (!userData.email) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
@@ -69,7 +67,7 @@ function SignInForm() {
       return;
     }
 
-    // 로그인 API 호출
+    // 로그인 진행
     try {
       const response = await SIGNIN_API.userSignIn(userData);
       const accessToken = response.data.data.access_token;
@@ -77,17 +75,14 @@ function SignInForm() {
       const userName = response.data.data.name;
       const userEmail = response.data.data.email;
 
-      // 세션 스토리지에 토큰 값 저장
       sessionStorage.setItem('accessToken', accessToken);
       sessionStorage.setItem('refreshToken', refreshToken);
       sessionStorage.setItem('userName', userName);
       sessionStorage.setItem('userEmail', userEmail);
 
-      // response코드 저장
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNIN_SUCCESS:
-          // window.location.href = '/main';
           router.push('/main');
           break;
       }
@@ -118,7 +113,7 @@ function SignInForm() {
               );
               break;
             default:
-              alert('로그인에 실패했습니다. 서버와의 연결을 확인해주세요.');
+              alert('로그인에 실패했습니다. 관리자에게 문의하세요.');
               break;
           }
         }
