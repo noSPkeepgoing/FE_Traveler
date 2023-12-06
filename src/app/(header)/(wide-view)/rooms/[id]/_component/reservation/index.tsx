@@ -31,7 +31,6 @@ function Reservation({ price, params, data }: TReservation) {
   const [selectedOption, setSelectedOption] = useState<number>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [day, setDay] = useState(1);
-  const amount = price;
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
   const [modalType, setModalType] = useState(0);
@@ -122,7 +121,7 @@ function Reservation({ price, params, data }: TReservation) {
           {
             accommodation_name: data.accommodation_name,
             address: data.address,
-            accommodation_price: amount * day,
+            accommodation_price: price * day,
             accommodation_img: data.accommodation_img,
             start_date: startDate,
             end_date: endDate,
@@ -226,7 +225,7 @@ function Reservation({ price, params, data }: TReservation) {
           </Text>
           <div className={styles.amount}>
             <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${(
-              amount * day
+              price * day
             ).toLocaleString()}`}</Text>
           </div>
           <div className={styles.day}>
