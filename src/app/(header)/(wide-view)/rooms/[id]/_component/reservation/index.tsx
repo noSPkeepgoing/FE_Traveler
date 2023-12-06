@@ -33,19 +33,19 @@ function Reservation({ price, params, data }: TReservation) {
   const [day, setDay] = useState(1);
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
-  const [modalType, setModalType] = useState(0);
+  const [modalType, setModalType] = useState('');
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
   async function handleCartClick() {
-    if (day === 0) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
-      return;
-    }
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
       alert('로그인 후 진행하실 수 있습니다.');
       router.push('/sign-in');
+      return;
+    }
+    if (day === 0) {
+      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
       return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
@@ -71,8 +71,8 @@ function Reservation({ price, params, data }: TReservation) {
       accommodation_img: data.accommodation_img,
     };
     try {
-      const res = await ROOMS_API.addCart(productData);
-      setModalType(4001);
+      await ROOMS_API.addCart(productData);
+      setModalType('success');
       if (!modalOpen) {
         setModalOpen((prev) => !prev);
         setTimeout(() => {
@@ -81,14 +81,14 @@ function Reservation({ price, params, data }: TReservation) {
       }
     } catch (error: any) {
       if (error.response.status === 403) {
-        setModalType(403);
+        setModalType('failure');
         setModalOpen((prev) => !prev);
         setTimeout(() => {
           setModalOpen(false);
         }, 2500);
         return;
       }
-      setModalType(error.response.data.code);
+      setModalType('MAXCART');
       setModalOpen((prev) => !prev);
       setTimeout(() => {
         setModalOpen(false);
@@ -102,14 +102,14 @@ function Reservation({ price, params, data }: TReservation) {
     data,
     selectedOption,
   }: TReservationForm) {
-    if (day === 0) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
-      return;
-    }
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
       alert('로그인 후 진행하실 수 있습니다.');
       router.push('/sign-in');
+      return;
+    }
+    if (day === 0) {
+      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
       return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
