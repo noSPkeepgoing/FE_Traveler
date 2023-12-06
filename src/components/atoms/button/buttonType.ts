@@ -6,4 +6,6 @@ export type TButton = {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   href?: string;
+  textDecoration?: 'none' | 'underline';
+  textDecorationColor?: 'primary' | 'highlight';
 };

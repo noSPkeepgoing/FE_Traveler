@@ -34,9 +34,24 @@
     border: 1px solid #b0b0b0;
   }
   &.text {
-    &:hover {
-      text-decoration: underline;
-      text-decoration-color: black;
+    &.underline {
+      &.primary {
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: $primary;
+        }
+      }
+      &.highlight {
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: $highlight;
+        }
+      }
+    }
+    &.none {
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
   &.disabled {

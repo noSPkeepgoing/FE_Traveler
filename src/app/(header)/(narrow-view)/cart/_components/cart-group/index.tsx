@@ -21,6 +21,7 @@ function CartGroup({
           </Text>
         </div>
         <Button
+          textDecorationColor="highlight"
           variant="text"
           onClick={() => {
             const cart_ids = selectedItems.map((item) => item.cart_id);
