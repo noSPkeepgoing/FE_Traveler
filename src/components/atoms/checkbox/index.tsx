@@ -2,7 +2,7 @@ import React from 'react';
 import './checkbox.scss';
 import { Tcheckbox } from './checkboxType';
 
-function Checkbox({ onChange, isChecked, id, name }: Tcheckbox) {
+function Checkbox({ onChange, isChecked, id, name, disabled }: Tcheckbox) {
   return (
     <input
       type="checkbox"
@@ -11,6 +11,7 @@ function Checkbox({ onChange, isChecked, id, name }: Tcheckbox) {
       onChange={onChange}
       id={id}
       name={name}
+      disabled={disabled}
     />
   );
 }
