@@ -37,13 +37,16 @@ function Reservation({ price, params, data }: TReservation) {
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
-  async function handleCartClick() {
+  function checkLogin() {
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
       alert('로그인 후 진행하실 수 있습니다.');
       router.push('/sign-in');
-      return;
+      return false;
     }
+    return true;
+  }
+  async function addCartItem() {
     if (day === 0) {
       alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
       return;
@@ -95,6 +98,14 @@ function Reservation({ price, params, data }: TReservation) {
       }, 2500);
     }
   }
+  function needAuth(callback : any) {
+    if (checkLogin()) {
+      callback();
+    }
+  }
+  async function handleCartClick() {
+    needAuth(addCartItem);
+  }
   async function handleClickReservation({
     value,
     valueSecond,
@@ -103,39 +114,40 @@ function Reservation({ price, params, data }: TReservation) {
     selectedOption,
   }: TReservationForm) {
     const token = sessionStorage.getItem('accessToken');
-    if (token === null) {
-      alert('로그인 후 진행하실 수 있습니다.');
-      router.push('/sign-in');
-      return;
-    }
-    if (day === 0) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
-      return;
-    }
-    const startDate = moment(value).format('YYYY-MM-DD');
-    const endDate = moment(valueSecond).format('YYYY-MM-DD');
-    try {
-      const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
-      if (res.data.code === 2001) {
-        const productData = [
-          {
-            accommodation_name: data.accommodation_name,
-            address: data.address,
-            accommodation_price: price * day,
-            accommodation_img: data.accommodation_img,
-            start_date: startDate,
-            end_date: endDate,
-            accommodation_id: id,
-            people_number: selectedOption,
-            cart_id: 0,
-          },
-        ];
-        setProduct(productData);
-        router.push('/reservation');
+    needAuth(async () => {
+      if (day === 0) {
+        alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
+        return;
       }
-    } catch (error) {
-      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
-    }
+      const startDate = moment(value).format('YYYY-MM-DD');
+      const endDate = moment(valueSecond).format('YYYY-MM-DD');
+      try {
+        const res = await ROOMS_API.checkReservation({
+          startDate,
+          endDate,
+          id,
+        });
+        if (res.data.code === 2001) {
+          const productData = [
+            {
+              accommodation_name: data.accommodation_name,
+              address: data.address,
+              accommodation_price: price * day,
+              accommodation_img: data.accommodation_img,
+              start_date: startDate,
+              end_date: endDate,
+              accommodation_id: id,
+              people_number: selectedOption,
+              cart_id: 0,
+            },
+          ];
+          setProduct(productData);
+          router.push('/reservation');
+        }
+      } catch (error) {
+        alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+      }
+    });
   }
   function isNaturalNumber(value: TCheckValue) {
     return Number.isInteger(value) && value >= 0;
