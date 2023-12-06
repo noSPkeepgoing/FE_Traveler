@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { TCartItemProps } from './cartItemType';
 import Button from '@/components/atoms/button';
 import { VscChromeClose } from 'react-icons/vsc';
+import Checkbox from '@/components/atoms/checkbox';
 
 function SoldOutCartItem({
   data,
@@ -11,6 +12,7 @@ function SoldOutCartItem({
 }: Pick<TCartItemProps, 'data' | 'handleDeleteCartItems'>) {
   return (
     <div className={styles.cartItem}>
+      <Checkbox disabled={true} />
       <div className={styles.itemInfo}>
         <Text fontSize="xs" fontWeight="bold" color="gray400">
           {data.accommodation_name}
