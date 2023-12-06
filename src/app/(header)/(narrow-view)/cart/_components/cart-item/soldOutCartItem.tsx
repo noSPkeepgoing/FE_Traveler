@@ -14,9 +14,14 @@ function SoldOutCartItem({
     <div className={styles.cartItem}>
       <Checkbox disabled={true} />
       <div className={styles.itemInfo}>
-        <Text fontSize="xs" fontWeight="bold" color="gray400">
-          {data.accommodation_name}
-        </Text>
+        <Button
+          href={`rooms/${data.accommodation_id}`}
+          variant="text"
+          textDecoration="none">
+          <Text fontSize="xs" fontWeight="bold" color="gray400">
+            {data.accommodation_name}
+          </Text>
+        </Button>
         <div className={styles.imageInfo}>
           <Image
             src={data.accommodation_img}
