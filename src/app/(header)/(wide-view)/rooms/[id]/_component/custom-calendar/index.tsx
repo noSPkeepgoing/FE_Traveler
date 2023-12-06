@@ -48,12 +48,13 @@ function CustomCalendar({
   }, [value, valueSecond]);
 
   useEffect(() => {
-    window.addEventListener('click', (e) => {
-      // const targetClassName = e.target.className;
-      // if (targetClassName.includes('react-calendar') || targetClassName.includes('customCalendar_DropdownButton__b_Z_7')) {
-      //   // setIsOpen(true);
-      //   return;
-      // }
+    window.addEventListener('click', (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const targetClassName = target?.className;
+      if (targetClassName.includes('react-calendar') || targetClassName.includes('customCalendar_DropdownButton__b_Z_7')) {
+        // setIsOpen(true);
+        return;
+      }
       setIsOpen(false);
     });
   }, []);

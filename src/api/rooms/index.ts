@@ -7,7 +7,7 @@ export const ROOMS_API = {
     ),
   getProduct: async (id: TProductId) => {
     const res = await instance.get(`/v1/accommodations/${id}`, {
-      headers: { cache: 'no-cache' },
+      headers: { cache: 'force-cache' },
     });
     return res.data;
   },
