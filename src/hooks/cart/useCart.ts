@@ -15,6 +15,10 @@ function useCart() {
   const setProductState = useSetRecoilState(productState);
   const router = useRouter();
 
+  const getNotSoldOutItems = (cartData: TCartItem[]) => {
+    return cartData.filter((item) => !item.accommodation_sold_out);
+  };
+
   const {
     data: cartData,
     refetch: refetchCartData,
@@ -24,16 +28,12 @@ function useCart() {
     select(data) {
       return data.data.data;
     },
+    onSuccess(cartData) {
+      setSelectedItems(getNotSoldOutItems(cartData));
+    },
   });
 
-  useEffect(() => {
-    if (cartData) {
-      const notSoldOutItems = cartData.filter(
-        (item) => !item.accommodation_sold_out,
-      );
-      setSelectedItems(notSoldOutItems);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
@@ -50,10 +50,7 @@ function useCart() {
   const selectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (cartData && event.currentTarget.checked) {
       /* 장바구니 최대 갯수가 10개로 제한되어 있어 filter 사용이 성능에 크게 미치지 않을거라고 판단됩니다 */
-      const notSoldOutItems = cartData.filter(
-        (item) => !item.accommodation_sold_out,
-      );
-      setSelectedItems(notSoldOutItems);
+      setSelectedItems(getNotSoldOutItems(cartData));
     } else {
       setSelectedItems([]);
     }
@@ -61,9 +58,7 @@ function useCart() {
 
   const isAllSelected = () => {
     if (cartData) {
-      const notSoldOutItems = cartData.filter(
-        (item) => !item.accommodation_sold_out,
-      );
+      const notSoldOutItems = getNotSoldOutItems(cartData);
       return selectedItems.length === notSoldOutItems.length;
     }
     return false;
