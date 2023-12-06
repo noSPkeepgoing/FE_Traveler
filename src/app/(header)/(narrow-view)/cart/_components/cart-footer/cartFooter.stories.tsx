@@ -27,9 +27,23 @@ const meta = {
   argTypes: {
     totalPrice: {
       description: '총 결제 금액을 나타내는 데이터입니다',
+      table: {
+        type: { summary: 'CartFooterTotalPrice' },
+        defaultValue: { summary: 0 },
+        control: {
+          type: 'number',
+        },
+      },
     },
     selectedItemsLength: {
       description: '선택된 장바구니 상품의 개수를 의미하는 데이터입니다',
+      table: {
+        type: { summary: 'CartFooterTotalPrice' },
+        defaultValue: { summary: 0 },
+        control: {
+          type: 'number',
+        },
+      },
     },
   },
 } satisfies Meta<typeof CartFooter>;
@@ -51,23 +65,14 @@ export const ExampleCartFooter: StoryObj<typeof CartFooter> = {
       },
     },
   },
-  render: () => {
-    const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
-    const calculateTotalPrice = () => {
-      return selectedItems.reduce(
-        (totalPrice, items) => totalPrice + items.cart_price,
-        0,
-      );
-    };
-
+  render: (args) => {
     const handleReservation = () => {};
 
     return (
       <CartFooter
-        totalPrice={calculateTotalPrice()}
-        selectedItemsLength={selectedItems.length}
-        handleReservation={handleReservation}
-      />
+        totalPrice={args.totalPrice}
+        selectedItemsLength={args.selectedItemsLength}
+        handleReservation={handleReservation}></CartFooter>
     );
   },
 };

@@ -34,13 +34,36 @@
     border: 1px solid #b0b0b0;
   }
   &.text {
-    &:hover {
-      text-decoration: underline;
-      text-decoration-color: black;
+    &.underline {
+      &.primary {
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: $primary;
+        }
+      }
+      &.highlight {
+        &:hover {
+          text-decoration: underline;
+          text-decoration-color: $highlight;
+        }
+      }
+    }
+    &.none {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &.disabled {
+      cursor: auto;
+      &:hover {
+        text-decoration: none !important;
+      }
     }
   }
-  &.disabled {
-    background-color: #cccccc;
-    cursor: auto;
+  &.default {
+    &.disabled {
+      background-color: #cccccc;
+      cursor: auto;
+    }
   }
 }
