@@ -53,9 +53,17 @@
         text-decoration: none;
       }
     }
+    &.disabled {
+      cursor: auto;
+      &:hover {
+        text-decoration: none !important;
+      }
+    }
   }
-  &.disabled {
-    background-color: #cccccc;
-    cursor: auto;
+  &.default {
+    &.disabled {
+      background-color: #cccccc;
+      cursor: auto;
+    }
   }
 }
