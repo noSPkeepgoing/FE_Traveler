@@ -1,6 +1,6 @@
 'use client';
 import styles from './carousel.module.scss';
-import React, { useCallback, useRef } from 'react';
+import React, { useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -9,8 +9,8 @@ import { TCarousel } from './carouselType';
 
 function Carousel({ imgs }: TCarousel) {
   const slickRef = useRef<Slider | null>(null);
-  const previous = useCallback(() => slickRef.current?.slickPrev(), []);
-  const next = useCallback(() => slickRef.current?.slickNext(), []);
+  const previous = () => slickRef.current?.slickPrev();
+  const next = () => slickRef.current?.slickNext();
   const settings = {
     dots: false,
     arrows: false,
@@ -23,7 +23,7 @@ function Carousel({ imgs }: TCarousel) {
   return (
     <div className={styles.carousel}>
       <Slider {...settings} ref={slickRef}>
-        {imgs.map((item : string, index : number) => (
+        {imgs.map((item: string, index: number) => (
           <div key={index}>
             <img src={item} alt="Slide" className={styles.carouselImage} />
           </div>

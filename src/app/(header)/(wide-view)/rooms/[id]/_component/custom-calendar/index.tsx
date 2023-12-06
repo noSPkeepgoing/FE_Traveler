@@ -50,9 +50,11 @@ function CustomCalendar({
   useEffect(() => {
     window.addEventListener('click', (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const targetClassName = target?.className;
-      if (targetClassName.includes('react-calendar') || targetClassName.includes('customCalendar_DropdownButton__b_Z_7')) {
-        // setIsOpen(true);
+      const targetClassName = target.className;
+      if (typeof targetClassName === 'object') {
+        return;
+      }
+      if (target && targetClassName?.includes('react-calendar') || targetClassName?.includes('customCalendar_DropdownButton__b_Z_7')) {
         return;
       }
       setIsOpen(false);
