@@ -10,7 +10,7 @@ import { RESPONSE_CODE } from '@/constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
-import { emailRegex } from '@/constants/emailRegex';
+import { EMAIL_REGEX } from '@/constants/emailRegex';
 import { setSessionCookie } from '@/constants/cookie';
 import Swal from 'sweetalert2';
 
@@ -54,7 +54,7 @@ function SignInForm() {
       );
       return;
     }
-    if (!emailRegex.test(userData.email)) {
+    if (!EMAIL_REGEX.test(userData.email)) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
         '올바르지 않은 이메일 형식입니다.',

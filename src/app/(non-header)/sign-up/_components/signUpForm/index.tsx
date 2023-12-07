@@ -11,7 +11,7 @@ import { RESPONSE_CODE } from '@constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
-import { emailRegex } from '@/constants/emailRegex';
+import { EMAIL_REGEX } from '@/constants/emailRegex';
 import Swal from 'sweetalert2';
 
 function SignUpForm() {
@@ -162,7 +162,7 @@ function SignUpForm() {
     const email = formData.get('email');
 
     if (typeof email === 'string') {
-      if (!emailRegex.test(email)) {
+      if (!EMAIL_REGEX.test(email)) {
         setMessageAndHideAfterDelay(
           setEmailMessage,
           '올바르지 않은 이메일 형식입니다.',
