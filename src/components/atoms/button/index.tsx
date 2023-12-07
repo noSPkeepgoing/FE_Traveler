@@ -4,15 +4,24 @@ import { TButton } from './buttonType';
 import Link from 'next/link';
 
 function Button({
-  size = '',
+  size,
   variant = 'default',
   children,
   onClick,
   disabled = false,
   type = 'button',
+  textDecoration = 'underline',
+  textDecorationColor = 'primary',
   href,
 }: TButton) {
-  const className = classNames('button', size, variant, { disabled });
+  const className = classNames(
+    'button',
+    size,
+    variant,
+    { disabled },
+    textDecoration,
+    textDecorationColor,
+  );
   if (href)
     return (
       <Link href={href} className={className}>

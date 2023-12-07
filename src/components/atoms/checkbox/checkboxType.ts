@@ -3,4 +3,5 @@ export type Tcheckbox = {
   isChecked?: boolean;
   id?: string;
   name?: string;
+  disabled?: boolean;
 };
