@@ -2,6 +2,7 @@ import { HTTP_BASE_URL } from '@/constants/api';
 import axios from 'axios';
 import { TOKEN_API } from './refresh-token';
 import { useRouter } from 'next/navigation';
+import { deleteCookie } from '@/constants/cookie';
 
 const isServer = typeof window === 'undefined';
 let headers;
@@ -24,6 +25,8 @@ instance.interceptors.request.use(
         sessionStorage && sessionStorage.getItem('accessToken');
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
+      } else {
+        deleteCookie('refreshToken');
       }
     }
     return config;
