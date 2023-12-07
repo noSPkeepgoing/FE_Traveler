@@ -18,6 +18,7 @@
 
 .container {
   width: 100%;
-  @include flex(row);
-  margin-top: 4rem;
+  @include flex(column);
+  gap: 2rem;
+  margin-top: 6rem;
 }

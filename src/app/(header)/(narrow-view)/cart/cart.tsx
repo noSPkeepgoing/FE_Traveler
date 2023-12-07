@@ -7,6 +7,8 @@ import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
 import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
 import CartSkeleton from './_components/cart-skeleton';
+import { BsCart, BsCloudSlash } from 'react-icons/bs';
+import Button from '@/components/atoms/button';
 
 function Cart() {
   const {
@@ -38,16 +40,23 @@ function Cart() {
   if (isError)
     return (
       <section className={styles.container}>
-        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+        <BsCloudSlash size="100" />
+        <Text fontSize="xl" fontWeight="semibold" color="blackAlpha100">
           알 수 없는 에러가 발생했습니다
         </Text>
+        <Button href="/main" variant="text">
+          <Text fontSize="xs" fontWeight="normal" color="primary">
+            홈 화면으로 이동하기
+          </Text>
+        </Button>
       </section>
     );
 
   if (cartData?.length === 0) {
     return (
       <section className={styles.container}>
-        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+        <BsCart size="100" />
+        <Text fontSize="lg" fontWeight="semibold" color="blackAlpha100">
           장바구니에 담긴 상품이 없습니다
         </Text>
       </section>
