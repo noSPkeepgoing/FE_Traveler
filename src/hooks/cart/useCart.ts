@@ -6,7 +6,7 @@ import { productState } from '@/recoil/order';
 import { TProduct } from '@/recoil/productType';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
@@ -32,6 +32,9 @@ function useCart() {
       setSelectedItems(getNotSoldOutItems(cartData));
     },
   });
+  useEffect(() => {
+    if (cartData) setSelectedItems(getNotSoldOutItems(cartData));
+  }, []);
 
   const { mutate: deleteCartItems } = useDeleteCartItems({
     onSuccess() {
