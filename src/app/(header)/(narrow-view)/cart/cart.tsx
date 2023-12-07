@@ -9,21 +9,19 @@ import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
 import CartSkeleton from './_components/cart-skeleton';
 import { BsCart, BsCloudSlash } from 'react-icons/bs';
 import Button from '@/components/atoms/button';
+import useSelect from '@/hooks/cart/useSelect';
 
 function Cart() {
+  const { cartData, isLoading, isError, selectedItems } = useCart();
   const {
-    cartData,
-    isLoading,
-    isError,
     selectAll,
     isAllSelected,
     handleSelectItem,
     isSelected,
     calculateTotalPrice,
-    selectedItems,
     handleDeleteCartItems,
     handleReservation,
-  } = useCart();
+  } = useSelect();
 
   if (isLoading) {
     const skeletonArray = new Array(5).fill('');
