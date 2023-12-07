@@ -11,6 +11,7 @@ import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
 import { emailRegex } from '@/constants/emailRegex';
+import { setSessionCookie } from '@/constants/cookie';
 import Swal from 'sweetalert2';
 
 function SignInForm() {
@@ -82,6 +83,7 @@ function SignInForm() {
       sessionStorage.setItem('refreshToken', refreshToken);
       sessionStorage.setItem('userName', userName);
       sessionStorage.setItem('userEmail', userEmail);
+      setSessionCookie('refreshToken', refreshToken);
 
       const responseCode = response.data.code;
       switch (responseCode) {

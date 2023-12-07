@@ -8,6 +8,8 @@ import Button from '../../atoms/button';
 import Text from '../../atoms/text';
 import { THeader } from './headerType';
 import { instance } from '@/api';
+import { deleteCookie } from '@/constants/cookie';
+import Swal from 'sweetalert2';
 
 function Header({ border = true }: THeader) {
   const router = useRouter();
@@ -22,16 +24,39 @@ function Header({ border = true }: THeader) {
     try {
       const accessToken = sessionStorage.getItem('accessToken');
       if (accessToken) {
-        const shouldLogout = window.confirm('로그아웃 하시겠습니까?');
-        if (shouldLogout) {
-          const headers = { Authorization: `Bearer ${accessToken}` };
-          await instance.post<Response>('v1/member/logout', {}, { headers });
+        // const shouldLogout = window.confirm('로그아웃 하시겠습니까?');
+        Swal.fire({
+          title: '로그아웃 하시겠습니까?',
+          icon: 'warning',
 
-          sessionStorage.removeItem('accessToken');
-          sessionStorage.removeItem('refreshToken');
-          setIsOnline(false);
-          router.push('/main');
-        }
+          showCancelButton: true,
+
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '로그아웃',
+          cancelButtonText: '취소',
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            Swal.fire('로그아웃 되었습니다.', ' ', 'success');
+
+            let headers = { Authorization: `Bearer ${accessToken}` };
+            await instance.post<Response>('v1/member/logout', {}, { headers });
+            if (accessToken) {
+              headers = { Authorization: '' };
+              sessionStorage.removeItem('accessToken');
+              sessionStorage.removeItem('refreshToken');
+              deleteCookie('refreshToken');
+              setIsOnline(false);
+              if (!sessionStorage.getItem('accessToken')) {
+                console.log(
+                  '엑세스토큰: ',
+                  sessionStorage.getItem('accessToken'),
+                );
+                router.push('/main');
+              }
+            }
+          }
+        });
       }
     } catch (error) {
       throw new Error('로그아웃 실패.');
