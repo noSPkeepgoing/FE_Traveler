@@ -43,10 +43,8 @@ function Header({ border = true }: THeader) {
             await instance.post<Response>('v1/member/logout', {}, { headers });
             if (accessToken) {
               headers = { Authorization: '' };
-              sessionStorage.removeItem('accessToken');
               sessionStorage.removeItem('refreshToken');
               deleteCookie('refreshToken');
-              deleteCookie('accessToken');
               setIsOnline(false);
               if (!sessionStorage.getItem('accessToken')) {
                 console.log(
