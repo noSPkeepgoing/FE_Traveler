@@ -4,7 +4,7 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { TSignUp } from './signUpType';
+import { TLabelMessage, TSignUp } from './signUpType';
 import Input from '@/components/atoms/input';
 import { SIGNUP_API } from '@/api/sign-up';
 import { RESPONSE_CODE } from '@constants/api';
@@ -16,21 +16,25 @@ import Swal from 'sweetalert2';
 
 function SignUpForm() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  const [emailMessage, setEmailMessage] = useState({
+  const [email, setEmail] = useState<string>('');
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [emailMessage, setEmailMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordMessage, setPasswordMessage] = useState({
+  const [passwordMessage, setPasswordMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordCheckMessage, setPasswordCheckMessage] = useState({
+  const [passwordCheckMessage, setPasswordCheckMessage] =
+    useState<TLabelMessage>({
+      message: '',
+      error: false,
+    });
+  const [nameMessage, setNameMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [nameMessage, setNameMessage] = useState({ message: '', error: false });
 
   // 각 상태관리 함수 메세지값 전달용 함수
   const setMessageAndHideAfterDelay = (
@@ -48,7 +52,7 @@ function SignUpForm() {
 
   /* -------------------- 회원가입 submit 핸들러 함수 --------------------*/
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const signupHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // form 데이터 Target함수
@@ -211,7 +215,7 @@ function SignUpForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={signupHandler}>
       <div className={styles.form}>
         <div className={styles.info}>
           <Text color="primary" fontSize="xl" fontWeight="medium">
