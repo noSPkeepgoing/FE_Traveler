@@ -10,50 +10,17 @@ import { THeader } from './headerType';
 import { instance } from '@/api';
 import { deleteCookie } from '@/constants/cookie';
 import Swal from 'sweetalert2';
+import { signOut } from '@/utils/signOutHandler';
 
 function Header({ border = true }: THeader) {
   const router = useRouter();
-
-  const [isOnline, setIsOnline] = useState(false);
-
+  const [isOnline, setIsOnline] = useState<boolean>(false);
   const containerClassName = classNames(styles.container, {
     [styles.border]: border,
   });
 
   const signOutHandler = async () => {
-    try {
-      const accessToken = sessionStorage.getItem('accessToken');
-      if (accessToken) {
-        Swal.fire({
-          title: '로그아웃 하시겠습니까?',
-          icon: 'warning',
-
-          showCancelButton: true,
-
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '로그아웃',
-          cancelButtonText: '취소',
-        }).then(async (result) => {
-          if (result.isConfirmed) {
-            Swal.fire('로그아웃 되었습니다.', ' ', 'success');
-            let headers = { Authorization: `Bearer ${accessToken}` };
-            await instance.post<Response>('v1/member/logout', {}, { headers });
-            if (accessToken) {
-              headers = { Authorization: '' };
-              sessionStorage.removeItem('refreshToken');
-              deleteCookie('refreshToken');
-              setIsOnline(false);
-              if (!sessionStorage.getItem('accessToken')) {
-                router.push('/main');
-              }
-            }
-          }
-        });
-      }
-    } catch (error) {
-      throw new Error('로그아웃 실패.');
-    }
+    await signOut(router, setIsOnline, instance);
   };
 
   useEffect(() => {
