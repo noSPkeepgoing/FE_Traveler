@@ -46,6 +46,7 @@ function Header({ border = true }: THeader) {
               sessionStorage.removeItem('accessToken');
               sessionStorage.removeItem('refreshToken');
               deleteCookie('refreshToken');
+              deleteCookie('accessToken');
               setIsOnline(false);
               if (!sessionStorage.getItem('accessToken')) {
                 console.log(
@@ -64,11 +65,12 @@ function Header({ border = true }: THeader) {
   };
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    if (accessToken) {
+    const refreshToken = sessionStorage.getItem('refreshToken');
+    if (refreshToken) {
       setIsOnline(true);
     } else {
       setIsOnline(false);
+      deleteCookie('refreshToken');
     }
   }, []);
 
