@@ -1,3 +1,4 @@
+@import '@/styles/common.scss';
 .selectContainer {
   display: flex;
   align-items: center;
@@ -5,9 +6,7 @@
   border-bottom: 2px solid #e5e5e5;
 }
 .allSelection {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   gap: 0.4rem;
 }
 
