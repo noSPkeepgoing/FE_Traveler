@@ -24,7 +24,6 @@ function Header({ border = true }: THeader) {
     try {
       const accessToken = sessionStorage.getItem('accessToken');
       if (accessToken) {
-        // const shouldLogout = window.confirm('로그아웃 하시겠습니까?');
         Swal.fire({
           title: '로그아웃 하시겠습니까?',
           icon: 'warning',
@@ -38,7 +37,6 @@ function Header({ border = true }: THeader) {
         }).then(async (result) => {
           if (result.isConfirmed) {
             Swal.fire('로그아웃 되었습니다.', ' ', 'success');
-
             let headers = { Authorization: `Bearer ${accessToken}` };
             await instance.post<Response>('v1/member/logout', {}, { headers });
             if (accessToken) {
@@ -47,10 +45,6 @@ function Header({ border = true }: THeader) {
               deleteCookie('refreshToken');
               setIsOnline(false);
               if (!sessionStorage.getItem('accessToken')) {
-                console.log(
-                  '엑세스토큰: ',
-                  sessionStorage.getItem('accessToken'),
-                );
                 router.push('/main');
               }
             }
