@@ -19,6 +19,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (!isServer) {
+      config.headers.Authorization = '';
       const accessToken =
         sessionStorage && sessionStorage.getItem('accessToken');
       if (accessToken) {
