@@ -1,4 +1,4 @@
 export type TCategoryListProps = {
-  isSelected: number;
+  selectedCategoryNumber: number;
   handleSelect: (num: number) => void;
 };

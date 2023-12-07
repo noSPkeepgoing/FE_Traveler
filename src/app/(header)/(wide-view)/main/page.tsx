@@ -7,7 +7,7 @@ import useMain from '@/hooks/main/useMain';
 
 function MainPage() {
   const {
-    isSelected,
+    selectedCategoryNumber,
     handleSelect,
     accommodationData,
     isLoading,
@@ -17,7 +17,10 @@ function MainPage() {
 
   return (
     <>
-      <CategoryList isSelected={isSelected} handleSelect={handleSelect} />
+      <CategoryList
+        selectedCategoryNumber={selectedCategoryNumber}
+        handleSelect={handleSelect}
+      />
       <ItemList
         data={accommodationData}
         isLoading={isLoading}

@@ -3,12 +3,16 @@ import styles from './category.module.scss';
 import Text from '@/components/atoms/text';
 import { TCategoryProps } from './categoryType';
 
-function Category({ item, isSelected, handleSelect }: TCategoryProps) {
+function Category({
+  item,
+  selectedCategoryNumber,
+  handleSelect,
+}: TCategoryProps) {
   const handleClick = () => {
-    handleSelect(item.num);
+    handleSelect(item.id);
   };
 
-  if (isSelected === item.num) {
+  if (selectedCategoryNumber === item.id) {
     return (
       <div
         onClick={handleClick}
