@@ -4,8 +4,8 @@ import Button from '@/components/atoms/button/index';
 import React from 'react';
 import styles from './reservationCheck.module.scss';
 import Text from '@/components/atoms/text';
-import Subtitles from './_components/subtitles';
-import SubtitlesContent from './_components/subtitles-content';
+import DetailTitles from './_components/detail-titles';
+import DetailContents from './_components/detail-contents';
 import checkmark from './checkmark.svg';
 import Image from 'next/image';
 import { useRecoilValue } from 'recoil';
@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 function ReservationCheck() {
   const successProduct = useRecoilValue(successProductsState);
-  const isReserved = !(successProduct.total_accommodation_num === 0);
+  const isReserved = successProduct.total_accommodation_num !== 0;
 
   if (!isReserved && typeof window !== 'undefined') {
     Swal.fire('상품이 존재하지 않습니다');
@@ -44,14 +44,14 @@ function ReservationCheck() {
       </main>
 
       <div className={styles.leftContent}>
-        <Subtitles text="상품명" />
-        <SubtitlesContent text={accommodation_name} />
-        <Subtitles text="결제 금액" />
-        <SubtitlesContent
+        <DetailTitles text="상품명" />
+        <DetailContents text={accommodation_name} />
+        <DetailTitles text="결제 금액" />
+        <DetailContents
           text={`${successProduct.total_price.toLocaleString()}원`}
         />
-        <Subtitles text="결제 날짜" />
-        <SubtitlesContent text={order_date} />
+        <DetailTitles text="결제 날짜" />
+        <DetailContents text={order_date} />
       </div>
 
       <main className={styles.mainContent}>

@@ -1,10 +1,5 @@
 @use '@styles/_variables.scss' as vars;
 
-/** {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}*/
 .frame {
   max-width: 770px;
   margin: 0 auto;
@@ -48,9 +43,6 @@
     align-items: center;
     margin-bottom: 1rem;
 
-    .itemDetails {
-    }
-
     .itemPrice {
       font-weight: bold;
       color: #000;
@@ -84,6 +76,7 @@
 .sameLine {
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: flex-start;
   align-items: center;
 }

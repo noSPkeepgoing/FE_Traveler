@@ -1,5 +1,7 @@
 'use client';
-import Button from '@/components/atoms/button/index';
+import SubmitButton from './_components/submit-button';
+import PurchaseInfo from './_components/purchase-info';
+import ReservationItems from './_components/reservation-items';
 import styles from './reservation.module.scss';
 import Input from '@/components/atoms/input/index';
 import Checkbox from '@/components/atoms/checkbox';
@@ -11,13 +13,13 @@ import Swal from 'sweetalert2';
 import { usePostReservation } from '@/queries/reservation/useReservation';
 import { TReservationItems } from '@/api/reservation/reservationApiType';
 import { successProductsState } from '@/recoil/successProducts';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { TProduct } from '@/recoil/productType';
 
 function Reservation() {
   const router = useRouter();
-
   const products = useRecoilValue(productState);
+
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
 
@@ -123,48 +125,11 @@ function Reservation() {
             <Text fontSize="xs" fontWeight="normal">
               숙소
             </Text>
-
-            <section className={styles.reservationItemContainer}>
-              {products?.map((item) => (
-                <div className={styles.reservationItem}>
-                  <div className={styles.itemInfo}>
-                    <div className={styles.imageInfo}>
-                      <Image
-                        src={item.accommodation_img}
-                        width={80}
-                        height={80}
-                        alt="숙소 이미지"
-                        className={styles.accommodationImage}
-                      />
-                      <div className={styles.detailInfo}>
-                        <Text fontSize="xs" fontWeight="bold">
-                          {item.accommodation_name}
-                        </Text>
-                        <Text
-                          fontSize="xs-3"
-                          fontWeight="medium"
-                          color="blackAlpha100">
-                          {`${item.start_date} ~ ${item.end_date} / ${item.people_number}명`}
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.priceInfo}>
-                    <Text fontSize="md" fontWeight="medium">
-                      {`${item.accommodation_price.toLocaleString()}원`}
-                    </Text>
-                    <Text fontSize="xs-3" fontWeight="normal" color="red200">
-                      취소 및 환불 불가
-                    </Text>
-                  </div>
-                </div>
-              ))}
-            </section>
+            <ReservationItems products={products} />
           </div>
 
           <div className={styles.parts}>
             <div className={styles.container}>
-              {/* <Text fontSize='md' color='black' /> */}
               <Text fontSize="md" fontWeight="bold">
                 예약자 정보
               </Text>
@@ -223,22 +188,10 @@ function Reservation() {
           </div>
 
           <div className={styles.parts}>
-            <Text fontSize="md" fontWeight="bold">
-              결제 정보
-            </Text>
-            <div className={styles.grayLine}></div>
-            <div className={styles.totalPrice}>
-              <Text fontSize="sm" fontWeight="medium" color="primary">
-                총 결제 금액
-              </Text>
-              <Text fontSize="sm" fontWeight="medium" color="highlight">
-                {`${calculateTotalPrice().toLocaleString()}원`}
-              </Text>
-            </div>
+            <PurchaseInfo price={calculateTotalPrice().toLocaleString()} />
           </div>
 
           <div className={styles.parts}>
-            {/* <Checkbox onChange={} isChecked={}/> */}
             <Text fontSize="md" fontWeight="bold">
               필수약관 동의
             </Text>
@@ -246,14 +199,7 @@ function Reservation() {
               <Checkbox id="check" name="check" />만 14세 이용 동의
             </div>
           </div>
-
-          <div className={styles.parts}>
-            <Button variant="default" size="xl" type="submit">
-              <Text fontSize="xs" fontWeight="normal" color="white">
-                결제하기
-              </Text>
-            </Button>
-          </div>
+          <SubmitButton />
         </div>
       </form>
     </>
