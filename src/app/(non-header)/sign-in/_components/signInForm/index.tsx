@@ -3,7 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import styles from './signInForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { TSignIn } from './signInType';
+import { TLabelMessage, TSignIn } from './signInType';
 import Input from '@/components/atoms/input';
 import { SIGNIN_API } from '@/api/sign-in/Index';
 import { RESPONSE_CODE } from '@/constants/api';
@@ -13,16 +13,17 @@ import { useRouter } from 'next/navigation';
 import { EMAIL_REGEX } from '@/constants/emailRegex';
 import { setSessionCookie } from '@/constants/cookie';
 import Swal from 'sweetalert2';
+import { sessionSet } from '@/utils/sessionStorage';
 
 function SignInForm() {
   const router = useRouter();
 
   // 각 Input 라벨 메세지용 state
-  const [emailMessage, setEmailMessage] = useState({
+  const [emailMessage, setEmailMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordMessage, setPasswordMessage] = useState({
+  const [passwordMessage, setPasswordMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
@@ -74,15 +75,18 @@ function SignInForm() {
     // 로그인 진행
     try {
       const response = await SIGNIN_API.userSignIn(userData);
-      const accessToken = response.data.data.access_token;
-      const refreshToken = response.data.data.refresh_token;
-      const userName = response.data.data.name;
-      const userEmail = response.data.data.email;
+      const apiData = response.data.data;
+      const accessToken = apiData.access_token;
+      const refreshToken = apiData.refresh_token;
+      const userName = apiData.name;
+      const userEmail = apiData.email;
 
-      sessionStorage.setItem('accessToken', accessToken);
-      sessionStorage.setItem('refreshToken', refreshToken);
-      sessionStorage.setItem('userName', userName);
-      sessionStorage.setItem('userEmail', userEmail);
+      sessionSet({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userName: userName,
+        userEmail: userEmail,
+      });
       setSessionCookie('refreshToken', refreshToken);
 
       const responseCode = response.data.code;
