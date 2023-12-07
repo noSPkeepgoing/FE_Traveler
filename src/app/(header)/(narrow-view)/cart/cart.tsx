@@ -5,8 +5,8 @@ import CartFooter from './_components/cart-footer';
 import useCart from '@/hooks/cart/useCart';
 import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
-import Loader from '@/components/layouts/loader';
 import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
+import CartSkeleton from './_components/cart-skeleton';
 
 function Cart() {
   const {
@@ -23,7 +23,17 @@ function Cart() {
     handleReservation,
   } = useCart();
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    const skeletonArray = new Array(5).fill('');
+    return (
+      <>
+        <div className={styles.selectContainer}></div>
+        <section className={styles.cartContainer}>
+          {skeletonArray?.map((_, index) => <CartSkeleton key={index} />)}
+        </section>
+      </>
+    );
+  }
 
   if (isError)
     return (

@@ -21,9 +21,14 @@ function CartItem({
         isChecked={isSelected(data.cart_id)}
       />
       <div className={styles.itemInfo}>
-        <Text fontSize="xs" fontWeight="bold">
-          {data.accommodation_name}
-        </Text>
+        <Button
+          href={`rooms/${data.accommodation_id}`}
+          variant="text"
+          textDecoration="none">
+          <Text fontSize="xs" fontWeight="bold">
+            {data.accommodation_name}
+          </Text>
+        </Button>
         <div className={styles.imageInfo}>
           <Image
             src={data.accommodation_img}
