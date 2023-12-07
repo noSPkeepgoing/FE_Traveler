@@ -7,12 +7,7 @@ import { TCartItem } from '@/api/cart/cartApiType';
 const meta = {
   title: 'cart/CartFooter',
   component: CartFooter,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle:
       'CartFooter는 선택된 CartItem들의 totalPrice를 나타내고 예약하기 버튼이 존재하는 컴포넌트입니다. ',
     docs: {
