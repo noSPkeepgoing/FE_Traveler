@@ -10,12 +10,7 @@ import { TCartItem } from '@/api/cart/cartApiType';
 const meta = {
   title: 'cart/CartItem',
   component: CartItem,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle: 'CartItem는 장바구니 정보를 나타내는 컴포넌트입니다. ',
     docs: {
       description: {

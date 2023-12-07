@@ -5,12 +5,7 @@ import Layout from '../../../layout';
 const meta = {
   title: 'cart/CartTitle',
   component: CartTitle,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle: 'Cart page에서 title 컴포넌트입니다',
   },
 } satisfies Meta<typeof CartTitle>;
