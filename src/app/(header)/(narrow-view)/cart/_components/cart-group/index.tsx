@@ -11,6 +11,10 @@ function CartGroup({
   handleDeleteCartItems,
   selectedItems,
 }: TCartGroup) {
+  const handleClick = () => {
+    const cart_ids = selectedItems.map((item) => item.cart_id);
+    handleDeleteCartItems({ delete_id: cart_ids });
+  };
   return (
     <>
       <div className={styles.selectContainer}>
@@ -23,10 +27,7 @@ function CartGroup({
         <Button
           textDecorationColor="highlight"
           variant="text"
-          onClick={() => {
-            const cart_ids = selectedItems.map((item) => item.cart_id);
-            handleDeleteCartItems({ delete_id: cart_ids });
-          }}
+          onClick={handleClick}
           disabled={selectedItems.length === 0}>
           <Text
             fontSize="xs"
