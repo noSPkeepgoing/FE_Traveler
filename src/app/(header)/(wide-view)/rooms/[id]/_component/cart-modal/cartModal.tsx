@@ -9,7 +9,7 @@ function CartModal({type} : TCartModal ) {
   function handlePath(type: string): void {
     router.push(`/${type}`);
   }
-  if (type === 5000 || type === 5001 || type === 403) {
+  if (type === 'failure') {
     return (
       <div className={styles.modal}>
         <p
@@ -22,7 +22,7 @@ function CartModal({type} : TCartModal ) {
       </div>
     );
   }
-  else if  (type === 4002) {
+  else if  (type === 'MAXCART') {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">
@@ -38,7 +38,7 @@ function CartModal({type} : TCartModal ) {
       </div>
     );
   }
-  else if (type === 4001) {
+  else if (type === 'success') {
     return (
       <div className={styles.modal}>
         <Text color="white" fontSize="xs-3">
