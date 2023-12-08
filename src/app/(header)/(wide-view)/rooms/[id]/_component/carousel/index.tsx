@@ -6,8 +6,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { TCarousel } from './carouselType';
+import Image from 'next/image'
 
-function Carousel({ imgs }: TCarousel) {
+function Carousel({ roomImages }: TCarousel) {
   const slickRef = useRef<Slider | null>(null);
   const previous = () => slickRef.current?.slickPrev();
   const next = () => slickRef.current?.slickNext();
@@ -21,13 +22,12 @@ function Carousel({ imgs }: TCarousel) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log(imgs.length);
   return (
     <div className={styles.carousel}>
       <Slider {...settings} ref={slickRef}>
-        {imgs.map((item: string, index: number) => (
+        {roomImages.map((item: string, index: number) => (
           <div key={index}>
-            <img src={item} alt="Slide" className={styles.carouselImage} />
+            <Image src={item} alt="Slide" className={styles.carouselImage} width={1080} height={460} />
           </div>
         ))}
       </Slider>
@@ -43,7 +43,7 @@ function Carousel({ imgs }: TCarousel) {
           next();
           setCurrentImage((prev) => prev + 1);
         }}>
-        {currentImage !== imgs.length - 1 && (
+        {currentImage !== roomImages.length - 1 && (
           <GrNext className={styles.nextButton} />
         )}
       </div>

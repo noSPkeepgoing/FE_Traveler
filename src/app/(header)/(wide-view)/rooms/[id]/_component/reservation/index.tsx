@@ -12,6 +12,8 @@ import moment from 'moment';
 import { productState } from '@/recoil/order';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
+import { RESPONSE_CODE } from 'src/constants/api';
 import {
   TReservation,
   TReservationForm,
@@ -19,7 +21,7 @@ import {
   TCheckValue,
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
-import { DAY_SECOND } from '@/constants/rooms';
+import { DAY_SECOND, ZERO } from '@/constants/rooms';
 
 function Reservation({ price, params, data }: TReservation) {
   const currentDate = new Date();
@@ -47,7 +49,7 @@ function Reservation({ price, params, data }: TReservation) {
     return true;
   }
   async function addCartItem() {
-    if (day === 0) {
+    if (day === ZERO) {
       alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
       return;
     }
@@ -98,7 +100,7 @@ function Reservation({ price, params, data }: TReservation) {
       }, 2500);
     }
   }
-  function needAuth(callback : any) {
+  function needAuth(callback: () => void) {
     if (checkLogin()) {
       callback();
     }
@@ -127,7 +129,7 @@ function Reservation({ price, params, data }: TReservation) {
           endDate,
           id,
         });
-        if (res.data.code === 2001) {
+        if (res.data.code === RESPONSE_CODE.AVAILABLE_DATE) {
           const productData = [
             {
               accommodation_name: data.accommodation_name,
@@ -144,8 +146,14 @@ function Reservation({ price, params, data }: TReservation) {
           setProduct(productData);
           router.push('/reservation');
         }
-      } catch (error) {
-        alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+      } catch (error: AxiosError | unknown) {
+        if (
+          error instanceof AxiosError &&
+          error.response?.data?.code === RESPONSE_CODE.UNAVAILABLE_DATE
+        ) {
+          alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+        }
+        alert('예약이 불가능합니다. 잠시 후 다시시도해주세요.');
       }
     });
   }
