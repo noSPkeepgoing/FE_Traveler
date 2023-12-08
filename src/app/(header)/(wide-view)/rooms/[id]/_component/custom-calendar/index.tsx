@@ -49,14 +49,11 @@ function CustomCalendar({
 
   useEffect(() => {
     window.addEventListener('click', (e) => {
-      const targetClassName = e.target.className;
-      if (
-        targetClassName.includes('react-calendar') ||
-        targetClassName.includes('customCalendar_DropdownButton__b_Z_7')
-      ) {
-        // setIsOpen(true);
-        return;
-      }
+      // const targetClassName = e.target.className;
+      // if (targetClassName.includes('react-calendar') || targetClassName.includes('customCalendar_DropdownButton__b_Z_7')) {
+      //   // setIsOpen(true);
+      //   return;
+      // }
       setIsOpen(false);
     });
   }, []);
