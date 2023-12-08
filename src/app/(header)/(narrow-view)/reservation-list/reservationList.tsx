@@ -6,21 +6,12 @@ import styles from './reservationList.module.scss';
 import useReservationList from '@/hooks/reservation-list/useReservationList';
 import Text from '@/components/atoms/text';
 import Loader from '@/components/layouts/loader';
-import ReservationSkeleton from './_components/reservation-skeleton';
 
 function ReservationList() {
   const { reservationItems, fetchNextPage, hasNextPage, isError, isLoading } =
     useReservationList();
 
-  if (isLoading) {
-    const skeletonArray = new Array(5).fill('');
-    return (
-      <section className={styles.reservationItemContainer}>
-        {skeletonArray?.map((_, index) => <ReservationSkeleton key={index} />)}
-      </section>
-    );
-  }
-
+  if (isLoading) <Loader />;
   if (isError) {
     return (
       <section className={styles.reservationItemContainer}>

@@ -6,10 +6,10 @@ import useCart from '@/hooks/cart/useCart';
 import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
 import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
-import CartSkeleton from './_components/cart-skeleton';
 import { BsCart, BsCloudSlash } from 'react-icons/bs';
 import Button from '@/components/atoms/button';
 import useSelect from '@/hooks/cart/useSelect';
+import Loader from '@/components/layouts/loader';
 
 function Cart() {
   const { cartData, isLoading, isError, selectedItems } = useCart();
@@ -23,17 +23,7 @@ function Cart() {
     handleReservation,
   } = useSelect();
 
-  if (isLoading) {
-    const skeletonArray = new Array(5).fill('');
-    return (
-      <>
-        <div className={styles.selectContainer}></div>
-        <section className={styles.cartContainer}>
-          {skeletonArray?.map((_, index) => <CartSkeleton key={index} />)}
-        </section>
-      </>
-    );
-  }
+  if (isLoading) <Loader />;
 
   if (isError)
     return (
