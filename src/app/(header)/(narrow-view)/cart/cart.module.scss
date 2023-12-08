@@ -1,8 +1,8 @@
+@import '@/styles/common.scss';
+
 .title {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   margin-top: 1.25rem;
 }
 .cartContainer {
@@ -18,10 +18,6 @@
 
 .container {
   width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  @include flex(row);
   margin-top: 4rem;
 }

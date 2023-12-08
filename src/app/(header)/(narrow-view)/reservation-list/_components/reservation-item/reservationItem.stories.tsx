@@ -5,12 +5,7 @@ import ReservationItem from './page';
 const meta = {
   title: 'reservation-list/ReservationItem',
   component: ReservationItem,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle: 'Reservation List page에서 title 컴포넌트입니다',
   },
 } satisfies Meta<typeof ReservationItem>;
