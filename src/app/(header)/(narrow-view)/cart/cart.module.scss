@@ -1,23 +1,24 @@
+@import '@/styles/common.scss';
+
 .title {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   margin-top: 1.25rem;
 }
-.selectContainer {
+.cartContainer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.selectContainer {
   border-bottom: 2px solid #e5e5e5;
+  margin-bottom: 1.5rem;
+  margin-top: 2.3rem;
 }
 
 .container {
   width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 4rem;
+  @include flex(column);
+  gap: 2rem;
+  margin-top: 6rem;
 }

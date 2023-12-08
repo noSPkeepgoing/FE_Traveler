@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
 import Layout from '../../../layout';
-import { TCartItem } from '@/api/cart/cartApiType';
 
 const meta = {
   title: 'cart/CartFooter',
   component: CartFooter,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle:
       'CartFooter는 선택된 CartItem들의 totalPrice를 나타내고 예약하기 버튼이 존재하는 컴포넌트입니다. ',
     docs: {
@@ -29,7 +23,7 @@ const meta = {
       description: '총 결제 금액을 나타내는 데이터입니다',
       table: {
         type: { summary: 'CartFooterTotalPrice' },
-        defaultValue: { summary: 0 },
+        defaultValue: 100,
         control: {
           type: 'number',
         },
@@ -39,7 +33,7 @@ const meta = {
       description: '선택된 장바구니 상품의 개수를 의미하는 데이터입니다',
       table: {
         type: { summary: 'CartFooterTotalPrice' },
-        defaultValue: { summary: 0 },
+        defaultValue: 100,
         control: {
           type: 'number',
         },

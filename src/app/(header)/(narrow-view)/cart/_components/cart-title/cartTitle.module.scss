@@ -1,7 +1,6 @@
+@import '@/styles/common.scss';
 .title {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   margin: 1rem 0 0.625rem 0;
 }

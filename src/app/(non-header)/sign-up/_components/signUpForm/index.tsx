@@ -4,34 +4,37 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import styles from './signUpForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { TSignUp } from './signUpType';
+import { TLabelMessage, TSignUp } from './signUpType';
 import Input from '@/components/atoms/input';
 import { SIGNUP_API } from '@/api/sign-up';
 import { RESPONSE_CODE } from '@constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
+import { EMAIL_REGEX } from '@/constants/emailRegex';
+import Swal from 'sweetalert2';
 
 function SignUpForm() {
   const router = useRouter();
-  // 이메일 중복확인 버튼 활성화용 state
-  const [email, setEmail] = useState('');
-  const [isEmailValid, setIsEmailValid] = useState(false);
-
-  // 각 Input 라벨 메세지용 state
-  const [emailMessage, setEmailMessage] = useState({
+  const [email, setEmail] = useState<string>('');
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
+  const [emailMessage, setEmailMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordMessage, setPasswordMessage] = useState({
+  const [passwordMessage, setPasswordMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordCheckMessage, setPasswordCheckMessage] = useState({
+  const [passwordCheckMessage, setPasswordCheckMessage] =
+    useState<TLabelMessage>({
+      message: '',
+      error: false,
+    });
+  const [nameMessage, setNameMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [nameMessage, setNameMessage] = useState({ message: '', error: false });
 
   // 각 상태관리 함수 메세지값 전달용 함수
   const setMessageAndHideAfterDelay = (
@@ -40,17 +43,16 @@ function SignUpForm() {
     error: boolean,
   ) => {
     setMessage({ message, error });
-    setTimeout(() => setMessage({ message: '', color: 'black' }), 3000); // 3초 후 메시지를 숨기는 용도.
+    setTimeout(() => setMessage({ message: '', color: 'black' }), 3000);
   };
 
   useEffect(() => {
-    // 이메일 input 빈칸시
     setIsEmailValid(!email);
   }, [email]);
 
   /* -------------------- 회원가입 submit 핸들러 함수 --------------------*/
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const signupHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // form 데이터 Target함수
@@ -61,10 +63,9 @@ function SignUpForm() {
       passwordCheck: formData.get('passwordCheck') as string,
       name: formData.get('name') as string,
     };
-    // 객체 분해 할당으로 비밀번호 확인만 제외하고 apiData라는 객체에 할당! (api 전달용)
+
     const { passwordCheck, ...apiData } = userData;
 
-    // 각 form 데이터 유효성 검사 실시
     if (!userData.email) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
@@ -72,35 +73,40 @@ function SignUpForm() {
         true,
       );
       return;
-    } else if (!userData.password) {
+    }
+    if (!userData.password) {
       setMessageAndHideAfterDelay(
         setPasswordMessage,
         '비밀번호를 입력해주세요.',
         true,
       );
       return;
-    } else if (!/(?=.*[a-zA-Z])(?=.*[0-9]).{5,}/.test(userData.password)) {
+    }
+    if (!/(?=.*[a-zA-Z])(?=.*[0-9]).{5,}/.test(userData.password)) {
       setMessageAndHideAfterDelay(
         setPasswordMessage,
         '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
         true,
       );
       return;
-    } else if (!userData.passwordCheck) {
+    }
+    if (!userData.passwordCheck) {
       setMessageAndHideAfterDelay(
         setPasswordCheckMessage,
         '비밀번호 확인을 입력해주세요.',
         true,
       );
       return;
-    } else if (userData.password !== userData.passwordCheck) {
+    }
+    if (userData.password !== userData.passwordCheck) {
       setMessageAndHideAfterDelay(
         setPasswordCheckMessage,
         '입력된 비밀번호가 서로 다릅니다. 다시 확인해주세요.',
         true,
       );
       return;
-    } else if (!userData.name) {
+    }
+    if (!userData.name) {
       setMessageAndHideAfterDelay(setNameMessage, '이름을 입력해주세요.', true);
       return;
     }
@@ -111,23 +117,25 @@ function SignUpForm() {
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
-          alert('회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.');
+          Swal.fire(
+            '회원 가입에 성공했습니다. 가입한 아이디로 로그인해주세요.',
+          );
           router.push('/sign-in');
           break;
       }
-    } catch (error: unknown) {
+    } catch (error) {
       if (isAxiosError<Response>(error)) {
         if (error.response) {
           const responseCode = error.response.data.code;
           switch (responseCode) {
-            case RESPONSE_CODE.INVALID_EMAIL: // 이메일 형식 오류
+            case RESPONSE_CODE.INVALID_EMAIL:
               setMessageAndHideAfterDelay(
                 setEmailMessage,
                 '올바르지 않은 이메일 형식입니다.',
                 true,
               );
               break;
-            case RESPONSE_CODE.INVALID_PASSWORD: // 비밀번호 형식 오류
+            case RESPONSE_CODE.INVALID_PASSWORD:
               setMessageAndHideAfterDelay(
                 setPasswordMessage,
                 '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
@@ -142,7 +150,7 @@ function SignUpForm() {
               );
               break;
             default:
-              alert('회원 가입에 실패했습니다. 서버와의 연결을 확인해주세요.');
+              Swal.fire('회원 가입에 실패했습니다. 관리자에게 문의하세요.');
               break;
           }
         }
@@ -158,9 +166,7 @@ function SignUpForm() {
     const email = formData.get('email');
 
     if (typeof email === 'string') {
-      // 이메일 형식 유효성 검사
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
+      if (!EMAIL_REGEX.test(email)) {
         setMessageAndHideAfterDelay(
           setEmailMessage,
           '올바르지 않은 이메일 형식입니다.',
@@ -168,7 +174,6 @@ function SignUpForm() {
         );
         return;
       }
-
       try {
         // 이메일 중복체크 API 호출
         const response = await SIGNUP_API.emailCheck(email);
@@ -210,7 +215,7 @@ function SignUpForm() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={signupHandler}>
       <div className={styles.form}>
         <div className={styles.info}>
           <Text color="primary" fontSize="xl" fontWeight="medium">

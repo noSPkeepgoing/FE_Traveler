@@ -1,4 +1,5 @@
 @import '@/styles/_variables.scss';
+@import '@/styles/common.scss';
 
 .cartFooter {
   height: 7rem;
@@ -33,8 +34,6 @@
 }
 
 .cartTotalPriceInfo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   gap: 0.4rem;
 }

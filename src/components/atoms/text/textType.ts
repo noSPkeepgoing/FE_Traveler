@@ -7,6 +7,7 @@ export type TText = {
     | 'xs'
     | 'sm'
     | 'md'
+    | 'lg'
     | 'xl'
     | 'xl-2';
   fontWeight?:

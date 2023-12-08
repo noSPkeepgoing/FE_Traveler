@@ -1,39 +1,51 @@
 'use client';
 import styles from './carousel.module.scss';
-import React, { useCallback, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { TCarousel } from './carouselType';
+import Image from 'next/image'
 
-function Carousel({ imgs }: TCarousel) {
+function Carousel({ roomImages }: TCarousel) {
   const slickRef = useRef<Slider | null>(null);
-  const previous = useCallback(() => slickRef.current?.slickPrev(), []);
-  const next = useCallback(() => slickRef.current?.slickNext(), []);
+  const previous = () => slickRef.current?.slickPrev();
+  const next = () => slickRef.current?.slickNext();
+  const [currentImage, setCurrentImage] = useState(0);
   const settings = {
     dots: false,
     arrows: false,
     infinite: false,
+    draggable: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
   return (
     <div className={styles.carousel}>
       <Slider {...settings} ref={slickRef}>
-        {imgs.map((item : string, index : number) => (
+        {roomImages.map((item: string, index: number) => (
           <div key={index}>
-            <img src={item} alt="Slide" className={styles.carouselImage} />
+            <Image src={item} alt="Slide" className={styles.carouselImage} width={1080} height={460} />
           </div>
         ))}
       </Slider>
-      <div onClick={previous}>
-        <GrPrevious className={styles.prevButton} />
+      <div
+        onClick={() => {
+          previous();
+          setCurrentImage((prev) => prev - 1);
+        }}>
+        {currentImage !== 0 && <GrPrevious className={styles.prevButton} />}
       </div>
-      <div onClick={next}>
-        <GrNext className={styles.nextButton} />
+      <div
+        onClick={() => {
+          next();
+          setCurrentImage((prev) => prev + 1);
+        }}>
+        {currentImage !== roomImages.length - 1 && (
+          <GrNext className={styles.nextButton} />
+        )}
       </div>
     </div>
   );

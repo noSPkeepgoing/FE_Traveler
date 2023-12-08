@@ -3,6 +3,10 @@ import '@styles/_reset.scss';
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
+    nextjs: {
+      appDirectory: true,
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
