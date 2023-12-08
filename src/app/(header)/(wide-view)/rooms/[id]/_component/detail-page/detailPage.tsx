@@ -5,7 +5,7 @@ import DetailTitle from '../detail-title/detailTitle';
 import styles from './detailPage.module.scss';
 import DetailDescription from '../detail-description/detailDescription';
 import Reservation from '../reservation';
-import { TParams,TProductId } from './paramsType';
+import { TParams } from './paramsType';
 import { ROOMS_API } from '@/api/rooms';
 
 async function DetailPage({ params }: TParams ) {
@@ -18,7 +18,7 @@ async function DetailPage({ params }: TParams ) {
         <DetailTitle title={data.data.accommodation_name} />
       </div>
       <div className={styles.carousel}>
-        <Carousel imgs={productImg} />
+        <Carousel roomImages={productImg} />
       </div>
       <div className={styles.content}>
         <DetailDescription

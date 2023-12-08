@@ -1,1 +1,1 @@
-export type TCartModal = { type: number };
+export type TCartModal = { type: string };

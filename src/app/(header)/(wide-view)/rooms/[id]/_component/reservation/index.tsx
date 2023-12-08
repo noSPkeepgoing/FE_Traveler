@@ -12,6 +12,8 @@ import moment from 'moment';
 import { productState } from '@/recoil/order';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
+import { RESPONSE_CODE } from 'src/constants/api';
 import {
   TReservation,
   TReservationForm,
@@ -19,7 +21,7 @@ import {
   TCheckValue,
 } from './reservationType';
 import { Value } from '../custom-calendar/customCalendarType';
-import { DAY_SECOND } from '@/constants/rooms';
+import { DAY_SECOND, ZERO } from '@/constants/rooms';
 
 function Reservation({ price, params, data }: TReservation) {
   const currentDate = new Date();
@@ -31,22 +33,24 @@ function Reservation({ price, params, data }: TReservation) {
   const [selectedOption, setSelectedOption] = useState<number>(1);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [day, setDay] = useState(1);
-  const amount = price;
   const [product, setProduct] = useRecoilState(productState);
   const router = useRouter();
-  const [modalType, setModalType] = useState(0);
+  const [modalType, setModalType] = useState('');
   const handleChangeSelect = (event: TReservationEvent) => {
     setSelectedOption(Number(event.target.value));
   };
-  async function handleCartClick() {
-    if (day === 0) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
-      return;
-    }
+  function checkLogin() {
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
       alert('로그인 후 진행하실 수 있습니다.');
       router.push('/sign-in');
+      return false;
+    }
+    return true;
+  }
+  async function addCartItem() {
+    if (day === ZERO) {
+      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
       return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
@@ -72,8 +76,8 @@ function Reservation({ price, params, data }: TReservation) {
       accommodation_img: data.accommodation_img,
     };
     try {
-      const res = await ROOMS_API.addCart(productData);
-      setModalType(4001);
+      await ROOMS_API.addCart(productData);
+      setModalType('success');
       if (!modalOpen) {
         setModalOpen((prev) => !prev);
         setTimeout(() => {
@@ -82,19 +86,27 @@ function Reservation({ price, params, data }: TReservation) {
       }
     } catch (error: any) {
       if (error.response.status === 403) {
-        setModalType(403);
+        setModalType('failure');
         setModalOpen((prev) => !prev);
         setTimeout(() => {
           setModalOpen(false);
         }, 2500);
         return;
       }
-      setModalType(error.response.data.code);
+      setModalType('MAXCART');
       setModalOpen((prev) => !prev);
       setTimeout(() => {
         setModalOpen(false);
       }, 2500);
     }
+  }
+  function needAuth(callback: () => void) {
+    if (checkLogin()) {
+      callback();
+    }
+  }
+  async function handleCartClick() {
+    needAuth(addCartItem);
   }
   async function handleClickReservation({
     value,
@@ -103,40 +115,47 @@ function Reservation({ price, params, data }: TReservation) {
     data,
     selectedOption,
   }: TReservationForm) {
-    if (day === 0) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
-      return;
-    }
     const token = sessionStorage.getItem('accessToken');
-    if (token === null) {
-      alert('로그인 후 진행하실 수 있습니다.');
-      router.push('/sign-in');
-      return;
-    }
-    const startDate = moment(value).format('YYYY-MM-DD');
-    const endDate = moment(valueSecond).format('YYYY-MM-DD');
-    try {
-      const res = await ROOMS_API.checkReservation({ startDate, endDate, id });
-      if (res.data.code === 2001) {
-        const productData = [
-          {
-            accommodation_name: data.accommodation_name,
-            address: data.address,
-            accommodation_price: amount * day,
-            accommodation_img: data.accommodation_img,
-            start_date: startDate,
-            end_date: endDate,
-            accommodation_id: id,
-            people_number: selectedOption,
-            cart_id: 0,
-          },
-        ];
-        setProduct(productData);
-        router.push('/reservation');
+    needAuth(async () => {
+      if (day === 0) {
+        alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
+        return;
       }
-    } catch (error) {
-      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
-    }
+      const startDate = moment(value).format('YYYY-MM-DD');
+      const endDate = moment(valueSecond).format('YYYY-MM-DD');
+      try {
+        const res = await ROOMS_API.checkReservation({
+          startDate,
+          endDate,
+          id,
+        });
+        if (res.data.code === RESPONSE_CODE.AVAILABLE_DATE) {
+          const productData = [
+            {
+              accommodation_name: data.accommodation_name,
+              address: data.address,
+              accommodation_price: price * day,
+              accommodation_img: data.accommodation_img,
+              start_date: startDate,
+              end_date: endDate,
+              accommodation_id: id,
+              people_number: selectedOption,
+              cart_id: 0,
+            },
+          ];
+          setProduct(productData);
+          router.push('/reservation');
+        }
+      } catch (error: AxiosError | unknown) {
+        if (
+          error instanceof AxiosError &&
+          error.response?.data?.code === RESPONSE_CODE.UNAVAILABLE_DATE
+        ) {
+          alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+        }
+        alert('예약이 불가능합니다. 잠시 후 다시시도해주세요.');
+      }
+    });
   }
   function isNaturalNumber(value: TCheckValue) {
     return Number.isInteger(value) && value >= 0;
@@ -226,7 +245,7 @@ function Reservation({ price, params, data }: TReservation) {
           </Text>
           <div className={styles.amount}>
             <Text fontSize="xs" fontWeight="semibold" color="highlight">{`₩${(
-              amount * day
+              price * day
             ).toLocaleString()}`}</Text>
           </div>
           <div className={styles.day}>
