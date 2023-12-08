@@ -15,7 +15,7 @@ function CartItem({
   return (
     <div className={styles.cartItem}>
       <Checkbox
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange={(event) => {
           handleSelectItem({ event, selectedItem: data });
         }}
         isChecked={isSelected(data.cart_id)}

@@ -54,9 +54,8 @@ const meta = {
         type: { summary: 'ButtonDisabled' },
         defaultValue: { summary: false },
       },
-      options: [false, true],
       control: {
-        type: 'radio',
+        type: 'boolean',
       },
     },
     type: {
@@ -90,7 +89,7 @@ export const defaultButton: StoryObj<typeof Button> = {
       },
     },
   },
-  render: (args) => <Button variant="default" {...args}></Button>,
+  render: (args) => <Button variant="default" size="lg" {...args}></Button>,
 };
 
 export const secondaryButton: StoryObj<typeof Button> = {
@@ -111,7 +110,9 @@ export const disabledButton: StoryObj<typeof Button> = {
       },
     },
   },
-  render: (args) => <Button disabled={true} {...args}></Button>,
+  render: (args) => (
+    <Button disabled={true} variant="default" size="lg" {...args}></Button>
+  ),
 };
 export const LinkButton: StoryObj<typeof Button> = {
   parameters: {

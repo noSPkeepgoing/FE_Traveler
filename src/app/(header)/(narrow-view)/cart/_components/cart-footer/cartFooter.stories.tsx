@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import CartFooter from '.';
 import Layout from '../../../layout';
-import { TCartItem } from '@/api/cart/cartApiType';
 
 const meta = {
   title: 'cart/CartFooter',
@@ -24,7 +23,7 @@ const meta = {
       description: '총 결제 금액을 나타내는 데이터입니다',
       table: {
         type: { summary: 'CartFooterTotalPrice' },
-        defaultValue: { summary: 0 },
+        defaultValue: 100,
         control: {
           type: 'number',
         },
@@ -34,7 +33,7 @@ const meta = {
       description: '선택된 장바구니 상품의 개수를 의미하는 데이터입니다',
       table: {
         type: { summary: 'CartFooterTotalPrice' },
-        defaultValue: { summary: 0 },
+        defaultValue: 100,
         control: {
           type: 'number',
         },
