@@ -4,3 +4,21 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin mobileS {
+  @media (max-width: 319px) {
+    @content;
+  }
+}
+
+@mixin mobileM {
+  @media (min-width: 320px) and (max-width: 424px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 425px) and (max-width: 769px) {
+    @content;
+  }
+}
