@@ -31,7 +31,7 @@ export function useSignInForm() {
     error: boolean,
   ) => {
     setMessage({ message, error });
-    setTimeout(() => setMessage({ message: '', color: 'black' }), 3000); // 3초 후 메시지를 숨기는 용도.
+    setTimeout(() => setMessage({ message: '', color: 'black' }), 3000);
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
