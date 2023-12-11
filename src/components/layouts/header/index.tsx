@@ -9,7 +9,6 @@ import Text from '../../atoms/text';
 import { THeader } from './headerType';
 import { instance } from '@/api';
 import { deleteCookie } from '@/constants/cookie';
-import Swal from 'sweetalert2';
 import { signOut } from '@/queries/sign/signOutHandler';
 
 function Header({ border = true }: THeader) {
