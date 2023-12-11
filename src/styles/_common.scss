@@ -5,20 +5,20 @@
   justify-content: center;
 }
 
-@mixin mobileS {
-  @media (max-width: 319px) {
+@mixin tablet {
+  @media (max-width: 769px) {
     @content;
   }
 }
 
 @mixin mobileM {
-  @media (min-width: 320px) and (max-width: 424px) {
+  @media (max-width: 424px) {
     @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: 425px) and (max-width: 769px) {
+@mixin mobileS {
+  @media (max-width: 319px) {
     @content;
   }
 }
