@@ -8,12 +8,7 @@ import { useState } from 'react';
 
 const meta = {
   title: 'reservation-list/ReservationList',
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle:
       'Reservation List page에 사용되는 컴포넌트를 조합하는 컨테이너입니다 ',
   },

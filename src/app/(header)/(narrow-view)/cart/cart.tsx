@@ -6,48 +6,45 @@ import useCart from '@/hooks/cart/useCart';
 import Text from '@/components/atoms/text';
 import styles from './cart.module.scss';
 import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
-import CartSkeleton from './_components/cart-skeleton';
+import { BsCart, BsCloudSlash } from 'react-icons/bs';
+import Button from '@/components/atoms/button';
+import useSelect from '@/hooks/cart/useSelect';
+import Loader from '@/components/layouts/loader';
 
 function Cart() {
+  const { cartData, isLoading, isError, selectedItems } = useCart();
   const {
-    cartData,
-    isLoading,
-    isError,
     selectAll,
     isAllSelected,
     handleSelectItem,
     isSelected,
     calculateTotalPrice,
-    selectedItems,
     handleDeleteCartItems,
     handleReservation,
-  } = useCart();
+  } = useSelect();
 
-  if (isLoading) {
-    const skeletonArray = new Array(5).fill('');
-    return (
-      <>
-        <div className={styles.selectContainer}></div>
-        <section className={styles.cartContainer}>
-          {skeletonArray?.map((_, index) => <CartSkeleton key={index} />)}
-        </section>
-      </>
-    );
-  }
+  if (isLoading) <Loader />;
 
   if (isError)
     return (
       <section className={styles.container}>
-        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+        <BsCloudSlash size="100" />
+        <Text fontSize="xl" fontWeight="semibold" color="blackAlpha100">
           알 수 없는 에러가 발생했습니다
         </Text>
+        <Button href="/main" variant="text">
+          <Text fontSize="xs" fontWeight="normal" color="primary">
+            홈 화면으로 이동하기
+          </Text>
+        </Button>
       </section>
     );
 
   if (cartData?.length === 0) {
     return (
       <section className={styles.container}>
-        <Text fontSize="md" fontWeight="semibold" color="blackAlpha100">
+        <BsCart size="100" />
+        <Text fontSize="lg" fontWeight="semibold" color="blackAlpha100">
           장바구니에 담긴 상품이 없습니다
         </Text>
       </section>

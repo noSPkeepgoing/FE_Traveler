@@ -1,9 +1,9 @@
 @import '@/styles/_variables.scss';
+@import '@/styles/common.scss';
+
 .button {
   border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(row);
   cursor: pointer;
   outline: none;
   border: none;

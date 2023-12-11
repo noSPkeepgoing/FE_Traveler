@@ -1,1 +1,1 @@
-export type TCarousel = { imgs: string[] };
+export type TCarousel = { roomImages: string[] };

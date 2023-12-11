@@ -8,42 +8,28 @@ import Button from '../../atoms/button';
 import Text from '../../atoms/text';
 import { THeader } from './headerType';
 import { instance } from '@/api';
+import { deleteCookie } from '@/constants/cookie';
+import Swal from 'sweetalert2';
+import { signOut } from '@/utils/signOutHandler';
 
 function Header({ border = true }: THeader) {
   const router = useRouter();
-
-  const [isOnline, setIsOnline] = useState(false);
-
+  const [isOnline, setIsOnline] = useState<boolean>(false);
   const containerClassName = classNames(styles.container, {
     [styles.border]: border,
   });
 
   const signOutHandler = async () => {
-    try {
-      const accessToken = sessionStorage.getItem('accessToken');
-      if (accessToken) {
-        const shouldLogout = window.confirm('로그아웃 하시겠습니까?');
-        if (shouldLogout) {
-          const headers = { Authorization: `Bearer ${accessToken}` };
-          await instance.post<Response>('v1/member/logout', {}, { headers });
-
-          sessionStorage.removeItem('accessToken');
-          sessionStorage.removeItem('refreshToken');
-          setIsOnline(false);
-          router.push('/main');
-        }
-      }
-    } catch (error) {
-      throw new Error('로그아웃 실패.');
-    }
+    await signOut(router, setIsOnline, instance);
   };
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    if (accessToken) {
+    const refreshToken = sessionStorage.getItem('refreshToken');
+    if (refreshToken) {
       setIsOnline(true);
     } else {
       setIsOnline(false);
+      deleteCookie('refreshToken');
     }
   }, []);
 

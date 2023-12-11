@@ -9,12 +9,7 @@ import { TCartItem } from '@/api/cart/cartApiType';
 const meta = {
   title: 'cart/CartGroup',
   component: CartGroup,
-  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
-    nextjs: {
-      appDirectory: true,
-    },
     componentSubtitle:
       'CartGroup는 CartItem을 그룹으로 묶어 제어하는 컴포넌트입니다. ',
     docs: {

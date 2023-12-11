@@ -3,23 +3,27 @@ import React, { FormEvent, useState } from 'react';
 import styles from './signInForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
-import { TSignIn } from './signInType';
+import { TLabelMessage, TSignIn } from './signInType';
 import Input from '@/components/atoms/input';
 import { SIGNIN_API } from '@/api/sign-in/Index';
 import { RESPONSE_CODE } from '@/constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
+import { EMAIL_REGEX } from '@/constants/emailRegex';
+import { setSessionCookie } from '@/constants/cookie';
+import Swal from 'sweetalert2';
+import { sessionSet } from '@/utils/sessionStorage';
 
 function SignInForm() {
   const router = useRouter();
 
   // 각 Input 라벨 메세지용 state
-  const [emailMessage, setEmailMessage] = useState({
+  const [emailMessage, setEmailMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
-  const [passwordMessage, setPasswordMessage] = useState({
+  const [passwordMessage, setPasswordMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
   });
@@ -43,9 +47,6 @@ function SignInForm() {
       password: formData.get('password') as string,
     };
 
-    // 각 form 데이터 유효성 검사 실시
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 유효성 검사용 정규식
-
     if (!userData.email) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
@@ -53,14 +54,16 @@ function SignInForm() {
         true,
       );
       return;
-    } else if (!emailRegex.test(userData.email)) {
+    }
+    if (!EMAIL_REGEX.test(userData.email)) {
       setMessageAndHideAfterDelay(
         setEmailMessage,
         '올바르지 않은 이메일 형식입니다.',
         true,
       );
       return;
-    } else if (!userData.password) {
+    }
+    if (!userData.password) {
       setMessageAndHideAfterDelay(
         setPasswordMessage,
         '비밀번호를 입력해주세요.',
@@ -69,25 +72,26 @@ function SignInForm() {
       return;
     }
 
-    // 로그인 API 호출
+    // 로그인 진행
     try {
       const response = await SIGNIN_API.userSignIn(userData);
-      const accessToken = response.data.data.access_token;
-      const refreshToken = response.data.data.refresh_token;
-      const userName = response.data.data.name;
-      const userEmail = response.data.data.email;
+      const apiData = response.data.data;
+      const accessToken = apiData.access_token;
+      const refreshToken = apiData.refresh_token;
+      const userName = apiData.name;
+      const userEmail = apiData.email;
 
-      // 세션 스토리지에 토큰 값 저장
-      sessionStorage.setItem('accessToken', accessToken);
-      sessionStorage.setItem('refreshToken', refreshToken);
-      sessionStorage.setItem('userName', userName);
-      sessionStorage.setItem('userEmail', userEmail);
+      sessionSet({
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userName: userName,
+        userEmail: userEmail,
+      });
+      setSessionCookie('refreshToken', refreshToken);
 
-      // response코드 저장
       const responseCode = response.data.code;
       switch (responseCode) {
         case RESPONSE_CODE.SIGNIN_SUCCESS:
-          // window.location.href = '/main';
           router.push('/main');
           break;
       }
@@ -118,7 +122,7 @@ function SignInForm() {
               );
               break;
             default:
-              alert('로그인에 실패했습니다. 서버와의 연결을 확인해주세요.');
+              Swal.fire('로그인에 실패했습니다.\n잠시 후 다시 시도하세요.');
               break;
           }
         }
