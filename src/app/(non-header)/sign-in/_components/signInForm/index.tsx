@@ -4,7 +4,7 @@ import styles from './signInForm.module.scss';
 import Text from '@/components/atoms/text';
 import Button from '@/components/atoms/button';
 import Input from '@/components/atoms/input';
-import { useSignInForm } from '@/queries/sign/useSignInForm';
+import { useSignInForm } from '@/hooks/sign/useSignInForm';
 
 function SignInForm() {
   const { emailMessage, passwordMessage, handleSubmit } = useSignInForm();
