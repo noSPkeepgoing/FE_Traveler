@@ -9,7 +9,7 @@ import Text from '../../atoms/text';
 import { THeader } from './headerType';
 import { instance } from '@/api';
 import { deleteCookie } from '@/constants/cookie';
-import { signOut } from '@/queries/sign/signOutHandler';
+import { signOut } from '@/hooks/sign/signOutHandler';
 
 function Header({ border = true }: THeader) {
   const router = useRouter();
