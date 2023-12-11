@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { EMAIL_REGEX } from '@/constants/emailRegex';
+import { EMAIL_REGEX } from '@/constants/regex';
 import { SIGNIN_API } from '@/api/sign-in/Index';
 import { RESPONSE_CODE } from '@/constants/api';
 import { isAxiosError } from 'axios';
