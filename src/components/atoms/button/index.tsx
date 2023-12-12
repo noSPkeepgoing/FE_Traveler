@@ -13,6 +13,7 @@ function Button({
   textDecoration = 'underline',
   textDecorationColor = 'primary',
   href,
+  style,
 }: TButton) {
   const className = classNames(
     'button',
@@ -24,7 +25,7 @@ function Button({
   );
   if (href)
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} style={style}>
         {children}
       </Link>
     );
@@ -33,7 +34,8 @@ function Button({
       className={className}
       onClick={onClick}
       disabled={disabled}
-      type={type}>
+      type={type}
+      style={style}>
       {children}
     </button>
   );
