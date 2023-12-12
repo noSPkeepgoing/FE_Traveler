@@ -9,7 +9,11 @@ function Text({
   children,
 }: TText) {
   const className = `Text ${fontSize} ${fontWeight} ${color} ${textDecoration}`;
-  return <p className={className}>{children}</p>;
+  return (
+    <div className={'textWrapper'}>
+      <p className={className}>{children}</p>
+    </div>
+  );
 }
 
 export default Text;
