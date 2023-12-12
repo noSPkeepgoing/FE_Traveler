@@ -115,7 +115,6 @@ function CartItem({
             결제 시 환불 불가
           </Text>
         </div>
-        <div></div>
       </div>
     </>
   );

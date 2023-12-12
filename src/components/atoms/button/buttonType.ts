@@ -8,5 +8,4 @@ export type TButton = {
   href?: string;
   textDecoration?: 'none' | 'underline';
   textDecorationColor?: 'primary' | 'highlight';
-  style?: any;
 };
