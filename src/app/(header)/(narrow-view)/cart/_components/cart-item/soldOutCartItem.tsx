@@ -11,18 +11,76 @@ function SoldOutCartItem({
   handleDeleteCartItems,
 }: Pick<TCartItemProps, 'data' | 'handleDeleteCartItems'>) {
   return (
-    <div className={styles.cartItem}>
-      <Checkbox disabled={true} />
-      <div className={styles.itemInfo}>
-        <Button
-          href={`rooms/${data.accommodation_id}`}
-          variant="text"
-          textDecoration="none">
-          <Text fontSize="xs" fontWeight="bold" color="gray400">
-            {data.accommodation_name}
-          </Text>
-        </Button>
-        <div className={styles.imageInfo}>
+    <>
+      <div className={styles.cartItem}>
+        <Checkbox disabled={true} />
+        <div className={styles.itemInfo}>
+          <Button
+            href={`rooms/${data.accommodation_id}`}
+            variant="text"
+            textDecoration="none">
+            <Text fontSize="xs" fontWeight="bold" color="gray400">
+              {data.accommodation_name}
+            </Text>
+          </Button>
+          <div className={styles.imageInfo}>
+            <Image
+              src={data.accommodation_img}
+              width={80}
+              height={80}
+              alt="숙소 이미지"
+              className={styles.accommodationImage}
+            />
+            <div className={styles.detailInfo}>
+              <Text fontSize="xs-3" fontWeight="medium" color="gray400">
+                {`${data.start_date}~${data.end_date} / ${data.people_number}명`}
+              </Text>
+              <Text fontSize="xs-3" fontWeight="medium" color="gray400">
+                {data.address}
+              </Text>
+            </div>
+          </div>
+        </div>
+        <div className={styles.subCartInfo}>
+          <Button
+            variant="text"
+            onClick={() => {
+              handleDeleteCartItems({ delete_id: [data.cart_id] });
+            }}>
+            <VscChromeClose size="16" />
+          </Button>
+          <div className={styles.priceInfo}>
+            <Text
+              fontSize="md"
+              fontWeight="bold"
+              color="blackAlpha100"
+              textDecoration="line-through">
+              {`${data.cart_price.toLocaleString()}원`}
+            </Text>
+            <Text fontSize="xs-4" fontWeight="medium" color="blackAlpha200">
+              예약마감
+            </Text>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.mobileCartItem}>
+        <div className={styles.mobileNameInfo}>
+          <div className={styles.mobileName}>
+            <Text fontSize="sm" fontWeight="bold" color="gray400">
+              {data.accommodation_name}
+            </Text>
+          </div>
+          <Button
+            variant="text"
+            size="xs"
+            onClick={() => {
+              handleDeleteCartItems({ delete_id: [data.cart_id] });
+            }}>
+            <VscChromeClose size="16" />
+          </Button>
+        </div>
+        <div className={styles.mobileImageInfo}>
           <Image
             src={data.accommodation_img}
             width={80}
@@ -30,7 +88,7 @@ function SoldOutCartItem({
             alt="숙소 이미지"
             className={styles.accommodationImage}
           />
-          <div className={styles.detailInfo}>
+          <div className={styles.mobileDetailInfo}>
             <Text fontSize="xs-3" fontWeight="medium" color="gray400">
               {`${data.start_date}~${data.end_date} / ${data.people_number}명`}
             </Text>
@@ -39,16 +97,7 @@ function SoldOutCartItem({
             </Text>
           </div>
         </div>
-      </div>
-      <div className={styles.subCartInfo}>
-        <Button
-          variant="text"
-          onClick={() => {
-            handleDeleteCartItems({ delete_id: [data.cart_id] });
-          }}>
-          <VscChromeClose size="16" />
-        </Button>
-        <div className={styles.priceInfo}>
+        <div className={styles.mobilePriceInfo}>
           <Text
             fontSize="md"
             fontWeight="bold"
@@ -56,12 +105,12 @@ function SoldOutCartItem({
             textDecoration="line-through">
             {`${data.cart_price.toLocaleString()}원`}
           </Text>
-          <Text fontSize="xs-4" fontWeight="medium" color="blackAlpha200">
+          <Text fontSize="xs-2" fontWeight="medium" color="blackAlpha200">
             예약마감
           </Text>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
