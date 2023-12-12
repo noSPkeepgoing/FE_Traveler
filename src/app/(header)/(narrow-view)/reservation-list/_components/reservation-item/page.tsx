@@ -64,7 +64,7 @@ function ReservationItem({ item }: { item: TReservationItem }) {
           </div>
         </div>
         <div className={styles.mobilePriceInfo}>
-          <Text fontSize="md" fontWeight="bold">
+          <Text fontSize="md" fontWeight="semibold">
             {`${item.order_price.toLocaleString()}원`}
           </Text>
         </div>
