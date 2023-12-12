@@ -18,7 +18,8 @@ function SignUpForm() {
     name,
     setName,
     isEmailValid,
-    emailPass,
+    isPwValid,
+    isNameValid,
     emailMessage,
     passwordMessage,
     passwordCheckMessage,
@@ -44,7 +45,6 @@ function SignUpForm() {
               name="email"
               onChange={(e) => setEmail(e.target.value)}
               state={emailMessage.error ? 'invalid' : ''}
-              readOnly={emailPass}
             />
             <Button
               size="sm"
@@ -52,7 +52,7 @@ function SignUpForm() {
               onClick={checkEmailValid}
               disabled={isEmailValid}>
               <Text color="gray100" fontSize="xs-4" fontWeight="medium">
-                {emailPass ? '사용가능' : '중복확인'}
+                중복확인
               </Text>
             </Button>
           </div>
@@ -137,7 +137,15 @@ function SignUpForm() {
           <Button
             size="lg"
             type="submit"
-            disabled={!email || !pw || !pwCheck || !(name.length >= 2)}>
+            disabled={
+              !email ||
+              !pw ||
+              !pwCheck ||
+              !(name.length >= 2) ||
+              !isEmailValid ||
+              !isPwValid ||
+              !isNameValid
+            }>
             <Text color="gray100" fontSize="xs-2" fontWeight="medium">
               가입하기
             </Text>

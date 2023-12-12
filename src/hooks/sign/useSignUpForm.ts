@@ -5,7 +5,7 @@ import { RESPONSE_CODE } from '@constants/api';
 import { isAxiosError } from 'axios';
 import { Response } from '@/api/type';
 import { useRouter } from 'next/navigation';
-import { EMAIL_REGEX, PASSWORD_REGEX } from '@/constants/regex';
+import { EMAIL_REGEX, NAME_REGEX, PASSWORD_REGEX } from '@/constants/regex';
 import Swal from 'sweetalert2';
 
 export function useSignUpForm() {
@@ -17,7 +17,9 @@ export function useSignUpForm() {
   const [name, setName] = useState<string>('');
 
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
-  const [emailPass, setEmailPass] = useState<boolean>(false);
+  const [isPwValid, setIsPwValid] = useState<boolean>(false);
+  const [isNameValid, setIsNameValid] = useState<boolean>(false);
+
   const [emailMessage, setEmailMessage] = useState<TLabelMessage>({
     message: '',
     error: false,
@@ -38,17 +40,41 @@ export function useSignUpForm() {
 
   useEffect(() => {
     setIsEmailValid(!email);
+
+    if (!EMAIL_REGEX.test(email) && email.length > 0 && email.includes('@')) {
+      setEmailMessage({
+        message: '올바르지 않은 이메일 형식입니다.',
+        error: true,
+      });
+      return;
+    } else {
+      setEmailMessage({
+        message: '',
+        error: false,
+      });
+    }
   }, [email]);
 
   useEffect(() => {
+    setIsPwValid(!pw);
+    if (pw.length === 0) {
+      setPasswordMessage({
+        message: '',
+        error: false,
+      });
+      return;
+    }
+
     if (!PASSWORD_REGEX.test(pw) && pw.length > 0) {
       setPasswordMessage({
         message:
           '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
         error: true,
       });
+      setIsPwValid(false);
       return;
     }
+
     if (PASSWORD_REGEX.test(pw)) {
       setPasswordMessage({
         message: '사용가능한 비밀번호입니다.',
@@ -56,14 +82,24 @@ export function useSignUpForm() {
       });
       return;
     }
-  }, [pw]);
+  }, [pw, pwCheck]);
 
   useEffect(() => {
-    if (pw !== pwCheck && pw.length >= 5) {
+    setIsPwValid(!pwCheck);
+    if (pwCheck.length === 0) {
+      setPasswordCheckMessage({
+        message: '',
+        error: false,
+      });
+      return;
+    }
+
+    if (pw !== pwCheck) {
       setPasswordCheckMessage({
         message: '입력된 비밀번호가 서로 다릅니다.',
         error: true,
       });
+      setIsPwValid(false);
       return;
     }
     if (pw === pwCheck && pw.length >= 5) {
@@ -71,22 +107,46 @@ export function useSignUpForm() {
         message: '입력된 비밀번호가 일치합니다.',
         error: false,
       });
+      setIsPwValid(true);
+      return;
     }
-  }, [pwCheck]);
+  }, [pw, pwCheck]);
 
   useEffect(() => {
-    if (!name && pwCheck === pw && pwCheck.length > 5 && name.length <= 2) {
+    setIsNameValid(!name);
+
+    if (name.length === 0) {
+      setNameMessage({
+        message: '',
+        error: false,
+      });
+      return;
+    }
+
+    if (!NAME_REGEX.test(name)) {
+      setNameMessage({
+        message: '이름에는 영문자 또는 한글만 사용할 수 있습니다.',
+        error: true,
+      });
+      setIsNameValid(false);
+      return;
+    }
+
+    if (!name && name.length === 1) {
       setNameMessage({
         message: '이름을 2글자 이상 입력해주세요.',
         error: true,
       });
+      setIsEmailValid(false);
       return;
     }
+
     if (name.length >= 2) {
       setNameMessage({
         message: `반갑습니다, ${name}님!`,
         error: false,
       });
+      setIsNameValid(true);
       return;
     }
   }, [name]);
@@ -105,7 +165,6 @@ export function useSignUpForm() {
         return;
       }
       try {
-        // 이메일 중복체크 API 호출
         const response = await SIGNUP_API.emailCheck(email);
         const responseCode = response.data.code;
 
@@ -116,7 +175,6 @@ export function useSignUpForm() {
               error: false,
             });
             setIsEmailValid(true);
-            setEmailPass(true);
             break;
         }
       } catch (error: unknown) {
@@ -163,7 +221,7 @@ export function useSignUpForm() {
       const response = await SIGNUP_API.userSignUp(apiData);
       const responseCode = response.data.code;
       switch (responseCode) {
-        case RESPONSE_CODE.SIGNUP_SUCCESS: // 회원가입 성공
+        case RESPONSE_CODE.SIGNUP_SUCCESS:
           Swal.fire(
             '회원 가입에 성공했습니다.\n가입한 아이디로 로그인해주세요.',
           );
@@ -196,7 +254,7 @@ export function useSignUpForm() {
               });
               break;
             default:
-              Swal.fire('회원 가입에 실패했습니다. 잠시 후 다시 시도하세요.');
+              Swal.fire('회원 가입에 실패했습니다.\n잠시 후 다시 시도하세요.');
               break;
           }
         }
@@ -214,7 +272,8 @@ export function useSignUpForm() {
     name,
     setName,
     isEmailValid,
-    emailPass,
+    isPwValid,
+    isNameValid,
     emailMessage,
     passwordMessage,
     passwordCheckMessage,
