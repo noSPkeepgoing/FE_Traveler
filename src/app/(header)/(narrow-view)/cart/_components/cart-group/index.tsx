@@ -12,6 +12,7 @@ function CartGroup({
   selectedItems,
 }: TCartGroup) {
   const handleClick = () => {
+    console.log(selectedItems);
     const cart_ids = selectedItems.map((item) => item.cart_id);
     handleDeleteCartItems({ delete_id: cart_ids });
   };
