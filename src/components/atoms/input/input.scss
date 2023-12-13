@@ -15,11 +15,17 @@
 
   &.signRegular {
     width: 23.5rem;
-
     padding: 0 0.75rem;
-
     background-color: white;
     border: 1px solid $gray400;
+
+    @include tablet {
+      width: 20rem;
+    }
+    @include mobileM {
+      width: 10.75rem;
+      height: 2.5rem;
+    }
   }
 
   &.signShort {
@@ -31,6 +37,12 @@
     background-color: white;
     border: 1px solid $gray400;
     color: $black;
+    @include tablet {
+      width: 15rem;
+    }
+    @include mobileM {
+      width: 5.75rem;
+    }
   }
 
   &.reservation {
@@ -45,7 +57,7 @@
     color: $black;
     @include tablet {
       width: 17rem;
-      height: 3rem;
+      height: 1rem;
     }
     @include mobileM {
       width: 15rem;
