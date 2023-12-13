@@ -34,7 +34,7 @@ function Reservation() {
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
-    router.push('/main');
+    router.back();
   }
 
   const calculateTotalPrice = () => {
