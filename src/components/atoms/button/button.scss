@@ -15,6 +15,14 @@
   &.xl {
     width: 48.125rem;
     height: 3.125rem;
+    @include tablet {
+      width: 15rem;
+      height: 3rem;
+    }
+    @include mobileM {
+      width: 24.5rem;
+      height: 2.5rem;
+    }
   }
   &.lg {
     width: 25.125rem;

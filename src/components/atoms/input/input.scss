@@ -1,4 +1,5 @@
 @import '@/styles/_variables.scss';
+@import '@/styles/_common.scss';
 
 .input {
   height: 3.125rem;
@@ -42,6 +43,14 @@
 
     border: 0.0625rem solid $gray400;
     color: $black;
+    @include tablet {
+      width: 17rem;
+      height: 3rem;
+    }
+    @include mobileM {
+      width: 15rem;
+      height: 1rem;
+    }
   }
 
   &.invalid {
