@@ -6,4 +6,5 @@ export type TInput = {
   placeholder?: string;
   name?: string;
   id?: string;
+  readOnly?: boolean;
 };

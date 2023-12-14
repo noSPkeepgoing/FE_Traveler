@@ -11,6 +11,7 @@ function Input({
   name,
   onChange,
   id,
+  readOnly,
 }: TInput) {
   const inputPlaceholder = placeholder ?? '';
 
@@ -24,6 +25,7 @@ function Input({
       name={name}
       onChange={onChange}
       id={id}
+      readOnly={readOnly}
     />
   );
 }

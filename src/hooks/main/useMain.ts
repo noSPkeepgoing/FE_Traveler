@@ -4,13 +4,13 @@ import { useGetAccommodations } from './../../queries/main/index';
 import React, { useEffect, useMemo, useState } from 'react';
 
 function useMain() {
-  const [isSelected, setIsSelected] = useState(1);
+  const [selectedCategoryNumber, setSelectedCategoryNumber] = useState(1);
 
   const { data, fetchNextPage, hasNextPage, isLoading, refetch, remove } =
-    useGetAccommodations(isSelected);
+    useGetAccommodations(selectedCategoryNumber);
 
   const handleSelect = (category: number) => {
-    setIsSelected(category);
+    setSelectedCategoryNumber(category);
   };
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function useMain() {
     return () => {
       remove();
     };
-  }, [isSelected]);
+  }, [selectedCategoryNumber]);
 
   const accommodationData = useMemo(() => {
     return data?.pages.flatMap((page) => page.data.accommodations);
@@ -27,7 +27,7 @@ function useMain() {
 
   return {
     accommodationData,
-    isSelected,
+    selectedCategoryNumber,
     handleSelect,
     isLoading,
     fetchNextPage,

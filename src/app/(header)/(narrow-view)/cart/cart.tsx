@@ -8,14 +8,15 @@ import styles from './cart.module.scss';
 import SoldOutCartItem from './_components/cart-item/soldOutCartItem';
 import { BsCart, BsCloudSlash } from 'react-icons/bs';
 import Button from '@/components/atoms/button';
+import useSelect from '@/hooks/cart/useSelect';
 import Loader from '@/components/layouts/loader';
+import { useRecoilValue } from 'recoil';
+import { selectedItemState } from '@/recoil/selectedItem';
 
 function Cart() {
+  const selectedItems = useRecoilValue(selectedItemState);
+  const { cartData, isLoading, isError } = useCart();
   const {
-    cartData,
-    isLoading,
-    isError,
-    selectedItems,
     selectAll,
     isAllSelected,
     handleSelectItem,
@@ -23,8 +24,7 @@ function Cart() {
     calculateTotalPrice,
     handleDeleteCartItems,
     handleReservation,
-  } = useCart();
-
+  } = useSelect();
   if (isLoading) <Loader />;
 
   if (isError)
