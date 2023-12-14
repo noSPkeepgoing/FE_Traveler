@@ -74,6 +74,7 @@ function CustomCalendar({
         ref={modalRef}
         className={`${styles.CalendarWrapper} ${isOpen ? '' : styles.hide}`}>
         <Calendar
+          className={`${styles.calendar}`}
           locale="en"
           onChange={(value, e) => {
             handleDateChange(value as Date, e);

@@ -1,3 +1,4 @@
+@import '@/styles/_common.scss';
 .Reservation {
   max-width: 20rem;
   max-height: 22.375rem;
@@ -6,6 +7,9 @@
   border: 1px solid #ddd;
   background: #fff;
   box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12);
+  @include mobileM {
+    max-width: 20rem;
+  }
 }
 .inputDate {
   display: flex;
@@ -61,3 +65,4 @@
   bottom: 0.1rem;
   margin-left: 0.3rem;
 }
+

@@ -14,6 +14,7 @@ import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/navigation';
 import { AxiosError } from 'axios';
 import { RESPONSE_CODE } from 'src/constants/api';
+import Swal from 'sweetalert2';
 import {
   TReservation,
   TReservationForm,
@@ -42,15 +43,26 @@ function Reservation({ price, params, data }: TReservation) {
   function checkLogin() {
     const token = sessionStorage.getItem('accessToken');
     if (token === null) {
-      alert('로그인 후 진행하실 수 있습니다.');
-      router.push('/sign-in');
+      Swal.fire({
+        title: '로그인 후 이용하실수 있습니다.',
+        icon: 'info',
+        confirmButtonText: '확인',
+      }).then((result)=>{
+        if (result.isConfirmed){
+          router.push('/sign-in');
+        }
+      });
       return false;
     }
     return true;
   }
   async function addCartItem() {
     if (day === ZERO) {
-      alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
+      Swal.fire({
+        title: '체크인 날짜와 체크아웃 날짜를 확인해주세요',
+        icon: 'info',
+        confirmButtonText: '확인',
+      });
       return;
     }
     const startDate = moment(value).format('YYYY-MM-DD');
@@ -62,7 +74,11 @@ function Reservation({ price, params, data }: TReservation) {
         id: params,
       });
     } catch (error: unknown) {
-      alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+      Swal.fire({
+        title: '예약이 불가능한날짜입니다. 날짜를 다시 선택해주세요',
+        icon: 'info',
+        confirmButtonText: '확인',
+      });
       return;
     }
     const productData = {
@@ -118,7 +134,7 @@ function Reservation({ price, params, data }: TReservation) {
     const token = sessionStorage.getItem('accessToken');
     needAuth(async () => {
       if (day === 0) {
-        alert('체크인 날짜와 체크아웃 날짜를 확인해주세요');
+        Swal.fire('체크인 날짜와 체크아웃 날짜를 확인해주세요');
         return;
       }
       const startDate = moment(value).format('YYYY-MM-DD');
@@ -151,9 +167,9 @@ function Reservation({ price, params, data }: TReservation) {
           error instanceof AxiosError &&
           error.response?.data?.code === RESPONSE_CODE.UNAVAILABLE_DATE
         ) {
-          alert('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
+          Swal.fire('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
         }
-        alert('예약이 불가능합니다. 잠시 후 다시시도해주세요.');
+        Swal.fire('예약이 불가능한 날짜입니다. 다시 선택해주세요.');
       }
     });
   }

@@ -1,9 +1,29 @@
+@import '@/styles/_common.scss';
 .title {
   margin-bottom: 1rem;
+  @include mobileM {
+    padding: 0 1rem;
+  }
+  @include tablet {
+    padding: 0 1rem;
+  }
 }
 .carousel {
     margin-bottom:2.4rem;
+    @include mobileM {
+     margin-bottom:1rem;   
+    }
+    @include tablet {
+      margin-bottom:1rem;   
+     }
 }
 .content{
   display:flex;
+  @include mobileM {
+    @include flex(column);
+    padding: 0 1rem;
+  }
+  @include tablet {
+    padding: 0 1rem;
+  }
 }

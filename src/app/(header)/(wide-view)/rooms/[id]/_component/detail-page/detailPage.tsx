@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import Carousel from '../carousel';
 import DetailTitle from '../detail-title/detailTitle';
@@ -7,6 +6,7 @@ import DetailDescription from '../detail-description/detailDescription';
 import Reservation from '../reservation';
 import { TParams } from './paramsType';
 import { ROOMS_API } from '@/api/rooms';
+
 
 async function DetailPage({ params }: TParams ) {
   const data = await ROOMS_API.getProduct(params);

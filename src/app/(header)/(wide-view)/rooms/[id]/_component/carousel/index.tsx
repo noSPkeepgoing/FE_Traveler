@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 import { TCarousel } from './carouselType';
-import Image from 'next/image'
+
 
 function Carousel({ roomImages }: TCarousel) {
   const slickRef = useRef<Slider | null>(null);
@@ -27,7 +27,7 @@ function Carousel({ roomImages }: TCarousel) {
       <Slider {...settings} ref={slickRef}>
         {roomImages.map((item: string, index: number) => (
           <div key={index}>
-            <Image src={item} alt="Slide" className={styles.carouselImage} width={1080} height={460} />
+            <img src={item} alt="Slide" className={styles.carouselImage} />
           </div>
         ))}
       </Slider>
