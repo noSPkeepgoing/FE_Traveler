@@ -1,5 +1,11 @@
 @import '@/styles/_variables.scss';
 
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .input {
   height: 3.125rem;
 
@@ -51,4 +57,11 @@
   &:focus {
     border-color: $black;
   }
+}
+
+.password-toggle {
+  position: absolute;
+  right: 3%;
+
+  cursor: pointer;
 }
