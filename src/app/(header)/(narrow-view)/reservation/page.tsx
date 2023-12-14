@@ -14,7 +14,7 @@ import { usePostReservation } from '@/queries/reservation/useReservation';
 import { TReservationItems } from '@/api/reservation/reservationApiType';
 import { successProductsState } from '@/recoil/successProducts';
 import { useEffect, useState } from 'react';
-import { TProduct } from '@/recoil/productType';
+import { EMAIL_REGEX, NAME_REGEX } from '@/constants/regex';
 
 function Reservation() {
   const router = useRouter();
@@ -43,18 +43,6 @@ function Reservation() {
       0,
     );
     return totalPrice;
-  };
-
-  const checkEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) return false;
-    if (!emailRegex.test(email)) return;
-    return true;
-  };
-
-  const checkName = (name: string) => {
-    if (!name) return false;
-    return true;
   };
 
   const checkTermsOfService = (checked: FormDataEntryValue | null) => {
@@ -105,8 +93,9 @@ function Reservation() {
     const data = new FormData(event.currentTarget);
     const name = data.get('name') as string;
     const email = data.get('email') as string;
-    if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
-    if (!checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
+    if (!NAME_REGEX.test(name)) return Swal.fire('이름을 작성해주세요!');
+    if (!EMAIL_REGEX.test(email))
+      return Swal.fire('이메일 형식에 맞게 작성해주세요');
 
     if (!checkTermsOfService(data.get('check')))
       return Swal.fire('약관을 동의해주세요!');
