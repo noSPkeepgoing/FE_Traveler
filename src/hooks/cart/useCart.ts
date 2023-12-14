@@ -1,8 +1,9 @@
 'use client';
 import { TCartItem } from '@/api/cart/cartApiType';
 import { useDeleteCartItems, useGetCartItems } from '@/queries/cart';
+import { selectedItemState } from '@/recoil/selectedItem';
 import { AxiosError } from 'axios';
-import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 
 /**
@@ -19,8 +20,7 @@ import Swal from 'sweetalert2';
  */
 
 function useCart() {
-  const [selectedItems, setSelectedItems] = useState<TCartItem[]>([]);
-
+  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const getNotSoldOutItems = (cartData: TCartItem[]) => {
     return cartData.filter((item) => !item.accommodation_sold_out);
   };

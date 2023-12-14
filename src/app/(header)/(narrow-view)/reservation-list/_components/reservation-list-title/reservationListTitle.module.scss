@@ -1,6 +1,13 @@
+@import '@styles/_common.scss';
+@import '@styles/_variables.scss';
 .title {
   width: 100%;
   margin-top: 1.25rem;
-  border-bottom: 2px solid #e5e5e5;
+  border-bottom: 2px solid $gray100;
   padding-bottom: 0.5rem;
+
+  @include tablet {
+    width: 90%;
+    margin: 1.25rem auto 0 auto;
+  }
 }

@@ -5,9 +5,10 @@ import { productState } from '@/recoil/order';
 import { TProduct } from '@/recoil/productType';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import Swal from 'sweetalert2';
 import useCart from './useCart';
+import { selectedItemState } from '@/recoil/selectedItem';
 
 /**
  * @description checkbox를 통해 장바구니를 선택하고 삭제하는 로직이 있는 컴포넌트입니다.
@@ -24,16 +25,11 @@ import useCart from './useCart';
  */
 
 function useSelect() {
+  const [selectedItems, setSelectedItems] = useRecoilState(selectedItemState);
   const setProductState = useSetRecoilState(productState);
   const router = useRouter();
 
-  const {
-    cartData,
-    selectedItems,
-    setSelectedItems,
-    getNotSoldOutItems,
-    deleteCartItems,
-  } = useCart();
+  const { cartData, getNotSoldOutItems, deleteCartItems } = useCart();
 
   useEffect(() => {
     if (cartData) setSelectedItems(getNotSoldOutItems(cartData));
@@ -51,6 +47,7 @@ function useSelect() {
   const isAllSelected = () => {
     if (cartData) {
       const notSoldOutItems = getNotSoldOutItems(cartData);
+      if (!selectedItems.length) return false;
       return selectedItems.length === notSoldOutItems.length;
     }
     return false;
