@@ -1,14 +1,17 @@
 import React from 'react';
 import styles from './category.module.scss';
 import Text from '@/components/atoms/text';
-import { TCategoryProps } from './categoryType';
+import { TCategory } from './categoryType';
+import useMain from '@/hooks/main/useMain';
 
-function Category({ item, isSelected, handleSelect }: TCategoryProps) {
+function Category({ item }: TCategory) {
+  const { selectedCategoryNumber, handleSelect } = useMain();
+
   const handleClick = () => {
-    handleSelect(item.num);
+    handleSelect(item.id);
   };
 
-  if (isSelected === item.num) {
+  if (selectedCategoryNumber === item.id) {
     return (
       <div
         onClick={handleClick}
