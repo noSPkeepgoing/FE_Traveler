@@ -6,18 +6,12 @@ import ItemList from './_components/item-list';
 import useMain from '@/hooks/main/useMain';
 
 function MainPage() {
-  const {
-    isSelected,
-    handleSelect,
-    accommodationData,
-    isLoading,
-    fetchNextPage,
-    hasNextPage,
-  } = useMain();
+  const { accommodationData, isLoading, fetchNextPage, hasNextPage } =
+    useMain();
 
   return (
     <>
-      <CategoryList isSelected={isSelected} handleSelect={handleSelect} />
+      <CategoryList />
       <ItemList
         data={accommodationData}
         isLoading={isLoading}

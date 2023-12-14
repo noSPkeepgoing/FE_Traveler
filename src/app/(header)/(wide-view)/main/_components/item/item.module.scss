@@ -4,13 +4,16 @@
   margin: 1rem 0.5rem;
   transition: all 0.2s;
 
+  display: flex;
+  flex-direction: column;
+
   $size: 15.5rem;
-  max-width: $size;
+  width: 100%;
 
   &Image {
     margin: 0.2rem 0;
 
-    width: $size;
+    width: 100%;
     height: $size;
 
     border-radius: 1rem;
@@ -31,6 +34,7 @@
       p {
         white-space: nowrap;
         overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
