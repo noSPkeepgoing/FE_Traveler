@@ -93,12 +93,20 @@ function Reservation() {
     const data = new FormData(event.currentTarget);
     const name = data.get('name') as string;
     const email = data.get('email') as string;
-    // if (!NAME_REGEX.test(name)) return Swal.fire('이름을 작성해주세요!');
-    // if (!EMAIL_REGEX.test(email))
-    //   return Swal.fire('이메일 형식에 맞게 작성해주세요');
-    // if (!checkTermsOfService(data.get('check')))
-    //   return Swal.fire('약관을 동의해주세요!');
     postReservation(getParams(name, email));
+  };
+
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+    setIsNameValid(NAME_REGEX.test(e.target.value));
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEmail(e.target.value);
+    setIsEmailValid(EMAIL_REGEX.test(e.target.value));
   };
 
   const [isCheckedMain, setIsCheckedMain] = useState(false);
@@ -187,6 +195,8 @@ function Reservation() {
                     placeholder="홍길동"
                     id="name"
                     name="name"
+                    value={userName}
+                    onChange={handleNameChange}
                   />
                 </div>
                 <div className={styles.sameLine}>
@@ -198,6 +208,8 @@ function Reservation() {
                     placeholder="abc@naver.com"
                     id="email"
                     name="email"
+                    value={userEmail}
+                    onChange={handleEmailChange}
                   />
                 </div>
               </div>
@@ -247,7 +259,7 @@ function Reservation() {
               variant="default"
               size="xl"
               type="submit"
-              disabled={!isCheckedMain}>
+              disabled={!isCheckedMain || !isNameValid || !isEmailValid}>
               <Text fontSize="xs" fontWeight="normal" color="white">
                 결제하기
               </Text>
