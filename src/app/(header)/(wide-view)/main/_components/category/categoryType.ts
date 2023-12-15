@@ -1,2 +1,2 @@
-export type TCategoryItem = { name: string; id: number };
+export type TCategoryItem = { name: string; id: string };
 export type TCategory = { item: TCategoryItem };
