@@ -1,9 +1,16 @@
+@import '@/styles/_common.scss';
+
 .logo {
   width: 25rem;
-  height: 12.5rem;
+  height: 11rem;
   margin: 0 auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include tablet {
+    width: 10rem;
+    height: 8rem;
+  }
 }
