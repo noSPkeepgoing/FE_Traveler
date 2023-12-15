@@ -258,15 +258,17 @@ function Reservation() {
             </div>
           </div>
           <div className={styles.parts}>
-            <Button
-              variant="default"
-              size="xl"
-              type="submit"
-              disabled={!isCheckedMandatory || !isNameValid || !isEmailValid}>
-              <Text fontSize="xs" fontWeight="normal" color="white">
-                결제하기
-              </Text>
-            </Button>
+            <div className={styles.button}>
+              <Button
+                variant="default"
+                size="xl"
+                type="submit"
+                disabled={!isCheckedMandatory || !isNameValid || !isEmailValid}>
+                <Text fontSize="xs" fontWeight="normal" color="white">
+                  결제하기
+                </Text>
+              </Button>
+            </div>
           </div>
         </div>
       </form>

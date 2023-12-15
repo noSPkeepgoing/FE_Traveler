@@ -32,7 +32,7 @@ function ReservationCheck() {
   const date = new Date();
   const order_date = date.toLocaleDateString();
   return (
-    <>
+    <div className={styles.container}>
       <main className={styles.mainContent}>
         <Image src={checkmark} alt="Checkmark" width={100} height={100} />
         <Text fontSize="xl" fontWeight="semibold" color="primary">
@@ -61,7 +61,7 @@ function ReservationCheck() {
           </Text>
         </Button>
       </main>
-    </>
+    </div>
   );
 }
 

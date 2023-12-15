@@ -1,4 +1,15 @@
+@use '@styles/_variables.scss' as vars;
+@import '@/styles/_common.scss';
+
+.container {
+  @include mobileM {
+    width: auto;
+    margin: 1.5rem;
+  }
+}
+
 .mainContent {
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

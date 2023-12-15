@@ -15,12 +15,19 @@
   &.xl {
     width: 48.125rem;
     height: 3.125rem;
+
     @include tablet {
       width: 15rem;
       height: 3rem;
     }
+
     @include mobileM {
-      width: 24.5rem;
+      width: 24rem;
+      height: 2.5rem;
+    }
+
+    @include mobileS {
+      width: 18rem;
       height: 2.5rem;
     }
   }
