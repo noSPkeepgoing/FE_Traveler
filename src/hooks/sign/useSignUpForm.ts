@@ -43,7 +43,7 @@ export function useSignUpForm() {
 
     if (!EMAIL_REGEX.test(email) && email.length > 0 && email.includes('@')) {
       setEmailMessage({
-        message: '올바르지 않은 이메일 형식입니다.',
+        message: '올바르지 않은 이메일',
         error: true,
       });
       return;
@@ -67,8 +67,7 @@ export function useSignUpForm() {
 
     if (!PASSWORD_REGEX.test(pw) && pw.length > 0) {
       setPasswordMessage({
-        message:
-          '비밀번호는 영문자와 숫자를 포함한 최소 5글자 이상이어야 합니다.',
+        message: '5자 이상의 영문자+숫자 조합 필수',
         error: true,
       });
       setIsPwValid(false);
@@ -77,7 +76,7 @@ export function useSignUpForm() {
 
     if (PASSWORD_REGEX.test(pw)) {
       setPasswordMessage({
-        message: '사용가능한 비밀번호입니다.',
+        message: '사용가능한 비밀번호',
         error: false,
       });
       return;
@@ -96,7 +95,7 @@ export function useSignUpForm() {
 
     if (pw !== pwCheck) {
       setPasswordCheckMessage({
-        message: '입력된 비밀번호가 서로 다릅니다.',
+        message: '비밀번호 불일치',
         error: true,
       });
       setIsPwValid(false);
@@ -104,7 +103,7 @@ export function useSignUpForm() {
     }
     if (pw === pwCheck && pw.length >= 5) {
       setPasswordCheckMessage({
-        message: '입력된 비밀번호가 일치합니다.',
+        message: '비밀번호 일치',
         error: false,
       });
       setIsPwValid(true);
@@ -125,7 +124,7 @@ export function useSignUpForm() {
 
     if (!NAME_REGEX.test(name) && name.length > 1) {
       setNameMessage({
-        message: '이름에는 자음+모음의 한글 또는 영문자만 사용할 수 있습니다.',
+        message: '특수문자, 숫자 사용불가',
         error: true,
       });
       setIsNameValid(false);
@@ -134,7 +133,7 @@ export function useSignUpForm() {
 
     if (!!name && name.length === 1) {
       setNameMessage({
-        message: '이름을 2글자 이상 입력해주세요.',
+        message: '2글자 이상 입력',
         error: true,
       });
       setIsNameValid(false);
@@ -157,13 +156,6 @@ export function useSignUpForm() {
     const email = formData.get('email');
 
     if (typeof email === 'string') {
-      if (!EMAIL_REGEX.test(email)) {
-        setEmailMessage({
-          message: '올바르지 않은 이메일 형식입니다.',
-          error: true,
-        });
-        return;
-      }
       try {
         const response = await SIGNUP_API.emailCheck(email);
         const responseCode = response.data.code;
@@ -171,7 +163,7 @@ export function useSignUpForm() {
         switch (responseCode) {
           case RESPONSE_CODE.VALID_EMAIL:
             setEmailMessage({
-              message: '사용 가능한 이메일입니다.',
+              message: '사용 가능한 이메일',
               error: false,
             });
             setIsEmailValid(true);
@@ -185,15 +177,14 @@ export function useSignUpForm() {
             switch (responseCode) {
               case RESPONSE_CODE.DUPLICATE_EMAIL:
                 setEmailMessage({
-                  message: '이미 사용중인 이메일입니다.',
+                  message: '중복된 이메일',
                   error: true,
                 });
 
                 break;
               case RESPONSE_CODE.INVALID_FORMAT:
                 setEmailMessage({
-                  message:
-                    '유효하지 않은 이메일 형식입니다. 다시 입력해주세요.',
+                  message: '올바르지 않은 이메일',
                   error: true,
                 });
                 break;

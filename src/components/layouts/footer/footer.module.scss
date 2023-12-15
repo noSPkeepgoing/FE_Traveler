@@ -1,4 +1,5 @@
 @import '@styles/_variables.scss';
+@import '@/styles/_common.scss';
 
 .footer {
   position: fixed;
@@ -11,6 +12,9 @@
   border-top: 3px solid $gray;
 
   background-color: white;
+  @include tablet {
+    display: none;
+  }
 
   .footerContainer {
     display: flex;
