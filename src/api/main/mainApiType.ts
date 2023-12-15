@@ -1,5 +1,5 @@
 export type TAccommodation = {
-  accommodation_id: number;
+  accommodation_id: string;
   accommodation_name: string;
   short_address: string;
   accommodation_price: number;
