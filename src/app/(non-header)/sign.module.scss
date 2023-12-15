@@ -1,0 +1,21 @@
+@import '@/styles/_common.scss';
+
+.container {
+  width: 770px;
+  height: 800px;
+  margin: 0 auto;
+
+  @include tablet {
+    width: 75%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  @include mobileM {
+    height: 100vh;
+  }
+}

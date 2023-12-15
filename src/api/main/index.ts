@@ -3,10 +3,10 @@ import { Response } from '../type';
 import { TMainListData } from './mainApiType';
 
 export const MAIN_API = {
-  getAccommodations: (category: number, page?: number) =>
+  getAccommodations: (category: string, page?: number) =>
     instance.get<Response<TMainListData>>('/v1/accommodations', {
       params: {
-        location: category,
+        regionIds: category,
         size: 12,
         page: page,
       },

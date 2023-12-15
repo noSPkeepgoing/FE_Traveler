@@ -4,11 +4,10 @@ import React from 'react';
 import styles from './item.module.scss';
 import Text from '@/components/atoms/text';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { TAccommodation } from '@/api/main/mainApiType';
+import Link from 'next/link';
 
 function Item({ data }: { data: TAccommodation }) {
-  const router = useRouter();
   const {
     accommodation_id,
     short_address,
@@ -17,12 +16,8 @@ function Item({ data }: { data: TAccommodation }) {
     accommodation_img,
   } = data;
 
-  const handleClick = () => {
-    router.push(`/rooms/${accommodation_id}`);
-  };
-
   return (
-    <div className={styles.item} onClick={handleClick}>
+    <Link href={`/rooms/${accommodation_id}`} className={styles.item}>
       <div className={styles.itemImage}>
         <Image
           src={accommodation_img}
@@ -45,7 +40,7 @@ function Item({ data }: { data: TAccommodation }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
