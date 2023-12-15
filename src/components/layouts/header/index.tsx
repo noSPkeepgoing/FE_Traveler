@@ -50,7 +50,7 @@ function Header({ border = true }: THeader) {
           </div>
           {/* 데스크탑 메뉴 */}
           <div className={styles.buttons}>
-            {!!isOnline ? (
+            {!isOnline ? (
               <>
                 <div className={styles.buttons}>
                   <Button variant="text" href="/sign-in">
@@ -103,7 +103,7 @@ function Header({ border = true }: THeader) {
       </div>
       {!isHamMenuOpen ? (
         <></>
-      ) : !!isOnline ? (
+      ) : !isOnline ? (
         <>
           <div
             className={`${styles.dropMenu} ${
