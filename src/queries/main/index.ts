@@ -1,7 +1,7 @@
 import { MAIN_API } from '@/api/main';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-export const useGetAccommodations = (category: number) => {
+export const useGetAccommodations = (category: string) => {
   return useInfiniteQuery(
     ['getAccommodations'],
     ({ pageParam = 1 }) => MAIN_API.getAccommodations(category, pageParam),

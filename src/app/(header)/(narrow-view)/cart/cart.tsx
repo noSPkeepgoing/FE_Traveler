@@ -10,9 +10,12 @@ import { BsCart, BsCloudSlash } from 'react-icons/bs';
 import Button from '@/components/atoms/button';
 import useSelect from '@/hooks/cart/useSelect';
 import Loader from '@/components/layouts/loader';
+import { useRecoilValue } from 'recoil';
+import { selectedItemState } from '@/recoil/selectedItem';
 
 function Cart() {
-  const { cartData, isLoading, isError, selectedItems } = useCart();
+  const selectedItems = useRecoilValue(selectedItemState);
+  const { cartData, isLoading, isError } = useCart();
   const {
     selectAll,
     isAllSelected,
@@ -22,7 +25,6 @@ function Cart() {
     handleDeleteCartItems,
     handleReservation,
   } = useSelect();
-
   if (isLoading) <Loader />;
 
   if (isError)

@@ -7,7 +7,7 @@ function DetailDescription({ address, desc }: TDetailDescription) {
   return (
     <div className={styles.detailDescription}>
       <div className={styles.address}>
-        <Text fontSize="md" fontWeight="semibold">
+        <Text fontSize="sm" fontWeight="semibold">
           {address}
         </Text>
       </div>

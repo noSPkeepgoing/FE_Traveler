@@ -1,13 +1,20 @@
+@import '@/styles/_common.scss';
 .address {
-    padding-bottom: 1.45rem;
-    border-bottom:1px solid #DDD;
-    margin-bottom : 1.5rem;
+  padding-bottom: 1.45rem;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 1.5rem;
 }
 .descTitle {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .detailDescription {
-    width : 48rem;
-    margin-right:1.5rem;
+  width: 48rem;
+  margin-right: 1.5rem;
+  @include mobileM {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+  }
 }

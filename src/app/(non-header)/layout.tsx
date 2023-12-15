@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './signUp.module.scss';
+import styles from './sign.module.scss';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return <main className={styles.container}>{children}</main>;

@@ -1,4 +1,5 @@
 @import '@/styles/common.scss';
+@import '@styles/_variables.scss';
 
 .title {
   width: 100%;
@@ -11,7 +12,7 @@
   gap: 1.5rem;
 }
 .selectContainer {
-  border-bottom: 2px solid #e5e5e5;
+  border-bottom: 2px solid $gray;
   margin-bottom: 1.5rem;
   margin-top: 2.3rem;
 }

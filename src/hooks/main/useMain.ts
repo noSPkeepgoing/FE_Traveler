@@ -1,17 +1,15 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useGetAccommodations } from './../../queries/main/index';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 function useMain() {
-  const [isSelected, setIsSelected] = useState(1);
+  const searchParam = useSearchParams();
+  const selectedCategoryNumber = searchParam.get('category') || '1';
 
   const { data, fetchNextPage, hasNextPage, isLoading, refetch, remove } =
-    useGetAccommodations(isSelected);
-
-  const handleSelect = (category: number) => {
-    setIsSelected(category);
-  };
+    useGetAccommodations(selectedCategoryNumber);
 
   useEffect(() => {
     refetch();
@@ -19,7 +17,7 @@ function useMain() {
     return () => {
       remove();
     };
-  }, [isSelected]);
+  }, [selectedCategoryNumber]);
 
   const accommodationData = useMemo(() => {
     return data?.pages.flatMap((page) => page.data.accommodations);
@@ -27,8 +25,7 @@ function useMain() {
 
   return {
     accommodationData,
-    isSelected,
-    handleSelect,
+    selectedCategoryNumber,
     isLoading,
     fetchNextPage,
     hasNextPage,

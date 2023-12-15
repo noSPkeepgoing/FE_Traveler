@@ -1,4 +1,11 @@
 @import '@/styles/_variables.scss';
+@import '@/styles/_common.scss';
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
 .input {
   height: 3.125rem;
@@ -14,11 +21,16 @@
 
   &.signRegular {
     width: 23.5rem;
-
     padding: 0 0.75rem;
-
     background-color: white;
     border: 1px solid $gray400;
+
+    @include tablet {
+      width: 15.35rem;
+    }
+    @include mobileM {
+      width: 10.75rem;
+    }
   }
 
   &.signShort {
@@ -30,6 +42,12 @@
     background-color: white;
     border: 1px solid $gray400;
     color: $black;
+    @include tablet {
+      width: 9.87rem;
+    }
+    @include mobileM {
+      width: 5.75rem;
+    }
   }
 
   &.reservation {
@@ -42,6 +60,14 @@
 
     border: 0.0625rem solid $gray400;
     color: $black;
+    @include tablet {
+      width: 17rem;
+      height: 1rem;
+    }
+    @include mobileM {
+      width: 15rem;
+      height: 1rem;
+    }
   }
 
   &.invalid {
@@ -51,4 +77,11 @@
   &:focus {
     border-color: $black;
   }
+}
+
+.password-toggle {
+  position: absolute;
+  right: 3%;
+
+  cursor: pointer;
 }

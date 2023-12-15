@@ -1,5 +1,5 @@
 @import '@/styles/_variables.scss';
-@import '@/styles/common.scss';
+@import '@/styles/_common.scss';
 
 .button {
   border-radius: 0.5rem;
@@ -15,10 +15,26 @@
   &.xl {
     width: 48.125rem;
     height: 3.125rem;
+    @include tablet {
+      width: 15rem;
+      height: 3rem;
+    }
+    @include mobileM {
+      width: 24.5rem;
+      height: 2.5rem;
+    }
   }
   &.lg {
     width: 25.125rem;
     height: 3.25rem;
+    @include tablet {
+      width: 17rem;
+      height: 3rem;
+    }
+    @include mobileM {
+      width: 12.5rem;
+      height: 2.5rem;
+    }
   }
   &.md {
     width: 11.5rem;
@@ -28,6 +44,11 @@
     width: 4.625rem;
     height: 3.125rem;
   }
+  &.xs {
+    width: 2.75rem;
+    height: 1.875rem;
+  }
+
   &.secondary {
     width: 3.875rem;
     height: 3rem;

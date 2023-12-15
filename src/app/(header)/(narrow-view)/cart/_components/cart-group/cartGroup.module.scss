@@ -1,9 +1,13 @@
 @import '@/styles/common.scss';
+@import '@styles/_variables.scss';
 .selectContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #e5e5e5;
+  border-bottom: 2px solid $gray200;
+  @include tablet {
+    padding: 0 1rem;
+  }
 }
 .allSelection {
   @include flex(row);
@@ -17,4 +21,8 @@
   gap: 1.5rem;
 
   margin-bottom: 10rem;
+
+  @include tablet {
+    padding: 1rem;
+  }
 }
