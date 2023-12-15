@@ -32,25 +32,18 @@
 }
 
 .CalendarWrapper {
-  z-index: 11;
+  z-index: 99;
   position: absolute;
-  // top: 100%;
-  left: 0;
+  width: 16rem;
   &.hide {
     display: none;
   }
-  @include mobileM {
-    width : 18rem;
-    position: fixed;    
-    bottom:0rem;
-    left:50%;
-    transform: translate(-50%,-1rem);
-  }
+
   @include tablet {
-    width : 18rem;
-    position: fixed;    
-    bottom:0rem;
-    left:50%;
-    transform: translate(-50%,-1rem);
+    width: 18rem;
+    position: fixed;
+    bottom: 0rem;
+    left: 50%;
+    transform: translate(-50%, -1rem);
   }
 }

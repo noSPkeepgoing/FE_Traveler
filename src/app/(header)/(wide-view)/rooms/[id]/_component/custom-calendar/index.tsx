@@ -54,14 +54,17 @@ function CustomCalendar({
       if (typeof targetClassName === 'object') {
         return;
       }
-      if (target && targetClassName?.includes('react-calendar') || targetClassName?.includes('customCalendar_DropdownButton__b_Z_7')) {
+      if (
+        (target && targetClassName?.includes('react-calendar')) ||
+        targetClassName?.includes('customCalendar_DropdownButton__b_Z_7')
+      ) {
         return;
       }
       setIsOpen(false);
     });
   }, []);
   return (
-    <div className={styles.CalendarContainer}>
+    <div className={styles.Container}>
       <div
         className={`${styles.DropdownButton} ${
           type === '체크인' ? '' : styles.checkout
@@ -74,7 +77,7 @@ function CustomCalendar({
         ref={modalRef}
         className={`${styles.CalendarWrapper} ${isOpen ? '' : styles.hide}`}>
         <Calendar
-          className={`${styles.calendar}`}
+          className={styles.calendar}
           locale="en"
           onChange={(value, e) => {
             handleDateChange(value as Date, e);
