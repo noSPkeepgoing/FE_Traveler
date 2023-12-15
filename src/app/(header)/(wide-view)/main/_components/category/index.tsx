@@ -9,7 +9,7 @@ function Category({ item }: TCategory) {
 
   if (selectedCategoryNumber === item.id) {
     return (
-      <div
+      <button
         onClick={() => {
           handleSelectCategory(item.id);
         }}
@@ -18,17 +18,17 @@ function Category({ item }: TCategory) {
           fontSize="xs-2"
           color="white"
           fontWeight="semibold">{`#${item.name}`}</Text>
-      </div>
+      </button>
     );
   } else {
     return (
-      <div
+      <button
         onClick={() => {
           handleSelectCategory(item.id);
         }}
         className={styles.categoryItem}>
         <Text fontSize="xs-2">{`#${item.name}`}</Text>
-      </div>
+      </button>
     );
   }
 }
