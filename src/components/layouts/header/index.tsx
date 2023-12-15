@@ -10,7 +10,7 @@ import { THeader } from './headerType';
 import { instance } from '@/api';
 import { deleteCookie } from '@/constants/cookie';
 import { signOut } from '@/hooks/sign/signOutHandler';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 function Header({ border = true }: THeader) {
   const router = useRouter();
@@ -96,7 +96,11 @@ function Header({ border = true }: THeader) {
           {/* 모바일 및 테블릿 메뉴 */}
           <div className={styles.hamBurgerMenu}>
             <Button variant="text" onClick={hamMenuHandler}>
-              <FaBars className={styles.menuIcon} />
+              {isHamMenuOpen ? (
+                <FaTimes className={styles.menuIcon} />
+              ) : (
+                <FaBars className={styles.menuIcon} />
+              )}
             </Button>
           </div>
         </div>
