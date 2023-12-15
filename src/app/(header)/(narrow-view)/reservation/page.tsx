@@ -23,14 +23,18 @@ function Reservation() {
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
 
+  const [reservationEmail, setReservationEmail] = useState('');
+  const [reservationName, setReservationName] = useState('');
+
   useEffect(() => {
     const userEmail = sessionStorage.getItem('userEmail');
     const userName = sessionStorage.getItem('userName');
-    if (userEmail !== null && userName !== null) {
-      setUserEmail(userEmail);
-      setUserName(userName);
+    if (userEmail && userName!) {
+      setReservationEmail(userEmail);
+      setReservationName(userName);
     }
   }, []);
+
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
@@ -43,11 +47,6 @@ function Reservation() {
       0,
     );
     return totalPrice;
-  };
-
-  const checkTermsOfService = (checked: FormDataEntryValue | null) => {
-    if (checked === 'on') return true;
-    return false;
   };
 
   const { mutate: postReservation } = usePostReservation({
@@ -109,34 +108,34 @@ function Reservation() {
     setIsEmailValid(EMAIL_REGEX.test(e.target.value));
   };
 
-  const [isCheckedMain, setIsCheckedMain] = useState(false);
-  const [isCheckedSub1, setIsCheckedSub1] = useState(false);
-  const [isCheckedSub2, setIsCheckedSub2] = useState(false);
+  const [isCheckedMandatory, setIsCheckedMandatory] = useState(false);
+  const [isCheckedAge, setIsCheckedAge] = useState(false);
+  const [isCheckedPrivacy, setIsCheckedPrivacy] = useState(false);
 
   const handleMainCheckboxChange = () => {
-    const newCheckedState = !isCheckedMain;
-    setIsCheckedMain(newCheckedState);
-    setIsCheckedSub1(newCheckedState);
-    setIsCheckedSub2(newCheckedState);
+    const newCheckedState = !isCheckedMandatory;
+    setIsCheckedMandatory(newCheckedState);
+    setIsCheckedAge(newCheckedState);
+    setIsCheckedPrivacy(newCheckedState);
   };
 
   const handleSubCheckboxChange = (subNumber: number, checked: boolean) => {
     if (subNumber === 1) {
-      setIsCheckedSub1(checked);
+      setIsCheckedAge(checked);
     } else {
-      setIsCheckedSub2(checked);
+      setIsCheckedPrivacy(checked);
     }
 
     if (!checked) {
-      setIsCheckedMain(false);
+      setIsCheckedMandatory(false);
     }
   };
 
   useEffect(() => {
-    if (isCheckedSub1 && isCheckedSub2) {
-      setIsCheckedMain(true);
+    if (isCheckedAge && isCheckedPrivacy) {
+      setIsCheckedMandatory(true);
     }
-  }, [isCheckedSub1, isCheckedSub2]);
+  }, [isCheckedAge, isCheckedPrivacy]);
 
   return (
     <>
@@ -164,7 +163,7 @@ function Reservation() {
                     예약자
                   </Text>
                   <Text fontSize="sm" fontWeight="normal" color="primary">
-                    {userName}
+                    {reservationName}
                   </Text>
                 </div>
                 <div className={styles.sameLine}>
@@ -172,7 +171,7 @@ function Reservation() {
                     이메일
                   </Text>
                   <Text fontSize="sm" fontWeight="normal" color="primary">
-                    {userEmail}
+                    {reservationEmail}
                   </Text>
                 </div>
               </div>
@@ -225,7 +224,7 @@ function Reservation() {
               <Checkbox
                 id="checkMain"
                 name="check"
-                isChecked={isCheckedMain}
+                isChecked={isCheckedMandatory}
                 onChange={handleMainCheckboxChange}
               />
               <Text fontSize="md" fontWeight="bold">
@@ -236,21 +235,25 @@ function Reservation() {
             <div className={styles.container}>
               <div className={styles.sameLine}>
                 <Checkbox
-                  id="checkSub1"
+                  id="checkAge"
                   name="check"
-                  isChecked={isCheckedSub1}
-                  onChange={() => handleSubCheckboxChange(1, !isCheckedSub1)}
+                  isChecked={isCheckedAge}
+                  onChange={() => handleSubCheckboxChange(1, !isCheckedAge)}
                 />
-                만 14세 이용 동의
+                <Text fontSize="xs" fontWeight="normal">
+                  만 14세 이용 동의
+                </Text>
               </div>
               <div className={styles.sameLine}>
                 <Checkbox
-                  id="checkSub2"
+                  id="checkPrivacy"
                   name="check"
-                  isChecked={isCheckedSub2}
-                  onChange={() => handleSubCheckboxChange(2, !isCheckedSub2)}
+                  isChecked={isCheckedPrivacy}
+                  onChange={() => handleSubCheckboxChange(2, !isCheckedPrivacy)}
                 />
-                개인 정보 수집 동의
+                <Text fontSize="xs" fontWeight="normal">
+                  개인 정보 수집 동의
+                </Text>
               </div>
             </div>
           </div>
@@ -259,7 +262,7 @@ function Reservation() {
               variant="default"
               size="xl"
               type="submit"
-              disabled={!isCheckedMain || !isNameValid || !isEmailValid}>
+              disabled={!isCheckedMandatory || !isNameValid || !isEmailValid}>
               <Text fontSize="xs" fontWeight="normal" color="white">
                 결제하기
               </Text>
