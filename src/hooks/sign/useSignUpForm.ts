@@ -123,21 +123,21 @@ export function useSignUpForm() {
       return;
     }
 
-    if (!NAME_REGEX.test(name)) {
+    if (!NAME_REGEX.test(name) && name.length > 1) {
       setNameMessage({
-        message: '이름에는 영문자 또는 한글만 사용할 수 있습니다.',
+        message: '이름에는 자음+모음의 한글 또는 영문자만 사용할 수 있습니다.',
         error: true,
       });
       setIsNameValid(false);
       return;
     }
 
-    if (!name && name.length === 1) {
+    if (!!name && name.length === 1) {
       setNameMessage({
         message: '이름을 2글자 이상 입력해주세요.',
         error: true,
       });
-      setIsEmailValid(false);
+      setIsNameValid(false);
       return;
     }
 

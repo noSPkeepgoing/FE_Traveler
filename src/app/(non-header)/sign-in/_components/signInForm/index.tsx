@@ -46,6 +46,7 @@ function SignInForm() {
               placeholder="비밀번호"
               name="password"
               state={passwordMessage.error ? 'invalid' : ''}
+              usePwShowToggle={true}
             />
             <div className={styles.labelArea}>
               <label htmlFor="password">
