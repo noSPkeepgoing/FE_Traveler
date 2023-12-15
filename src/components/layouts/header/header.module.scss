@@ -27,7 +27,7 @@
     justify-content: space-between;
 
     .logo {
-      margin-left: 20px;
+      padding-left: 20px;
       &:hover {
         cursor: pointer;
       }
@@ -38,10 +38,10 @@
       justify-content: end;
       align-items: center;
 
-      margin-right: 20px;
+      padding-right: 20px;
 
       .buttons:last-child {
-        margin-right: 0;
+        padding-right: 0;
       }
 
       @include tablet {
@@ -63,7 +63,7 @@
       align-items: center;
       justify-content: center;
 
-      margin-right: 15px;
+      margin: 0 15px 0 15px;
 
       cursor: pointer;
 
@@ -82,15 +82,15 @@
   display: none;
 
   .buttons {
-    height: 100%;
     @include flex(row);
-    margin: auto;
+    height: 100%;
   }
 
   .columns {
     @include flex(row);
-    height: 4rem;
+    height: 3rem;
     width: 100%;
+
     border-top: 1px solid $gray400;
   }
 
