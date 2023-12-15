@@ -65,8 +65,14 @@
       height: 1rem;
     }
     @include mobileM {
-      width: 15rem;
+      width: 12rem;
       height: 1rem;
+    }
+
+    @include mobileS {
+      width: 6rem;
+      height: 1rem;
+      background-color: midnightblue;
     }
   }
 
