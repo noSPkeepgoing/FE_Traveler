@@ -1,10 +1,10 @@
 import Text from '@/components/atoms/text';
 import React from 'react';
-import styles from './subtitles-content.module.scss';
+import styles from './detailContents.module.scss';
 
-function SubtitlesContent({ text }: { text: string }) {
+function DetailContents({ text }: { text: string }) {
   return (
-    <header className={styles.subtitlesContent}>
+    <header className={styles.detailContents}>
       <Text fontSize="xs" fontWeight="semibold" color="primary">
         {text}
       </Text>
@@ -12,4 +12,4 @@ function SubtitlesContent({ text }: { text: string }) {
   );
 }
 
-export default SubtitlesContent;
+export default DetailContents;

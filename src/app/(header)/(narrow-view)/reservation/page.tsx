@@ -1,9 +1,11 @@
 'use client';
-import Button from '@/components/atoms/button/index';
+import PurchaseInfo from './_components/purchase-info';
+import ReservationItems from './_components/reservation-items';
 import styles from './reservation.module.scss';
 import Input from '@/components/atoms/input/index';
 import Checkbox from '@/components/atoms/checkbox';
 import Text from '@/components/atoms/text';
+import Button from '@/components/atoms/button';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { productState } from '@/recoil/order';
@@ -11,13 +13,13 @@ import Swal from 'sweetalert2';
 import { usePostReservation } from '@/queries/reservation/useReservation';
 import { TReservationItems } from '@/api/reservation/reservationApiType';
 import { successProductsState } from '@/recoil/successProducts';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { EMAIL_REGEX, NAME_REGEX } from '@/constants/regex';
 
 function Reservation() {
   const router = useRouter();
-
   const products = useRecoilValue(productState);
+
   const [userEmail, setUserEmail] = useState('');
   const [userName, setUserName] = useState('');
 
@@ -32,7 +34,7 @@ function Reservation() {
   const setSuccessProducts = useSetRecoilState(successProductsState);
   if (products.length === 0 && typeof window !== 'undefined') {
     Swal.fire('선택된 상품이 없습니다');
-    router.push('/main');
+    router.back();
   }
 
   const calculateTotalPrice = () => {
@@ -41,18 +43,6 @@ function Reservation() {
       0,
     );
     return totalPrice;
-  };
-
-  const checkEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) return false;
-    if (!emailRegex.test(email)) return;
-    return true;
-  };
-
-  const checkName = (name: string) => {
-    if (!name) return false;
-    return true;
   };
 
   const checkTermsOfService = (checked: FormDataEntryValue | null) => {
@@ -103,13 +93,50 @@ function Reservation() {
     const data = new FormData(event.currentTarget);
     const name = data.get('name') as string;
     const email = data.get('email') as string;
-    if (!checkName(name)) return Swal.fire('이름을 작성해주세요!');
-    if (!checkEmail(email)) return Swal.fire('이메일 형식에 맞게 작성해주세요');
-
-    if (!checkTermsOfService(data.get('check')))
-      return Swal.fire('약관을 동의해주세요!');
     postReservation(getParams(name, email));
   };
+
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(e.target.value);
+    setIsNameValid(NAME_REGEX.test(e.target.value));
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserEmail(e.target.value);
+    setIsEmailValid(EMAIL_REGEX.test(e.target.value));
+  };
+
+  const [isCheckedMain, setIsCheckedMain] = useState(false);
+  const [isCheckedSub1, setIsCheckedSub1] = useState(false);
+  const [isCheckedSub2, setIsCheckedSub2] = useState(false);
+
+  const handleMainCheckboxChange = () => {
+    const newCheckedState = !isCheckedMain;
+    setIsCheckedMain(newCheckedState);
+    setIsCheckedSub1(newCheckedState);
+    setIsCheckedSub2(newCheckedState);
+  };
+
+  const handleSubCheckboxChange = (subNumber: number, checked: boolean) => {
+    if (subNumber === 1) {
+      setIsCheckedSub1(checked);
+    } else {
+      setIsCheckedSub2(checked);
+    }
+
+    if (!checked) {
+      setIsCheckedMain(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isCheckedSub1 && isCheckedSub2) {
+      setIsCheckedMain(true);
+    }
+  }, [isCheckedSub1, isCheckedSub2]);
 
   return (
     <>
@@ -123,48 +150,11 @@ function Reservation() {
             <Text fontSize="xs" fontWeight="normal">
               숙소
             </Text>
-
-            <section className={styles.reservationItemContainer}>
-              {products?.map((item) => (
-                <div className={styles.reservationItem}>
-                  <div className={styles.itemInfo}>
-                    <div className={styles.imageInfo}>
-                      <Image
-                        src={item.accommodation_img}
-                        width={80}
-                        height={80}
-                        alt="숙소 이미지"
-                        className={styles.accommodationImage}
-                      />
-                      <div className={styles.detailInfo}>
-                        <Text fontSize="xs" fontWeight="bold">
-                          {item.accommodation_name}
-                        </Text>
-                        <Text
-                          fontSize="xs-3"
-                          fontWeight="medium"
-                          color="blackAlpha100">
-                          {`${item.start_date} ~ ${item.end_date} / ${item.people_number}명`}
-                        </Text>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.priceInfo}>
-                    <Text fontSize="md" fontWeight="medium">
-                      {`${item.accommodation_price.toLocaleString()}원`}
-                    </Text>
-                    <Text fontSize="xs-3" fontWeight="normal" color="red200">
-                      취소 및 환불 불가
-                    </Text>
-                  </div>
-                </div>
-              ))}
-            </section>
+            <ReservationItems products={products} />
           </div>
 
           <div className={styles.parts}>
             <div className={styles.container}>
-              {/* <Text fontSize='md' color='black' /> */}
               <Text fontSize="md" fontWeight="bold">
                 예약자 정보
               </Text>
@@ -205,6 +195,8 @@ function Reservation() {
                     placeholder="홍길동"
                     id="name"
                     name="name"
+                    value={userName}
+                    onChange={handleNameChange}
                   />
                 </div>
                 <div className={styles.sameLine}>
@@ -216,6 +208,8 @@ function Reservation() {
                     placeholder="abc@naver.com"
                     id="email"
                     name="email"
+                    value={userEmail}
+                    onChange={handleEmailChange}
                   />
                 </div>
               </div>
@@ -223,32 +217,49 @@ function Reservation() {
           </div>
 
           <div className={styles.parts}>
-            <Text fontSize="md" fontWeight="bold">
-              결제 정보
-            </Text>
-            <div className={styles.grayLine}></div>
-            <div className={styles.totalPrice}>
-              <Text fontSize="sm" fontWeight="medium" color="primary">
-                총 결제 금액
-              </Text>
-              <Text fontSize="sm" fontWeight="medium" color="highlight">
-                {`${calculateTotalPrice().toLocaleString()}원`}
-              </Text>
-            </div>
+            <PurchaseInfo price={calculateTotalPrice().toLocaleString()} />
           </div>
 
           <div className={styles.parts}>
-            {/* <Checkbox onChange={} isChecked={}/> */}
-            <Text fontSize="md" fontWeight="bold">
-              필수약관 동의
-            </Text>
-            <div className={styles.terms}>
-              <Checkbox id="check" name="check" />만 14세 이용 동의
+            <div className={styles.sameLine}>
+              <Checkbox
+                id="checkMain"
+                name="check"
+                isChecked={isCheckedMain}
+                onChange={handleMainCheckboxChange}
+              />
+              <Text fontSize="md" fontWeight="bold">
+                필수약관 동의
+              </Text>
+            </div>
+
+            <div className={styles.container}>
+              <div className={styles.sameLine}>
+                <Checkbox
+                  id="checkSub1"
+                  name="check"
+                  isChecked={isCheckedSub1}
+                  onChange={() => handleSubCheckboxChange(1, !isCheckedSub1)}
+                />
+                만 14세 이용 동의
+              </div>
+              <div className={styles.sameLine}>
+                <Checkbox
+                  id="checkSub2"
+                  name="check"
+                  isChecked={isCheckedSub2}
+                  onChange={() => handleSubCheckboxChange(2, !isCheckedSub2)}
+                />
+                개인 정보 수집 동의
+              </div>
             </div>
           </div>
-
           <div className={styles.parts}>
-            <Button variant="default" size="xl" type="submit">
+            <Button
+              variant="default"
+              size="xl"
+              type="submit"
+              disabled={!isCheckedMain || !isNameValid || !isEmailValid}>
               <Text fontSize="xs" fontWeight="normal" color="white">
                 결제하기
               </Text>
