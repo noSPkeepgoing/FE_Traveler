@@ -26,11 +26,10 @@
     border: 1px solid $gray400;
 
     @include tablet {
-      width: 20rem;
+      width: 15rem;
     }
     @include mobileM {
       width: 10.75rem;
-      height: 2.5rem;
     }
   }
 
@@ -44,7 +43,7 @@
     border: 1px solid $gray400;
     color: $black;
     @include tablet {
-      width: 15rem;
+      width: 9.87rem;
     }
     @include mobileM {
       width: 5.75rem;
