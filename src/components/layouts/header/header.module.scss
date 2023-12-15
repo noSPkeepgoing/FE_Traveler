@@ -79,7 +79,13 @@
 }
 
 .dropMenu {
+  position: sticky;
+  top: 4.95rem;
   display: none;
+
+  z-index: 1010;
+
+  background-color: white;
 
   .buttons {
     @include flex(row);
