@@ -76,6 +76,7 @@ function SignUpForm() {
               name="password"
               onChange={(e) => setPw(e.target.value)}
               state={passwordMessage.error ? 'invalid' : ''}
+              usePwShowToggle={true}
             />
             <div className={styles.labelArea}>
               <label htmlFor="password">

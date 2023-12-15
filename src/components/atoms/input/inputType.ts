@@ -8,4 +8,5 @@ export type TInput = {
   id?: string;
   readOnly?: boolean;
   value?: string;
+  usePwShowToggle?: boolean;
 };
