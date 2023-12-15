@@ -1,17 +1,15 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useGetAccommodations } from './../../queries/main/index';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 function useMain() {
-  const [selectedCategoryNumber, setSelectedCategoryNumber] = useState(1);
+  const searchParam = useSearchParams();
+  const selectedCategoryNumber = searchParam.get('category') || '1';
 
   const { data, fetchNextPage, hasNextPage, isLoading, refetch, remove } =
     useGetAccommodations(selectedCategoryNumber);
-
-  const handleSelect = (category: number) => {
-    setSelectedCategoryNumber(category);
-  };
 
   useEffect(() => {
     refetch();
@@ -28,7 +26,6 @@ function useMain() {
   return {
     accommodationData,
     selectedCategoryNumber,
-    handleSelect,
     isLoading,
     fetchNextPage,
     hasNextPage,

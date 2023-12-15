@@ -2,19 +2,17 @@ import React from 'react';
 import styles from './category.module.scss';
 import Text from '@/components/atoms/text';
 import { TCategory } from './categoryType';
-import useMain from '@/hooks/main/useMain';
+import useCategory from '@/hooks/main/useCategory';
 
 function Category({ item }: TCategory) {
-  const { selectedCategoryNumber, handleSelect } = useMain();
-
-  const handleClick = () => {
-    handleSelect(item.id);
-  };
+  const { selectedCategoryNumber, handleSelectCategory } = useCategory();
 
   if (selectedCategoryNumber === item.id) {
     return (
       <div
-        onClick={handleClick}
+        onClick={() => {
+          handleSelectCategory(item.id);
+        }}
         className={`${styles.categoryItem} ${styles.active}`}>
         <Text
           fontSize="xs-2"
@@ -24,7 +22,11 @@ function Category({ item }: TCategory) {
     );
   } else {
     return (
-      <div onClick={handleClick} className={styles.categoryItem}>
+      <div
+        onClick={() => {
+          handleSelectCategory(item.id);
+        }}
+        className={styles.categoryItem}>
         <Text fontSize="xs-2">{`#${item.name}`}</Text>
       </div>
     );
