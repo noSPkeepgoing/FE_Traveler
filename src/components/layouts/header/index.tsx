@@ -15,9 +15,9 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 function Header({ border = true }: THeader) {
   const router = useRouter();
 
-  const [isHamMenuOpen, setIsHamMenuOpen] = useState<boolean>(false);
+  const [isHamBurgerMenuOpen, setHamBurgerMenuOpen] = useState<boolean>(false);
   const hamMenuHandler = () => {
-    setIsHamMenuOpen(!isHamMenuOpen);
+    setHamBurgerMenuOpen(!isHamBurgerMenuOpen);
   };
 
   const [isOnline, setIsOnline] = useState<boolean>(false);
@@ -96,7 +96,7 @@ function Header({ border = true }: THeader) {
           {/* 모바일 및 테블릿 메뉴 */}
           <div className={styles.hamBurgerMenu}>
             <Button variant="text" onClick={hamMenuHandler}>
-              {isHamMenuOpen ? (
+              {isHamBurgerMenuOpen ? (
                 <FaTimes className={styles.menuIcon} />
               ) : (
                 <FaBars className={styles.menuIcon} />
@@ -105,14 +105,11 @@ function Header({ border = true }: THeader) {
           </div>
         </div>
       </div>
-      {!isHamMenuOpen ? (
+      {!isHamBurgerMenuOpen ? (
         <></>
       ) : !isOnline ? (
         <>
-          <div
-            className={`${styles.dropMenu} ${
-              isHamMenuOpen ? styles.isOpen : ''
-            }`}>
+          <div className={styles.dropMenu}>
             <div className={styles.columns}>
               <Button variant="text" href="/sign-in">
                 <Text fontSize="xs-2" fontWeight="semibold">
@@ -131,10 +128,7 @@ function Header({ border = true }: THeader) {
         </>
       ) : (
         <>
-          <div
-            className={`${styles.dropMenu} ${
-              isHamMenuOpen ? styles.isOpen : ''
-            }`}>
+          <div className={styles.dropMenu}>
             <div className={styles.columns}>
               <Button variant="text" onClick={signOutHandler}>
                 <Text fontSize="xs-2" fontWeight="semibold">
